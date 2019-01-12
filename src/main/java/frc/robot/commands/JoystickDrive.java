@@ -43,7 +43,7 @@ public class JoystickDrive extends Command {
         twistVal = 0.5*(oi.getTwist());
         
         if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) {
-          drivetrain.drive(twistVal-yVal, twistVal+yVal)
+          drivetrain.drive(twistVal-yVal, twistVal+yVal);
         } else {
           drivetrain.drive(0,0);
         }

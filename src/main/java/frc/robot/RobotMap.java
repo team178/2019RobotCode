@@ -26,4 +26,7 @@ public class RobotMap {
   public static int DRIVEencoderRB = 1; //DIO
   public static int DRIVEencoderLA = 2; //DIO
   public static int DRIVEencoderLB = 3; //DIO
+
+  public static int JoystickPort = 0; //computer
+  public static int JoystickPortXBOX = 1; //computer
 }
