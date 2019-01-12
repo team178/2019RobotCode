@@ -9,14 +9,14 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-import org.usfirst.frc.team178.robot.RobotMap;
-import org.usfirst.frc.team178.robot.commands.*;
+import frc.robot.RobotMap;
+import frc.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Encoder;
 
 import edu.wpi.first.wpilibj.Talon;
 
-public class Drivetrain extends Subsystem {
+public class DriveTrain extends Subsystem {
 	public static final double diameter = 6;
 	public static final double gearRatio = 1; //figure out for main bot (5.95:1?)
 	public static final double circumference = diameter * Math.PI;
@@ -31,7 +31,7 @@ public class Drivetrain extends Subsystem {
     public static Encoder right;
     public static Encoder left;
     
-    public Drivetrain() {
+    public DriveTrain() {
 	    left1 = new Talon(RobotMap.DMTopLeft);
 	    left2 = new Talon(RobotMap.DMMiddleLeft);
 	    left3 = new Talon(RobotMap.DMBottomLeft);
