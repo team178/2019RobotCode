@@ -71,6 +71,10 @@ public class DriveTrain extends Subsystem {
     right2.set(rightMotors);
     right3.set(rightMotors);
   }
+
+  public void resetGyro() {
+    //implemented later
+  }
   
   public double getLeftDistance() {
     return left.getDistance();
@@ -86,6 +90,10 @@ public class DriveTrain extends Subsystem {
   
   public double getRightSpeed() {
     return right.getRate();
+  }
+
+  public double getAngle() {
+    return 0.0; //implement code
   }
 
   @Override
