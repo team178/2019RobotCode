@@ -82,14 +82,14 @@ public class PIDTurn extends Command {
         //needs to be tuned
     	if(targetAngle > 0)
     	{
-    		aP = ;
-    		aI= ;
-    		aD = ;
+    		aP = 0;
+    		aI = 0;
+    		aD = 0;
     	}
     	else {
-    		aP = ;
-    		aI= ;
-    		aD = ;
+    		aP = 0;
+    		aI = 0;
+    		aD = 0;
     	}
 		//How far the Robot is from it's target distance
 		double angleError = Math.abs(angleSetpoint - currentAngle);  //inverse of difference between current distance and target distance 
