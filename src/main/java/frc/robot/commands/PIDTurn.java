@@ -42,7 +42,7 @@ public class PIDTurn extends Command {
     	//Turn and slow down as the robot gets closer to the specified angle
     	counter++;
     	System.out.println("Counter:" + counter);
-    	currentAngle = drivetrain.getAngle();
+    	//currentAngle = drivetrain.getAngle();
     	System.out.println("Current Angle: " + currentAngle);	
     	setAngleSetpoint(targetAngle);
     	double valuePID = turnPID(currentAngle);

@@ -9,8 +9,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Climb extends Command {
-  public Climb() {
+public class ExtractRetractHatchMechanism extends Command {
+  public ExtractRetractHatchMechanism() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

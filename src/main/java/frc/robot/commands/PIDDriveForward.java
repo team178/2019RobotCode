@@ -30,7 +30,7 @@ public class PIDDriveForward extends Command {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
 
-    requires(robot.drivetrain);
+    requires(Robot.drivetrain);
     distance = dist;
     robotSpeed = speed;
     resetGyro = resetG;
