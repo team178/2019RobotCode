@@ -21,23 +21,20 @@ import edu.wpi.first.wpilibj.Talon;
  public class Robot extends TimedRobot {
  public static OI oi;
  public static DriveTrain drivetrain;
- /*
- public static HatchMechanism hatchmechanism;
+ 
+ public static HatchMechanism hatchMechanism;
  public static Climber climber;
  public static CargoIntake cargointake;
  public static CargoLauncher cargolauncher;
- */
 
   @Override
   public void robotInit() {
     oi = new OI();
     drivetrain = new DriveTrain();
-    /*
-      public static HatchMechanism hatchmechanism
-      public static Climber climber;
-      public static CargoIntake cargointake;
-      public static CargoLauncheer cargolauncher;
-    */
+    hatchMechanism = new HatchMechanism();
+    climber = new Climber();  
+    cargointake = new CargoIntake();
+    cargolauncher = new CargoLauncher();
   }
 
   @Override

@@ -35,10 +35,10 @@ public class HatchMechanism extends Subsystem {
   public HatchMechanism() {
     hatchMotor = new Talon(RobotMap.HatchMotor);
     encoder = new Encoder(RobotMap.HatchEncoder, RobotMap.HatchEncoder);
-    hatchCylinder1 = new DoubleSolenoid(RobotMap.HatchCylinder1PCM, RobotMap.HatchCylinder1Input, RobotMap.HatchCylinder1Output);
-    hatchCylinder2 = new DoubleSolenoid(RobotMap.HatchCylinder2PCM, RobotMap.HatchCylinder2Input, RobotMap.HatchCylinder2Output);
-    hatchCylinder3 = new DoubleSolenoid(RobotMap.HatchCylinder3PCM, RobotMap.HatchCylinder3Input, RobotMap.HatchCylinder3Output);
-    hatchCylinder4 = new DoubleSolenoid(RobotMap.HatchCylinder4PCM, RobotMap.HatchCylinder4Input, RobotMap.HatchCylinder4Output);
+    hatchCylinder1 = new DoubleSolenoid(RobotMap.HatchCylinder1Input, RobotMap.HatchCylinder1Output);
+    hatchCylinder2 = new DoubleSolenoid(RobotMap.HatchCylinder2Input, RobotMap.HatchCylinder2Output);
+    hatchCylinder3 = new DoubleSolenoid(RobotMap.HatchCylinder3Input, RobotMap.HatchCylinder3Output);
+    hatchCylinder4 = new DoubleSolenoid(RobotMap.HatchCylinder4Input, RobotMap.HatchCylinder4Output);
 
     double dpp = gearRatio * (maxDistance/countsPerRevolution);
     encoder.setDistancePerPulse(dpp);

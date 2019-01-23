@@ -22,8 +22,8 @@ public class CargoIntake extends Subsystem {
   public static DoubleSolenoid cylinder2;
 
   public CargoIntake() {
-    cylinder1 = new DoubleSolenoid(RobotMap.CargoCylinder1PCM, RobotMap.CargoCylinder1Input, RobotMap.CargoCylinder1Output);
-    cylinder2 = new DoubleSolenoid(RobotMap.CargoCylinder2PCM, RobotMap.CargoCylinder2Input, RobotMap.CargoCylinder2Output);
+    cylinder1 = new DoubleSolenoid(RobotMap.CargoCylinder1Input, RobotMap.CargoCylinder1Output);
+    cylinder2 = new DoubleSolenoid(RobotMap.CargoCylinder2Input, RobotMap.CargoCylinder2Output);
   }
 
 

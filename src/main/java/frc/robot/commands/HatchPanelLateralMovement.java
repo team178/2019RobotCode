@@ -7,12 +7,17 @@
 
 package frc.robot.commands;
 
+import frc.robot.Robot;
+import frc.robot.*;
+import frc.robot.subsystems.*;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class HatchPanelLateralMovement extends Command {
   public HatchPanelLateralMovement() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.hatchMechanism);
   }
 
   // Called just before this Command runs the first time
