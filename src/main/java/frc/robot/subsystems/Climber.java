@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.*;
 
 /**
  * Add your docs here.
@@ -26,12 +27,34 @@ public class Climber extends Subsystem {
     climber1 = new Talon(RobotMap.ClimberMotor1);
     climber2 = new Talon(RobotMap.ClimberMotor2);
     climber3 = new Talon(RobotMap.ClimberMotor3);
-
   }
 
+public void climb(float power)  {
+  power = Math.abs(power);
+  climber1.set(power);
+  climber2.set(power);
+  climber3.set(power);
+}
+
+public void unclimb(float power)  {
+  power = Math.abs(power);
+  climber1.set(-power);
+  climber2.set(-power);
+  climber3.set(-power);
+}
+public void moveClimber1(float power)  {
+  climber1.set(power);
+}
+public void moveClimber2(float power)   {
+climber2.set(power);
+}
+public void moveClimber3(float power)   {
+  climber3.set(power);
+}
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new Climb());
   }
 }
