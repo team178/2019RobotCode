@@ -29,32 +29,30 @@ public class Climber extends Subsystem {
     climber3 = new Talon(RobotMap.ClimberMotor3);
   }
 
-public void climb(float power)  {
+public void climb(double power)  {
   power = Math.abs(power);
   climber1.set(power);
   climber2.set(power);
   climber3.set(power);
 }
 
-public void unclimb(float power)  {
+public void unclimb(double power)  {
   power = Math.abs(power);
   climber1.set(-power);
   climber2.set(-power);
   climber3.set(-power);
 }
-public void moveClimber1(float power)  {
+public void moveClimber1(double power)  {
   climber1.set(power);
 }
-public void moveClimber2(float power)   {
+public void moveClimber2(double power)   {
 climber2.set(power);
 }
-public void moveClimber3(float power)   {
+public void moveClimber3(double power)   {
   climber3.set(power);
 }
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new Climb());
   }
 }
