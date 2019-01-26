@@ -60,14 +60,14 @@ public class HatchMechanism extends Subsystem {
       encoder.reset();
   }
 
-  public void extendHatchMechanism () {
+  public void extend () {
       hatchCylinder1.set(DoubleSolenoid.Value.kForward);
       hatchCylinder2.set(DoubleSolenoid.Value.kForward);
       hatchCylinder3.set(DoubleSolenoid.Value.kForward);
       hatchCylinder4.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void retractHatchMechanism () {
+  public void retract () {
       hatchCylinder1.set(DoubleSolenoid.Value.kReverse);
       hatchCylinder2.set(DoubleSolenoid.Value.kReverse);
       hatchCylinder3.set(DoubleSolenoid.Value.kReverse);

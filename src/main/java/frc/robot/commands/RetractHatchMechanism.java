@@ -12,27 +12,25 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
 
-public class ExtendHatchMechanism extends Command {
-  OI oi;
+public class RetractHatchMechanism extends Command {
+  OI  oi;
   HatchMechanism hatchmechanism;
 
-
-
-  public ExtendHatchMechanism() {
+  public RetractHatchMechanism() {
     requires(Robot.hatchMechanism);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-      oi = Robot.oi;
-      hatchmechanism = Robot.hatchMechanism;
+    oi = Robot.oi;
+    hatchmechanism = Robot.hatchMechanism;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    hatchmechanism.extend();
+    hatchmechanism.retract();
   }
 
   // Make this return true when this Command no longer needs to run execute()
