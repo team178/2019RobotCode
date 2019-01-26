@@ -12,11 +12,11 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.CargoLauncher;
 
-public class LaunchCargo extends Command {
+public class LaunchCargoCargoShip extends Command {
   OI oi;
   CargoLauncher cargolauncher;
 
-  public LaunchCargo() {
+  public LaunchCargoCargoShip() {
     requires(Robot.cargolauncher);
   }
 
@@ -30,11 +30,7 @@ public class LaunchCargo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (false/* we are going for the cargo ship */) { // False just put in as a placeholder so there is no error
       cargolauncher.shootCargoShip();
-    } else {
-      cargolauncher.shootRocket();
-    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
