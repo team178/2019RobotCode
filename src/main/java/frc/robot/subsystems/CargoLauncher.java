@@ -26,6 +26,16 @@ public class CargoLauncher extends Subsystem {
     cylinder2 = new DoubleSolenoid(RobotMap.CargoCylinder2Input, RobotMap.CargoCylinder2Output);
   }
 
+  public void shootCargoShip () {
+    cylinder1.set(DoubleSolenoid.Value.kReverse);
+    cylinder2.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void shootRocket () {
+    cylinder1.set(DoubleSolenoid.Value.kForward);
+    cylinder2.set(DoubleSolenoid.Value.kForward);
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

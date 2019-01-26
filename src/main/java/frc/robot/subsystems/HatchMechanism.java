@@ -45,19 +45,33 @@ public class HatchMechanism extends Subsystem {
   }
 
   public void slideHatch(double speed){
-    hatchMotor.set(speed);
+      hatchMotor.set(speed);
   }
 
   public double getPosition(){
-    return encoder.getDistance();
+      return encoder.getDistance();
   }
 
   public double getRate(){
-    return encoder.getRate();
+      return encoder.getRate();
   }
 
   public void resetEncoder(){
-    encoder.reset();
+      encoder.reset();
+  }
+
+  public void extendHatchMechanism () {
+      hatchCylinder1.set(DoubleSolenoid.Value.kForward);
+      hatchCylinder2.set(DoubleSolenoid.Value.kForward);
+      hatchCylinder3.set(DoubleSolenoid.Value.kForward);
+      hatchCylinder4.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void retractHatchMechanism () {
+      hatchCylinder1.set(DoubleSolenoid.Value.kReverse);
+      hatchCylinder2.set(DoubleSolenoid.Value.kReverse);
+      hatchCylinder3.set(DoubleSolenoid.Value.kReverse);
+      hatchCylinder4.set(DoubleSolenoid.Value.kReverse);
   }
 
   

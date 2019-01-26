@@ -8,16 +8,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.OI;
+import frc.robot.Robot;
+import frc.robot.subsystems.HatchMechanism;
 
-public class ExtractRetractHatchMechanism extends Command {
-  public ExtractRetractHatchMechanism() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class ExtendHatchMechanism extends Command {
+  OI oi;
+  HatchMechanism hatchmechanism;
+
+
+
+  public ExtendHatchMechanism() {
+    requires(Robot.hatchMechanism);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+      oi = Robot.oi;
+      hatchmechanism = Robot.hatchMechanism;
   }
 
   // Called repeatedly when this Command is scheduled to run

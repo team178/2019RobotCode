@@ -8,21 +8,33 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.OI;
+import frc.robot.Robot;
+import frc.robot.subsystems.CargoLauncher;
 
 public class LaunchCargo extends Command {
+  OI oi;
+  CargoLauncher cargolauncher;
+
   public LaunchCargo() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.cargolauncher);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    oi = Robot.oi;
+    cargolauncher = Robot.cargolauncher;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if (false/* we are going for the cargo ship */) { // False just put in as a placeholder so there is no error
+      cargolauncher.shootCargoShip();
+    } else {
+      cargolauncher.shootRocket();
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

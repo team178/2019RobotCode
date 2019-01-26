@@ -53,6 +53,6 @@ public void moveClimber3(double power)   {
 }
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new Climb());
+    
   }
 }

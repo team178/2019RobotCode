@@ -18,12 +18,9 @@ public class CargoIntake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static DoubleSolenoid cylinder1;
-  public static DoubleSolenoid cylinder2;
 
   public CargoIntake() {
-    cylinder1 = new DoubleSolenoid(RobotMap.CargoCylinder1Input, RobotMap.CargoCylinder1Output);
-    cylinder2 = new DoubleSolenoid(RobotMap.CargoCylinder2Input, RobotMap.CargoCylinder2Output);
+   
   }
 
 
