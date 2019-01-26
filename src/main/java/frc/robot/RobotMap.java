@@ -55,5 +55,8 @@ public class RobotMap {
   public static int JoystickPort = 0; //computer
   public static int JoystickPortXBOX = 1; //computer
 
+  public enum SubsystemIndex {
+    ALL, BUMPER
+  }
   
 }
