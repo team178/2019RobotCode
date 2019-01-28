@@ -67,8 +67,8 @@ public class PIDDriveForward extends Command {
 
     drivetrain.drive(powerLeft, powerRight);
 
-    currentErrorLeft = previousErrorLeft;
-    currentErrorRight = previousErrorRight;
+    previousErrorLeft = currentErrorLeft;
+    previousErrorRight = currentErrorRight;
   }
 
   // Make this return true when this Command no longer needs to run execute()
