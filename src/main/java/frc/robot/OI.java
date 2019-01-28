@@ -18,8 +18,9 @@ import frc.robot.commands.*;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  Joystick joystick1 = new Joystick(RobotMap.JoystickPort);
-  public Button button1 = new JoystickButton(joystick1, 1);
+	
+  	static Joystick joystick1 = new Joystick(RobotMap.JoystickPort);
+  	public Button button1 = new JoystickButton(joystick1, 1);
 	public Button button2 = new JoystickButton(joystick1, 2);
 	public Button button3 = new JoystickButton(joystick1, 3);
 	public Button button4 = new JoystickButton(joystick1, 4);
@@ -35,13 +36,13 @@ public class OI {
 	public Button lBumper = new JoystickButton(xbox, 5);
 	public Button rBumper = new JoystickButton(xbox, 6);
 	public Button backButton = new JoystickButton(xbox, 7);
-  public Button startButton = new JoystickButton(xbox, 8);
+  	public Button startButton = new JoystickButton(xbox, 8);
   
-  public OI() {
-	buttonA.whenPressed(new PIDSendMessage());
-  }
+	public OI() {
+		buttonA.whenPressed(new PIDSendMessage());
+	}
 
-  public double getX () {
+ 	public double getX () {
 		return joystick1.getX();
 	}
 	
