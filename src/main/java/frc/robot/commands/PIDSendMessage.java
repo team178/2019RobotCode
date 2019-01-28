@@ -18,7 +18,7 @@ public class PIDSendMessage extends Command {
   HatchPID hatchpid;
 
   public PIDSendMessage() {
-    requires(Robot.hatchpid);
+    
   }
 
   // Called just before this Command runs the first time
