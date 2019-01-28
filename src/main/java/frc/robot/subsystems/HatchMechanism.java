@@ -56,6 +56,21 @@ public class HatchMechanism extends Subsystem {
       encoder.reset();
   }
 
+  public void extendMechanism () {
+      hatchCylinderExtend.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void ejectPanel () {
+      hatchCylinderEject.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void retractMechanism () {
+      hatchCylinderExtend.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void retractPanel () {
+      hatchCylinderEject.set(DoubleSolenoid.Value.kReverse);
+  }
   
   @Override
   public void initDefaultCommand() {

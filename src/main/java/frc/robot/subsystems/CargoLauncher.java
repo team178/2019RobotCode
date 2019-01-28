@@ -26,6 +26,21 @@ public class CargoLauncher extends Subsystem {
     cargoCylinderShoot = new DoubleSolenoid(RobotMap.CargoCylinderShootInput, RobotMap.CargoCylinderShootOutput);
   }
 
+  public void aim () {
+    cargoCylinderAim.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void unAim () {
+    cargoCylinderAim.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void shoot () {
+    cargoCylinderShoot.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void releaseShooter () {
+    cargoCylinderShoot.set(DoubleSolenoid.Value.kReverse);
+  }
 
   @Override
   public void initDefaultCommand() {
