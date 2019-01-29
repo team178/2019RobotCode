@@ -28,23 +28,18 @@ public class RobotMap {
   
   public static int PCM = 0; //CAN
   
-  public static int CargoCylinder1Input = 0; //Analog
-  public static int CargoCylinder1Output = 1; //Analog
+  public static int CargoCylinderAimInput = 0; //Analog
+  public static int CargoCylinderAimOutput = 1; //Analog
   
-  public static int CargoCylinder2Input = 2; //Analog
-  public static int CargoCylinder2Output = 3; //Analog
+  public static int CargoCylinderShootInput = 2; //Analog
+  public static int CargoCylinderShootOutput = 3; //Analog
 
-  public static int HatchCylinder1Input = 4; //Analog
-  public static int HatchCylinder1Output = 5; //Analog
+  public static int HatchCylinderExtendInput = 4; //Analog
+  public static int HatchCylinderExtendOutput = 5; //Analog
 
-  public static int HatchCylinder2Input = 6; //Analog
-  public static int HatchCylinder2Output = 7; //Analog
+  public static int HatchCylinderEjectInput = 6; //Analog
+  public static int HatchCylinderEjectOutput = 7; //Analog
 
-  public static int HatchCylinder3Input = 8; //Analog
-  public static int HatchCylinder3Output = 9; //Analog
-
-  public static int HatchCylinder4Input = 10; //Analog
-  public static int HatchCylinder4Output = 11; //Analog
 
   public static int DRIVEncoderRA = 0; //DIO
   public static int DRIVEncoderRB = 1; //DIO

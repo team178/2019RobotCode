@@ -10,28 +10,27 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.RobotMap.SubsystemIndex;
-import frc.robot.subsystems.HatchPID;
+import frc.robot.subsystems.CargoLauncher;
 
-public class PIDSendMessage extends Command {
+public class HoldCargoInPlace extends Command {
+  CargoLauncher cargolauncher;
   OI oi;
-  HatchPID hatchpid;
 
-  public PIDSendMessage() {
-    
+  public HoldCargoInPlace() {
+    requires(Robot.cargolauncher);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    cargolauncher = Robot.cargolauncher;
     oi = Robot.oi;
-    hatchpid = Robot.hatchpid;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    hatchpid.sendMessage(SubsystemIndex.ALL, "test");
+    cargolauncher.aim();
   }
 
   // Make this return true when this Command no longer needs to run execute()

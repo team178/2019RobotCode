@@ -27,18 +27,14 @@ public class HatchMechanism extends Subsystem {
 
   public static Talon hatchMotor;
   public static Encoder encoder;
-  public static DoubleSolenoid hatchCylinder1;
-  public static DoubleSolenoid hatchCylinder2;
-  public static DoubleSolenoid hatchCylinder3;
-  public static DoubleSolenoid hatchCylinder4;
+  public static DoubleSolenoid hatchCylinderExtend;
+  public static DoubleSolenoid hatchCylinderEject;
 
   public HatchMechanism() {
     hatchMotor = new Talon(RobotMap.HatchMotor);
-    encoder = new Encoder(RobotMap.HatchEncoder, RobotMap.HatchEncoder);
-    hatchCylinder1 = new DoubleSolenoid(RobotMap.HatchCylinder1Input, RobotMap.HatchCylinder1Output);
-    hatchCylinder2 = new DoubleSolenoid(RobotMap.HatchCylinder2Input, RobotMap.HatchCylinder2Output);
-    hatchCylinder3 = new DoubleSolenoid(RobotMap.HatchCylinder3Input, RobotMap.HatchCylinder3Output);
-    hatchCylinder4 = new DoubleSolenoid(RobotMap.HatchCylinder4Input, RobotMap.HatchCylinder4Output);
+    encoder = new Encoder(RobotMap.HatchEncoder, 0);
+    hatchCylinderExtend = new DoubleSolenoid(RobotMap.HatchCylinderExtendInput, RobotMap.HatchCylinderExtendOutput);
+    hatchCylinderEject = new DoubleSolenoid(RobotMap.HatchCylinderEjectInput, RobotMap.HatchCylinderEjectOutput);
 
     double dpp = gearRatio * (maxDistance/countsPerRevolution);
     encoder.setDistancePerPulse(dpp);
@@ -60,20 +56,21 @@ public class HatchMechanism extends Subsystem {
       encoder.reset();
   }
 
-  public void extend () {
-      hatchCylinder1.set(DoubleSolenoid.Value.kForward);
-      hatchCylinder2.set(DoubleSolenoid.Value.kForward);
-      hatchCylinder3.set(DoubleSolenoid.Value.kForward);
-      hatchCylinder4.set(DoubleSolenoid.Value.kForward);
+  public void extendMechanism () {
+      hatchCylinderExtend.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void retract () {
-      hatchCylinder1.set(DoubleSolenoid.Value.kReverse);
-      hatchCylinder2.set(DoubleSolenoid.Value.kReverse);
-      hatchCylinder3.set(DoubleSolenoid.Value.kReverse);
-      hatchCylinder4.set(DoubleSolenoid.Value.kReverse);
+  public void ejectPanel () {
+      hatchCylinderEject.set(DoubleSolenoid.Value.kForward);
   }
 
+  public void retractMechanism () {
+      hatchCylinderExtend.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void retractPanel () {
+      hatchCylinderEject.set(DoubleSolenoid.Value.kReverse);
+  }
   
   @Override
   public void initDefaultCommand() {

@@ -18,22 +18,28 @@ public class CargoLauncher extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static DoubleSolenoid cylinder1;
-  public static DoubleSolenoid cylinder2;
+  public static DoubleSolenoid cargoCylinderAim;
+  public static DoubleSolenoid cargoCylinderShoot;
 
   public CargoLauncher() {
-    cylinder1 = new DoubleSolenoid(RobotMap.CargoCylinder1Input, RobotMap.CargoCylinder1Output);
-    cylinder2 = new DoubleSolenoid(RobotMap.CargoCylinder2Input, RobotMap.CargoCylinder2Output);
+    cargoCylinderAim = new DoubleSolenoid(RobotMap.CargoCylinderAimInput, RobotMap.CargoCylinderShootInput);
+    cargoCylinderShoot = new DoubleSolenoid(RobotMap.CargoCylinderShootInput, RobotMap.CargoCylinderShootOutput);
   }
 
-  public void shootCargoShip () {
-    cylinder1.set(DoubleSolenoid.Value.kReverse);
-    cylinder2.set(DoubleSolenoid.Value.kReverse);
+  public void aim () {
+    cargoCylinderAim.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void shootRocket () {
-    cylinder1.set(DoubleSolenoid.Value.kForward);
-    cylinder2.set(DoubleSolenoid.Value.kForward);
+  public void unAim () {
+    cargoCylinderAim.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public void shoot () {
+    cargoCylinderShoot.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void releaseShooter () {
+    cargoCylinderShoot.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override
