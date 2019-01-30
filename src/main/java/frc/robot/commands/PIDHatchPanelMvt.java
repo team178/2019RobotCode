@@ -13,38 +13,62 @@ import frc.robot.Robot;
 import frc.robot.RobotMap.SubsystemIndex;
 
 public class PIDHatchPanelMvt extends Command {
+  
+  HatchMechanism hatchMechanism;
   OI oi;
+  
+  private double setPoint;
+  
+  private double P, I, D;
+  private double kP, kI, kD;
 
-  public PIDHatchPanelMvt() {
-    //requires stuff
+  public PIDHatchPanelMvt(double setPoint) {
+    requires(Robot.hatchMechanism);
+    requires(Robot.arduino);
+    
+    this.setPoint = setPoint;
+    kP = 0;
+    kI = 0;
+    kD = 0;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
+    hatchMechanism = Robot.hatchMechanism;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
+    retrievePixyValues();
+    //TODO: complete PID stuff
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    if (Math.abs(setPoint - hatchMechanism.getPosition()) < 0.0001) {
+      return true;
+    }
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    hatchMechanism.set(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    hatchMechanism.set(0);
+  }
+  
+  public void retrievePixyValues() {
+    
   }
 }
