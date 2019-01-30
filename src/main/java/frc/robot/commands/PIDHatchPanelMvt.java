@@ -17,6 +17,8 @@ public class PIDHatchPanelMvt extends Command {
   HatchMechanism hatchMechanism;
   OI oi;
   
+  private static final double LOOP_TIME = 0.02;
+  
   private double setPoint;
   private double error;
   private double previousError;
@@ -36,14 +38,14 @@ public class PIDHatchPanelMvt extends Command {
     previousError = 0;
   }
 
-  // Called just before this Command runs the first time
+  //Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
     hatchMechanism = Robot.hatchMechanism;
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  //Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     double output;
@@ -52,11 +54,17 @@ public class PIDHatchPanelMvt extends Command {
     
     //TODO: either set kI to 0 or implement integral active zones
     
-    P = error * kP;
-    I += (error * kI);
-    D = (currentError - previousError) * kD;
-    output = P + I + D;
+    //P, I, and D w/o gains
+    P = error;
+    I += (error * LOOP_TIME);
+    D = (currentError - previousError) / LOOP_TIME;
     
+    //implementing gains
+    P *= kD;
+    I *= kI;
+    D *= kD;
+    
+    output = P + I + D;
     hatchMechanism.slideHatch(output);
     previousError = error;
   }
