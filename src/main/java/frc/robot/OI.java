@@ -19,7 +19,7 @@ import frc.robot.commands.*;
  */
 public class OI {
 	
-  	static Joystick joystick1 = new Joystick(RobotMap.JoystickPort);
+  	public static Joystick joystick1 = new Joystick(RobotMap.JoystickPort);
   	public Button button1 = new JoystickButton(joystick1, 1);
 	public Button button2 = new JoystickButton(joystick1, 2);
 	public Button button3 = new JoystickButton(joystick1, 3);
@@ -28,7 +28,7 @@ public class OI {
 	public Button button6 = new JoystickButton(joystick1, 6);
 	public Button button7 = new JoystickButton(joystick1, 7);
 	
-	static Joystick xbox = new Joystick(RobotMap.JoystickPortXBOX);
+	public static Joystick xbox = new Joystick(RobotMap.JoystickPortXBOX);
 	public Button buttonA = new JoystickButton(xbox, 1);
 	public Button buttonB = new JoystickButton(xbox, 2);
 	public Button buttonX = new JoystickButton(xbox, 3);
@@ -42,15 +42,15 @@ public class OI {
 		
 	}
 
- 	public double getX () {
+ 	public double getX() {
 		return joystick1.getX();
 	}
 	
-	public double getY () {
+	public double getY() {
 		return joystick1.getY();
 	}
 	
-	public double getTwist () {
+	public double getTwist() {
 		return joystick1.getRawAxis(3);
 	}
 	
