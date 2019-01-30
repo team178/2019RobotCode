@@ -13,25 +13,26 @@ import frc.robot.Robot;
 import frc.robot.RobotMap.SubsystemIndex;
 import frc.robot.subsystems.HatchPID;
 
-public class PIDSendMessage extends Command {
+public class SendMessage extends Command {
+  
   OI oi;
-  HatchPID hatchpid;
+  Arduino arduino;
 
-  public PIDSendMessage() {
-    
+  public SendMessage() {
+    requires(Robot.arduino);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    hatchpid = Robot.hatchpid;
+    arduino = Robot.arduino;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    hatchpid.sendMessage(SubsystemIndex.ALL, "test");
+    //hatchpid.sendMessage(SubsystemIndex.ALL, "test");
   }
 
   // Make this return true when this Command no longer needs to run execute()
