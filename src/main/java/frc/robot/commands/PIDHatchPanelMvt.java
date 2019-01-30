@@ -18,6 +18,8 @@ public class PIDHatchPanelMvt extends Command {
   OI oi;
   
   private double setPoint;
+  private double error;
+  private double previousError;
   
   private double P, I, D;
   private double kP, kI, kD;
@@ -30,6 +32,8 @@ public class PIDHatchPanelMvt extends Command {
     kP = 0;
     kI = 0;
     kD = 0;
+    error = setPoint - hatchMechanism.getPosition();
+    previousError = 0;
   }
 
   // Called just before this Command runs the first time
@@ -42,8 +46,19 @@ public class PIDHatchPanelMvt extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double output;
     retrievePixyValues();
-    //TODO: complete PID stuff
+    error = setPoint - hatchMechanism.getPosition(); //error = desired - actual
+    
+    //TODO: either set kI to 0 or implement integral active zones
+    
+    P = error * kP;
+    I += (error * kI);
+    D = (currentError - previousError) * kD;
+    output = P + I + D;
+    
+    hatchMechanism.slideHatch(output);
+    previousError = error;
   }
 
   // Make this return true when this Command no longer needs to run execute()
