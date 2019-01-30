@@ -27,7 +27,6 @@ import edu.wpi.first.wpilibj.Talon;
  public static Climber climber;
  public static CargoIntake cargointake;
  public static CargoLauncher cargolauncher;
- public static HatchPID hatchpid;
 
   @Override
   public void robotInit() {
@@ -37,7 +36,6 @@ import edu.wpi.first.wpilibj.Talon;
     climber = new Climber();  
     cargointake = new CargoIntake();
     cargolauncher = new CargoLauncher();
-    hatchpid = new HatchPID();
   }
 
   @Override
