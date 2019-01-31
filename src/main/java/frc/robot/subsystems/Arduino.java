@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 import frc.robot.RobotMap.SubsystemIndex;
 
 /**
@@ -18,7 +19,7 @@ public class Arduino extends Subsystem {
   private I2C arduino;
 
   public Arduino() {
-    arduino = new I2C(I2C.Port.kOnboard, 8); // check these values
+    arduino = new I2C(I2C.Port.kOnboard, RobotMap.ArduinoAddress); // check these values
   }
 
   public void sendMessage(SubsystemIndex subsystem, String pattern) {

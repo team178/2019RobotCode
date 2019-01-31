@@ -19,8 +19,9 @@ public class SendMessage extends Command {
   Arduino arduino;
 
   public SendMessage() {
-    requires(Robot.arduino);
+
   }
+  
 
   // Called just before this Command runs the first time
   @Override
@@ -32,7 +33,7 @@ public class SendMessage extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //hatchpid.sendMessage(SubsystemIndex.ALL, "test");
+    arduino.sendMessage(SubsystemIndex.ALL, "test");
   }
 
   // Make this return true when this Command no longer needs to run execute()
