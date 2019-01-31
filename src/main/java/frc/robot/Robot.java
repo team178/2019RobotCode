@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.CameraServer;
 
  public class Robot extends TimedRobot {
    
@@ -29,6 +30,7 @@ import edu.wpi.first.wpilibj.Talon;
  public static CargoLauncher cargolauncher;
  public static Arduino arduino;
 
+
   @Override
   public void robotInit() {
     oi = new OI();
@@ -38,6 +40,10 @@ import edu.wpi.first.wpilibj.Talon;
     cargointake = new CargoIntake();
     cargolauncher = new CargoLauncher();
     arduino = new Arduino();
+
+    UsbCamera camera = edu.wpi.first.cameraserver.CameraServer.getInstance().startAutomaticCapture();
+    camera.setResolution(160, 120);
+    camera.setFPS(14);
   }
 
   @Override
