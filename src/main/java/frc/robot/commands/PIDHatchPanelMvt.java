@@ -23,9 +23,11 @@ public class PIDHatchPanelMvt extends Command {
   private double error;
   private double previousError;
   
+  private boolean sensingTarget;
+  
   private double P, I, D;
   private double kP, kI, kD;
-
+  
   public PIDHatchPanelMvt(double setPoint) {
     requires(Robot.hatchMechanism);
     requires(Robot.arduino);
@@ -36,6 +38,7 @@ public class PIDHatchPanelMvt extends Command {
     kD = 0;
     error = setPoint - hatchMechanism.getPosition();
     previousError = 0;
+    sensingTarget = false;
   }
 
   //Called just before this Command runs the first time
@@ -48,26 +51,31 @@ public class PIDHatchPanelMvt extends Command {
   //Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double output;
-    retrievePixyValues();
-    error = setPoint - hatchMechanism.getPosition(); //error = desired - actual
     
-    //TODO: either set kI to 0 or implement integral active zones
+    if (sensingTarget) {
+      double output;
+      retrievePixyValues();
+      error = setPoint - hatchMechanism.getPosition(); //error = desired - actual
+
+      //TODO: either set kI to 0 or implement integral active zones
+
+      //P, I, and D w/o gains
+      P = error;
+      I += (error * LOOP_TIME);
+      D = (error - previousError) / LOOP_TIME;
+
+      //implementing gains
+      P *= kD;
+      I *= kI;
+      D *= kD;
+
+      output = P + I + D;
+      hatchMechanism.slideHatch(output);
+      previousError = error;
+    }
+   }
     
-    //P, I, and D w/o gains
-    P = error;
-    I += (error * LOOP_TIME);
-    D = (error - previousError) / LOOP_TIME;
     
-    //implementing gains
-    P *= kD;
-    I *= kI;
-    D *= kD;
-    
-    output = P + I + D;
-    hatchMechanism.slideHatch(output);
-    previousError = error;
-  }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
