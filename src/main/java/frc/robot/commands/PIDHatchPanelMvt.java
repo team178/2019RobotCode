@@ -18,6 +18,7 @@ public class PIDHatchPanelMvt extends Command {
   OI oi;
   
   private static final double LOOP_TIME = 0.02;
+  private static final double FOV = Math.toRadians(75); //FOV in radians 
   
   private boolean sensingTarget;
   private double targetX;
@@ -53,7 +54,6 @@ public class PIDHatchPanelMvt extends Command {
   //Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
     if (sensingTarget) {
       double output;
       retrievePixyValues();
@@ -104,6 +104,7 @@ public class PIDHatchPanelMvt extends Command {
   }
   
   public void calcSetpoint() {
-    
+    //drive all the way up to the thing until bumpers hit & measure distance
+    //pixes/inch = x resolution of camera / (2 * measured distance * tan(1/2 FOV)); 1/2 FOV in radians
   }
 }
