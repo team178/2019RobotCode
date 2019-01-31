@@ -19,11 +19,13 @@ public class PIDHatchPanelMvt extends Command {
   
   private static final double LOOP_TIME = 0.02;
   
+  private boolean sensingTarget;
+  private double targetX;
+  private double cameraX;
+  
   private double setPoint;
   private double error;
   private double previousError;
-  
-  private boolean sensingTarget;
   
   private double P, I, D;
   private double kP, kI, kD;
@@ -74,8 +76,6 @@ public class PIDHatchPanelMvt extends Command {
       previousError = error;
     }
    }
-    
-    
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -100,6 +100,10 @@ public class PIDHatchPanelMvt extends Command {
   }
   
   public void retrievePixyValues() {
+    
+  }
+  
+  public void calcSetpoint() {
     
   }
 }
