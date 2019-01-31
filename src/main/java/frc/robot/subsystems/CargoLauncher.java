@@ -22,7 +22,7 @@ public class CargoLauncher extends Subsystem {
   public static DoubleSolenoid cargoCylinderShoot;
 
   public CargoLauncher() {
-    cargoCylinderAim = new DoubleSolenoid(RobotMap.CargoCylinderAimInput, RobotMap.CargoCylinderShootInput);
+    cargoCylinderAim = new DoubleSolenoid(RobotMap.CargoCylinderAimInput, RobotMap.CargoCylinderAimOutput);
     cargoCylinderShoot = new DoubleSolenoid(RobotMap.CargoCylinderShootInput, RobotMap.CargoCylinderShootOutput);
   }
 

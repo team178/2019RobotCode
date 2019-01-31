@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.RobotMap.SubsystemIndex;
+import frc.robot.subsystems.HatchMechanism;
 
 public class PIDHatchPanelMvt extends Command {
   
@@ -57,7 +57,7 @@ public class PIDHatchPanelMvt extends Command {
     //P, I, and D w/o gains
     P = error;
     I += (error * LOOP_TIME);
-    D = (currentError - previousError) / LOOP_TIME;
+    D = (error - previousError) / LOOP_TIME;
     
     //implementing gains
     P *= kD;
@@ -81,14 +81,14 @@ public class PIDHatchPanelMvt extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    hatchMechanism.set(0);
+    hatchMechanism.slideHatch(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    hatchMechanism.set(0);
+    hatchMechanism.slideHatch(0);
   }
   
   public void retrievePixyValues() {

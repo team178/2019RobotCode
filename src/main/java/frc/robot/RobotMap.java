@@ -15,18 +15,19 @@ package frc.robot;
  */
 public class RobotMap {
   // All values are filler values to get rid of errors in other classes
-  public static int DMTopRight = 0; //PWM
-  public static int DMMiddleRight = 1; //PWM
-  //public static int DMBottomRight = 2; //PWM
-  public static int DMTopLeft = 3; //PWM
-  public static int DMMiddleLeft = 4; //PWM
-  //public static int DMBottomLeft = 5; //PWM
-  public static int HatchMotor = 6; //PWM
-  public static int ClimberMotor1 = 7; //PWM
-  public static int ClimberMotor2 = 8; //PWM
-  public static int ClimberMotor3 = 9; //PWM
+  public static int DMTopRight = 0; //CAN
+  public static int DMMiddleRight = 1; //CAN
+  //public static int DMBottomRight = 2; //CAN
+  public static int DMTopLeft = 3; //CAN
+  public static int DMMiddleLeft = 4; //CAN
+  //public static int DMBottomLeft = 5; //CAN
+  public static int HatchMotor = 6; //CAN
+  public static int ClimberMotor1 = 7; //CAN
+  public static int ClimberMotor2 = 8; //CAN
+  public static int ClimberMotor3 = 9; //CAN
+  public static int ClimberMotor4 = 10; //CAN
   
-  public static int PCM = 0; //CAN
+  public static int PCM = 0; //idek at this point
   
   public static int CargoCylinderAimInput = 0; //Analog
   public static int CargoCylinderAimOutput = 1; //Analog
