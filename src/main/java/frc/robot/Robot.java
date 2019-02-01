@@ -28,22 +28,22 @@ import edu.wpi.first.wpilibj.CameraServer;
  public static Climber climber;
  public static CargoIntake cargointake;
  public static CargoLauncher cargolauncher;
- public static Arduino arduino;
+ public static Arduino arduino;*/
  public static UsbCamera camera;
-*/
+
   @Override
   public void robotInit() {
     oi = new OI();
     drivetrain = new DriveTrain();
-  /*  hatchMechanism = new HatchMechanism();
+    /*hatchMechanism = new HatchMechanism();
     climber = new Climber();  
     cargointake = new CargoIntake();
     cargolauncher = new CargoLauncher();
-    arduino = new Arduino();
+    arduino = new Arduino();*/
 
     camera = CameraServer.getInstance().startAutomaticCapture(0);
     camera.setResolution(160, 120);
-    camera.setFPS(/*14  9001);*/
+    camera.setFPS(14);
   }
 
   @Override
