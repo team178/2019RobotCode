@@ -21,7 +21,6 @@ public class PIDHatchPanelMvt extends Command {
   private static final double LOOP_TIME = 0.02;
   private static final double FOV = Math.toRadians(75); //FOV in radians 
   private static final double distFromCargoShip = 0; //TODO: measure dist w/ bumpers against wall
-  private static final double 
   
   private boolean sensingTarget;
   private double targetX;
@@ -45,6 +44,8 @@ public class PIDHatchPanelMvt extends Command {
     error = setPoint - hatchMechanism.getPosition();
     previousError = 0;
     sensingTarget = false;
+    
+    calcSetpoint();
   }
 
   //Called just before this Command runs the first time
@@ -115,5 +116,6 @@ public class PIDHatchPanelMvt extends Command {
     offset /= hatchMechanism.gearRatio;
     offset *= hatchMechanism.countsPerRevolution;
     setPoint = offset; //setting setpoint in ticks (absolute setpoint, not relative to current position)
+    error = setPoint - hatchMechanism.getPosition(); //setting error
   }
 }
