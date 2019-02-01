@@ -29,7 +29,7 @@ import edu.wpi.first.wpilibj.CameraServer;
  public static CargoIntake cargointake;
  public static CargoLauncher cargolauncher;
  public static Arduino arduino;
-
+ public static UsbCamera camera;
 
   @Override
   public void robotInit() {
@@ -41,9 +41,9 @@ import edu.wpi.first.wpilibj.CameraServer;
     cargolauncher = new CargoLauncher();
     arduino = new Arduino();
 
-    UsbCamera camera = edu.wpi.first.cameraserver.CameraServer.getInstance().startAutomaticCapture();
+    camera = CameraServer.getInstance().startAutomaticCapture(0);
     camera.setResolution(160, 120);
-    camera.setFPS(14);
+    camera.setFPS(/*14*/ 9001);
   }
 
   @Override
@@ -84,5 +84,6 @@ import edu.wpi.first.wpilibj.CameraServer;
 
   @Override
   public void testPeriodic() {
+    //Scheduler.getInstance().run();
   }
 }
