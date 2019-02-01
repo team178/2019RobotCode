@@ -20,7 +20,7 @@ public class Climb extends Command {
   public Climb(double pwr) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.climber);
+    //requires(Robot.climber);
     power = pwr;
   }
  
@@ -28,7 +28,7 @@ public class Climb extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    climber = Robot.climber;
+    //climber = Robot.climber;
   }
 
   // Called repeatedly when this Command is scheduled to run

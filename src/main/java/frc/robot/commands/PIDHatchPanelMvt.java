@@ -34,8 +34,8 @@ public class PIDHatchPanelMvt extends Command {
   private double kP, kI, kD;
   
   public PIDHatchPanelMvt(double setPoint) {
-    requires(Robot.hatchMechanism);
-    requires(Robot.arduino);
+    //requires(Robot.hatchMechanism);
+    //requires(Robot.arduino);
     
     this.setPoint = setPoint;
     kP = 0;
@@ -52,7 +52,7 @@ public class PIDHatchPanelMvt extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    hatchMechanism = Robot.hatchMechanism;
+    //hatchMechanism = Robot.hatchMechanism;
   }
 
   //Called repeatedly when this Command is scheduled to run

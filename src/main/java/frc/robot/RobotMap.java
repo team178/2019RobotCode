@@ -15,8 +15,8 @@ package frc.robot;
  */
 public class RobotMap {
   // All values are filler values to get rid of errors in other classes
-  public static int DMTopRight = 0; //CAN
-  public static int DMMiddleRight = 1; //CAN
+  public static int DMTopRight = 1; //CAN
+  public static int DMMiddleRight = 2; //CAN
   //public static int DMBottomRight = 2; //CAN
   public static int DMTopLeft = 3; //CAN
   public static int DMMiddleLeft = 4; //CAN

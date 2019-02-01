@@ -14,7 +14,8 @@ import frc.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Encoder;
 
-import edu.wpi.first.wpilibj.Talon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class DriveTrain extends Subsystem {
 	public static final double diameter = 6;
@@ -22,18 +23,18 @@ public class DriveTrain extends Subsystem {
 	public static final double circumference = diameter * Math.PI;
 	public static final double countsPerRevolution = 1024; //Units for encoders -- the encoder ticks 1024 times per rotation
 	
-	public static Talon left1;
-    public static Talon left2;
-    public static Talon right1;
-    public static Talon right2;
+	public static TalonSRX left1;
+    public static TalonSRX left2;
+    public static TalonSRX right1;
+    public static TalonSRX right2;
     //public static Encoder right;
     //public static Encoder left;
     
     public DriveTrain() {
-	    left1 = new Talon(RobotMap.DMTopLeft);
-	    left2 = new Talon(RobotMap.DMMiddleLeft);
-	    right1 = new Talon(RobotMap.DMTopRight);
-	    right2 = new Talon(RobotMap.DMMiddleRight);
+	    left1 = new TalonSRX(RobotMap.DMTopLeft);
+	    left2 = new TalonSRX(RobotMap.DMMiddleLeft);
+	    right1 = new TalonSRX(RobotMap.DMTopRight);
+	    right2 = new TalonSRX(RobotMap.DMMiddleRight);
 	    //right = new Encoder(RobotMap.DRIVEencoderRA,RobotMap.DRIVEencoderRB, false, Encoder.EncodingType.k4X);
 	    //left = new Encoder(RobotMap.DRIVEencoderLA, RobotMap.DRIVEencoderLB, true, Encoder.EncodingType.k4X);
 	    
@@ -48,20 +49,20 @@ public class DriveTrain extends Subsystem {
   }
   */
   public void rightDrive(double speed) {
-    right1.set(speed);
-    right2.set(speed);
+    right1.set(ControlMode.PercentOutput, speed);
+    right2.set(ControlMode.PercentOutput, speed);
   }
   
   public void leftDrive(double speed) {
-    left1.set(speed);
-    left2.set(speed);
+    left1.set(ControlMode.PercentOutput, speed);
+    left2.set(ControlMode.PercentOutput, speed);
    }
   
   public void drive(double leftMotors, double rightMotors) {
-    left1.set(leftMotors);
-    left2.set(leftMotors);
-    right1.set(rightMotors);
-    right2.set(rightMotors);
+    left1.set(ControlMode.PercentOutput, leftMotors);
+    left2.set(ControlMode.PercentOutput, leftMotors);
+    right1.set(ControlMode.PercentOutput, rightMotors);
+    right2.set(ControlMode.PercentOutput, rightMotors);
   }
 
   public void resetGyro() {

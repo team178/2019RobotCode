@@ -17,14 +17,14 @@ public class PutCargoInCargoShip extends Command {
   CargoLauncher cargolauncher;
 
   public PutCargoInCargoShip() {
-    requires(Robot.cargolauncher);
+    //requires(Robot.cargolauncher);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    cargolauncher = Robot.cargolauncher;
+    //cargolauncher = Robot.cargolauncher;
   }
 
   // Called repeatedly when this Command is scheduled to run

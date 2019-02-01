@@ -19,14 +19,14 @@ public class ExtendHatchMechanism extends Command {
 
 
   public ExtendHatchMechanism() {
-    requires(Robot.hatchMechanism);
+    //requires(Robot.hatchMechanism);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
       oi = Robot.oi;
-      hatchmechanism = Robot.hatchMechanism;
+     // hatchmechanism = Robot.hatchMechanism;
   }
 
   // Called repeatedly when this Command is scheduled to run

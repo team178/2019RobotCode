@@ -27,7 +27,7 @@ public class SendMessage extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    arduino = Robot.arduino;
+    //arduino = Robot.arduino;
   }
 
   // Called repeatedly when this Command is scheduled to run

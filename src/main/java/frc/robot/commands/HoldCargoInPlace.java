@@ -17,13 +17,13 @@ public class HoldCargoInPlace extends Command {
   OI oi;
 
   public HoldCargoInPlace() {
-    requires(Robot.cargolauncher);
+   // requires(Robot.cargolauncher);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    cargolauncher = Robot.cargolauncher;
+   // cargolauncher = Robot.cargolauncher;
     oi = Robot.oi;
   }
 
