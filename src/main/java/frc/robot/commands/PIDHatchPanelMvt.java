@@ -16,9 +16,12 @@ public class PIDHatchPanelMvt extends Command {
   
   HatchMechanism hatchMechanism;
   OI oi;
-  
+
+  //TODO: Split all this up into two classes (one for cam, one for PID)
   private static final double LOOP_TIME = 0.02;
   private static final double FOV = Math.toRadians(75); //FOV in radians 
+  private static final double distFromCargoShip = 0; //TODO: measure dist w/ bumpers against wall
+  private static final double 
   
   private boolean sensingTarget;
   private double targetX;
@@ -104,7 +107,13 @@ public class PIDHatchPanelMvt extends Command {
   }
   
   public void calcSetpoint() {
-    //drive all the way up to the thing until bumpers hit & measure distance
-    //pixes/inch = x resolution of camera / (2 * measured distance * tan(1/2 FOV)); 1/2 FOV in radians
+    final double PIXELS_PER_INCH = 400 / (2 * distFromCargoShip * Math.tan(0.5 * FOV)); //how many cam pixels are in a real life inch
+    double offset = targetX - cameraX; //positive -- mechanism is too much to the right; negative -- too much to left
+    offset /= PIXELS_PER_INCH; //converting offset from pixels to inches
+    
+    //converting offset to encoder ticks
+    offset /= hatchMechanism.gearRatio;
+    offset *= hatchMechanism.countsPerRevolution;
+    setPoint = offset; //setting setpoint in ticks (absolute setpoint, not relative to current position)
   }
 }
