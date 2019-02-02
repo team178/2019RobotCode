@@ -36,6 +36,12 @@ public class Arduino extends Subsystem {
     arduino.writeBulk(message.getBytes());
   }
 
+  public void getMessage()
+  {
+    byte dataFromPixy[] = new byte[2];
+    arduino.read(RobotMap.ArduinoAddress, 2, dataFromPixy);
+  }
+ 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

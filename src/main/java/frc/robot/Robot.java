@@ -24,11 +24,12 @@ import edu.wpi.first.wpilibj.CameraServer;
  public static OI oi;
  public static DriveTrain drivetrain;
  
-/* public static HatchMechanism hatchMechanism;
+ public static HatchMechanism hatchMechanism;
  public static Climber climber;
  public static CargoIntake cargointake;
  public static CargoLauncher cargolauncher;
- public static Arduino arduino;*/
+ 
+ public static Arduino arduino;
  public static UsbCamera camera;
 
   @Override
