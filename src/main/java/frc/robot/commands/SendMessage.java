@@ -17,9 +17,11 @@ public class SendMessage extends Command {
   
   OI oi;
   Arduino arduino;
+  
+  private String message;
 
   public SendMessage() {
-
+    this.message = message;
   }
   
 
@@ -27,13 +29,13 @@ public class SendMessage extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    //arduino = Robot.arduino;
+    arduino = Robot.arduino;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    arduino.sendMessage("test");
+    arduino.sendMessage(message);
   }
 
   // Make this return true when this Command no longer needs to run execute()
