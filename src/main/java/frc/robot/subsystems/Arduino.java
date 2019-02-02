@@ -22,6 +22,13 @@ public class Arduino extends Subsystem {
     arduino = new I2C(I2C.Port.kOnboard, RobotMap.ArduinoAddress); // check these values
   }
 
+  public void sendMessage(String pattern) {
+    String message = pattern;
+    message = message.toLowerCase();
+    System.out.println(message);
+    arduino.writeBulk(message.getBytes());
+  }
+
   public void sendMessage(SubsystemIndex subsystem, String pattern) {
     String message = subsystem.ordinal() + pattern;
     message = message.toLowerCase();
