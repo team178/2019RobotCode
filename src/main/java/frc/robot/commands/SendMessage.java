@@ -20,7 +20,7 @@ public class SendMessage extends Command {
   
   private String message;
 
-  public SendMessage() {
+  public SendMessage(String message) {
     this.message = message;
   }
   
