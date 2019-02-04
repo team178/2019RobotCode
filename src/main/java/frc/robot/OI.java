@@ -40,6 +40,7 @@ public class OI {
   
 	public OI() {
 		buttonA.whenPressed(new SendMessage("test"));
+		buttonB.whenPressed(new ReceiveMessage());
 	}
 
  	public double getX() {

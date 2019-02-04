@@ -8,10 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.OI;
+import frc.robot.Robot;
+import frc.robot.subsystems.Arduino;
 
 public class ReceiveMessage extends Command {
   
-  OI oi.
+  OI oi;
   Arduino arduino;
   
   public ReceiveMessage() {
@@ -22,13 +25,13 @@ public class ReceiveMessage extends Command {
   @Override
   protected void initialize() {
     arduino = Robot.arduino;
-    oi = Robot.OI;
+    oi = Robot.oi;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    arduino.getMessage();
+    arduino.receiveMessage();
   }
 
   // Make this return true when this Command no longer needs to run execute()

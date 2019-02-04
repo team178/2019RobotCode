@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.Arrays;
+
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -36,10 +38,11 @@ public class Arduino extends Subsystem {
     arduino.writeBulk(message.getBytes());
   }
 
-  public void getMessage()
+  public void receiveMessage()
   {
     byte dataFromPixy[] = new byte[2];
     arduino.read(RobotMap.ArduinoAddress, 2, dataFromPixy);
+    System.out.println(Arrays.toString(dataFromPixy));
   }
  
   @Override
