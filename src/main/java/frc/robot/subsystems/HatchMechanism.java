@@ -33,8 +33,8 @@ public class HatchMechanism extends Subsystem {
   public HatchMechanism() {
     hatchMotor = new Talon(RobotMap.HatchMotor);
     encoder = new Encoder(RobotMap.HatchEncoder, 0);
-    hatchCylinderExtend = new DoubleSolenoid(RobotMap.HatchCylinderExtendInput, RobotMap.HatchCylinderExtendOutput);
-    hatchCylinderEject = new DoubleSolenoid(RobotMap.HatchCylinderEjectInput, RobotMap.HatchCylinderEjectOutput);
+    hatchCylinderExtend = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchCylinderExtendInput, RobotMap.HatchCylinderExtendOutput);
+    hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchCylinderEjectInput, RobotMap.HatchCylinderEjectOutput);
 
     double dpp = gearRatio * (maxDistance/countsPerRevolution);
     encoder.setDistancePerPulse(dpp);
@@ -56,19 +56,19 @@ public class HatchMechanism extends Subsystem {
       encoder.reset();
   }
 
-  public void extendMechanism () {
+  public void extendMechanism() {
       hatchCylinderExtend.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void ejectPanel () {
+  public void ejectPanel() {
       hatchCylinderEject.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void retractMechanism () {
+  public void retractMechanism() {
       hatchCylinderExtend.set(DoubleSolenoid.Value.kReverse);
   }
 
-  public void retractPanel () {
+  public void retractPanel() {
       hatchCylinderEject.set(DoubleSolenoid.Value.kReverse);
   }
   

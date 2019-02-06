@@ -36,11 +36,11 @@ import edu.wpi.first.wpilibj.CameraServer;
   public void robotInit() {
     oi = new OI();
     drivetrain = new DriveTrain();
-    /*hatchMechanism = new HatchMechanism();
+    hatchMechanism = new HatchMechanism();
     climber = new Climber();  
     cargointake = new CargoIntake();
     cargolauncher = new CargoLauncher();
-    arduino = new Arduino();*/
+    arduino = new Arduino();
 
     camera = CameraServer.getInstance().startAutomaticCapture(0);
     camera.setResolution(160, 120);

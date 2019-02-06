@@ -18,7 +18,7 @@ public class ReceiveMessage extends Command {
   Arduino arduino;
   
   public ReceiveMessage() {
-    requires(Robot.arduino);
+    //requires(Robot.arduino);
   }
 
   // Called just before this Command runs the first time

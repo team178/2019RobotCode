@@ -41,6 +41,9 @@ public class OI {
 	public OI() {
 		buttonA.whenPressed(new SendMessage("test"));
 		buttonB.whenPressed(new ReceiveMessage());
+		
+		buttonX.whenPressed(new ExtendHatchMechanism());
+		buttonY.whenPressed(new RetractHatchMechanism());
 	}
 
  	public double getX() {
@@ -49,6 +52,10 @@ public class OI {
 	
 	public double getY() {
 		return joystick1.getY();
+	}
+
+	public double getZ() {
+		return joystick1.getZ();
 	}
 	
 	public double getTwist() {

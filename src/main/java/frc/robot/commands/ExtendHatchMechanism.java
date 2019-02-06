@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
+import edu.wpi.first.wpilibj.Timer;
 
 public class ExtendHatchMechanism extends Command {
   OI oi;
@@ -26,13 +27,14 @@ public class ExtendHatchMechanism extends Command {
   @Override
   protected void initialize() {
       oi = Robot.oi;
-     // hatchmechanism = Robot.hatchMechanism;
+     hatchmechanism = Robot.hatchMechanism;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     hatchmechanism.extendMechanism();
+    Timer.delay(1000);
     hatchmechanism.ejectPanel();
   }
 

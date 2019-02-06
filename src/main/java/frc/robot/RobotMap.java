@@ -27,7 +27,7 @@ public class RobotMap {
   public static int ClimberMotor3 = 9; //CAN
   public static int ClimberMotor4 = 10; //CAN
   
-  public static int PCM = 0; //idek at this point
+  public static int PCM = 5; //PCM
   
   public static int CargoCylinderAimInput = 0; //Analog
   public static int CargoCylinderAimOutput = 1; //Analog
@@ -51,7 +51,9 @@ public class RobotMap {
   public static int JoystickPort = 0; //computer
   public static int JoystickPortXBOX = 1; //computer
 
-  public static int  ArduinoAddress = 8;
+  public static int
+  
+  ArduinoAddress = 8;
 
   public enum SubsystemIndex {
     ALL, BUMPER

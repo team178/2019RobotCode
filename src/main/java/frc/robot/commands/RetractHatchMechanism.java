@@ -24,7 +24,7 @@ public class RetractHatchMechanism extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    //hatchmechanism = Robot.hatchMechanism;
+    hatchmechanism = Robot.hatchMechanism;
   }
 
   // Called repeatedly when this Command is scheduled to run
