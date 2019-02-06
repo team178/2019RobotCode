@@ -53,6 +53,8 @@ public class RobotMap {
 
   public static int  ArduinoAddress = 8;
 
+  public static int linearactuator = 0; // PWM
+
   public enum SubsystemIndex {
     ALL, BUMPER
   }

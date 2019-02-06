@@ -39,8 +39,10 @@ public class OI {
   	public Button startButton = new JoystickButton(xbox, 8);
   
 	public OI() {
-		buttonA.whenPressed(new SendMessage("test"));
-		buttonB.whenPressed(new ReceiveMessage());
+		buttonA.whileHeld(new SendMessage("test"));
+		buttonB.whileHeld(new ReceiveMessage());
+		buttonX.whileHeld(new MoveActuator(true));
+		buttonY.whileHeld(new MoveActuator(false));
 	}
 
  	public double getX() {

@@ -7,10 +7,12 @@
 
 package frc.robot.subsystems;
 
-import java.util.Arrays;
-
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import frc.robot.RobotMap;
 import frc.robot.RobotMap.SubsystemIndex;
 
@@ -24,27 +26,27 @@ public class Arduino extends Subsystem {
     arduino = new I2C(I2C.Port.kOnboard, RobotMap.ArduinoAddress); // check these values
   }
 
-  public void sendMessage(String pattern) {
-    String message = pattern;
-    message = message.toLowerCase();
-    System.out.println(message);
-    arduino.writeBulk(message.getBytes());
-  }
-
   public void sendMessage(SubsystemIndex subsystem, String pattern) {
     String message = subsystem.ordinal() + pattern;
     message = message.toLowerCase();
     System.out.println(message);
     arduino.writeBulk(message.getBytes());
+    System.out.println(arduino.addressOnly());
   }
 
   public void receiveMessage()
   {
-    byte dataFromPixy[] = new byte[2];
-    arduino.read(RobotMap.ArduinoAddress, 2, dataFromPixy);
-    System.out.println(Arrays.toString(dataFromPixy));
+    byte[] dataFromPixy = new byte[1];
+    boolean success = arduino.read(RobotMap.ArduinoAddress, 1, dataFromPixy);
+    System.out.println(success);
+    for (byte b : dataFromPixy) {
+    String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
+    System.out.print(s1 + ", ");
+    } 
+    System.out.println();
   }
- 
+
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

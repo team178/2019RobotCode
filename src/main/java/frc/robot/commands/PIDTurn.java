@@ -21,7 +21,7 @@ public class PIDTurn extends Command {
 	double currentAngle;
 	
     public PIDTurn(double tAngle, double speed, boolean resetG) {
-		requires(Robot.drivetrain);
+	//	requires(Robot.drivetrain);
 		targetAngle = tAngle;
 		robotSpeed = speed;
 		resetGyro = resetG;
@@ -30,7 +30,7 @@ public class PIDTurn extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	oi = Robot.oi;
-    	drivetrain = Robot.drivetrain;
+    //	drivetrain = Robot.drivetrain;
     	if(resetGyro) {
     		drivetrain.resetGyro();
     	}

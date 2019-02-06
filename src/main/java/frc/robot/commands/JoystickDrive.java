@@ -23,7 +23,7 @@ public class JoystickDrive extends Command {
   public JoystickDrive() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.drivetrain);
+   // requires(Robot.drivetrain);
   }
 
 
@@ -31,7 +31,7 @@ public class JoystickDrive extends Command {
     @Override
     protected void initialize() {
       oi = Robot.oi;
-      drivetrain = Robot.drivetrain;
+    //  drivetrain = Robot.drivetrain;
     }
 
     // Called repeatedly when this Command is scheduled to run
