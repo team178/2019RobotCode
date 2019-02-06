@@ -28,19 +28,19 @@ public class RobotMap {
   public static int ClimberMotor4 = 10; //CAN
   
   public static int PCM = 5; //PCM
+  public static int PressureTranducer = 0; //Analog
   
-  public static int CargoCylinderAimInput = 0; //Analog
-  public static int CargoCylinderAimOutput = 1; //Analog
+  public static int CargoCylinderAimInput = 0; //PCM
+  public static int CargoCylinderAimOutput = 1; //PCM
   
-  public static int CargoCylinderShootInput = 2; //Analog
-  public static int CargoCylinderShootOutput = 3; //Analog
+  public static int CargoCylinderShootInput = 2; //PCM
+  public static int CargoCylinderShootOutput = 3; //PCM
 
-  public static int HatchCylinderExtendInput = 4; //Analog
-  public static int HatchCylinderExtendOutput = 5; //Analog
+  public static int HatchCylinderExtendInput = 4; //PCM
+  public static int HatchCylinderExtendOutput = 5; //PCM
 
-  public static int HatchCylinderEjectInput = 6; //Analog
-  public static int HatchCylinderEjectOutput = 7; //Analog
-
+  public static int HatchCylinderEjectInput = 6; //PCM
+  public static int HatchCylinderEjectOutput = 7; //PCM
 
   public static int DRIVEncoderRA = 0; //DIO
   public static int DRIVEncoderRB = 1; //DIO

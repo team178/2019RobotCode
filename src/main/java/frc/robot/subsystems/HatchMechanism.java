@@ -13,6 +13,8 @@ import frc.robot.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+
 import edu.wpi.first.wpilibj.Talon;
 
 /**
@@ -21,20 +23,23 @@ import edu.wpi.first.wpilibj.Talon;
 public class HatchMechanism extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public static final int countsPerRevolution = 1024;
-  public static final int gearRatio = 1;
-  public static final double maxDistance = 3; 
 
   public static Talon hatchMotor;
   public static Encoder encoder;
   public static DoubleSolenoid hatchCylinderExtend;
   public static DoubleSolenoid hatchCylinderEject;
+  public static AnalogInput pressureTransducer;
+
+  public static final int countsPerRevolution = 1024;
+  public static final int gearRatio = 1;
+  public static final double maxDistance = 3; 
 
   public HatchMechanism() {
     hatchMotor = new Talon(RobotMap.HatchMotor);
     encoder = new Encoder(RobotMap.HatchEncoder, 0);
     hatchCylinderExtend = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchCylinderExtendInput, RobotMap.HatchCylinderExtendOutput);
     hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchCylinderEjectInput, RobotMap.HatchCylinderEjectOutput);
+    pressureTransducer = new AnalogInput(RobotMap.PressureTranducer);
 
     double dpp = gearRatio * (maxDistance/countsPerRevolution);
     encoder.setDistancePerPulse(dpp);
@@ -57,6 +62,7 @@ public class HatchMechanism extends Subsystem {
   }
 
   public void extendMechanism() {
+      System.out.println("Setting hatchCylinder to kForward...");
       hatchCylinderExtend.set(DoubleSolenoid.Value.kForward);
   }
 
@@ -70,6 +76,18 @@ public class HatchMechanism extends Subsystem {
 
   public void retractPanel() {
       hatchCylinderEject.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public DoubleSolenoid.Value getMechanismSolenoidState() {
+    return hatchCylinderExtend.get();
+  }
+
+  public DoubleSolenoid.Value getPanelSolenoidState() {
+    return hatchCylinderEject.get();
+  }
+
+  public double getPressure() {
+      return pressureTransducer.getVoltage();
   }
   
   @Override

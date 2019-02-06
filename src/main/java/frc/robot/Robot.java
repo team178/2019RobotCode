@@ -34,14 +34,14 @@ import edu.wpi.first.wpilibj.CameraServer;
 
   @Override
   public void robotInit() {
-    oi = new OI();
     drivetrain = new DriveTrain();
     hatchMechanism = new HatchMechanism();
     climber = new Climber();  
     cargointake = new CargoIntake();
     cargolauncher = new CargoLauncher();
     arduino = new Arduino();
-
+    oi = new OI();
+    
     camera = CameraServer.getInstance().startAutomaticCapture(0);
     camera.setResolution(160, 120);
     camera.setFPS(14);

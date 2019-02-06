@@ -8,69 +8,63 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import edu.wpi.first.wpilibj.Timer;
 
-public class ExtendHatchMechanism extends Command {
-  OI oi;
-  HatchMechanism hatchmechanism;
+public class FullHatchPlacement extends Command {
 
+  HatchMechanism hatchMechanism;
 
-
-  public ExtendHatchMechanism() {
-    requires(Robot.hatchMechanism);
+  public FullHatchPlacement() {
+    //requires(Robot.hatchMechanism);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-      oi = Robot.oi;
-     hatchmechanism = Robot.hatchMechanism;
-     hatchmechanism.hatchCylinderExtend.set(DoubleSolenoid.Value.kForward);
+    hatchMechanism = Robot.hatchMechanism;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    //extend
+    hatchMechanism.extendMechanism();
     //Timer.delay(1000);
-    hatchmechanism.extendMechanism();
-    hatchmechanism.ejectPanel();
+    hatchMechanism.ejectPanel();
+    //Timer.delay(500);
 
-   // while (true) {
-
-    //}
+    //retract
+    hatchMechanism.retractPanel();
+    hatchMechanism.retractMechanism();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (hatchmechanism.getMechanismSolenoidState() == DoubleSolenoid.Value.kForward) {
-      System.out.println("forward");
-      return true;
-    } else {
-      System.out.println(hatchmechanism.getMechanismSolenoidState().toString() );
-      return true;
-    }
-    /*if (hatchmechanism.getMechanismSolenoidState() == DoubleSolenoid.Value.kForward) {
-      if (hatchmechanism.getPanelSolenoidState() == DoubleSolenoid.Value.kForward) {
+    if (hatchMechanism.getMechanismSolenoidState() == DoubleSolenoid.Value.kReverse) {
+      if (hatchMechanism.getPanelSolenoidState() == DoubleSolenoid.Value.kReverse) {
         return true;
       }
-    }*/
-   // return true;
+    }
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    //hatchMechanism.retractMechanism();
+    //hatchMechanism.retractPanel();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    hatchMechanism.retractMechanism();
+    hatchMechanism.retractPanel();
   }
 }

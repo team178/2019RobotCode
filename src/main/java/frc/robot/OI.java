@@ -39,9 +39,10 @@ public class OI {
   	public Button startButton = new JoystickButton(xbox, 8);
   
 	public OI() {
-		buttonA.whenPressed(new SendMessage("test"));
-		buttonB.whenPressed(new ReceiveMessage());
+		//buttonA.whenPressed(new SendMessage("test"));
+		//buttonB.whenPressed(new ReceiveMessage());
 		
+		//buttonA.whenPressed(new FullHatchPlacement());
 		buttonX.whenPressed(new ExtendHatchMechanism());
 		buttonY.whenPressed(new RetractHatchMechanism());
 	}

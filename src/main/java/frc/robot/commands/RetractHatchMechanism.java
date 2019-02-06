@@ -8,9 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 
 public class RetractHatchMechanism extends Command {
   OI  oi;
@@ -32,12 +35,24 @@ public class RetractHatchMechanism extends Command {
   protected void execute() {
     hatchmechanism.retractPanel();
     hatchmechanism.retractMechanism();
+    while (true) {
+      if (hatchmechanism.getMechanismSolenoidState() == DoubleSolenoid.Value.kForward) {
+        System.out.println("forward");
+      } else {
+        System.out.println("reverse");
+      }
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    /*if (hatchmechanism.getMechanismSolenoidState() == DoubleSolenoid.Value.kReverse) {
+      if (hatchmechanism.getPanelSolenoidState() == DoubleSolenoid.Value.kReverse) {
+        return true;
+      }
+    }*/
+    return true;
   }
 
   // Called once after isFinished returns true
