@@ -7,7 +7,8 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.RobotMap; 
+import frc.robot.RobotMap;
+import frc.robot.commands.MoveActuator;
 import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.PWM;
@@ -30,6 +31,22 @@ public class LinearActuator extends Subsystem {
 
   public double get () {
     return actuator.getPosition();
+  }
+
+  public void moveActuator (boolean movingForward) {
+    double currentPosition = get();
+    if (movingForward) {
+      if (currentPosition < 1 || currentPosition >= 0) {
+        currentPosition+=0.004;
+        set(currentPosition);
+      }
+    } else {
+      if (currentPosition <= 1 || currentPosition > 0) {
+        currentPosition-=0.004;
+        set(currentPosition);
+      }
+    }
+    System.out.println(get());
   }
 
 
