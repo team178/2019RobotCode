@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
+import edu.wipi.first.wpilibj.DigitalInput;
 
 /**
  * Add your docs here.
