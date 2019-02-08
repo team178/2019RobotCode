@@ -30,37 +30,32 @@ public class ExtendHatchMechanism extends Command {
   protected void initialize() {
       oi = Robot.oi;
      hatchmechanism = Robot.hatchMechanism;
-     hatchmechanism.hatchCylinderExtend.set(DoubleSolenoid.Value.kForward);
-  }
+    }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //Timer.delay(1000);
-    hatchmechanism.extendMechanism();
-    hatchmechanism.ejectPanel();
+    DoubleSolenoid.Value isExtended = hatchmechanism.getExtenderSolenoidState();
+    System.out.println("Extender is out? " + isExtended);
+    System.out.println("Try to go out");
+    hatchmechanism.setExtender("Forward");
 
-   // while (true) {
-
-    //}
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (hatchmechanism.getMechanismSolenoidState() == DoubleSolenoid.Value.kForward) {
-      System.out.println("forward");
-      return true;
+    return false; 
+   // DoubleSolenoid.Value ejectState = hatchmechanism.getEjectorSolenoidState();
+
+   /* if (ejectState == DoubleSolenoid.Value.kForward) {
+      System.out.println("Finished!");
+      return false;
     } else {
-      System.out.println(hatchmechanism.getMechanismSolenoidState().toString() );
-      return true;
-    }
-    /*if (hatchmechanism.getMechanismSolenoidState() == DoubleSolenoid.Value.kForward) {
-      if (hatchmechanism.getPanelSolenoidState() == DoubleSolenoid.Value.kForward) {
-        return true;
-      }
+      System.out.println("Not finished, trying again: " + ejectState);
+      return false;
     }*/
-   // return true;
   }
 
   // Called once after isFinished returns true

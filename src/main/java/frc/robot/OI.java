@@ -47,7 +47,7 @@ public class OI {
 		buttonY.whenPressed(new RetractHatchMechanism());
 	}
 
- 	public double getX() {
+ 	public double getX() {	
 		return joystick1.getX();
 	}
 	

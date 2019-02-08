@@ -32,24 +32,24 @@ public class FullHatchPlacement extends Command {
   @Override
   protected void execute() {
     //extend
-    hatchMechanism.extendMechanism();
+    hatchMechanism.setExtender("Forward");
     //Timer.delay(1000);
-    hatchMechanism.ejectPanel();
+    hatchMechanism.setEjector("Forward");
     //Timer.delay(500);
 
     //retract
-    hatchMechanism.retractPanel();
-    hatchMechanism.retractMechanism();
+    hatchMechanism.setEjector("reverse");
+    hatchMechanism.setExtender("reverse");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (hatchMechanism.getMechanismSolenoidState() == DoubleSolenoid.Value.kReverse) {
-      if (hatchMechanism.getPanelSolenoidState() == DoubleSolenoid.Value.kReverse) {
+    /*if (hatchMechanism.getExtenderSolenoidState() == DoubleSolenoid.Value.kReverse) {
+      if (hatchMechanism.getEjectorSolenoidState() == DoubleSolenoid.Value.kReverse) {
         return true;
       }
-    }
+    }*/
     return false;
   }
 
@@ -64,7 +64,7 @@ public class FullHatchPlacement extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    hatchMechanism.retractMechanism();
-    hatchMechanism.retractPanel();
+    hatchMechanism.setExtender("reverse");
+    hatchMechanism.setEjector("reverse");
   }
 }

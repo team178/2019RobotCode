@@ -36,11 +36,11 @@ public class RobotMap {
   public static int CargoCylinderShootInput = 2; //PCM
   public static int CargoCylinderShootOutput = 3; //PCM
 
-  public static int HatchCylinderExtendInput = 4; //PCM
-  public static int HatchCylinderExtendOutput = 5; //PCM
+  public static int HatchExtenderCylinderExtend = 4; //PCM
+  public static int HatchExtenderCylinderRetract = 5; //PCM
 
-  public static int HatchCylinderEjectInput = 6; //PCM
-  public static int HatchCylinderEjectOutput = 7; //PCM
+  public static int HatchEjectorCylinderExtend = 6; //PCM
+  public static int HatchEjectorCylinderRetract = 7; //PCM
 
   public static int DRIVEncoderRA = 0; //DIO
   public static int DRIVEncoderRB = 1; //DIO
