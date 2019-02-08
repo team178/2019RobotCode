@@ -45,6 +45,8 @@ import edu.wpi.first.wpilibj.CameraServer;
     camera = CameraServer.getInstance().startAutomaticCapture(0);
     camera.setResolution(160, 120);
     camera.setFPS(14);
+
+    System.out.println("Robot init: " + hatchMechanism.getExtenderSolenoidState());
   }
 
   @Override
@@ -81,6 +83,7 @@ import edu.wpi.first.wpilibj.CameraServer;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    //System.out.println("Current state: " + hatchMechanism.getMechanismSolenoidState());
   }
 
   @Override

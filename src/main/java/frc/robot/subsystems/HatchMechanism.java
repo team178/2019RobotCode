@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
-
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 import edu.wpi.first.wpilibj.Talon;
@@ -26,8 +26,12 @@ public class HatchMechanism extends Subsystem {
 
   public static Talon hatchMotor;
   public static Encoder encoder;
+
   public static DoubleSolenoid hatchCylinderExtend;
+
+
   public static DoubleSolenoid hatchCylinderEject;
+  
   public static AnalogInput pressureTransducer;
 
   public static final int countsPerRevolution = 1024;
@@ -35,14 +39,19 @@ public class HatchMechanism extends Subsystem {
   public static final double maxDistance = 3; 
 
   public HatchMechanism() {
+
     hatchMotor = new Talon(RobotMap.HatchMotor);
     encoder = new Encoder(RobotMap.HatchEncoder, 0);
-    hatchCylinderExtend = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchCylinderExtendInput, RobotMap.HatchCylinderExtendOutput);
-    hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchCylinderEjectInput, RobotMap.HatchCylinderEjectOutput);
+    hatchCylinderExtend = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchExtenderCylinderExtend, RobotMap.HatchExtenderCylinderRetract);
+    
+    hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchEjectorCylinderExtend, RobotMap.HatchEjectorCylinderRetract);
     pressureTransducer = new AnalogInput(RobotMap.PressureTranducer);
 
     double dpp = gearRatio * (maxDistance/countsPerRevolution);
     encoder.setDistancePerPulse(dpp);
+
+    setExtender("reverse");
+    setEjector("reverse");
   }
 
   public void slideHatch(double speed){
@@ -61,28 +70,38 @@ public class HatchMechanism extends Subsystem {
       encoder.reset();
   }
 
-  public void extendMechanism() {
-      System.out.println("Setting hatchCylinder to kForward...");
-      hatchCylinderExtend.set(DoubleSolenoid.Value.kForward);
+  public void setExtender(String pos){
+      if(pos.toLowerCase().equals("forward")){
+        hatchCylinderExtend.set(DoubleSolenoid.Value.kForward);
+        
+
+        System.out.println("Extender forward: " + getExtenderSolenoidState());
+      } else if (pos.toLowerCase().equals("reverse")){
+        hatchCylinderExtend.set(DoubleSolenoid.Value.kReverse);
+        
+        System.out.println("Extender reverse: " + getExtenderSolenoidState());
+      } else{
+          System.out.println("Invalid position. Please try again");
+      }
+  }
+  public void setEjector(String pos){
+    if(pos.toLowerCase().equals("forward")){
+        hatchCylinderEject.set(DoubleSolenoid.Value.kForward);
+        
+        System.out.println("Ejecter forward: " + getEjectorSolenoidState());
+      } else if (pos.toLowerCase().equals("reverse")){
+       hatchCylinderEject.set(DoubleSolenoid.Value.kReverse);
+        System.out.println("Ejecter reverse: " + getEjectorSolenoidState());
+      } else{
+          System.out.println("Invalid position. Please try again");
+      }
   }
 
-  public void ejectPanel() {
-      hatchCylinderEject.set(DoubleSolenoid.Value.kForward);
-  }
-
-  public void retractMechanism() {
-      hatchCylinderExtend.set(DoubleSolenoid.Value.kReverse);
-  }
-
-  public void retractPanel() {
-      hatchCylinderEject.set(DoubleSolenoid.Value.kReverse);
-  }
-
-  public DoubleSolenoid.Value getMechanismSolenoidState() {
+  public DoubleSolenoid.Value getExtenderSolenoidState() {
     return hatchCylinderExtend.get();
   }
 
-  public DoubleSolenoid.Value getPanelSolenoidState() {
+  public DoubleSolenoid.Value getEjectorSolenoidState() {
     return hatchCylinderEject.get();
   }
 

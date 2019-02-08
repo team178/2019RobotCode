@@ -13,6 +13,7 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 
 public class RetractHatchMechanism extends Command {
@@ -33,26 +34,17 @@ public class RetractHatchMechanism extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    hatchmechanism.retractPanel();
-    hatchmechanism.retractMechanism();
-    while (true) {
-      if (hatchmechanism.getMechanismSolenoidState() == DoubleSolenoid.Value.kForward) {
-        System.out.println("forward");
-      } else {
-        System.out.println("reverse");
-      }
-    }
+    DoubleSolenoid.Value isExtended = hatchmechanism.getExtenderSolenoidState();
+
+    System.out.println("Extender is out? " + isExtended);
+    System.out.println("Try to go back");
+    hatchmechanism.setExtender("reverse");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    /*if (hatchmechanism.getMechanismSolenoidState() == DoubleSolenoid.Value.kReverse) {
-      if (hatchmechanism.getPanelSolenoidState() == DoubleSolenoid.Value.kReverse) {
-        return true;
-      }
-    }*/
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
