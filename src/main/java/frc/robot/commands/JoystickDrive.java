@@ -38,6 +38,7 @@ public class JoystickDrive extends Command {
     @Override
     protected void execute() {
       
+      
       if(oi.getTrigger() >= 0) {
         yVal = 0.75 * oi.getY();
         twistVal = 0.5 * (oi.getTwist());
@@ -58,8 +59,12 @@ public class JoystickDrive extends Command {
         }
       }
     }
+    //joystick drive
 
-    // Make this return true when this Command no longer needs to run execute()
+    
+   
+
+
     @Override
     protected boolean isFinished() {
       return false;
