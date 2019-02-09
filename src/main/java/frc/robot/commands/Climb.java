@@ -45,7 +45,7 @@ public class Climb extends Command {
   @Override
   protected boolean isFinished() {
     //Varun - Apply all 4 switches
-    return climber.getSwtichStatus();
+    return climber.getTopSwitchStatuses() || climber.getBottomSwitchStatuses();
   }
 
   // Called once after isFinished returns true
