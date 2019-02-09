@@ -44,7 +44,9 @@ public class OI {
 		
 		//buttonA.whenPressed(new FullHatchPlacement());
 		buttonX.whenPressed(new ExtendHatchMechanism());
-		buttonY.whenPressed(new RetractHatchMechanism());
+		buttonB.whenPressed(new RetractHatchMechanism());
+		buttonY.whenPressed(new EjectPanel());
+		buttonA.whenPressed(new resetEjector());
 	}
 
  	public double getX() {	

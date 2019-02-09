@@ -15,13 +15,14 @@ import frc.robot.subsystems.HatchMechanism;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
+public class resetEjector extends Command {
+  OI oi;
+  HatchMechanism hatchmechanism; 
 
-public class RetractHatchMechanism extends Command {
-  OI  oi;
-  HatchMechanism hatchmechanism;
-
-  public RetractHatchMechanism() {
+  public resetEjector() {
     requires(Robot.hatchMechanism);
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
@@ -34,23 +35,22 @@ public class RetractHatchMechanism extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DoubleSolenoid.Value isExtended = hatchmechanism.getExtenderSolenoidState();
-
-    System.out.println("Extender is out? " + isExtended);
+    DoubleSolenoid.Value isEjected = hatchmechanism.getEjectorSolenoidState();
+    System.out.println("Ejector is out? " + isEjected);
     System.out.println("Try to go back");
-    hatchmechanism.setExtender("reverse");
+    hatchmechanism.setEjector("reverse");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    DoubleSolenoid.Value ExtendState = hatchmechanism.getExtenderSolenoidState();
+    DoubleSolenoid.Value EjectState = hatchmechanism.getEjectorSolenoidState();
 
-    if (ExtendState == DoubleSolenoid.Value.kReverse) {
+    if (EjectState == DoubleSolenoid.Value.kReverse) {
       System.out.println("Finished!");
       return true;
     } else {
-      System.out.println("Not finished, trying again: " + ExtendState);
+      System.out.println("Not finished, trying again: " + EjectState);
       return false;
     }
 

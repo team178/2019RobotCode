@@ -45,17 +45,16 @@ public class ExtendHatchMechanism extends Command {
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return false; 
-   // DoubleSolenoid.Value ejectState = hatchmechanism.getEjectorSolenoidState();
+  protected boolean isFinished() { 
+   DoubleSolenoid.Value ExtendState = hatchmechanism.getExtenderSolenoidState();
 
-   /* if (ejectState == DoubleSolenoid.Value.kForward) {
+    if (ExtendState == DoubleSolenoid.Value.kForward) {
       System.out.println("Finished!");
-      return false;
+      return true;
     } else {
-      System.out.println("Not finished, trying again: " + ejectState);
+      System.out.println("Not finished, trying again: " + ExtendState);
       return false;
-    }*/
+    }
   }
 
   // Called once after isFinished returns true

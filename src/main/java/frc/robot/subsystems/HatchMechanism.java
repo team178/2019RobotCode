@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 import edu.wpi.first.wpilibj.Talon;
@@ -51,7 +50,7 @@ public class HatchMechanism extends Subsystem {
     encoder.setDistancePerPulse(dpp);
 
     setExtender("reverse");
-    setEjector("reverse");
+    //setEjector("reverse");
   }
 
   public void slideHatch(double speed){
