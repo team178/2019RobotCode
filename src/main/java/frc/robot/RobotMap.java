@@ -14,14 +14,14 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
-  // All values are filler values to get rid of errors in other classes
+
   public static int DMTopRight = 1; //CAN
-  public static int DMMiddleRight = 2; //CAN
-  //public static int DMBottomRight = 2; //CAN
+  public static int DMBottomRight = 2; //CAN
   public static int DMTopLeft = 3; //CAN
-  public static int DMMiddleLeft = 4; //CAN
-  //public static int DMBottomLeft = 5; //CAN
+  public static int DMBottomLeft = 4; //CAN
+
   public static int HatchMotor = 6; //CAN
+
   public static int ClimberMotor1 = 7; //CAN
   public static int ClimberMotor2 = 8; //CAN
   public static int ClimberMotor3 = 9; //CAN
@@ -52,16 +52,12 @@ public class RobotMap {
   public static int LimitSwitchBottom1 = 7; //DIO
   public static int LimitSwitchBottom2 = 8; //DIO
 
-
   public static int JoystickPort = 0; //computer
   public static int JoystickPortXBOX = 1; //computer
 
-  public static int
-  
-  ArduinoAddress = 8;
+  public static int ArduinoAddress = 8;
 
   public enum SubsystemIndex {
     ALL, BUMPER
   }
-  
 }

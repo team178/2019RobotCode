@@ -32,22 +32,11 @@ public class DriveTrain extends Subsystem {
     
     public DriveTrain() {
 	    left1 = new TalonSRX(RobotMap.DMTopLeft);
-	    left2 = new TalonSRX(RobotMap.DMMiddleLeft);
+	    left2 = new TalonSRX(RobotMap.DMBottomLeft);
 	    right1 = new TalonSRX(RobotMap.DMTopRight);
-	    right2 = new TalonSRX(RobotMap.DMMiddleRight);
-	    //right = new Encoder(RobotMap.DRIVEencoderRA,RobotMap.DRIVEencoderRB, false, Encoder.EncodingType.k4X);
-	    //left = new Encoder(RobotMap.DRIVEencoderLA, RobotMap.DRIVEencoderLB, true, Encoder.EncodingType.k4X);
-	    
-	    //double dpp = gearRatio * (circumference/countsPerRevolution);
-	    //right.setDistancePerPulse(dpp); // must be changed for both right and left
-	    //left.setDistancePerPulse(dpp);   
+	    right2 = new TalonSRX(RobotMap.DMBottomRight);
     }
-  /*
-  public  void resetEncoders() {
-    right.reset();
-    left.reset();
-  }
-  */
+
   public void rightDrive(double speed) {
     right1.set(ControlMode.PercentOutput, speed);
     right2.set(ControlMode.PercentOutput, speed);
@@ -68,27 +57,7 @@ public class DriveTrain extends Subsystem {
   public void resetGyro() {
     //implemented later
   }
-  /*
-  public double getLeftDistance() {
-    return left.getDistance();
-  }
   
-  public double getRightDistance() {
-    return right.getDistance();
-  }
-  
-  public double getLeftSpeed() {
-    return left.getRate();
-  }
-  
-  public double getRightSpeed() {
-    return right.getRate();
-  }
-
-  public double getAngle() {
-    return 0.0; //implement code
-  }
-*/
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
