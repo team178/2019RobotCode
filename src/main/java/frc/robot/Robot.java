@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -30,7 +31,9 @@ import edu.wpi.first.wpilibj.CameraServer;
  public static CargoLauncher cargolauncher;
  
  public static Arduino arduino;
- public static UsbCamera camera;
+ public static CameraServer camserv;
+ public static UsbCamera camera1;
+ public static UsbCamera camera2;
 
   @Override
   public void robotInit() {
@@ -41,10 +44,18 @@ import edu.wpi.first.wpilibj.CameraServer;
     cargolauncher = new CargoLauncher();
     arduino = new Arduino();
     oi = new OI();
+
+    camserv = CameraServer.getInstance();
     
-    camera = CameraServer.getInstance().startAutomaticCapture(0);
-    camera.setResolution(160, 120);
-    camera.setFPS(14);
+    camera1 = camserv.startAutomaticCapture("cam0", 0);
+    camera1.setResolution(160, 120);
+    camera1.setFPS(14);
+    camera1.setPixelFormat(PixelFormat.kYUYV);
+
+    camera2 = CameraServer.getInstance().startAutomaticCapture("cam1", 1);
+    camera2.setResolution(160, 120);
+    camera2.setFPS(14);
+    camera2.setPixelFormat(PixelFormat.kYUYV);
 
     System.out.println("Robot init: " + hatchMechanism.getExtenderSolenoidState());
   }
