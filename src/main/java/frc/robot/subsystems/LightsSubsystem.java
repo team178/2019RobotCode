@@ -19,13 +19,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Add your docs here.
  */
-public class Lights extends Arduino {
+public class LightsSubsystem extends Arduino {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
   private DriverStation ds;
 
-  public Lights()
+  public LightsSubsystem()
   {
     super(I2C.Port.kOnboard, RobotMap.lightsAddress);
     ds = DriverStation.getInstance();

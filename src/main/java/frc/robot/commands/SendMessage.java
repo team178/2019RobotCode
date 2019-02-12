@@ -18,6 +18,7 @@ public class SendMessage extends Command {
   OI oi;
   Arduino arduino;
   String t; 
+  boolean sent;
 
   public SendMessage(String t) {
   this.t = t;
@@ -35,7 +36,7 @@ public class SendMessage extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    arduino.sendMessage(t);
+    sent = arduino.sendMessage(t);
   }
 
 
@@ -43,7 +44,7 @@ public class SendMessage extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return !sent;//because default is false when worked, which is stupid
   }
 
 

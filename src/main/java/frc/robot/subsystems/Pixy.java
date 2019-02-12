@@ -38,7 +38,7 @@ public class Pixy extends Arduino {
   public byte[] receiveMessage()
   {
     byte[] dataFromArduino = new byte[2];
-    arduino.read(RobotMap.pixyAddress, 1, dataFromArduino);
+    received = arduino.read(RobotMap.pixyAddress, 1, dataFromArduino);
     for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
       String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
       System.out.print(s1 + ", ");
@@ -73,6 +73,35 @@ public class Pixy extends Arduino {
     }
     firstLoc = x1;
     secondLoc = x2;
+  }
+
+  public boolean checkPixyAlign()//true if aligned, false if not
+  {
+    double desiredavg = 159;
+    this.checkForPixyValues();
+    int firstLocation = this.firstLoc;
+    int secondLocation = this.secondLoc;
+    double x1 = (double) firstLocation;
+    double x2 = (double) secondLocation; 
+    double avg = (x1 + x2)/2;
+    if(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){
+      double diff = desiredavg-avg;
+      if (diff>desiredavg){
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  public int getFirstLoc()
+  {
+    return firstLoc;
+  }
+
+  public int getSecondLoc()
+  {
+    return secondLoc;
   }
 
 }

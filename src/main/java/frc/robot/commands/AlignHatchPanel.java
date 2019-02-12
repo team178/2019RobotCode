@@ -15,7 +15,7 @@ import frc.robot.subsystems.LinearActuator;
 import frc.robot.subsystems.Pixy;
 
 public class AlignHatchPanel extends Command {
-  Pixy pixyArduino;
+  Pixy pixy
   OI oi;
   LinearActuator linearactuator;
 
@@ -28,13 +28,14 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    pixyArduino = Robot.pixy;
+    pixy = Robot.pixy;
     linearactuator = Robot.linearactuator;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    /*
     double desiredavg = 159;
     pixyArduino.checkForPixyValues();
     int firstLocation = pixyArduino.firstLoc;
@@ -49,6 +50,12 @@ public class AlignHatchPanel extends Command {
       } else {
         linearactuator.moveActuator(true);
       }
+    }
+    */
+    //moved to pixy subsystem
+    while (!pixy.checkPixyAlign())
+    {
+      linearactuator.moveActuator(true);//true for moving actuator, false for not
     }
   }
 

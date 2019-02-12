@@ -33,19 +33,10 @@ public class XBoxDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
+  //left joystick up and down, right joystick left and right for twist
     yVal = oi.getLeftY();
     twistVal = oi.getRightX();
-    if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) {
-      drivetrain.drive(twistVal-yVal, twistVal+yVal);
-    } else {
-      drivetrain.drive(0,0);
-    }
-
-    yVal = -oi.getLeftY();
-    twistVal = -oi.getRightX();
-
-    if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) {
+    if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) {//joystick dead zone, where the motors stop giving a crap
       drivetrain.drive(twistVal-yVal, twistVal+yVal);
     } else {
       drivetrain.drive(0,0);

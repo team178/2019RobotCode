@@ -41,6 +41,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
  public static Pixy pixy;
  public static TimeOfFlight tof1;
  public static TimeOfFlight tof2;
+ public static LightsSubsystem lights;
  public static CameraServer camserv;
  public static UsbCamera camera1;
  public static UsbCamera camera2;
@@ -52,6 +53,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
     climber = new Climber();  
     cargointake = new CargoIntake();
     cargolauncher = new CargoLauncher(); 
+    lights = new LightsSubsystem();
     arduino = new Arduino(I2C.Port.kOnboard, 1);//1 is placeholder
     pixy = new Pixy();
     tof1 = new TimeOfFlight(RobotMap.tofAddress1);

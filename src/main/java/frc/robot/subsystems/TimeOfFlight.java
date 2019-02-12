@@ -31,7 +31,7 @@ public class TimeOfFlight extends Arduino {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-  public int getTofDistance () {
+  public int getTofDistance () {//need to decide if we gonna put calculations on here or arduino
     byte[] tofDistance = receiveMessage();
     String dist = ((Byte) tofDistance[0]).toString();
     int counter = 1;
@@ -51,7 +51,7 @@ public class TimeOfFlight extends Arduino {
   public byte[] receiveMessage()
   {
     byte[] dataFromArduino = new byte[2];
-    arduino.read(this.address, 1, dataFromArduino);
+    received = arduino.read(this.address, 1, dataFromArduino);
     for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
       String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
       System.out.print(s1 + ", ");
