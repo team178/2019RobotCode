@@ -35,7 +35,7 @@ public class SendMessage extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    arduino.sendMessage(SubsystemIndex.ALL, t);
+    arduino.sendMessage(t);
   }
 
 

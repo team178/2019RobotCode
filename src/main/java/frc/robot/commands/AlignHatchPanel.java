@@ -12,9 +12,10 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arduino;
 import frc.robot.subsystems.LinearActuator;
+import frc.robot.subsystems.Pixy;
 
 public class AlignHatchPanel extends Command {
-  Arduino pixyArduino;
+  Pixy pixyArduino;
   OI oi;
   LinearActuator linearactuator;
 
@@ -27,7 +28,7 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    pixyArduino = Robot.arduino;
+    pixyArduino = Robot.pixy;
     linearactuator = Robot.linearactuator;
   }
 
@@ -36,8 +37,8 @@ public class AlignHatchPanel extends Command {
   protected void execute() {
     double desiredavg = 159;
     pixyArduino.checkForPixyValues();
-    int firstLocation = pixyArduino.firstLocation;
-    int secondLocation = pixyArduino.secondLocation;
+    int firstLocation = pixyArduino.firstLoc;
+    int secondLocation = pixyArduino.secondLoc;
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2;

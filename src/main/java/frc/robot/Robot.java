@@ -19,6 +19,10 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.CameraServer;
 
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
+
+
  public class Robot extends TimedRobot {
    
  public static OI oi;
@@ -32,6 +36,9 @@ import edu.wpi.first.wpilibj.CameraServer;
  public static CargoLauncher cargolauncher;
  public static LinearActuator linearactuator;
  public static Arduino arduino;
+ public static Pixy pixy;
+ public static TimeOfFlight tof1;
+ public static TimeOfFlight tof2;
  public static UsbCamera camera;
 
   @Override
@@ -42,7 +49,11 @@ import edu.wpi.first.wpilibj.CameraServer;
     climber = new Climber();  
     cargointake = new CargoIntake();
     cargolauncher = new CargoLauncher(); 
-    arduino = new Arduino();
+    arduino = new Arduino(I2C.Port.kOnboard, 1);//1 is placeholder
+    pixy = new Pixy();
+    tof1 = new TimeOfFlight(RobotMap.tofAddress1);
+    tof2 = new TimeOfFlight(RobotMap.tofAddress2);
+
     linearactuator = new LinearActuator();
 
     camera = CameraServer.getInstance().startAutomaticCapture(0);
