@@ -5,6 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/*
 package frc.robot.commands;
 
 import frc.robot.Robot;
@@ -23,7 +24,7 @@ public class JoystickDrive extends Command {
   public JoystickDrive() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.drivetrain);
+   // requires(Robot.drivetrain);
   }
 
 
@@ -31,12 +32,13 @@ public class JoystickDrive extends Command {
     @Override
     protected void initialize() {
       oi = Robot.oi;
-      drivetrain = Robot.drivetrain;
+    //  drivetrain = Robot.drivetrain;
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+      
       
       if(oi.getTrigger() >= 0) {
         yVal = 0.75 * oi.getY();
@@ -58,8 +60,12 @@ public class JoystickDrive extends Command {
         }
       }
     }
+    //joystick drive
 
-    // Make this return true when this Command no longer needs to run execute()
+    
+   
+
+
     @Override
     protected boolean isFinished() {
       return false;
@@ -78,3 +84,5 @@ public class JoystickDrive extends Command {
       drivetrain.drive(0,0);
     }
   }
+
+  */

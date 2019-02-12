@@ -7,10 +7,13 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.RobotMap.SubsystemIndex;
 
@@ -18,33 +21,33 @@ import frc.robot.RobotMap.SubsystemIndex;
  * Add your docs here.
  */
 public class Arduino extends Subsystem {
-  private I2C arduino;
+  protected I2C arduino;
 
-  public Arduino() {
-    arduino = new I2C(I2C.Port.kOnboard, RobotMap.ArduinoAddress); // check these values
+  public Arduino(Port port , int address) {
+    arduino = new I2C(port, address); // check these values
   }
 
   public void sendMessage(String pattern) {
+    //String message = subsystem.ordinal() + pattern;
     String message = pattern;
     message = message.toLowerCase();
     System.out.println(message);
     arduino.writeBulk(message.getBytes());
+    System.out.println(arduino.addressOnly());
   }
 
-  public void sendMessage(SubsystemIndex subsystem, String pattern) {
-    String message = subsystem.ordinal() + pattern;
-    message = message.toLowerCase();
-    System.out.println(message);
-    arduino.writeBulk(message.getBytes());
-  }
-
-  public void receiveMessage()
+  public byte[] receiveMessage()
   {
-    byte dataFromPixy[] = new byte[2];
-    arduino.read(RobotMap.ArduinoAddress, 2, dataFromPixy);
-    System.out.println(Arrays.toString(dataFromPixy));
+    byte[] dataFromArduino = new byte[2];//change based on type of data 
+    for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
+    String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
+    System.out.print(s1 + ", ");
+    } 
+    System.out.println();
+
+    return dataFromArduino;
   }
- 
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

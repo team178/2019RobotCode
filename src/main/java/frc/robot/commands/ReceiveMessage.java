@@ -21,6 +21,8 @@ public class ReceiveMessage extends Command {
     //requires(Robot.arduino);
   }
 
+    }
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {

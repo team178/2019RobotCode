@@ -9,36 +9,49 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
-import frc.robot.subsystems.Arduino;
 import frc.robot.Robot;
-import frc.robot.RobotMap.SubsystemIndex;
+import frc.robot.subsystems.DriveTrain;
 
-public class SendMessage extends Command {
+public class XBoxDrive extends Command {
 
   OI oi;
-  Arduino arduino;
-  String t; 
+  DriveTrain drivetrain;
+  double yVal;
+  double twistVal;
 
-  public SendMessage(String t) {
-  this.t = t;
+  public XBoxDrive() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    arduino = Robot.arduino;
   }
-
-
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    arduino.sendMessage(t);
+
+    yVal = oi.getLeftY();
+    twistVal = oi.getRightX();
+    if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) {
+      drivetrain.drive(twistVal-yVal, twistVal+yVal);
+    } else {
+      drivetrain.drive(0,0);
+    }
+
+    yVal = -oi.getLeftY();
+    twistVal = -oi.getRightX();
+
+    if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) {
+      drivetrain.drive(twistVal-yVal, twistVal+yVal);
+    } else {
+      drivetrain.drive(0,0);
+    }
+
   }
-
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -46,19 +59,16 @@ public class SendMessage extends Command {
     return false;
   }
 
-
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    drivetrain.drive(0,0);
   }
-
-
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-
+    drivetrain.drive(0,0);
   }
-
 }

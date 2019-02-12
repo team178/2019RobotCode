@@ -7,38 +7,46 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
-import frc.robot.subsystems.Arduino;
 import frc.robot.Robot;
-import frc.robot.RobotMap.SubsystemIndex;
+import frc.robot.subsystems.LinearActuator;
 
-public class SendMessage extends Command {
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.WaitUntilCommand;
 
-  OI oi;
-  Arduino arduino;
-  String t; 
+public class MoveActuator extends Command {
 
-  public SendMessage(String t) {
-  this.t = t;
+    LinearActuator linearactuator;
+    double currentPosition;
+    boolean movingForward;
+
+  public MoveActuator(boolean forward) {
+   // requires(Robot.linearactuator);
+    movingForward = forward;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    oi = Robot.oi;
-    arduino = Robot.arduino;
+    linearactuator = Robot.linearactuator;
+    currentPosition = linearactuator.get();
   }
-
-
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    arduino.sendMessage(t);
+    if (movingForward) {
+      if (currentPosition < 1 || currentPosition >= 0) {
+        currentPosition+=0.004;
+        linearactuator.set(currentPosition);
+      }
+    } else {
+      if (currentPosition <= 1 || currentPosition > 0) {
+        currentPosition-=0.004;
+        linearactuator.set(currentPosition);
+      }
+    }
+    System.out.println(linearactuator.get());
   }
-
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -46,19 +54,14 @@ public class SendMessage extends Command {
     return false;
   }
 
-
   // Called once after isFinished returns true
   @Override
   protected void end() {
   }
 
-
-
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-
   }
-
 }
