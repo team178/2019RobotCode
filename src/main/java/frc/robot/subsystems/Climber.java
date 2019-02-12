@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class Climber extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
+  
   public static VictorSPX climber1;
   public static VictorSPX climber2;
   public static VictorSPX climber3;
