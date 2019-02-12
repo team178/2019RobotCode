@@ -55,7 +55,7 @@ public class Arduino extends Subsystem {
 
   public boolean checkedForReceived()
   {
-    return received;
+    return !received;//because its false when it worked 
   }
 
   @Override
