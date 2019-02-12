@@ -48,10 +48,14 @@ public class RobotMap {
   public static int DRIVEncoderLB = 3; //DIO
   public static int HatchEncoder = 4; //DIO
 
-  public static int JoystickPort = 0; //computer
-  public static int JoystickPortXBOX = 1; //computer
+  //public static int JoyStickPort = 0; //computer, for joystick drive
+  public static int JoystickPortXBox = 0; //computer, for xbox drive
+  public static int JoystickPortXBoxAux = 1; //computer
 
-  public static int  ArduinoAddress = 8;
+  public static int pixyAddress = 8;
+  public static int tofAddress1 = 18;
+  public static int tofAddress2 = 19;
+  public static int lightsAddress = 7;
 
   public static int linearactuator = 0; // PWM
 

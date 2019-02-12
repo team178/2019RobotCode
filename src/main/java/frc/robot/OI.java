@@ -29,8 +29,9 @@ public class OI {
 	public Button button6 = new JoystickButton(joystick1, 6);
 	public Button button7 = new JoystickButton(joystick1, 7);
 	*/
+	//joystick drive
 
-	public static Joystick xbox1 = new Joystick(RobotMap.JoystickPortXBOX);
+	public static Joystick xbox1 = new Joystick(RobotMap.JoystickPortXBox);
 	public Button buttonA1 = new JoystickButton(xbox1, 1);
 	public Button buttonB1= new JoystickButton(xbox1, 2);
 	public Button buttonX1 = new JoystickButton(xbox1, 3);
@@ -41,7 +42,7 @@ public class OI {
 	public Button startButton1 = new JoystickButton(xbox1, 8);
 	
 	
-	public static Joystick xbox2 = new Joystick(RobotMap.JoystickPortXBOX);
+	public static Joystick xbox2 = new Joystick(RobotMap.JoystickPortXBoxAux);
 	public Button buttonA2 = new JoystickButton(xbox2, 1);
 	public Button buttonB2 = new JoystickButton(xbox2, 2);
 	public Button buttonX2 = new JoystickButton(xbox2, 3);
@@ -50,30 +51,39 @@ public class OI {
 	public Button rBumper2 = new JoystickButton(xbox2, 6);
 	public Button backButton2 = new JoystickButton(xbox2, 7);
 	public Button startButton2 = new JoystickButton(xbox2, 8);
-	
-
+	//xbox drive
 	
   
 	public OI() {
-		buttonA.whileHeld(new SendMessage("test"));
-		buttonB.whileHeld(new ReceiveMessage());
-		buttonX.whileHeld(new MoveActuator(true));
-		buttonY.whileHeld(new MoveActuator(false));
+
 	}
 
  	public double getX() {
-		return joystick1.getX();
+		return xbox1.getX();
 	}
 	
 	public double getY() {
-		return joystick1.getY();
+		return xbox1.getY();
+	}
+
+	public double getLeftY()
+	{
+		return xbox1.getRawAxis(1);
+	}
+
+	public double getRightX()
+	{
+		return xbox1.getRawAxis(4);
 	}
 	
+	/*
 	public double getTwist() {
 		return joystick1.getRawAxis(3);
 	}
 	
 	public double getTrigger() {
-		return xbox.getRawAxis(3);
+		return joystick1.getRawAxis(3);
 	}
+	*/
 }
+	
