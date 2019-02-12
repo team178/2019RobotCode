@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Talon;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
@@ -19,11 +19,11 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class Climber extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
-  public static Talon climber1;
-  public static Talon climber2;
-  public static Talon climber3;
-  public static Talon climber4;
+  
+  public static VictorSPX climber1;
+  public static VictorSPX climber2;
+  public static VictorSPX climber3;
+  public static VictorSPX climber4;
   //Proximity Sensors (4)
   public static DigitalInput limitswitchTop1;
   public static DigitalInput limitswitchTop2;
@@ -31,10 +31,10 @@ public class Climber extends Subsystem {
   public static DigitalInput limitswitchBottom2;
 
   public Climber() {
-    climber1 = new Talon(RobotMap.ClimberMotor1);
-    climber2 = new Talon(RobotMap.ClimberMotor2);
-    climber3 = new Talon(RobotMap.ClimberMotor3);
-    climber4 = new Talon(RobotMap.ClimberMotor4);
+    climber1 = new VictorSPX(RobotMap.ClimberMotor1);
+    climber2 = new VictorSPX(RobotMap.ClimberMotor2);
+    climber3 = new VictorSPX(RobotMap.ClimberMotor3);
+    climber4 = new VictorSPX(RobotMap.ClimberMotor4);
     //Varun - go to RobotMap and make a LimitSwitch input for each one (DIO)
     limitswitchTop1 = new DigitalInput(RobotMap.LimitSwitchTop1);
     limitswitchTop2 = new DigitalInput(RobotMap.LimitSwitchTop2);
