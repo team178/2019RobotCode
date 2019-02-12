@@ -16,9 +16,9 @@ import frc.robot.RobotMap.SubsystemIndex;
 public class SendMessage extends Command {
 
   OI oi;
-  Arduino arduino;
+  public Arduino arduino;
   String t; 
-  boolean sent;
+  public boolean sent; 
 
   public SendMessage(String t) {
   this.t = t;
@@ -44,7 +44,7 @@ public class SendMessage extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !sent;//because default is false when worked, which is stupid
+    return sent;
   }
 
 

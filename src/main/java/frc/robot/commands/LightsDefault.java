@@ -8,35 +8,32 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 import frc.robot.subsystems.LightsSubsystem;
 
-public class LightsHatch extends Command {
+public class LightsDefault extends Command {
 
   LightsSubsystem lights;
-
-  public LightsHatch() {
+  
+  public LightsDefault() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(lights);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    lights = Robot.lights;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.print("lights should be hatch color");
+    System.out.print("lights should be default, based on which alliance");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return lights.needHatchPanel();
+    return lights.setAllianceColor();
   }
 
   // Called once after isFinished returns true

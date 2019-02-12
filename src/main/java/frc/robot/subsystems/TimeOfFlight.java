@@ -31,7 +31,9 @@ public class TimeOfFlight extends Arduino {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-  public int getTofDistance () {//need to decide if we gonna put calculations on here or arduino
+
+  public int getTofDistance () 
+  {//need to decide if we gonna put calculations on here or arduino
     byte[] tofDistance = receiveMessage();
     String dist = ((Byte) tofDistance[0]).toString();
     int counter = 1;

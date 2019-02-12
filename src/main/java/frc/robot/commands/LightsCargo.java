@@ -29,13 +29,13 @@ public class LightsCargo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    lights.needCargo();
+    System.out.print("lights should be cargo color");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return new SendMessage("c").sent;
   }
 
   // Called once after isFinished returns true

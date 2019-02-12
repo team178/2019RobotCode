@@ -53,12 +53,15 @@ import edu.wpi.first.wpilibj.I2C.Port;
     climber = new Climber();  
     cargointake = new CargoIntake();
     cargolauncher = new CargoLauncher(); 
+    linearactuator = new LinearActuator();
     lights = new LightsSubsystem();
     arduino = new Arduino(I2C.Port.kOnboard, 1);//1 is placeholder
     pixy = new Pixy();
     tof1 = new TimeOfFlight(RobotMap.tofAddress1);
     tof2 = new TimeOfFlight(RobotMap.tofAddress2);
     oi = new OI();
+
+    lights.setAllianceColor();
 
     camserv = CameraServer.getInstance();
     
@@ -73,7 +76,6 @@ import edu.wpi.first.wpilibj.I2C.Port;
     camera2.setPixelFormat(PixelFormat.kYUYV);
 
     System.out.println("Robot init: " + hatchMechanism.getExtenderSolenoidState());
-    linearactuator = new LinearActuator();
   }
 
   @Override
