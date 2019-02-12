@@ -12,30 +12,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
 
-import edu.wpi.first.wpilibj.Encoder;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class DriveTrain extends Subsystem {
-	public static final double diameter = 6;
-	public static final double gearRatio = 1; //figure out for main bot (5.95:1?)
-	public static final double circumference = diameter * Math.PI;
-	public static final double countsPerRevolution = 1024; //Units for encoders -- the encoder ticks 1024 times per rotation
-	
-	public static TalonSRX left1;
-    public static TalonSRX left2;
-    public static TalonSRX right1;
-    public static TalonSRX right2;
-    //public static Encoder right;
-    //public static Encoder left;
+
+	public static VictorSPX left1;
+  public static VictorSPX left2;
+  public static VictorSPX right1;
+  public static VictorSPX right2;
+  //public static Encoder right;
+  //public static Encoder left;
     
-    public DriveTrain() {
-	    left1 = new TalonSRX(RobotMap.DMTopLeft);
-	    left2 = new TalonSRX(RobotMap.DMBottomLeft);
-	    right1 = new TalonSRX(RobotMap.DMTopRight);
-	    right2 = new TalonSRX(RobotMap.DMBottomRight);
-    }
+  public DriveTrain() {
+	  left1 = new VictorSPX(RobotMap.DMTopLeft);
+	  left2 = new VictorSPX(RobotMap.DMBottomLeft);
+	  right1 = new VictorSPX(RobotMap.DMTopRight);
+	  right2 = new VictorSPX(RobotMap.DMBottomRight);
+  }
 
   public void rightDrive(double speed) {
     right1.set(ControlMode.PercentOutput, speed);
