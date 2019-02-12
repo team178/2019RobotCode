@@ -59,10 +59,10 @@ public class OI {
 		//buttonB.whenPressed(new ReceiveMessage());
 		
 		//buttonA.whenPressed(new FullHatchPlacement());
-		buttonX.whenPressed(new ExtendHatchMechanism());
-		buttonB.whenPressed(new RetractHatchMechanism());
-		buttonY.whenPressed(new EjectPanel());
-		buttonA.whenPressed(new resetEjector());
+		buttonX2.whenPressed(new ExtendHatchMechanism());
+		buttonB2.whenPressed(new RetractHatchMechanism());
+		buttonY2.whenPressed(new EjectPanel());
+		buttonA2.whenPressed(new resetEjector());
 	}
 
  	public double getX() {
