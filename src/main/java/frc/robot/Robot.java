@@ -57,8 +57,8 @@ import edu.wpi.first.wpilibj.I2C.Port;
     linearactuator = new LinearActuator();
     lights = new LightsSubsystem();
     arduino = new Arduino(I2C.Port.kOnboard, 1);//1 is placeholder
-    pixyX = new Pixy(RobotMap.pixyAddressX);
-    pixyY = new Pixy(RobotMap.pixyAddressY);
+    pixyX = new Pixy(RobotMap.pixyAddress1);
+    pixyY = new Pixy(RobotMap.pixyAddress2);
     tofL = new TimeOfFlight(RobotMap.tofAddressL);
     tofR = new TimeOfFlight(RobotMap.tofAddressR);
     oi = new OI();

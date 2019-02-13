@@ -56,8 +56,8 @@ public class RobotMap {
   public static int JoystickPortXBox = 0; //computer, for xbox drive
   public static int JoystickPortXBoxAux = 1; //computer
 
-  public static int pixyAddressX = 8;
-  public static int pixyAddressY = 9;
+  public static int pixyAddress1 = 8;
+  public static int pixyAddress2 = 9;
   public static int tofAddressL = 18;//left and right
   public static int tofAddressR = 19;
   public static int lightsAddress = 7;
