@@ -41,7 +41,7 @@ public class Arduino extends Subsystem {
     return sent;
   }
 
-  public byte[] receiveMessage(int address)
+  public byte[] receiveMessage(int address)//for which i2c address to read from 
   {
     byte[] dataFromArduino = new byte[2];//change based on type of data 
     received = !arduino.read(address, 2, dataFromArduino);//because true if aborted, false if worked

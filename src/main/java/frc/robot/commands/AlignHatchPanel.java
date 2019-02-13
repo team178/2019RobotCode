@@ -15,7 +15,8 @@ import frc.robot.subsystems.LinearActuator;
 import frc.robot.subsystems.Pixy;
 
 public class AlignHatchPanel extends Command {
-  Pixy pixy;
+  Pixy pixy1;
+  Pixy pixy2;
   OI oi;
   LinearActuator linearactuator;
 
@@ -28,7 +29,8 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    pixy = Robot.pixy;
+    pixy1 = Robot.pixy1;
+    pixy2 = Robot.pixy2;
     linearactuator = Robot.linearactuator;
   }
 
@@ -54,17 +56,18 @@ public class AlignHatchPanel extends Command {
     */
     //moved to pixy subsystem
   
-    while (!pixy.checkPixyAlign())
+    while (!Pixy.checkPixyAlign())
     {
       linearactuator.moveActuator(true);//true for moving actuator, false for not
     }
+    linearactuator.moveActuator(false);
 
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Pixy.checkPixyAlign();
   }
 
   // Called once after isFinished returns true

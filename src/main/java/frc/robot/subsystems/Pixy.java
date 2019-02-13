@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.I2C;
@@ -18,8 +19,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Pixy extends Arduino {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public int firstLoc;
-  public int secondLoc;
+  public static int firstLoc;
+  public static int secondLoc;
 
   public Pixy(int address)//use robotmap values
   {
@@ -47,8 +48,8 @@ public class Pixy extends Arduino {
       return dataFromArduino;
   }
 
-  public void checkForPixyValues () {
-    byte[] coordinatesFromPixy = receiveMessage(RobotMap.pixyAddressX);//gets first x value from pixy
+  public static void checkForPixyValues () {
+    byte[] coordinatesFromPixy = Robot.pixy1.receiveMessage(RobotMap.pixyAddress1);//gets first x value from pixy
     String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
     int counter = 1;
     int x1 = 0;
@@ -61,7 +62,7 @@ public class Pixy extends Arduino {
     counter = 0;
     
     // delay
-    coordinatesFromPixy = receiveMessage(RobotMap.pixyAddressY);//gets second x value from pixy 
+    coordinatesFromPixy = Robot.pixy2.receiveMessage(RobotMap.pixyAddress2);//gets second x value from pixy 
     String x2Binary = ((Byte) coordinatesFromPixy[0]).toString();
     counter = 1;
     int x2 = 0;
@@ -75,12 +76,12 @@ public class Pixy extends Arduino {
     secondLoc = x2;
   }
 
-  public boolean checkPixyAlign()//true if aligned, false if not
+  public static boolean checkPixyAlign()//true if aligned, false if not
   {
     double desiredavg = 159;
-    this.checkForPixyValues();
-    int firstLocation = this.firstLoc;
-    int secondLocation = this.secondLoc;
+    checkForPixyValues();
+    int firstLocation = firstLoc;
+    int secondLocation = secondLoc;
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2;

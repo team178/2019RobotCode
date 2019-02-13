@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.Arduino;
 
 public class ReceiveMessage extends Command {
@@ -17,9 +18,11 @@ public class ReceiveMessage extends Command {
   OI oi;
   Arduino arduino;
   boolean received;
+  int address;
   
-  public ReceiveMessage() {
+  public ReceiveMessage(int address) {
     //requires(Robot.arduino);
+    this.address = address;
   }
 
 
@@ -33,7 +36,7 @@ public class ReceiveMessage extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    arduino.receiveMessage();
+    arduino.receiveMessage(address);
     received = arduino.checkIfReceived();
     
   }

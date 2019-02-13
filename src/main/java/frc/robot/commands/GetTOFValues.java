@@ -12,13 +12,13 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.TimeOfFlight;
 
-public class GetTOFValues extends Command {
+public class GetTofValues extends Command {
 
   OI oi;
-  TimeOfFlight tof1;
-  TimeOfFlight tof2;
+  TimeOfFlight tofL;
+  TimeOfFlight tofR;
 
-  public GetTOFValues() {
+  public GetTofValues() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -27,15 +27,17 @@ public class GetTOFValues extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    tof1 = Robot.tof1;
-    tof2 = Robot.tof2;
+    tofL = Robot.tofL;
+    tofR = Robot.tofR;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    tof1.getTofDistance();//will most likey have to change
-    tof2.getTofDistance();
+    tofL.getTofDistance();//will most likey have to change
+    tofR.getTofDistance();
+
+    
 
   }
 

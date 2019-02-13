@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.I2C;
@@ -32,9 +33,9 @@ public class TimeOfFlight extends Arduino {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public int getTofDistance () 
+  public static int getTofDistance () 
   {//need to decide if we gonna put calculations on here or arduino
-    byte[] tofDistance = receiveMessage(RobotMap.tofAddressL);//gets first tof value
+    byte[] tofDistance = Robot.tofL.receiveMessage(RobotMap.tofAddressL);//gets first tof value
     String dist = ((Byte) tofDistance[0]).toString();
     int counter = 1;
     int distance = 0;
@@ -47,6 +48,11 @@ public class TimeOfFlight extends Arduino {
     System.out.println(distance);
     return distance;
     }
+
+  public static boolean checkTofAlign()//need to see what the strings are in binary or could just change to ints 
+  {
+    return false;
+  }
 
 
 @Override
