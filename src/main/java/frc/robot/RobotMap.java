@@ -48,8 +48,7 @@ public class RobotMap {
   public static int LimitSwitchBottom1 = 7; //DIO
   public static int LimitSwitchBottom2 = 8; //DIO
 
-  //public static int JoyStickPort = 0; //computer, for joystick drive
-  public static int JoystickPortXBox = 0; //computer, for xbox drive
+  public static int JoystickPort = 0; //computer, for joystick drive
   public static int JoystickPortXBoxAux = 1; //computer
 
   public static int pixyAddress1 = 8;

@@ -40,19 +40,19 @@ public class LightsSubsystem extends Arduino {
 
   public boolean setAllianceColor()
   {
-    if (ds.getAlliance() == Alliance.Blue)
+    /*if (ds.getAlliance() == Alliance.Blue)
     {
         return new SendMessage("b").arduino.checkIfSent();
     }
     else
     {
         return new SendMessage("r").arduino.checkIfSent();
-    }
+    }*/ return true;
   }
-
   public boolean needHatchPanel()
   {
-    return new SendMessage("h").arduino.checkIfSent();
+    return true;
+    //return new SendMessage("h").arduino.checkIfSent();
   }
 
   public boolean needCargo()

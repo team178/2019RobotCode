@@ -13,7 +13,6 @@ import frc.robot.RobotMap;
 import frc.robot.commands.*;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class DriveTrain extends Subsystem {
@@ -22,8 +21,6 @@ public class DriveTrain extends Subsystem {
   public static VictorSPX left2;
   public static VictorSPX right1;
   public static VictorSPX right2;
-  //public static Encoder right;
-  //public static Encoder left;
     
   public DriveTrain() {
 	  left1 = new VictorSPX(RobotMap.DMTopLeft);
@@ -57,7 +54,7 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    //setDefaultCommand(new JoystickDrive());
-    setDefaultCommand(new XBoxDrive());
+    setDefaultCommand(new JoystickDrive());
+    //setDefaultCommand(new XBoxDrive());
   }
 }
