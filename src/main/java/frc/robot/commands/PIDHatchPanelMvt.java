@@ -41,7 +41,7 @@ public class PIDHatchPanelMvt extends Command {
     kP = 0;
     kI = 0;
     kD = 0;
-    error = setPoint - hatchMechanism.getPosition();
+    //error = setPoint - hatchMechanism.getPosition();
     previousError = 0;
     sensingTarget = false;
     
@@ -61,7 +61,7 @@ public class PIDHatchPanelMvt extends Command {
     if (sensingTarget) {
       double output;
       retrievePixyValues();
-      error = setPoint - hatchMechanism.getPosition(); //error = desired - actual
+      //error = setPoint - hatchMechanism.getPosition(); //error = desired - actual
 
       //TODO: either set kI to 0 or implement integral active zones
 
@@ -76,7 +76,7 @@ public class PIDHatchPanelMvt extends Command {
       D *= kD;
 
       output = P + I + D;
-      hatchMechanism.slideHatch(output);
+      //hatchMechanism.slideHatch(output);
       previousError = error;
     }
    }
@@ -84,23 +84,23 @@ public class PIDHatchPanelMvt extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (Math.abs(setPoint - hatchMechanism.getPosition()) < 0.0001) {
-      return true;
-    }
+    //if (Math.abs(setPoint - hatchMechanism.getPosition()) < 0.0001) {
+    //  return true;
+    //}
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    hatchMechanism.slideHatch(0);
+    //hatchMechanism.slideHatch(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    hatchMechanism.slideHatch(0);
+    //hatchMechanism.slideHatch(0);
   }
   
   public void retrievePixyValues() {
@@ -113,9 +113,9 @@ public class PIDHatchPanelMvt extends Command {
     offset /= PIXELS_PER_INCH; //converting offset from pixels to inches
     
     //converting offset to encoder ticks
-    offset /= hatchMechanism.gearRatio;
-    offset *= hatchMechanism.countsPerRevolution;
-    setPoint = offset; //setting setpoint in ticks (absolute setpoint, not relative to current position)
-    error = setPoint - hatchMechanism.getPosition(); //setting error
+    //offset /= hatchMechanism.gearRatio;
+    //offset *= hatchMechanism.countsPerRevolution;
+    //setPoint = offset; //setting setpoint in ticks (absolute setpoint, not relative to current position)
+    //error = setPoint - hatchMechanism.getPosition(); //setting error
   }
 }

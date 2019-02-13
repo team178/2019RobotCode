@@ -20,21 +20,20 @@ public class RobotMap {
   public static int DMTopLeft = 3; //CAN
   public static int DMBottomLeft = 4; //CAN
 
-  public static int HatchMotor = 6; //CAN
-
-  public static int ClimberMotor1 = 7; //CAN
-  public static int ClimberMotor2 = 8; //CAN
-  public static int ClimberMotor3 = 9; //CAN
-  public static int ClimberMotor4 = 10; //CAN
+  public static int ClimberBackWheel = 5; //CAN
+  public static int ClimberMotor1 = 6; //CAN
+  public static int ClimberMotor2 = 7; //CAN
+  public static int ClimberMotor3 = 8; //CAN
+  public static int ClimberMotor4 = 9; //CAN
   
-  public static int PCM = 5; //PCM
+  public static int PCM = 10; //CAN
   public static int PressureTranducer = 0; //Analog
   
-  public static int CargoCylinderAimInput = 0; //PCM
-  public static int CargoCylinderAimOutput = 1; //PCM
+  public static int CargoCylinderAimExtend = 0; //PCM
+  public static int CargoCylinderAimRetract = 1; //PCM
   
-  public static int CargoCylinderShootInput = 2; //PCM
-  public static int CargoCylinderShootOutput = 3; //PCM
+  public static int CargoCylinderShootExtend = 2; //PCM
+  public static int CargoCylinderShootRetract = 3; //PCM
 
   public static int HatchExtenderCylinderExtend = 4; //PCM
   public static int HatchExtenderCylinderRetract = 5; //PCM
@@ -42,11 +41,8 @@ public class RobotMap {
   public static int HatchEjectorCylinderExtend = 7; //PCM
   public static int HatchEjectorCylinderRetract = 6; //PCM
 
-  public static int DRIVEncoderRA = 0; //DIO
-  public static int DRIVEncoderRB = 1; //DIO
-  public static int DRIVEncoderLA = 2; //DIO
-  public static int DRIVEncoderLB = 3; //DIO
-  public static int HatchEncoder = 4; //DIO
+  public static int linearactuator = 0; // PWM
+
   public static int LimitSwitchTop1 = 5; //DIO
   public static int LimitSwitchTop2 = 6; //DIO
   public static int LimitSwitchBottom1 = 7; //DIO
@@ -61,8 +57,6 @@ public class RobotMap {
   public static int tofAddressL = 18;//left and right
   public static int tofAddressR = 19;
   public static int lightsAddress = 7;
-
-  public static int linearactuator = 0; // PWM
 
   public enum SubsystemIndex {
     ALL, BUMPER

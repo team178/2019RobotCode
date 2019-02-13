@@ -12,13 +12,13 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.TimeOfFlight;
 
-public class GetTofValues extends Command {
+public class GetTOFValues extends Command {
 
   OI oi;
   TimeOfFlight tofL;
   TimeOfFlight tofR;
 
-  public GetTofValues() {
+  public GetTOFValues() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

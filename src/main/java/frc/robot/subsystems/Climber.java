@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Victor;
 
 /**
  * Add your docs here.
@@ -20,10 +21,10 @@ public class Climber extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   
-  public static VictorSPX climber1;
-  public static VictorSPX climber2;
-  public static VictorSPX climber3;
-  public static VictorSPX climber4;
+  public static Victor climber1;
+  public static Victor climber2;
+  public static Victor climber3;
+  public static Victor climber4;
   //Proximity Sensors (4)
   public static DigitalInput limitswitchTop1;
   public static DigitalInput limitswitchTop2;
@@ -31,10 +32,10 @@ public class Climber extends Subsystem {
   public static DigitalInput limitswitchBottom2;
 
   public Climber() {
-    climber1 = new VictorSPX(RobotMap.ClimberMotor1);
-    climber2 = new VictorSPX(RobotMap.ClimberMotor2);
-    climber3 = new VictorSPX(RobotMap.ClimberMotor3);
-    climber4 = new VictorSPX(RobotMap.ClimberMotor4);
+    climber1 = new Victor(RobotMap.ClimberMotor1);
+    climber2 = new Victor(RobotMap.ClimberMotor2);
+    climber3 = new Victor(RobotMap.ClimberMotor3);
+    climber4 = new Victor(RobotMap.ClimberMotor4);
     //Varun - go to RobotMap and make a LimitSwitch input for each one (DIO)
     limitswitchTop1 = new DigitalInput(RobotMap.LimitSwitchTop1);
     limitswitchTop2 = new DigitalInput(RobotMap.LimitSwitchTop2);
