@@ -34,7 +34,7 @@ public class TimeOfFlight extends Arduino {
 
   public int getTofDistance () 
   {//need to decide if we gonna put calculations on here or arduino
-    byte[] tofDistance = receiveMessage(RobotMap.tofAddressL);//gets first tof value
+    byte[] tofDistance = receiveMessage(this.address);//gets tof value
     String dist = ((Byte) tofDistance[0]).toString();
     int counter = 1;
     int distance = 0;
