@@ -20,7 +20,7 @@ public class TimeOfFlight extends Arduino {
   // here. Call these from Commands.
   int address;
 
-  public TimeOfFlight(int address)//must be 18 or 19
+  public TimeOfFlight(int address)//use robotmap values
   {
     super(I2C.Port.kOnboard, address);
     this.address = address;
@@ -34,7 +34,7 @@ public class TimeOfFlight extends Arduino {
 
   public int getTofDistance () 
   {//need to decide if we gonna put calculations on here or arduino
-    byte[] tofDistance = receiveMessage();
+    byte[] tofDistance = receiveMessage(RobotMap.tofAddressL);//gets first tof value
     String dist = ((Byte) tofDistance[0]).toString();
     int counter = 1;
     int distance = 0;
@@ -50,10 +50,10 @@ public class TimeOfFlight extends Arduino {
 
 
 @Override
-  public byte[] receiveMessage()
+  public byte[] receiveMessage(int address)
   {
     byte[] dataFromArduino = new byte[2];
-    received = arduino.read(this.address, 1, dataFromArduino);
+    received = arduino.read(this.address, 2, dataFromArduino);
     for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
       String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
       System.out.print(s1 + ", ");

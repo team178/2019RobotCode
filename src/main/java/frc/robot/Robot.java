@@ -38,9 +38,10 @@ import edu.wpi.first.wpilibj.I2C.Port;
  public static CargoLauncher cargolauncher;
  public static LinearActuator linearactuator;
  public static Arduino arduino;
- public static Pixy pixy;
- public static TimeOfFlight tof1;
- public static TimeOfFlight tof2;
+ public static Pixy pixyX;
+ public static Pixy pixyY;
+ public static TimeOfFlight tofL;
+ public static TimeOfFlight tofR;
  public static LightsSubsystem lights;
  public static CameraServer camserv;
  public static UsbCamera camera1;
@@ -56,9 +57,10 @@ import edu.wpi.first.wpilibj.I2C.Port;
     linearactuator = new LinearActuator();
     lights = new LightsSubsystem();
     arduino = new Arduino(I2C.Port.kOnboard, 1);//1 is placeholder
-    pixy = new Pixy();
-    tof1 = new TimeOfFlight(RobotMap.tofAddress1);
-    tof2 = new TimeOfFlight(RobotMap.tofAddress2);
+    pixyX = new Pixy(RobotMap.pixyAddressX);
+    pixyY = new Pixy(RobotMap.pixyAddressY);
+    tofL = new TimeOfFlight(RobotMap.tofAddressL);
+    tofR = new TimeOfFlight(RobotMap.tofAddressR);
     oi = new OI();
 
     lights.setAllianceColor();

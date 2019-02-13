@@ -41,10 +41,10 @@ public class Arduino extends Subsystem {
     return sent;
   }
 
-  public byte[] receiveMessage()
+  public byte[] receiveMessage(int address)
   {
     byte[] dataFromArduino = new byte[2];//change based on type of data 
-    received = !arduino.read(RobotMap.lightsAddress, 1, dataFromArduino);//because true if aborted, false if worked
+    received = !arduino.read(address, 2, dataFromArduino);//because true if aborted, false if worked
     for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
     String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     System.out.print(s1 + ", ");

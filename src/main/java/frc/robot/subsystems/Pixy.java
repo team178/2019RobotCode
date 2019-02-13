@@ -21,9 +21,9 @@ public class Pixy extends Arduino {
   public int firstLoc;
   public int secondLoc;
 
-  public Pixy()
+  public Pixy(int address)//use robotmap values
   {
-    super(I2C.Port.kOnboard, RobotMap.pixyAddress);
+    super(I2C.Port.kOnboard, address);
     firstLoc = 0;
     secondLoc = 0;
   }
@@ -35,10 +35,10 @@ public class Pixy extends Arduino {
   }
 
   @Override
-  public byte[] receiveMessage()
+  public byte[] receiveMessage(int address)
   {
     byte[] dataFromArduino = new byte[2];
-    received = arduino.read(RobotMap.pixyAddress, 1, dataFromArduino);
+    received = arduino.read(address, 1, dataFromArduino);
     for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
       String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
       System.out.print(s1 + ", ");
@@ -48,7 +48,7 @@ public class Pixy extends Arduino {
   }
 
   public void checkForPixyValues () {
-    byte[] coordinatesFromPixy = receiveMessage();//gets first x value from pixy
+    byte[] coordinatesFromPixy = receiveMessage(RobotMap.pixyAddressX);//gets first x value from pixy
     String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
     int counter = 1;
     int x1 = 0;
@@ -61,7 +61,7 @@ public class Pixy extends Arduino {
     counter = 0;
     
     // delay
-    coordinatesFromPixy = receiveMessage();//gets second x value from pixy 
+    coordinatesFromPixy = receiveMessage(RobotMap.pixyAddressY);//gets second x value from pixy 
     String x2Binary = ((Byte) coordinatesFromPixy[0]).toString();
     counter = 1;
     int x2 = 0;

@@ -73,6 +73,9 @@ public class OI {
 		return xbox1.getY();
 	}
 
+
+	//get axis methods
+	// 1 is left x, 2 is left y, 3 is left trigger, 4 is right x, 5 is left x, 6 is right trigger
 	public double getLeftY()
 	{
 		return xbox1.getRawAxis(1);
@@ -82,6 +85,8 @@ public class OI {
 	{
 		return xbox1.getRawAxis(4);
 	}
+
+	
 	
 	/*
 	public double getTwist() {
