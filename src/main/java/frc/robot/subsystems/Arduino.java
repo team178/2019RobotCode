@@ -93,6 +93,11 @@ public class Arduino extends Subsystem {
     return sendMessage("c");
   }
 
+  public boolean lightsOff()
+  {
+    return sendMessage("o");
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
