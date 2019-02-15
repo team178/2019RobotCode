@@ -16,8 +16,8 @@ public class XBoxDrive extends Command {
 
   OI oi;
   DriveTrain drivetrain;
-  double yVal;
-  double twistVal;
+  private double leftY;
+  private double rightY;
 
   public XBoxDrive() {
     // Use requires() here to declare subsystem dependencies
@@ -35,14 +35,14 @@ public class XBoxDrive extends Command {
   @Override
   protected void execute() {
   //left joystick up and down, right joystick left and right for twist
-    yVal = oi.getLeftY();
-    twistVal = oi.getRightX();
-    if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) {//joystick dead zone, where the motors stop giving a crap
-      drivetrain.drive(twistVal-yVal, twistVal+yVal);
+    leftY = oi.getLeftY();
+    rightY = oi.getRightX();
+    
+    if(Math.abs(leftY) > 0.1 || Math.abs(rightY) > 0.1) {//joystick dead zone, where the motors stop giving a crap
+      drivetrain.drive(leftY, rightY);
     } else {
       drivetrain.drive(0,0);
     }
-
   }
 
   // Make this return true when this Command no longer needs to run execute()
