@@ -34,7 +34,7 @@ public class XBoxDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-  //left joystick up and down, right joystick left and right for twist
+  //left joystick controls left side of tank drive, right joystick controls right side
     leftY = oi.getStickLeftYMain();
     rightY = oi.getStickRightXMain();
     
