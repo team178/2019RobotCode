@@ -62,7 +62,7 @@ public class Pixy extends Arduino {
     counter = 0;
     
     // delay
-    coordinatesFromPixy = Robot.pixy2.receiveMessage(RobotMap.pixyAddress2);//gets second x value from pixy 
+    coordinatesFromPixy = Robot.pixy.receiveMessage(RobotMap.pixyAddress2);//gets second x value from pixy 
     String x2Binary = ((Byte) coordinatesFromPixy[0]).toString();
     counter = 1;
     int x2 = 0;
