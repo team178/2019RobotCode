@@ -34,7 +34,6 @@ import edu.wpi.first.wpilibj.I2C.Port;
  
  public static HatchMechanism hatchMechanism;
  public static Climber climber;
- public static CargoIntake cargointake;
  public static CargoLauncher cargolauncher;
  public static LinearActuator linearactuator;
  public static Arduino arduino;
@@ -52,7 +51,6 @@ import edu.wpi.first.wpilibj.I2C.Port;
     drivetrain = new DriveTrain();
     hatchMechanism = new HatchMechanism();
     climber = new Climber();  
-    cargointake = new CargoIntake();
     cargolauncher = new CargoLauncher(); 
     linearactuator = new LinearActuator();
     lights = new LightsSubsystem();
