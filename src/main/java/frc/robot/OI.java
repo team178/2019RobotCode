@@ -62,24 +62,24 @@ public class OI {
 		return xboxMain.getRawAxis(3);
 	}
 	
-	public double getLeftTriggerMain() {
+	public double getRightTriggerMain() {
 		return xboxMain.getRawAxis(4);
 	}
 	
 	//AUX controller accessor methods
 	public double getLeftStickYAux() {
-		return xboxMain.getRawAxis(2);
+		return xboxAux.getRawAxis(2);
 	}
 	
 	public double getRightStickYAux() {
-		return xboxMain.getRawAxis(5);
+		return xboxAux.getRawAxis(5);
 	}
 	
 	public double getLeftTriggerAux() {
-		return xboxMain.getRawAxis(3);
+		return xboxAux.getRawAxis(3);
 	}
 	
-	public double getLeftTriggerAux() {
-		return xboxMain.getRawAxis(4);
+	public double getRightTriggerAux() {
+		return xboxAux.getRawAxis(4);
 	}
 }

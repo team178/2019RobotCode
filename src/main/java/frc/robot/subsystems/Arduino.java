@@ -54,6 +54,8 @@ public class Arduino extends Subsystem {
     return dataFromArduino;
   }
 
+  
+
   public boolean checkIfReceived()
   {
     return received;
