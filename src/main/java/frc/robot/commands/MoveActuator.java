@@ -13,7 +13,7 @@ import frc.robot.subsystems.LinearActuator;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.WaitUntilCommand;
 
-public class MoveActuator extends Command {
+public class ManuallyMoveActuator extends Command {
 
     LinearActuator linearactuator;
     private double currentPosition;
