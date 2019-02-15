@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 import edu.wpi.first.wpilibj.Talon;
@@ -27,12 +28,15 @@ public class HatchMechanism extends Subsystem {
   public static DoubleSolenoid hatchCylinderExtend;
   public static DoubleSolenoid hatchCylinderEject;
   public static AnalogInput pressureTransducer;
+  public static PWM linearactuator;
 
   public HatchMechanism() {
     hatchCylinderExtend = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchExtenderCylinderExtend, RobotMap.HatchExtenderCylinderRetract);
     
     hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchEjectorCylinderExtend, RobotMap.HatchEjectorCylinderRetract);
     pressureTransducer = new AnalogInput(RobotMap.PressureTranducer);
+
+    linearactuator = new PWM(RobotMap.linearactuator);
 
     setExtender("reverse");
     //setEjector("reverse");
@@ -75,6 +79,30 @@ public class HatchMechanism extends Subsystem {
 
   public double getPressure() {
       return pressureTransducer.getVoltage();
+  }
+
+  public void setActuatorPosition(double val) {
+    linearactuator.setPosition(val);
+  }
+
+  public double getActuatorPosition() {
+    return linearactuator.getPosition();
+  }
+
+  public void moveActuator (boolean movingForward) {
+    double currentPosition = getActuatorPosition();
+    if (movingForward) {
+      if (currentPosition < 1 || currentPosition >= 0) {
+        currentPosition+=0.004;
+        setActuatorPosition(currentPosition);
+      }
+    } else {
+      if (currentPosition <= 1 || currentPosition > 0) {
+        currentPosition-=0.004;
+        setActuatorPosition(currentPosition);
+      }
+    }
+    System.out.println(getActuatorPosition());
   }
   
   @Override
