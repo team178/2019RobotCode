@@ -56,8 +56,6 @@ public class OI {
 		auxB.whenPressed (new ScoreHigh());
 		auxRightBumper.whileHeld (new AlignHatchPanel());
 		auxLeftBumper.whileHeld (new AlignHatchPanel()); 
-	
-
 	}
 
 	//MAIN controller accessor methods
