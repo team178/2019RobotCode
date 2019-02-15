@@ -52,8 +52,8 @@ public class OI {
 		//AUX controls (TODO: put climb controls in Climb command)
 		auxA.whileHeld(new EjectHatchPanel());
 		auxY.whileHeld(new ExtendHatchMechanism());
-		auxX.whileHeld(new ScoreLow());
-		auxB.whenPressed (new ScoreHigh());
+		auxX.whileHeld(new ScoreCargoLow());
+		auxB.whenPressed (new ScoreCargoHigh());
 		auxRightBumper.whileHeld (new AlignHatchPanel());
 		auxLeftBumper.whileHeld (new AlignHatchPanel()); 
 	}
@@ -77,18 +77,18 @@ public class OI {
 	
 	//AUX controller accessor methods
 	public double getLeftStickYAux() {
-		return xboxMain.getRawAxis(2);
+		return xboxAux.getRawAxis(2);
 	}
 	
 	public double getRightStickYAux() {
-		return xboxMain.getRawAxis(5);
+		return xboxAux.getRawAxis(5);
 	}
 	
 	public double getLeftTriggerAux() {
-		return xboxMain.getRawAxis(3);
+		return xboxAux.getRawAxis(3);
 	}
 	
-	public double getLeftTriggerAux() {
-		return xboxMain.getRawAxis(4);
+	public double getRightTriggerAux() {
+		return xboxAux.getRawAxis(6);
 	}
 }
