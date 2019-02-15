@@ -38,7 +38,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
  public static CargoIntake cargointake;
  public static CargoLauncher cargolauncher;
  public static Arduino arduino;
- public static Arduino pixy;
+ public static Pixy pixy;
  //public static TimeOfFlight tofL;
  //public static TimeOfFlight tofR;
  public static CameraServer camserv;

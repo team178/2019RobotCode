@@ -70,7 +70,7 @@ public class Arduino extends Subsystem {
     return sent;
   }
 
-  //lights methods
+  //lights methods, move these to oi
   public boolean setAllianceColor()
   {
     if (ds.getAlliance() == Alliance.Blue)
