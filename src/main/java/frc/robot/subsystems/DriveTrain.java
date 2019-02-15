@@ -17,7 +17,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class DriveTrain extends Subsystem {
 
-	public static VictorSPX left1;
+  public static VictorSPX left1;
   public static VictorSPX left2;
   public static VictorSPX right1;
   public static VictorSPX right2;
@@ -45,16 +45,10 @@ public class DriveTrain extends Subsystem {
     right1.set(ControlMode.PercentOutput, rightMotors);
     right2.set(ControlMode.PercentOutput, rightMotors);
   }
-
-  public void resetGyro() {
-    //implemented later
-  }
   
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new JoystickDrive());
-    //setDefaultCommand(new XBoxDrive());
+    //setDefaultCommand(new JoystickDrive());
+    setDefaultCommand(new XBoxDrive());
   }
 }

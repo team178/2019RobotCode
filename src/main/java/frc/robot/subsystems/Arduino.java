@@ -7,7 +7,9 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -22,11 +24,13 @@ import frc.robot.RobotMap.SubsystemIndex;
  */
 public class Arduino extends Subsystem {
   protected I2C arduino;
+  DriverStation ds;
   boolean received;
   boolean sent;
 
   public Arduino(Port port , int address) {
     arduino = new I2C(port, address); // check these values
+    ds = DriverStation.getInstance();
   }
 
   public boolean sendMessage(String pattern) {
@@ -54,6 +58,8 @@ public class Arduino extends Subsystem {
     return dataFromArduino;
   }
 
+
+  //checkers
   public boolean checkIfReceived()
   {
     return received;
@@ -62,6 +68,34 @@ public class Arduino extends Subsystem {
   public boolean checkIfSent()
   {
     return sent;
+  }
+
+  //lights methods, move these to oi
+  public boolean setAllianceColor()
+  {
+    if (ds.getAlliance() == Alliance.Blue)
+    {
+      return sendMessage("b");
+    }
+    else 
+    {
+      return sendMessage("r");
+    }
+  }
+
+  public boolean lightsHatchPanel()
+  {
+    return sendMessage("h");
+  }
+
+  public boolean lightsCargoPanel()
+  {
+    return sendMessage("c");
+  }
+
+  public boolean lightsOff()
+  {
+    return sendMessage("o");
   }
 
   @Override

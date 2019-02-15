@@ -19,14 +19,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Pixy extends Arduino {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public static int firstLoc;
-  public static int secondLoc;
+  public static int lLoc;
+  public static int rLoc;
 
   public Pixy(int address)//use robotmap values
   {
     super(I2C.Port.kOnboard, address);
-    firstLoc = 0;
-    secondLoc = 0;
+    lLoc = 0;
+    rLoc = 0;
   }
 
   @Override
@@ -48,7 +48,7 @@ public class Pixy extends Arduino {
       return dataFromArduino;
   }
 
-  public static void checkForPixyValues () {
+  public static void updateTargetValues () {
     byte[] coordinatesFromPixy = Robot.pixy1.receiveMessage(RobotMap.pixyAddress1);//gets first x value from pixy
     String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
     int counter = 1;
@@ -72,18 +72,27 @@ public class Pixy extends Arduino {
       }
       counter = counter * 2;
     }
-    firstLoc = x1;
-    secondLoc = x2;
+    
+    if (x1 > x2)//determines which one is on the left 
+    {
+      lLoc = x2;
+      rLoc = x1;
+    }
+    else 
+    {
+      lLoc = x1;
+      rLoc = x2;
+    }
   }
 
   public static boolean checkPixyAlign()//true if aligned, false if not
   {
     double desiredavg = 159;
-    checkForPixyValues();
-    int firstLocation = firstLoc;
-    int secondLocation = secondLoc;
-    double x1 = (double) firstLocation;
-    double x2 = (double) secondLocation; 
+    Pixy.updateTargetValues();
+    int leftLocation = lLoc;
+    int rightLocation = rLoc;
+    double x1 = (double) leftLocation;
+    double x2 = (double) rightLocation; 
     double avg = (x1 + x2)/2;
     if(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){
       double diff = desiredavg-avg;
@@ -95,14 +104,16 @@ public class Pixy extends Arduino {
   }
 
 
-  public int getFirstLoc()
+  public static int getLeft()
   {
-    return firstLoc;
+    System.out.println(lLoc);
+    return lLoc;
   }
 
-  public int getSecondLoc()
+  public static int getRight()
   {
-    return secondLoc;
+    System.out.println(rLoc);
+    return rLoc;
   }
 
 }
