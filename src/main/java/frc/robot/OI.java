@@ -40,32 +40,43 @@ public class OI {
   	public Button auxStart = new JoystickButton(xboxAux, 8);
   
 	public OI() {
+		//controls
 		buttonX.whenPressed(new ExtendHatchMechanism());
 		buttonY.whenPressed(new RetractHatchMechanism());
 		lBumper.whileHeld(new Climb(.1));
 	}
 
- 	public double getX() {
-		return joystick1.getX();
+	//MAIN controller accessor methods
+ 	public double getLeftStickYMain() {
+		return xboxMain.getRawAxis(2);
 	}
 	
-	public double getY() {
-		return joystick1.getY();
-	}
-
-	public double getZ() {
-		return joystick1.getZ();
+	public double getRightStickYMain() {
+		return xboxMain.getRawAxis(5);
 	}
 	
-	public double getTwist() {
-		return joystick1.getRawAxis(3);
-	}
-	
-	public double getLeftTrigger() {
+	public double getLeftTriggerMain() {
 		return xboxMain.getRawAxis(3);
 	}
-
-	public double getRightTrigger() {
-		return xboxMain.getRawAxis(6);
+	
+	public double getLeftTriggerMain() {
+		return xboxMain.getRawAxis(4);
+	}
+	
+	//AUX controller accessor methods
+	public double getLeftStickYAux() {
+		return xboxMain.getRawAxis(2);
+	}
+	
+	public double getRightStickYAux() {
+		return xboxMain.getRawAxis(5);
+	}
+	
+	public double getLeftTriggerAux() {
+		return xboxMain.getRawAxis(3);
+	}
+	
+	public double getLeftTriggerAux() {
+		return xboxMain.getRawAxis(4);
 	}
 }
