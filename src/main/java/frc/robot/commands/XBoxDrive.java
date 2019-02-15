@@ -35,8 +35,8 @@ public class XBoxDrive extends Command {
   @Override
   protected void execute() {
   //left joystick up and down, right joystick left and right for twist
-    leftY = oi.getLeftY();
-    rightY = oi.getRightX();
+    leftY = oi.getStickLeftYMain();
+    rightY = oi.getStickRightXMain();
     
     if(Math.abs(leftY) > 0.1 || Math.abs(rightY) > 0.1) {//joystick dead zone, where the motors stop giving a crap
       drivetrain.drive(leftY, rightY);
