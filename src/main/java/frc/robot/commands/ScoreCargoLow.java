@@ -35,23 +35,40 @@ public class ScoreCargoLow extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*check if shooter is pointing down 
+    /*check if "punch" solenoid is reverse 
     if yes: 
-    set shooter to reverse 
+    set aim solenoid to reverse 
     if no: 
-    set shooter to forward 
+    set "punch" solenoid to reverse
+    set aim solenoid to reverse 
     */
+    if(cargolauncher.getShootSolenoidState() == DoubleSolenoid.Value.kReverse){
+      cargolauncher.lowerLauncher();
+    }
+    else if (cargolauncher.getShootSolenoidState() == DoubleSolenoid.Value.kForward){
+      cargolauncher.retract();
+      
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    DoubleSolenoid.Value AimSolenoidState = cargolauncher.getAimSolenoidState();
+
+    if (AimSolenoidState == DoubleSolenoid.Value.kReverse) {
+      System.out.println("Finish shooting lower!");
+      return true;
+    } else {
+      System.out.println("Not finish shooting lower. Try again: " + AimSolenoidState);
+      return false;
+    }
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    cargolauncher.raiseLauncher();
   }
 
   // Called when another command which requires one or more of the same

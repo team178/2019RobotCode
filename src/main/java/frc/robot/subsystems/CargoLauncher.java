@@ -18,36 +18,36 @@ public class CargoLauncher extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static DoubleSolenoid aimCylinder;
-  public static DoubleSolenoid shootCylinder;
+  public static DoubleSolenoid aimSolenoid;
+  public static DoubleSolenoid shootSolenoid;
 
   public CargoLauncher() {
-    aimCylinder = new DoubleSolenoid(RobotMap.PCM,RobotMap.CargoCylinderAimExtend, RobotMap.CargoCylinderAimRetract);
-    shootCylinder = new DoubleSolenoid(RobotMap.PCM, RobotMap.CargoCylinderShootExtend, RobotMap.CargoCylinderShootRetract);
+    aimSolenoid = new DoubleSolenoid(RobotMap.PCM,RobotMap.CargoCylinderAimExtend, RobotMap.CargoCylinderAimRetract);
+    shootSolenoid = new DoubleSolenoid(RobotMap.PCM, RobotMap.CargoCylinderShootExtend, RobotMap.CargoCylinderShootRetract);
   }
 
   public void raiseLauncher () {
-    aimCylinder.set(DoubleSolenoid.Value.kForward);
+    aimSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
   public void lowerLauncher () {
-    aimCylinder.set(DoubleSolenoid.Value.kReverse);
+    aimSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   public void shoot () {
-    shootCylinder.set(DoubleSolenoid.Value.kForward);
+    shootSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
   public void retract () {
-    shootCylinder.set(DoubleSolenoid.Value.kReverse);
+    shootSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   public DoubleSolenoid.Value getAimSolenoidState() {
-    return aimCylinder.get();
+    return aimSolenoid.get();
   }
 
   public DoubleSolenoid.Value getShootSolenoidState() {
-    return shootCylinder.get();
+    return shootSolenoid.get();
   }
 
   @Override
