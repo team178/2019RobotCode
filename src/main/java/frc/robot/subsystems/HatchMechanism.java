@@ -25,9 +25,11 @@ public class HatchMechanism extends Subsystem {
   // here. Call these from Commands.
 
   public static Talon hatchMotor;
+  //Pneumatics
   public static DoubleSolenoid hatchCylinderExtend;
   public static DoubleSolenoid hatchCylinderEject;
   public static AnalogInput pressureTransducer;
+  //Linear actuator
   public static PWM linearactuator;
 
   public HatchMechanism() {
@@ -42,6 +44,7 @@ public class HatchMechanism extends Subsystem {
     //setEjector("reverse");
   }
 
+  //sets extender to two positions depending on string parameter --> forward = extends, reverse = retracts
   public void setExtender(String pos){
       if(pos.toLowerCase().equals("forward")){
         hatchCylinderExtend.set(DoubleSolenoid.Value.kForward);
@@ -56,6 +59,7 @@ public class HatchMechanism extends Subsystem {
           System.out.println("Invalid position. Please try again");
       }
   }
+  //sets extender to two positions depending on string parameter --> forward = extends, reverse = retracts
   public void setEjector(String pos){
     if(pos.toLowerCase().equals("forward")){
         hatchCylinderEject.set(DoubleSolenoid.Value.kForward);
