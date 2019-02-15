@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.AnalogInput;
 

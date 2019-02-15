@@ -10,15 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.Arduino;
-import frc.robot.subsystems.LinearActuator;
+import frc.robot.subsystems.HatchMechanism;
 import frc.robot.subsystems.Pixy;
 
 public class AlignHatchPanel extends Command {
   Pixy pixy1;
   Pixy pixy2;
   OI oi;
-  LinearActuator linearactuator;
+  HatchMechanism hatchmechanism;
 
   public AlignHatchPanel() {
     // Use requires() here to declare subsystem dependencies
@@ -31,7 +30,7 @@ public class AlignHatchPanel extends Command {
     oi = Robot.oi;
     pixy1 = Robot.pixy1;
     pixy2 = Robot.pixy2;
-    linearactuator = Robot.linearactuator;
+    hatchmechanism = Robot.hatchMechanism;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -47,10 +46,10 @@ public class AlignHatchPanel extends Command {
     double avg = (x1 + x2)/2;
     while(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){
       double diff = desiredavg-avg;
-      if (diff>desiredavg){
-        linearactuator.moveActuator(false);//change to new parameters
+	if (diff>desiredavg){
+       hatchmechanism.moveActuator(false);//change to new parameters
       } else {
-        linearactuator.moveActuator(true);
+        hatchmechanism.moveActuator(true);
       }
     }
 

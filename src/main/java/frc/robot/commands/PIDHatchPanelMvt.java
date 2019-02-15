@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
+/*
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -17,16 +17,14 @@ public class PIDHatchPanelMvt extends Command {
   HatchMechanism hatchMechanism;
   OI oi;
 
-  //TODO: Split all this up into two classes (one for cam, one for PID)
   private static final double LOOP_TIME = 0.02;
   private static final double FOV = Math.toRadians(75); //FOV in radians 
-  private static final double distFromCargoShip = 0; //TODO: measure dist w/ bumpers against wall
+  private static final double distFromCargoShip = 0;
   
   private boolean sensingTarget;
   private double targetX;
   private double cameraX;
   
-  private double setPoint;
   private double error;
   private double previousError;
   
@@ -37,7 +35,6 @@ public class PIDHatchPanelMvt extends Command {
     //requires(Robot.hatchMechanism);
     //requires(Robot.arduino);
     
-    this.setPoint = setPoint;
     kP = 0;
     kI = 0;
     kD = 0;
@@ -63,7 +60,6 @@ public class PIDHatchPanelMvt extends Command {
       retrievePixyValues();
       //error = setPoint - hatchMechanism.getPosition(); //error = desired - actual
 
-      //TODO: either set kI to 0 or implement integral active zones
 
       //P, I, and D w/o gains
       P = error;
@@ -119,3 +115,4 @@ public class PIDHatchPanelMvt extends Command {
     //error = setPoint - hatchMechanism.getPosition(); //setting error
   }
 }
+*/

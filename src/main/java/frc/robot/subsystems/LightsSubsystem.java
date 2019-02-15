@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
+/*
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.I2C;
@@ -16,13 +16,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- * Add your docs here.
- */
-public class LightsSubsystem extends Arduino {
+
+public class LightsSubsystem extends Arduino
+ {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
   private DriverStation ds;
 
   public LightsSubsystem()
@@ -37,18 +35,18 @@ public class LightsSubsystem extends Arduino {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-
   public boolean setAllianceColor()
   {
-    /*if (ds.getAlliance() == Alliance.Blue)
+    /if (ds.getAlliance() == Alliance.Blue)
     {
         return new SendMessage("b").arduino.checkIfSent();
     }
     else
     {
         return new SendMessage("r").arduino.checkIfSent();
-    }*/ return true;
+    } return true;
   }
+
   public boolean needHatchPanel()
   {
     return true;
@@ -59,6 +57,5 @@ public class LightsSubsystem extends Arduino {
   {
     return new SendMessage("c").arduino.checkIfSent();
   }
-
- 
 }
+*/
