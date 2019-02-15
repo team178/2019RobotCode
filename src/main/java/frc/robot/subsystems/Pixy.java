@@ -49,7 +49,7 @@ public class Pixy extends Arduino {
   }
 
   public static void updateTargetValues () {
-    byte[] coordinatesFromPixy = Robot.pixy1.receiveMessage(RobotMap.pixyAddress1);//gets first x value from pixy
+    byte[] coordinatesFromPixy = Robot.pixy.receiveMessage(RobotMap.pixyAddress1);//gets first x value from pixy
     String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
     int counter = 1;
     int x1 = 0;
