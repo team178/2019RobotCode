@@ -19,7 +19,8 @@ import frc.robot.commands.*;
  */
 public class OI {
 	
-	public static Joystick xboxMain = new Joystick(RobotMap.JoystickPortXBoxMain);
+	//MAIN controller buttons
+	public static Joystick xboxMain = new Joystick(RobotMap.JoystickPortXBoxMain); //Controller
 	public Button mainA = new JoystickButton(xboxMain, 1);
 	public Button mainB = new JoystickButton(xboxMain, 2);
 	public Button mainx = new JoystickButton(xboxMain, 3);
@@ -29,7 +30,8 @@ public class OI {
 	public Button mainBack = new JoystickButton(xboxMain, 7);
   	public Button mainStart = new JoystickButton(xboxMain, 8);
 	
-	public static Joystick xboxAux = new Joystick(RobotMap.JoystickPortXBoxAux);
+	//AUX controller buttons
+	public static Joystick xboxAux = new Joystick(RobotMap.JoystickPortXBoxAux); //Controller
 	public Button auxA = new JoystickButton(xboxAux, 1);
 	public Button auxB = new JoystickButton(xboxAux, 2);
 	public Button auxX = new JoystickButton(xboxAux, 3);
@@ -40,7 +42,7 @@ public class OI {
   	public Button auxStart = new JoystickButton(xboxAux, 8);
   
 	public OI() {
-		//controls
+		//actual controls
 		buttonX.whenPressed(new ExtendHatchMechanism());
 		buttonY.whenPressed(new RetractHatchMechanism());
 		lBumper.whileHeld(new Climb(.1));
