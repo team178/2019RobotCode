@@ -34,8 +34,8 @@ public class ClimbDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    leftVal = oi.getLeftTrigger();
-    rightVal = oi.getRightTrigger();
+    leftVal = oi.getLeftTriggerMain();
+    rightVal = oi.getRightTriggerMain();
     if (!(rightVal == 0)) {
       climber.moveBackWheel(rightVal);
     } else {
