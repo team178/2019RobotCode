@@ -19,70 +19,53 @@ import frc.robot.commands.*;
  */
 public class OI {
 	
+	public static Joystick xboxMain = new Joystick(RobotMap.JoystickPortXBoxMain);
+	public Button mainA = new JoystickButton(xboxMain, 1);
+	public Button mainB = new JoystickButton(xboxMain, 2);
+	public Button mainx = new JoystickButton(xboxMain, 3);
+	public Button mainy = new JoystickButton(xboxMain, 4);
+	public Button mainLeftBumper = new JoystickButton(xboxMain, 5);
+	public Button mainRightBumper = new JoystickButton(xboxMain, 6);
+	public Button mainBack = new JoystickButton(xboxMain, 7);
+  	public Button mainStart = new JoystickButton(xboxMain, 8);
 	
-  	public static Joystick joystick1 = new Joystick(RobotMap.JoystickPort);
-  	public Button button1 = new JoystickButton(joystick1, 1);
-	public Button button2 = new JoystickButton(joystick1, 2);
-	public Button button3 = new JoystickButton(joystick1, 3);
-	public Button button4 = new JoystickButton(joystick1, 4);
-	public Button button5 = new JoystickButton(joystick1, 5);
-	public Button button6 = new JoystickButton(joystick1, 6);
-	public Button button7 = new JoystickButton(joystick1, 7);
-	
-	//joystick drive
-
-	public static Joystick xbox = new Joystick(RobotMap.JoystickPortXBoxAux);
-	public Button buttonA = new JoystickButton(xbox, 1);
-	public Button buttonB= new JoystickButton(xbox, 2);
-	public Button buttonX = new JoystickButton(xbox, 3);
-	public Button buttonY = new JoystickButton(xbox, 4);
-	public Button lBumper = new JoystickButton(xbox, 5);
-	public Button rBumper = new JoystickButton(xbox, 6);
-	public Button backButton = new JoystickButton(xbox, 7);
-	public Button startButton = new JoystickButton(xbox, 8);
+	public static Joystick xboxAux = new Joystick(RobotMap.JoystickPortXBoxAux);
+	public Button auxA = new JoystickButton(xboxAux, 1);
+	public Button auxB = new JoystickButton(xboxAux, 2);
+	public Button auxX = new JoystickButton(xboxAux, 3);
+	public Button auxY = new JoystickButton(xboxAux, 4);
+	public Button auxLeftBumper = new JoystickButton(xboxAux, 5);
+	public Button auxRightBumper = new JoystickButton(xboxAux, 6);
+	public Button auxBack = new JoystickButton(xboxAux, 7);
+  	public Button auxStart = new JoystickButton(xboxAux, 8);
   
 	public OI() {
-		//buttonA.whenPressed(new SendMessage("test"));
-		//buttonB.whenPressed(new ReceiveMessage());
-		
-		//buttonA.whenPressed(new FullHatchPlacement());
 		buttonX.whenPressed(new ExtendHatchMechanism());
-		buttonB.whenPressed(new RetractHatchMechanism());
-		buttonY.whenPressed(new EjectPanel());
-		buttonA.whenPressed(new resetEjector());
+		buttonY.whenPressed(new RetractHatchMechanism());
+		lBumper.whileHeld(new Climb(.1));
 	}
 
  	public double getX() {
-		return xbox.getX();
+		return joystick1.getX();
 	}
 	
 	public double getY() {
-		return xbox.getY();
+		return joystick1.getY();
 	}
 
-
-	//get axis methods
-	// 1 is left x, 2 is left y, 3 is left trigger, 4 is right x, 5 is left x, 6 is right trigger
-	public double getLeftY()
-	{
-		return xbox.getRawAxis(1);
+	public double getZ() {
+		return joystick1.getZ();
 	}
-
-	public double getRightX()
-	{
-		return xbox.getRawAxis(4);
-	}
-
-	
-	
 	
 	public double getTwist() {
 		return joystick1.getRawAxis(3);
 	}
 	
-	public double getTrigger() {
-		return joystick1.getRawAxis(3);
+	public double getLeftTrigger() {
+		return xboxMain.getRawAxis(3);
 	}
-	
+
+	public double getRightTrigger() {
+		return xboxMain.getRawAxis(6);
+	}
 }
-	
