@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+//importing libraries and packages
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -29,24 +30,22 @@ import edu.wpi.first.wpilibj.I2C.Port;
    
  public static OI oi;
 
- 
+ //Here is where all the subsystems on the robot are declared
  public static DriveTrain drivetrain;
  
  public static HatchMechanism hatchMechanism;
  public static Climber climber;
  public static CargoIntake cargointake;
  public static CargoLauncher cargolauncher;
- public static LinearActuator linearactuator;
  public static Arduino arduino;
- public static Pixy pixy1;
- public static Pixy pixy2;
- public static TimeOfFlight tofL;
- public static TimeOfFlight tofR;
- public static LightsSubsystem lights;
+ public static Arduino pixy;
+ //public static TimeOfFlight tofL;
+ //public static TimeOfFlight tofR;
  public static CameraServer camserv;
  public static UsbCamera camera1;
  public static UsbCamera camera2;
 
+  //Here is where each of the subsystem fields declared above are initiatilized with their constructors when robot is started up
   @Override 
   public void robotInit() {
     drivetrain = new DriveTrain();
@@ -54,19 +53,17 @@ import edu.wpi.first.wpilibj.I2C.Port;
     climber = new Climber();  
     cargointake = new CargoIntake();
     cargolauncher = new CargoLauncher(); 
-    linearactuator = new LinearActuator();
-    lights = new LightsSubsystem();
     arduino = new Arduino(I2C.Port.kOnboard, 1);//1 is placeholder
-    pixy1 = new Pixy(RobotMap.pixyAddress1);
-    pixy2 = new Pixy(RobotMap.pixyAddress2);
-    tofL = new TimeOfFlight(RobotMap.tofAddressL);
-    tofR = new TimeOfFlight(RobotMap.tofAddressR);
+    pixy = new Pixy(RobotMap.pixyAddress1);
+    //tofL = new TimeOfFlight(RobotMap.tofAddressL);
+    //tofR = new TimeOfFlight(RobotMap.tofAddressR);
     oi = new OI();
-
-    lights.setAllianceColor();
+    //sets light strips to color of alliance (red or blue)
+    arduino.setAllianceColor();
 
     camserv = CameraServer.getInstance();
     
+    //formats video specifications for cameras
     camera1 = camserv.startAutomaticCapture("cam0", 0);
     camera1.setResolution(160, 120);
     camera1.setFPS(14);
@@ -111,6 +108,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
     
   }
 
+  //Called repeatedly and automatically during teleop --> Scheduler automatically stores all actions robot needs to do
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();

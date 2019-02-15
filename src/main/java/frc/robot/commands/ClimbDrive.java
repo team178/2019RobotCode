@@ -8,19 +8,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.HatchMechanism;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import frc.robot.subsystems.Climber;
 
-public class EjectPanel extends Command {
-  OI oi; 
-  HatchMechanism hatchmechanism;
+public class ClimbDrive extends Command {
 
-  public EjectPanel() {
-    requires(Robot.hatchMechanism);
+  OI oi;
+  Climber climber;
+  double leftVal;
+  double rightVal;
+
+  public ClimbDrive() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -29,31 +28,26 @@ public class EjectPanel extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    hatchmechanism = Robot.hatchMechanism;
+    climber = Robot.climber;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DoubleSolenoid.Value isEjected = hatchmechanism.getEjectorSolenoidState();
-    System.out.println("Ejector is out? " + isEjected);
-    System.out.println("Try to go forward");
-    hatchmechanism.setEjector("Forward");
+    leftVal = oi.getLeftTrigger();
+    rightVal = oi.getRightTrigger();
+    if (!(rightVal == 0)) {
+      climber.moveBackWheel(rightVal);
+    } else {
+      climber.moveBackWheel(-leftVal);
+    }
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    DoubleSolenoid.Value EjectState = hatchmechanism.getEjectorSolenoidState();
-
-    if (EjectState == DoubleSolenoid.Value.kForward) {
-      System.out.println("Finished!");
-      return true;
-    } else {
-      System.out.println("Not finished, trying again: " + EjectState);
-      return false;
-    }
-
+    return false;
   }
 
   // Called once after isFinished returns true

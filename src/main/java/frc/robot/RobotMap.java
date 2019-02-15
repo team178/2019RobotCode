@@ -15,42 +15,51 @@ package frc.robot;
  */
 public class RobotMap {
 
-  public static int DMTopRight = 1; //CAN
-  public static int DMBottomRight = 2; //CAN
-  public static int DMTopLeft = 3; //CAN
-  public static int DMBottomLeft = 4; //CAN
+  //CAN
+  public static int DMTopRight = 1;
+  public static int DMBottomRight = 2;
+  public static int DMTopLeft = 3;
+  public static int DMBottomLeft = 4;
 
-  public static int ClimberBackWheel = 5; //CAN
-  public static int ClimberMotor1 = 6; //CAN
-  public static int ClimberMotor2 = 7; //CAN
-  public static int ClimberMotor3 = 8; //CAN
-  public static int ClimberMotor4 = 9; //CAN
+  //CAN
+  public static int ClimberBackWheel = 5;
+  public static int ClimberMotor1 = 6;
+  public static int ClimberMotor2 = 7;
+  public static int ClimberMotor3 = 8;
+  public static int ClimberMotor4 = 9;
   
-  public static int PCM = 10; //CAN
-  public static int PressureTranducer = 0; //Analog
+  public static int PCM = 10;
+
+  //Analog
+  public static int PressureTranducer = 0;
   
-  public static int CargoCylinderAimExtend = 0; //PCM
-  public static int CargoCylinderAimRetract = 1; //PCM
+  //PCM
+  public static int CargoCylinderAimExtend = 0; 
+  public static int CargoCylinderAimRetract = 1; 
   
-  public static int CargoCylinderShootExtend = 2; //PCM
-  public static int CargoCylinderShootRetract = 3; //PCM
+  public static int CargoCylinderShootExtend = 2; 
+  public static int CargoCylinderShootRetract = 3; 
 
-  public static int HatchExtenderCylinderExtend = 4; //PCM
-  public static int HatchExtenderCylinderRetract = 5; //PCM
+  public static int HatchExtenderCylinderExtend = 4; 
+  public static int HatchExtenderCylinderRetract = 5; 
 
-  public static int HatchEjectorCylinderExtend = 7; //PCM
-  public static int HatchEjectorCylinderRetract = 6; //PCM
+  public static int HatchEjectorCylinderExtend = 7; 
+  public static int HatchEjectorCylinderRetract = 6; 
 
-  public static int linearactuator = 0; // PWM
+  //PWM
+  public static int linearactuator = 0;
 
-  public static int LimitSwitchTop1 = 5; //DIO
-  public static int LimitSwitchTop2 = 6; //DIO
-  public static int LimitSwitchBottom1 = 7; //DIO
-  public static int LimitSwitchBottom2 = 8; //DIO
+  //DIO
+  public static int LimitSwitchTop1 = 5;
+  public static int LimitSwitchTop2 = 6;
+  public static int LimitSwitchBottom1 = 7; 
+  public static int LimitSwitchBottom2 = 8; 
 
-  public static int JoystickPort = 0; //computer, for joystick drive
-  public static int JoystickPortXBoxAux = 1; //computer
+  //computer
+  public static int JoystickPortXBoxMain = 0; 
+  public static int JoystickPortXBoxAux = 1; 
 
+  //arduino
   public static int pixyAddress1 = 8;
   public static int pixyAddress2 = 9;
   public static int tofAddressL = 18;//left and right

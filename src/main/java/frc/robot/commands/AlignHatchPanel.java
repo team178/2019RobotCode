@@ -37,37 +37,29 @@ public class AlignHatchPanel extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*
-    double desiredavg = 159;
-    pixyArduino.checkForPixyValues();
-    int firstLocation = pixyArduino.firstLoc;
-    int secondLocation = pixyArduino.secondLoc;
+    
+    double desiredavg = 159;//checks if the pixy is inbetween the two pieces of tape
+    Pixy.updateTargetValues();
+    int firstLocation = Pixy.getLeft();
+    int secondLocation = Pixy.getRight();
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2;
     while(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){
       double diff = desiredavg-avg;
       if (diff>desiredavg){
-        linearactuator.moveActuator(false);
+        linearactuator.moveActuator(false);//change to new parameters
       } else {
         linearactuator.moveActuator(true);
       }
     }
-    */
-    //moved to pixy subsystem
-  
-    while (!Pixy.checkPixyAlign())
-    {
-      linearactuator.moveActuator(true);//true for moving actuator, false for not
-    }
-    linearactuator.moveActuator(false);
 
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Pixy.checkPixyAlign();
+    return false;
   }
 
   // Called once after isFinished returns true
