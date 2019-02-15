@@ -48,7 +48,6 @@ public class OI {
 		mainX.whenPressed(new SendMessage("f"));
 		mainA.whenPressed(new SendMessage("n"));
 		
-		
 		//AUX controls (TODO: put climb controls in Climb command)
 		auxA.whileHeld(new EjectHatchPanel());
 		auxY.whileHeld(new ExtendHatchMechanism());
