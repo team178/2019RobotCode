@@ -37,13 +37,10 @@ import edu.wpi.first.wpilibj.I2C.Port;
  public static Climber climber;
  public static CargoIntake cargointake;
  public static CargoLauncher cargolauncher;
- public static LinearActuator linearactuator;
  public static Arduino arduino;
- public static Pixy pixy1;
- public static Pixy pixy2;
- public static TimeOfFlight tofL;
- public static TimeOfFlight tofR;
- public static LightsSubsystem lights;
+ public static Arduino pixy;
+ //public static TimeOfFlight tofL;
+ //public static TimeOfFlight tofR;
  public static CameraServer camserv;
  public static UsbCamera camera1;
  public static UsbCamera camera2;
@@ -56,16 +53,13 @@ import edu.wpi.first.wpilibj.I2C.Port;
     climber = new Climber();  
     cargointake = new CargoIntake();
     cargolauncher = new CargoLauncher(); 
-    linearactuator = new LinearActuator();
-    lights = new LightsSubsystem();
     arduino = new Arduino(I2C.Port.kOnboard, 1);//1 is placeholder
-    pixy1 = new Pixy(RobotMap.pixyAddress1);
-    pixy2 = new Pixy(RobotMap.pixyAddress2);
-    tofL = new TimeOfFlight(RobotMap.tofAddressL);
-    tofR = new TimeOfFlight(RobotMap.tofAddressR);
+    pixy = new Pixy(RobotMap.pixyAddress1);
+    //tofL = new TimeOfFlight(RobotMap.tofAddressL);
+    //tofR = new TimeOfFlight(RobotMap.tofAddressR);
     oi = new OI();
     //sets light strips to color of alliance (red or blue)
-    lights.setAllianceColor();
+    arduino.setAllianceColor();
 
     camserv = CameraServer.getInstance();
     
