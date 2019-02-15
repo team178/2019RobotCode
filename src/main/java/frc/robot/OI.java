@@ -42,10 +42,11 @@ public class OI {
   	public Button auxStart = new JoystickButton(xboxAux, 8);
   
 	public OI() {
-		//actual controls
-		buttonX.whenPressed(new ExtendHatchMechanism());
-		buttonY.whenPressed(new RetractHatchMechanism());
-		lBumper.whileHeld(new Climb(.1));
+		//MAIN controls (joystick code in JoystickDrive)
+		
+		
+		//AUX controls (TODO: put climb controls in Climb command)
+		
 	}
 
 	//MAIN controller accessor methods
