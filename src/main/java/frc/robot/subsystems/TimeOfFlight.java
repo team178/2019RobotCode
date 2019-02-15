@@ -19,7 +19,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class TimeOfFlight extends Arduino {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  int address;
+  public TimeOfFlight(int address){
+    super(I2C.Port.kOnboard, address);
+    
+  }
+/*  int address;
 
   public TimeOfFlight(int address)//use robotmap values
   {
@@ -66,5 +70,5 @@ public class TimeOfFlight extends Arduino {
       } 
       System.out.println();
       return dataFromArduino;
-  }
+  }*/
 }

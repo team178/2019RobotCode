@@ -91,4 +91,16 @@ public class OI {
 	public double getRightTriggerAux() {
 		return xboxAux.getRawAxis(6);
 	}
+
+	//placeholder methods so JoystickDrive doesn't cry
+	public double getTrigger() { 
+		return 0;
+	}
+	public double getTwist() {
+		return 0;
+	}
+	public double getY() {
+		return 0;
+	}
+
 }

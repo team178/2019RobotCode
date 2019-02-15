@@ -34,11 +34,11 @@ public class ScoreCargoHigh extends Command {
   protected void execute() {
 
     /*
-    check if the shooter is pointing up
-      if yes:
-        set shooter to forward
+    check if the shooter is aiming up
+       if yes:
+        set shooter "punch" to forward
       if no:
-      set shooter to reverse 
+      set shooter "punch" to reverse 
      */
     if(cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kForward){
       cargolauncher.shoot();
@@ -53,13 +53,13 @@ public class ScoreCargoHigh extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    DoubleSolenoid.Value EjectState = cargolauncher.getAimSolenoidState();
+    DoubleSolenoid.Value ShootSolenoidState = cargolauncher.getShootSolenoidState();
 
-    if (EjectState == DoubleSolenoid.Value.kForward) {
+    if (ShootSolenoidState == DoubleSolenoid.Value.kForward) {
       System.out.println("Finish shooting!");
       return true;
     } else {
-      System.out.println("Not finish shooting. Try again: " + EjectState);
+      System.out.println("Not finish shooting. Try again: " + ShootSolenoidState);
       return false;
     }
 
