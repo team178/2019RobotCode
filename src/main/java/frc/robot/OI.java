@@ -63,7 +63,7 @@ public class OI {
 	}
 	
 	public double getRightTriggerMain() {
-		return xboxMain.getRawAxis(4);
+		return xboxMain.getRawAxis(6);
 	}
 	
 	//AUX controller accessor methods
