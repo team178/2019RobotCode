@@ -23,8 +23,8 @@ public class OI {
 	public static Joystick xboxMain = new Joystick(RobotMap.JoystickPortXBoxMain); //Controller
 	public Button mainA = new JoystickButton(xboxMain, 1);
 	public Button mainB = new JoystickButton(xboxMain, 2);
-	public Button mainx = new JoystickButton(xboxMain, 3);
-	public Button mainy = new JoystickButton(xboxMain, 4);
+	public Button mainX = new JoystickButton(xboxMain, 3);
+	public Button mainY = new JoystickButton(xboxMain, 4);
 	public Button mainLeftBumper = new JoystickButton(xboxMain, 5);
 	public Button mainRightBumper = new JoystickButton(xboxMain, 6);
 	public Button mainBack = new JoystickButton(xboxMain, 7);
@@ -43,10 +43,21 @@ public class OI {
   
 	public OI() {
 		//MAIN controls (joystick code in JoystickDrive)
+		mainB.whenPressed(new SendMessage("c"));
+		mainY.whenPressed(new SendMessage("h"));
+		mainX.whenPressed(new SendMessage("f"));
+		mainA.whenPressed(new SendMessage("n"));
 		
 		
 		//AUX controls (TODO: put climb controls in Climb command)
-		
+		auxA.whileHeld(new EjectHatchPanel());
+		auxY.whileHeld(new ExtendHatchMechanism());
+		auxX.whileHeld(new ScoreLow());
+		auxB.whenPressed (new ScoreHigh());
+		auxRightBumper.whileHeld (new AlignHatchPanel());
+		auxLeftBumper.whileHeld (new AlignHatchPanel()); 
+	
+
 	}
 
 	//MAIN controller accessor methods
@@ -68,18 +79,18 @@ public class OI {
 	
 	//AUX controller accessor methods
 	public double getLeftStickYAux() {
-		return xboxAux.getRawAxis(2);
+		return xboxMain.getRawAxis(2);
 	}
 	
 	public double getRightStickYAux() {
-		return xboxAux.getRawAxis(5);
+		return xboxMain.getRawAxis(5);
 	}
 	
 	public double getLeftTriggerAux() {
-		return xboxAux.getRawAxis(3);
+		return xboxMain.getRawAxis(3);
 	}
 	
-	public double getRightTriggerAux() {
-		return xboxAux.getRawAxis(4);
+	public double getLeftTriggerAux() {
+		return xboxMain.getRawAxis(4);
 	}
 }

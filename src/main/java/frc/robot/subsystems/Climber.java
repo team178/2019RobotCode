@@ -15,6 +15,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Victor;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**
  * Add your docs here.
@@ -72,8 +73,8 @@ public void unclimb(double power)  {
 public void moveAllClimbers(double power){
     climber1.set(power);
     climber2.set(power);
-    climber3.set(power);
-    climber4.set(power);
+    climber3.set(ControlMode.PercentOutput, power);
+    climber4.set(ControlMode.PercentOutput, power);
 }
 public void moveClimber1(double power)  {
   climber1.set(power);
