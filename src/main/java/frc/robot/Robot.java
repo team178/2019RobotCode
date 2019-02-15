@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+//importing libraries and packages
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -29,7 +30,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
    
  public static OI oi;
 
- 
+ //Here is where all the subsystems on the robot are declared
  public static DriveTrain drivetrain;
  
  public static HatchMechanism hatchMechanism;
@@ -47,6 +48,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
  public static UsbCamera camera1;
  public static UsbCamera camera2;
 
+  //Here is where each of the subsystem fields declared above are initiatilized with their constructors when robot is started up
   @Override 
   public void robotInit() {
     drivetrain = new DriveTrain();
@@ -62,11 +64,12 @@ import edu.wpi.first.wpilibj.I2C.Port;
     tofL = new TimeOfFlight(RobotMap.tofAddressL);
     tofR = new TimeOfFlight(RobotMap.tofAddressR);
     oi = new OI();
-
+    //sets light strips to color of alliance (red or blue)
     lights.setAllianceColor();
 
     camserv = CameraServer.getInstance();
     
+    //formats video specifications for cameras
     camera1 = camserv.startAutomaticCapture("cam0", 0);
     camera1.setResolution(160, 120);
     camera1.setFPS(14);
@@ -111,6 +114,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
     
   }
 
+  //Called repeatedly and automatically during teleop --> Scheduler automatically stores all actions robot needs to do
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
