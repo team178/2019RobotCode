@@ -16,11 +16,13 @@ import edu.wpi.first.wpilibj.command.WaitUntilCommand;
 public class MoveActuator extends Command {
 
     LinearActuator linearactuator;
-    double currentPosition;
-    boolean movingForward;
+    private double currentPosition;
+    private boolean movingForward;
+    private double setPoint;
 
-  public MoveActuator(boolean forward) {
+  public MoveActuator(double setPoint, boolean forward) {
    // requires(Robot.linearactuator);
+    this.setPoint = setPoint;
     movingForward = forward;
   }
 
@@ -28,7 +30,7 @@ public class MoveActuator extends Command {
   @Override
   protected void initialize() {
     linearactuator = Robot.linearactuator;
-    currentPosition = linearactuator.get();
+    currentPosition = linearactuator.getPosition();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -37,21 +39,29 @@ public class MoveActuator extends Command {
     if (movingForward) {
       if (currentPosition < 1 || currentPosition >= 0) {
         currentPosition+=0.004;
-        linearactuator.set(currentPosition);
+        linearactuator.setPosition(currentPosition);
       }
     } else {
       if (currentPosition <= 1 || currentPosition > 0) {
         currentPosition-=0.004;
-        linearactuator.set(currentPosition);
+        linearactuator.setPosition(currentPosition);
       }
     }
-    System.out.println(linearactuator.get());
+    System.out.println(linearactuator.getPosition());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(linearactuator.getPosition() == this.setPoint)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+
   }
 
   // Called once after isFinished returns true
