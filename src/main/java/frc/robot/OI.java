@@ -19,7 +19,8 @@ import frc.robot.commands.*;
  */
 public class OI {
 	
-	public static Joystick xboxMain = new Joystick(RobotMap.JoystickPortXBoxMain);
+	//MAIN controller buttons
+	public static Joystick xboxMain = new Joystick(RobotMap.JoystickPortXBoxMain); //Controller
 	public Button mainA = new JoystickButton(xboxMain, 1);
 	public Button mainB = new JoystickButton(xboxMain, 2);
 	public Button mainx = new JoystickButton(xboxMain, 3);
@@ -29,7 +30,8 @@ public class OI {
 	public Button mainBack = new JoystickButton(xboxMain, 7);
   	public Button mainStart = new JoystickButton(xboxMain, 8);
 	
-	public static Joystick xboxAux = new Joystick(RobotMap.JoystickPortXBoxAux);
+	//AUX controller buttons
+	public static Joystick xboxAux = new Joystick(RobotMap.JoystickPortXBoxAux); //Controller
 	public Button auxA = new JoystickButton(xboxAux, 1);
 	public Button auxB = new JoystickButton(xboxAux, 2);
 	public Button auxX = new JoystickButton(xboxAux, 3);
@@ -40,32 +42,44 @@ public class OI {
   	public Button auxStart = new JoystickButton(xboxAux, 8);
   
 	public OI() {
-		buttonX.whenPressed(new ExtendHatchMechanism());
-		buttonY.whenPressed(new RetractHatchMechanism());
-		lBumper.whileHeld(new Climb(.1));
+		//MAIN controls (joystick code in JoystickDrive)
+		
+		
+		//AUX controls (TODO: put climb controls in Climb command)
+		
 	}
 
- 	public double getX() {
-		return joystick1.getX();
+	//MAIN controller accessor methods
+ 	public double getLeftStickYMain() {
+		return xboxMain.getRawAxis(2);
 	}
 	
-	public double getY() {
-		return joystick1.getY();
-	}
-
-	public double getZ() {
-		return joystick1.getZ();
+	public double getRightStickYMain() {
+		return xboxMain.getRawAxis(5);
 	}
 	
-	public double getTwist() {
-		return joystick1.getRawAxis(3);
-	}
-	
-	public double getLeftTrigger() {
+	public double getLeftTriggerMain() {
 		return xboxMain.getRawAxis(3);
 	}
-
-	public double getRightTrigger() {
-		return xboxMain.getRawAxis(6);
+	
+	public double getLeftTriggerMain() {
+		return xboxMain.getRawAxis(4);
+	}
+	
+	//AUX controller accessor methods
+	public double getLeftStickYAux() {
+		return xboxMain.getRawAxis(2);
+	}
+	
+	public double getRightStickYAux() {
+		return xboxMain.getRawAxis(5);
+	}
+	
+	public double getLeftTriggerAux() {
+		return xboxMain.getRawAxis(3);
+	}
+	
+	public double getLeftTriggerAux() {
+		return xboxMain.getRawAxis(4);
 	}
 }
