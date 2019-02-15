@@ -27,15 +27,15 @@ public class GetTOFValues extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    tofL = Robot.tofL;
-    tofR = Robot.tofR;
+    //tofL = Robot.tofL;
+    //tofR = Robot.tofR;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    tofL.getTofDistance();//will most likey have to change
-    tofR.getTofDistance();
+    //tofL.getTofDistance();//will most likey have to change
+    //tofR.getTofDistance();
 
     
 

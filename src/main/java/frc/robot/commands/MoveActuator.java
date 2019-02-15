@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
+import frc.robot.subsystems.HatchMechanism;
 import frc.robot.subsystems.LinearActuator;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -15,7 +16,7 @@ import edu.wpi.first.wpilibj.command.WaitUntilCommand;
 
 public class MoveActuator extends Command {
 
-    LinearActuator linearactuator;
+    HatchMechanism linearactuator;
     private double currentPosition;
     private boolean movingForward;
     private double setPoint;
@@ -29,8 +30,8 @@ public class MoveActuator extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    linearactuator = Robot.linearactuator;
-    currentPosition = linearactuator.getPosition();
+    linearactuator = Robot.hatchMechanism;
+    currentPosition = linearactuator.getActuatorPosition();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -39,21 +40,21 @@ public class MoveActuator extends Command {
     if (movingForward) {
       if (currentPosition < 1 || currentPosition >= 0) {
         currentPosition+=0.004;
-        linearactuator.setPosition(currentPosition);
+        linearactuator.setActuatorPosition(currentPosition);
       }
     } else {
       if (currentPosition <= 1 || currentPosition > 0) {
         currentPosition-=0.004;
-        linearactuator.setPosition(currentPosition);
+        linearactuator.setActuatorPosition(currentPosition);
       }
     }
-    System.out.println(linearactuator.getPosition());
+    System.out.println(linearactuator.getActuatorPosition());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(linearactuator.getPosition() == this.setPoint)
+    if(linearactuator.getActuatorPosition() == this.setPoint)
     {
       return true;
     }
