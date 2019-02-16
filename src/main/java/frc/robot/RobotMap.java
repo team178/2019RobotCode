@@ -61,8 +61,7 @@ public class RobotMap {
   public static int ActualJoystick = 2;
 
   //arduino
-  public static int pixyAddress1 = 8;
-  public static int pixyAddress2 = 9;
+  public static int pixyAddress = 8;
   //public static int tofAddressL = 18;//left and right
   //public static int tofAddressR = 19;
   public static int lightsAddress = 7;

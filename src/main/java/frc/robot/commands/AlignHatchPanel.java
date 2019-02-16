@@ -14,12 +14,12 @@ import frc.robot.subsystems.HatchMechanism;
 import frc.robot.subsystems.Pixy;
 
 public class AlignHatchPanel extends Command {
-  Pixy pixy1;
-  Pixy pixy2;
+  Pixy pixy;
   OI oi;
   HatchMechanism hatchmechanism;
 
   public AlignHatchPanel() {
+    //requires(Robot.hatchMechanism);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -28,8 +28,7 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    pixy1 = Robot.pixy1;
-    pixy2 = Robot.pixy2;
+    pixy = Robot.pixy;
     hatchmechanism = Robot.hatchMechanism;
   }
 

@@ -10,6 +10,9 @@ package frc.robot.subsystems;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
 import edu.wpi.first.wpilibj.I2C;
 
 /**
@@ -37,40 +40,34 @@ public class Pixy extends Arduino {
   @Override
   public byte[] receiveMessage(int address)
   {
-    byte[] dataFromArduino = new byte[2];
-    received = arduino.read(address, 1, dataFromArduino);
-    for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
-      String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
-      System.out.print(s1 + ", ");
-      } 
-      System.out.println();
+    byte[] dataFromArduino = new byte[4];
+    received = !arduino.read(address, 4, dataFromArduino);
       return dataFromArduino;
   }
 
   public static void updateTargetValues () {
-    byte[] coordinatesFromPixy = Robot.pixy1.receiveMessage(RobotMap.pixyAddress1);//gets first x value from pixy
-    String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
-    int counter = 1;
-    int x1 = 0;
-    for (int i = x1Binary.length() - 1; i >= 0; i--) {//converts binary to base 10
-      if (x1Binary.charAt(i) == '1') {
-        x1 = x1 + counter;
-      }
-      counter = counter * 2;
-    }
-    counter = 0;
-    
-    // delay
-    coordinatesFromPixy = Robot.pixy2.receiveMessage(RobotMap.pixyAddress2);//gets second x value from pixy 
-    String x2Binary = ((Byte) coordinatesFromPixy[0]).toString();
-    counter = 1;
-    int x2 = 0;
-    for (int i = x2Binary.length() - 1; i >= 0; i--) {//converts binary to base 10
-      if (x2Binary.charAt(i) == '1') {
-        x2 = x2 + counter;
-      }
-      counter = counter * 2;
-    }
+    byte[] coordinatesFromPixy = Robot.pixy1.receiveMessage(RobotMap.pixyAddress);//gets first x value from pixy
+    ByteBuffer bytebuffer1 = ByteBuffer.allocateDirect(4); //allocating 4 bytes for an integer in this ByteBuffer object
+      bytebuffer1.order(ByteOrder.LITTLE_ENDIAN); //makes it so that it goes from least significant bit to most significant bit
+      bytebuffer1.put(coordinatesFromPixy[1]);
+      bytebuffer1.put(coordinatesFromPixy[0]);
+      bytebuffer1.put((byte) 0x00);
+      bytebuffer1.put((byte) 0x00);
+      bytebuffer1.flip(); //flips order of the bytes we put in the bytebuffer and stages it to convert to base 10
+      int x1 = bytebuffer1.getInt(); //converts base 2 value to base 10
+    //break
+   // int x2 = (int) coordinatesFromPixy[0];
+    ByteBuffer bytebuffer2 = ByteBuffer.allocateDirect(4); //allocating 4 bytes for an integer in this ByteBuffer object
+     bytebuffer2.order(ByteOrder.LITTLE_ENDIAN); //makes it so that it goes from least significant bit to most significant bit
+     bytebuffer2.put(coordinatesFromPixy[3]);
+     bytebuffer2.put(coordinatesFromPixy[2]);
+     bytebuffer2.put((byte) 0x00);
+     bytebuffer2.put((byte) 0x00);
+     bytebuffer2.flip(); //flips order of the bytes we put in the bytebuffer and stages it to convert to base 10
+     int x2 = bytebuffer2.getInt(); //converts base 2 value to base 10
+  
+    lLoc = x1;
+    rLoc = x2;
     
     if (x1 > x2)//determines which one is on the left 
     {
@@ -81,8 +78,7 @@ public class Pixy extends Arduino {
     {
       lLoc = x1;
       rLoc = x2;
-    }
-  }
+    }  }
 
   public static boolean checkPixyAlign()//true if aligned, false if not
   {
