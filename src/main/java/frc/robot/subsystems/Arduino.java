@@ -13,11 +13,6 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import frc.robot.RobotMap;
-import frc.robot.RobotMap.SubsystemIndex;
 
 /**
  * Add your docs here.

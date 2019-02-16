@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.subsystems.Arduino;
 import frc.robot.Robot;
-import frc.robot.RobotMap.SubsystemIndex;
 
 public class SendMessage extends Command {
 
