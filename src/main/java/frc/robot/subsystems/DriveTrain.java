@@ -40,6 +40,7 @@ public class DriveTrain extends Subsystem {
    }
   
   public void drive(double leftMotors, double rightMotors) {
+    leftMotors *= -1;
     left1.set(ControlMode.PercentOutput, leftMotors);
     left2.set(ControlMode.PercentOutput, leftMotors);
     right1.set(ControlMode.PercentOutput, rightMotors);

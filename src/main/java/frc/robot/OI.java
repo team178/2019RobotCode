@@ -59,7 +59,7 @@ public class OI {
 
 	//MAIN controller accessor methods
  	public double getLeftStickYMain() {
-		return xboxMain.getRawAxis(2);
+		return xboxMain.getRawAxis(1);
 	}
 	
 	public double getRightStickYMain() {
