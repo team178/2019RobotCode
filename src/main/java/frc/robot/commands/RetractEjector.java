@@ -7,18 +7,16 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-public class EjectHatchPanel extends Command {
+public class RetractEjector extends Command {
   OI oi; 
-  HatchMechanism hatchmechanism;
-
-  public EjectHatchPanel() {
+  HatchMechanism hatchmechanism; 
+  public RetractEjector() {
     requires(Robot.hatchMechanism);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -34,25 +32,20 @@ public class EjectHatchPanel extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DoubleSolenoid.Value isEjected = hatchmechanism.getEjectorSolenoidState();
-    System.out.println("Ejector is out? " + isEjected);
-    System.out.println("Try to go forward");
-    hatchmechanism.setEjector("Forward");
+
   }
+
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     DoubleSolenoid.Value EjectState = hatchmechanism.getEjectorSolenoidState();
 
-    if (EjectState == DoubleSolenoid.Value.kForward) {
-      System.out.println("Finished!");
-      return true;
+    if (EjectState == DoubleSolenoid.Value.kReverse){
+        return true;
     } else {
-      System.out.println("Not finished, trying again: " + EjectState);
       return false;
     }
-
   }
 
   // Called once after isFinished returns true
