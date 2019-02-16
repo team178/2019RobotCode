@@ -46,7 +46,7 @@ public class Pixy extends Arduino {
   }
 
   public static void updateTargetValues () {
-    byte[] coordinatesFromPixy = Robot.pixy1.receiveMessage(RobotMap.pixyAddress);//gets first x value from pixy
+    byte[] coordinatesFromPixy = Robot.pixy.receiveMessage(RobotMap.pixyAddress);//gets first x value from pixy
     ByteBuffer bytebuffer1 = ByteBuffer.allocateDirect(4); //allocating 4 bytes for an integer in this ByteBuffer object
       bytebuffer1.order(ByteOrder.LITTLE_ENDIAN); //makes it so that it goes from least significant bit to most significant bit
       bytebuffer1.put(coordinatesFromPixy[1]);
