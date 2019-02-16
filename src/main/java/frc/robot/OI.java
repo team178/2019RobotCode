@@ -19,6 +19,16 @@ import frc.robot.commands.*;
  */
 public class OI {
 	
+	//Joystick buttons
+	public static Joystick joystick = new Joystick(RobotMap.ActualJoystick);
+	public Button button1 = new JoystickButton(joystick, 1);
+	public Button button2 = new JoystickButton(joystick, 2);
+	public Button button3 = new JoystickButton(joystick, 3);
+	public Button button4 = new JoystickButton(joystick, 4);
+	public Button button5 = new JoystickButton(joystick, 5);
+	public Button button6 = new JoystickButton(joystick, 6);
+	public Button button7 = new JoystickButton(joystick, 7);
+
 	//MAIN controller buttons
 	public static Joystick xboxMain = new Joystick(RobotMap.JoystickPortXBoxMain); //Controller
 	public Button mainA = new JoystickButton(xboxMain, 1);
@@ -42,6 +52,10 @@ public class OI {
   	public Button auxStart = new JoystickButton(xboxAux, 8);
   
 	public OI() {
+		joystick.setXChannel(0);
+		joystick.setYChannel(3);
+		joystick.setZChannel(2);
+		joystick.setTwistChannel(1);
 		//MAIN controls (joystick code in JoystickDrive)
 		mainB.whenPressed(new LightsCargo());
 		mainY.whenPressed(new LightsHatch());
@@ -96,10 +110,16 @@ public class OI {
 		return 0;
 	}
 	public double getTwist() {
-		return 0;
+		return joystick.getTwist();
 	}
 	public double getY() {
-		return 0;
+		return joystick.getY();
 	}
 
+	public void printJoystickChannels() {
+		System.out.println("X channel: " + joystick.getXChannel());
+		System.out.println("Y channel: " + joystick.getYChannel());
+		System.out.println("Z channel: " + joystick.getZChannel());
+		System.out.println("Twist channel: " + joystick.getTwistChannel());
+	}
 }

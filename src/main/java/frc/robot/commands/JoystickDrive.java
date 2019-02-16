@@ -38,16 +38,21 @@ public class JoystickDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-      
-      
+      //oi.printJoystickChannels();
       if(oi.getTrigger() >= 0) {
         yVal = 0.75 * oi.getY();
-        twistVal = 0.5 * (oi.getTwist());
+        twistVal = 0.5 * oi.getTwist();
+        //System.out.println("yVal: " + yVal);
+        //System.out.println("twistVal: " + twistVal);
         
         if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) {
           drivetrain.drive(twistVal-yVal, twistVal+yVal);
+         // System.out.println("Left: " + (twistVal - yVal) + "");
+         // System.out.println("Right: " + (twistVal + yVal) + "");
         } else {
           drivetrain.drive(0,0);
+         // System.out.println("Left: " + (twistVal - yVal) + "");
+         // System.out.println("Right: " + (twistVal + yVal) + "");
         }
       } else {
         yVal = -oi.getY();
@@ -55,8 +60,12 @@ public class JoystickDrive extends Command {
 
         if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) {
           drivetrain.drive(twistVal-yVal, twistVal+yVal);
+         // System.out.println("Left: " + (twistVal - yVal) + "");
+          //System.out.println("Right: " + (twistVal + yVal) + "");
         } else {
           drivetrain.drive(0,0);
+          //System.out.println("Left: " + (twistVal - yVal) + "");
+          //System.out.println("Right: " + (twistVal + yVal) + "");
         }
       }
     }

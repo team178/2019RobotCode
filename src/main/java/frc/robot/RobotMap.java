@@ -58,6 +58,7 @@ public class RobotMap {
   //computer
   public static int JoystickPortXBoxMain = 0; 
   public static int JoystickPortXBoxAux = 1; 
+  public static int ActualJoystick = 2;
 
   //arduino
   public static int pixyAddress1 = 8;
