@@ -36,7 +36,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
  public static HatchMechanism hatchMechanism;
  public static Climber climber;
  public static CargoLauncher cargolauncher;
- public static Arduino arduino;
+ public static Arduino lightsArduino;
  public static Pixy pixy1;
  public static Pixy pixy2;
  //public static TimeOfFlight tofL;
@@ -44,7 +44,7 @@ import edu.wpi.first.wpilibj.I2C.Port;
  public static CameraServer camserv;
  public static UsbCamera camera1;
  public static UsbCamera camera2;
-
+ 
   //Here is where each of the subsystem fields declared above are initiatilized with their constructors when robot is started up
   @Override 
   public void robotInit() {
@@ -52,14 +52,14 @@ import edu.wpi.first.wpilibj.I2C.Port;
     hatchMechanism = new HatchMechanism();
     climber = new Climber();  
     cargolauncher = new CargoLauncher(); 
-    arduino = new Arduino(I2C.Port.kOnboard, 1);//1 is placeholder
+    lightsArduino = new Arduino(I2C.Port.kOnboard, 1);//1 is placeholder
     pixy1 = new Pixy(RobotMap.pixyAddress1);
     pixy2 = new Pixy(RobotMap.pixyAddress2);
     //tofL = new TimeOfFlight(RobotMap.tofAddressL);
     //tofR = new TimeOfFlight(RobotMap.tofAddressR);
     oi = new OI();
     //sets light strips to color of alliance (red or blue)
-    arduino.setAllianceColor();
+    lightsArduino.setAllianceColor();
 
     camserv = CameraServer.getInstance();
     

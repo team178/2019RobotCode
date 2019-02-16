@@ -8,58 +8,45 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
-import frc.robot.subsystems.Arduino;
 import frc.robot.Robot;
-import frc.robot.RobotMap.SubsystemIndex;
+import frc.robot.subsystems.Arduino;
 
-public class SendMessage extends Command {
+public class LightsCargo extends Command {
 
-  OI oi;
-  public Arduino lightsArduino;
-  String t; 
-  public boolean sent; 
+  Arduino lightsArduino;
 
-  public SendMessage(String t) {
-  this.t = t;
+  public LightsCargo() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.lightsArduino);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    oi = Robot.oi;
     lightsArduino = Robot.lightsArduino;
   }
-
-
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    sent = lightsArduino.sendMessage(t);
+    lightsArduino.sendMessage("c");
   }
-
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return sent;
+    return true;
   }
-
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
   }
 
-
-
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-
   }
-
 }
