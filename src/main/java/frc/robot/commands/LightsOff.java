@@ -14,6 +14,7 @@ import frc.robot.subsystems.Arduino;
 public class LightsOff extends Command {
 
   Arduino lightsArduino;
+  boolean sent;
 
   public LightsOff() {
     // Use requires() here to declare subsystem dependencies
@@ -30,13 +31,13 @@ public class LightsOff extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    lightsArduino.sendMessage("n");
+    sent = lightsArduino.sendMessage("n");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return sent;
   }
 
   // Called once after isFinished returns true
