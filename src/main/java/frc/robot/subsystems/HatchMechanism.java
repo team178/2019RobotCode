@@ -92,16 +92,16 @@ public class HatchMechanism extends Subsystem {
     return linearactuator.getPosition();
   }
 
-  public void moveActuator (boolean movingForward) {
+  public void moveActuator (boolean movingForward, double factor) {
     double currentPosition = getActuatorPosition();
     if (movingForward) {
       if (currentPosition < 1 || currentPosition >= 0) {
-        currentPosition+=0.004;
+        currentPosition+=factor;
         setActuatorPosition(currentPosition);
       }
     } else {
       if (currentPosition <= 1 || currentPosition > 0) {
-        currentPosition-=0.004;
+        currentPosition-=factors;
         setActuatorPosition(currentPosition);
       }
     }
