@@ -101,7 +101,7 @@ public class HatchMechanism extends Subsystem {
       }
     } else {
       if (currentPosition <= 1 || currentPosition > 0) {
-        currentPosition-=factors;
+        currentPosition-=factor;
         setActuatorPosition(currentPosition);
       }
     }
