@@ -39,8 +39,9 @@ public class HatchMechanism extends Subsystem {
 
     linearactuator = new PWM(RobotMap.linearactuator);
 
+    //Default position:
     setExtender("reverse");
-    //setEjector("reverse");
+    setEjector("reverse");
   }
 
   //sets extender to two positions depending on string parameter --> forward = extends, reverse = retracts

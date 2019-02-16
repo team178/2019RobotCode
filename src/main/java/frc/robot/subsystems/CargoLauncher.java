@@ -24,6 +24,8 @@ public class CargoLauncher extends Subsystem {
   public CargoLauncher() {
     aimSolenoid = new DoubleSolenoid(RobotMap.PCM,RobotMap.CargoCylinderAimExtend, RobotMap.CargoCylinderAimRetract);
     shootSolenoid = new DoubleSolenoid(RobotMap.PCM, RobotMap.CargoCylinderShootExtend, RobotMap.CargoCylinderShootRetract);
+    
+    //Default Position:
     raiseLauncher();
     retract();
   }
