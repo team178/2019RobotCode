@@ -43,10 +43,10 @@ public class OI {
   
 	public OI() {
 		//MAIN controls (joystick code in JoystickDrive)
-		mainB.whenPressed(new SendMessage("c"));
-		mainY.whenPressed(new SendMessage("h"));
-		mainX.whenPressed(new SendMessage("f"));
-		mainA.whenPressed(new SendMessage("n"));
+		mainB.whenPressed(new LightsCargo());
+		mainY.whenPressed(new LightsHatch());
+		mainX.whenPressed(new LightsDefault());
+		mainA.whenPressed(new LightsOff());
 		
 		//AUX controls (TODO: put climb controls in Climb command)
 		auxA.whileHeld(new EjectHatchPanel());
