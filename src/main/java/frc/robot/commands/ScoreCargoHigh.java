@@ -12,7 +12,6 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.CargoLauncher;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class ScoreCargoHigh extends Command {
   OI oi;

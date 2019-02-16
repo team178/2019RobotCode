@@ -7,11 +7,7 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Robot;
-import frc.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.

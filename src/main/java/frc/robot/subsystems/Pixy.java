@@ -11,7 +11,6 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.
@@ -49,7 +48,7 @@ public class Pixy extends Arduino {
   }
 
   public static void updateTargetValues () {
-    byte[] coordinatesFromPixy = Robot.pixy.receiveMessage(RobotMap.pixyAddress1);//gets first x value from pixy
+    byte[] coordinatesFromPixy = Robot.pixy1.receiveMessage(RobotMap.pixyAddress1);//gets first x value from pixy
     String x1Binary = ((Byte) coordinatesFromPixy[0]).toString();
     int counter = 1;
     int x1 = 0;
@@ -62,7 +61,7 @@ public class Pixy extends Arduino {
     counter = 0;
     
     // delay
-    coordinatesFromPixy = Robot.pixy.receiveMessage(RobotMap.pixyAddress2);//gets second x value from pixy 
+    coordinatesFromPixy = Robot.pixy2.receiveMessage(RobotMap.pixyAddress2);//gets second x value from pixy 
     String x2Binary = ((Byte) coordinatesFromPixy[0]).toString();
     counter = 1;
     int x2 = 0;
