@@ -13,11 +13,11 @@ import frc.robot.Robot;
 import frc.robot.subsystems.CargoLauncher;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-public class ScoreCargoHigh extends Command {
+public class ExtendCargoShooter extends Command {
   OI oi;
   CargoLauncher cargolauncher;
 
-  public ScoreCargoHigh() {
+  public ExtendCargoShooter() {
     requires(Robot.cargolauncher);
   }
 
@@ -53,10 +53,15 @@ public class ScoreCargoHigh extends Command {
   @Override
   protected boolean isFinished() {
     DoubleSolenoid.Value ShootSolenoidState = cargolauncher.getShootSolenoidState();
+    DoubleSolenoid.Value AimSolenoidState = cargolauncher.getAimSolenoidState();
 
     if (ShootSolenoidState == DoubleSolenoid.Value.kForward) {
       System.out.println("Finish shooting!");
       return true;
+    } else if(AimSolenoidState == DoubleSolenoid.Value.kReverse){
+      System.out.println("Could not shoot: Aimer is down. Try to raise aimer.");
+      cargolauncher.raiseLauncher();
+      return false;
     } else {
       System.out.println("Not finish shooting. Try again: " + ShootSolenoidState);
       return false;
@@ -67,13 +72,11 @@ public class ScoreCargoHigh extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    cargolauncher.retract();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    cargolauncher.retract();
   }
 }

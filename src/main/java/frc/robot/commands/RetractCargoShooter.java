@@ -7,21 +7,21 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.CargoLauncher;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-
-public class ScoreCargoLow extends Command {
+public class RetractCargoShooter extends Command {
   OI oi;
   CargoLauncher cargolauncher;
 
-  public ScoreCargoLow() {
+  public RetractCargoShooter() {
+    requires(Robot.cargolauncher);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.cargolauncher);
   }
 
   // Called just before this Command runs the first time
@@ -34,31 +34,16 @@ public class ScoreCargoLow extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*check if "punch" solenoid is reverse 
-    if yes: 
-    set aim solenoid to reverse 
-    if no: 
-    set "punch" solenoid to reverse
-    set aim solenoid to reverse 
-    */
-    if(cargolauncher.getShootSolenoidState() == DoubleSolenoid.Value.kReverse){
-      cargolauncher.lowerLauncher();
-    }
-    else if (cargolauncher.getShootSolenoidState() == DoubleSolenoid.Value.kForward){
-      cargolauncher.retract();
-    }
+    cargolauncher.retract();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    DoubleSolenoid.Value AimSolenoidState = cargolauncher.getAimSolenoidState();
-
-    if (AimSolenoidState == DoubleSolenoid.Value.kReverse) {
-      System.out.println("Finish shooting lower!");
+    if (cargolauncher.getShootSolenoidState() == DoubleSolenoid.Value.kReverse){
       return true;
-    } else {
-      System.out.println("Not finish shooting lower. Try again: " + AimSolenoidState);
+    }
+    else{
       return false;
     }
   }
@@ -66,7 +51,6 @@ public class ScoreCargoLow extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    cargolauncher.raiseLauncher();
   }
 
   // Called when another command which requires one or more of the same

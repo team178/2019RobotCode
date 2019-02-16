@@ -32,9 +32,9 @@ public class ExtendCargoAimer extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kReverse){
+    
       cargolauncher.raiseLauncher();
-    }
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
