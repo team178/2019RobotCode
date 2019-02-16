@@ -36,8 +36,8 @@ public class XBoxDrive extends Command {
   @Override
   protected void execute() {
   //left joystick controls left side of tank drive, right joystick controls right side
-    leftY = oi.getLeftStickYMain();
-    rightY = oi.getRightStickYMain();
+    leftY = 0.6 * oi.getLeftStickYMain();
+    rightY = 0.6 * oi.getRightStickYMain();
     
     if(Math.abs(leftY) > 0.1 || Math.abs(rightY) > 0.1) {//joystick dead zone, where the motors stop giving a crap
       drivetrain.drive(leftY, rightY);
