@@ -7,51 +7,44 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-
-public class ExtendHatchMechanism extends Command {
+public class RetractHatchMechanism extends Command {
   OI oi;
-  HatchMechanism hatchmechanism;
-
-
-
-  public ExtendHatchMechanism() {
+  HatchMechanism hatchMechanism;
+  public RetractHatchMechanism() {
     requires(Robot.hatchMechanism);
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-      oi = Robot.oi;
-     hatchmechanism = Robot.hatchMechanism;
-    }
+    oi = Robot.oi;
+    hatchMechanism = Robot.hatchMechanism;
+  }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    DoubleSolenoid.Value isExtended = hatchmechanism.getExtenderSolenoidState();
-    System.out.println("Extender is out? " + isExtended);
-    System.out.println("Try to go out");
-    hatchmechanism.setExtender("Forward");
-
-    
+    // set to reverse 
+    hatchMechanism.setExtender("Reverse");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() { 
-   DoubleSolenoid.Value ExtendState = hatchmechanism.getExtenderSolenoidState();
-
-    if (ExtendState == DoubleSolenoid.Value.kForward) {
-      System.out.println("Finished!");
+  protected boolean isFinished() {
+    if (hatchMechanism.getExtenderSolenoidState() == DoubleSolenoid.Value.kReverse){
       return true;
-    } else {
-      System.out.println("Not finished, trying again: " + ExtendState);
+
+    }
+  else {
       return false;
     }
   }

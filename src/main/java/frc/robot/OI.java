@@ -64,7 +64,8 @@ public class OI {
 		
 		//AUX controls (TODO: put climb controls in Climb command)
 		auxA.whileHeld(new EjectHatchPanel());
-		auxY.whileHeld(new ExtendHatchMechanism());
+		auxY.whenPressed(new ExtendHatchMechanism());
+		auxY.whenReleased(new RetractHatchMechanism());
 		auxX.whileHeld(new ScoreCargoLow());
 		auxB.whenPressed (new ScoreCargoHigh());
 		auxRightBumper.whileHeld (new AlignHatchPanel());
