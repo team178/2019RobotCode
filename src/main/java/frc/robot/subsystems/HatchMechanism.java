@@ -27,12 +27,12 @@ public class HatchMechanism extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static Talon hatchMotor;
   //Pneumatics
   public static DoubleSolenoid hatchCylinderExtend;
   public static DoubleSolenoid hatchCylinderEject;
   public static AnalogInput pressureTransducer;
-  //Linear actuator
+  
+  //Linear actuator died, so it was replaced by lead screw
   public static VictorSPX leadScrew;
 
   public HatchMechanism() {
