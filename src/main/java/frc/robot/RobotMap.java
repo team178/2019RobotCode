@@ -27,8 +27,8 @@ public class RobotMap {
   public static int ClimberMotor2 = 7;
   public static int ClimberMotor3 = 8;
   public static int ClimberMotor4 = 9;
-  
-  public static int PCM = 10;
+  public static int leadscrew = 10;
+  public static int PCM = 11;
 
   //Analog
   public static int PressureTranducer = 0;
@@ -47,7 +47,6 @@ public class RobotMap {
   public static int HatchEjectorCylinderRetract = 6; 
 
   //PWM
-  public static int linearactuator = 0;
 
   //DIO
   public static int LimitSwitchTop1 = 5;

@@ -43,9 +43,19 @@ public class AlignHatchPanel extends Command {
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2;
-    if(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){
+    while(avg > (desiredavg  + 10) || avg < (desiredavg - 10)) {
       double diff = desiredavg-avg;
-      hatchmechanism.moveActuator(true, avg);
+      if (diff > 0) {
+        hatchmechanism.moveLeadScrew(true, 1.0);
+      } else {
+        hatchmechanism.moveLeadScrew(false, 1.0);
+      }
+      Pixy.updateTargetValues();
+      firstLocation = Pixy.getLeft();
+      secondLocation = Pixy.getRight();
+      x1 = (double) firstLocation;
+      x2 = (double) secondLocation; 
+      avg = (x1 + x2)/2;
     }
 
   }
@@ -53,7 +63,7 @@ public class AlignHatchPanel extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
