@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.ClimbDrive;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
@@ -48,12 +49,20 @@ public class Climber extends Subsystem
     limitswitchBottom2 = new DigitalInput(RobotMap.LimitSwitchBottom2);
   }
 
-public boolean CheckLimitSwitchTop1 () {
+public boolean checkLimitSwitchTop1 () {
   return limitswitchTop1.get();
 }
 
 public boolean checkLimitSwitchTop2 () {
   return limitswitchTop2.get();
+}
+
+public boolean checkLimitSwitchBottom1 () {
+  return limitswitchBottom1.get();
+}
+
+public boolean checkLimitSwitchBottom2 () {
+  return limitswitchBottom2.get();
 }
 
 public void moveArms (double power)  {
@@ -92,6 +101,6 @@ public boolean getBottomSwitchStatuses() {
   @Override
   public void initDefaultCommand() 
   {
-    
+    setDefaultCommand(new ClimbDrive());
   }
 }

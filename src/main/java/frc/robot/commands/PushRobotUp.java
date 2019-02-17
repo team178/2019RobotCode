@@ -12,19 +12,17 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.Climber;
 
-public class ClimbDrive extends Command {
-
+public class PushRobotUp extends Command {
   OI oi;
   Climber climber;
-  double leftVal;
-  double rightVal;
+  private double power;
 
-  public ClimbDrive() {
+  public PushRobotUp(double pwr) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.climber);
+    power = pwr;
   }
-
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -35,14 +33,10 @@ public class ClimbDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    leftVal = oi.getLeftTriggerMain();
-    rightVal = -oi.getRightTriggerMain();
-    if (rightVal > 0) {
-      climber.moveBackWheel(rightVal);
-    } else {
-      climber.moveBackWheel(leftVal);
+    power = oi.getLeftStickYAux();
+    if (!climber.checkLimitSwitchTop2() || !climber.checkLimitSwitchBottom2()) {
+      climber.moveBackMotors(power);
     }
-    
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -54,11 +48,146 @@ public class ClimbDrive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    climber.moveBackMotors(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    climber.moveBackMotors(0);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//eclips
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//a

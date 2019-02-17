@@ -11,33 +11,31 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Climber;
 import frc.robot.*;
 
-public class Climb extends Command {
+public class EjectClimberArms extends Command {
 
   OI oi;
   Climber climber;
   private double power;
 
-  public Climb(double pwr) {
+  public EjectClimberArms() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    //requires(Robot.climber);
-    power = pwr;
+    requires(Robot.climber);
   }
  
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    //climber = Robot.climber;
+    climber = Robot.climber;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (power > 0) {
-      climber.climb(power);
-    } else if (power < 0) {
-      climber.unclimb(power);
+    power = oi.getRightStickYAux();
+    if (!climber.checkLimitSwitchTop1() || !climber.checkLimitSwitchBottom1()) {
+      climber.moveArms(power);
     }
   }
 
@@ -45,15 +43,14 @@ public class Climb extends Command {
   @Override
   protected boolean isFinished() 
   {
-    //Varun - Apply all 4 switches
-    return climber.getTopSwitchStatuses() || climber.getBottomSwitchStatuses();
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end()  
   {
-    climber.climb(0);
+    climber.moveArms(0);
   }
   
 
@@ -62,6 +59,6 @@ public class Climb extends Command {
   @Override
   protected void interrupted() 
   {
-    climber.climb(0);
+    climber.moveArms(0);
   }
 }
