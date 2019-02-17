@@ -47,7 +47,7 @@ public class RobotMap {
   public static int HatchEjectorCylinderRetract = 6; 
 
   //PWM
-  public static int linearactuator = 0;
+  public static int linearactuator = 3;
 
   //DIO
   public static int LimitSwitchTop1 = 5;
