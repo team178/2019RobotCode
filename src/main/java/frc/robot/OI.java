@@ -67,8 +67,13 @@ public class OI {
 		auxA.whenReleased(new RetractEjector());
 		auxY.whenPressed(new ExtendHatchMechanism());
 		auxY.whenReleased(new RetractHatchMechanism());
-		auxX.whileHeld(new ScoreCargoLow());
-		auxB.whenPressed (new ScoreCargoHigh());
+		//auxX.whileHeld(new ScoreCargoLow());
+		//auxB.whenPressed (new ScoreCargoHigh());
+		auxX.whenPressed(new ExtendCargoAimer());
+		auxX.whenReleased(new RetractCargoAimer());
+		auxB.whenPressed(new ExtendCargoShooter());
+		auxB.whenReleased(new RetractCargoShooter());
+
 		auxRightBumper.whileHeld (new AlignHatchPanel());
 		auxLeftBumper.whileHeld (new AlignHatchPanel()); 
 	}

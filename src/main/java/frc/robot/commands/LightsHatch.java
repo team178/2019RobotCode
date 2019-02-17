@@ -14,6 +14,7 @@ import frc.robot.subsystems.Arduino;
 public class LightsHatch extends Command {
 
   Arduino lightsArduino;
+  boolean sent;
 
   public LightsHatch() {
     // Use requires() here to declare subsystem dependencies
@@ -30,14 +31,14 @@ public class LightsHatch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    lightsArduino.sendMessage("h");
+    sent = lightsArduino.sendMessage("h");
 
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return sent;
   }
 
   // Called once after isFinished returns true
