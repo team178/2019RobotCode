@@ -41,7 +41,7 @@ public class HatchMechanism extends Subsystem {
     hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchEjectorCylinderExtend, RobotMap.HatchEjectorCylinderRetract);
     pressureTransducer = new AnalogInput(RobotMap.PressureTranducer);
 
-    leadScrew = new VictorSPX(RobotMap.leadscrew);
+    leadScrew = new VictorSPX(RobotMap.leadScrew);
 
     //Default position:
     setExtender("reverse");
