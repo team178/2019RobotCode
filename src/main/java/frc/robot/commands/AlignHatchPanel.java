@@ -14,12 +14,12 @@ import frc.robot.subsystems.HatchMechanism;
 import frc.robot.subsystems.Pixy;
 
 public class AlignHatchPanel extends Command {
-  Pixy pixy1;
-  Pixy pixy2;
+  Pixy pixy;
   OI oi;
   HatchMechanism hatchmechanism;
 
   public AlignHatchPanel() {
+    //requires(Robot.hatchMechanism);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -28,8 +28,7 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    pixy1 = Robot.pixy1;
-    pixy2 = Robot.pixy2;
+    pixy = Robot.pixy;
     hatchmechanism = Robot.hatchMechanism;
   }
 
@@ -37,20 +36,16 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void execute() {
     
-    double desiredavg = 159;//checks if the pixy is inbetween the two pieces of tape
+    double desiredavg = 157;//checks if the pixy is inbetween the two pieces of tape
     Pixy.updateTargetValues();
     int firstLocation = Pixy.getLeft();
     int secondLocation = Pixy.getRight();
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2;
-    while(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){
+    if(avg > (desiredavg  + 10) || avg < (desiredavg - 10)){
       double diff = desiredavg-avg;
-	if (diff>desiredavg){
-       hatchmechanism.moveActuator(false);//change to new parameters
-      } else {
-        hatchmechanism.moveActuator(true);
-      }
+      hatchmechanism.moveActuator(true, avg);
     }
 
   }

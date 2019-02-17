@@ -8,41 +8,31 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
+import frc.robot.subsystems.HatchMechanism;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ManuallyMoveActuator extends Command {
 
-    private double currentPosition;
     private boolean movingForward;
     private double setPoint;
+    private HatchMechanism hatchmechanism;
 
-  public ManuallyMoveActuator(double setPoint, boolean forward) {
+  public ManuallyMoveActuator(boolean forward) {
    // requires(Robot.linearactuator);
     requires(Robot.hatchMechanism);
-    this.setPoint = setPoint;
     movingForward = forward;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    currentPosition = Robot.hatchMechanism.getActuatorPosition();
+    hatchmechanism = Robot.hatchMechanism;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (movingForward) {
-      if (currentPosition < 1 || currentPosition >= 0) {
-        currentPosition+=0.004;
-        Robot.hatchMechanism.setActuatorPosition(currentPosition);
-      }
-    } else {
-      if (currentPosition <= 1 || currentPosition > 0) {
-        currentPosition-=0.004;
-        Robot.hatchMechanism.setActuatorPosition(currentPosition);
-      }
-    }
+    hatchmechanism.moveActuator(movingForward, 0.004);
     System.out.println(Robot.hatchMechanism.getActuatorPosition());
   }
 

@@ -29,8 +29,7 @@ import edu.wpi.first.wpilibj.I2C;
  public static Climber climber;
  public static CargoLauncher cargolauncher;
  public static Arduino lightsArduino;
- public static Pixy pixy1;
- public static Pixy pixy2;
+ public static Pixy pixy;
  //public static TimeOfFlight tofL;
  //public static TimeOfFlight tofR;
  public static CameraServer camserv;
@@ -44,9 +43,8 @@ import edu.wpi.first.wpilibj.I2C;
     hatchMechanism = new HatchMechanism();
     climber = new Climber();  
     cargolauncher = new CargoLauncher(); 
-    lightsArduino = new Arduino(I2C.Port.kOnboard, 1);//1 is placeholder
-    pixy1 = new Pixy(RobotMap.pixyAddress1);
-    pixy2 = new Pixy(RobotMap.pixyAddress2);
+    lightsArduino = new Arduino(I2C.Port.kOnboard, RobotMap.lightsAddress);//1 is placeholder
+    pixy = new Pixy(RobotMap.pixyAddress);
     //tofL = new TimeOfFlight(RobotMap.tofAddressL);
     //tofR = new TimeOfFlight(RobotMap.tofAddressR);
     oi = new OI();
