@@ -43,14 +43,16 @@ public class Climb extends Command {
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  protected boolean isFinished() 
+  {
     //Varun - Apply all 4 switches
     return climber.getTopSwitchStatuses() || climber.getBottomSwitchStatuses();
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end()  {
+  protected void end()  
+  {
     climber.climb(0);
   }
   
@@ -58,7 +60,8 @@ public class Climb extends Command {
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
+  protected void interrupted() 
+  {
     climber.climb(0);
   }
 }
