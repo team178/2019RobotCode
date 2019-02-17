@@ -90,7 +90,7 @@ public class Arduino extends Subsystem {
 
   public boolean lightsOff()
   {
-    return sendMessage("o");
+    return sendMessage("n");
   }
 
   @Override
