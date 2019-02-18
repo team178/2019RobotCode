@@ -18,6 +18,7 @@ public class AlignHatchPanel extends Command
   Pixy pixy;
   OI oi;
   HatchMechanism hatchmechanism;
+
   double diff;
   private final int TOLERANCE = 10;
   private final double DESIREDAVG = 157.5;//desired distance between the two objects that pixy recognizes 
@@ -44,35 +45,41 @@ public class AlignHatchPanel extends Command
   {
     triggerPressed = false; 
     pixy.updateTargetValues();//gets pixy values
+
     int firstLocation = pixy.getLeft();
     int secondLocation = pixy.getRight();
     double x1 = (double) firstLocation;//casts to double, in order to divide accurately 
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2.0;
     diff = DESIREDAVG - avg;//calc difference based on distance from desired point, sign indicated direction needed to move 
-
-      if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {//check for interruption, manual override with triggers 
-        hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
-        triggerPressed = true;
+    System.out.println("Difference: " + diff);
+    if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {//check for interruption, manual override with triggers 
+      //hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
+      triggerPressed = true;
+    } else {
+      if (diff > 0) {
+        hatchmechanism.moveLeadScrew(true, 0.5); //switched false and true because test screw is in wrong direction
+        System.out.println("Trying to go right");
+      } else if (diff == 0) {
+        hatchmechanism.moveLeadScrew(true, 0);
+        System.out.println("Diff is 0");
       } else {
-        if (diff > 0) {
-          hatchmechanism.moveLeadScrew(false, 0.5); //switched false and true because test screw is in wrong direction
-        } else {
-          hatchmechanism.moveLeadScrew(true, 0.5);
-        }
+        hatchmechanism.moveLeadScrew(false, 0.5);
+        System.out.println("Trying to go left");
       }
     }
+  }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Math.abs(diff) < TOLERANCE && triggerPressed);
+    return (Math.abs(diff) < TOLERANCE || triggerPressed);
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() 
-  {
+  protected void end() {
+    hatchmechanism.moveLeadScrew(true, 0);
   }
   
 
