@@ -12,6 +12,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.commands.LightsOff;
 import frc.robot.subsystems.*;
 import edu.wpi.first.cameraserver.CameraServer;
 
@@ -73,6 +74,7 @@ import edu.wpi.first.wpilibj.I2C;
 
   @Override
   public void disabledInit() {
+    lightsArduino.sendMessage("n");
   }
 
   @Override
