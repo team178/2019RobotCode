@@ -43,7 +43,7 @@ import edu.wpi.first.wpilibj.I2C;
     hatchMechanism = new HatchMechanism();
     climber = new Climber();  
     cargolauncher = new CargoLauncher(); 
-    lightsArduino = new Arduino(I2C.Port.kOnboard, RobotMap.lightsAddress);//1 is placeholder
+    lightsArduino = new Arduino(I2C.Port.kOnboard, RobotMap.lightsAddress);
     pixy = new Pixy(RobotMap.pixyAddress);
     //tofL = new TimeOfFlight(RobotMap.tofAddressL);
     //tofR = new TimeOfFlight(RobotMap.tofAddressR);

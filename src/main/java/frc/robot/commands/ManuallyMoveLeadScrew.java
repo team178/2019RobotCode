@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ManuallyMoveLeadScrew extends Command {
 
-    private HatchMechanism hatchmechanism;
     private OI oi;
+    private HatchMechanism hatchmechanism;
 
   public ManuallyMoveLeadScrew() {
    // requires(Robot.linearactuator);
@@ -42,7 +42,6 @@ public class ManuallyMoveLeadScrew extends Command {
   @Override
   protected boolean isFinished() {
     return true;
-
   }
 
   // Called once after isFinished returns true

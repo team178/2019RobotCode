@@ -96,6 +96,7 @@ public class HatchMechanism extends Subsystem {
     } else {
       leadScrew.set(ControlMode.PercentOutput, -factor);
     }
+  //  System.out.println(getActuatorPosition());
   }
   
   @Override

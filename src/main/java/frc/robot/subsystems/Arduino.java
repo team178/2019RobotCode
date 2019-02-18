@@ -33,9 +33,9 @@ public class Arduino extends Subsystem {
     boolean sent = false;
     String message = pattern;
     message = message.toLowerCase();
-    System.out.println(message);
+    System.out.println("Message Sent: " + message);
     sent = !arduino.writeBulk(message.getBytes());//because true if aborted, false if worked
-    System.out.println(arduino.addressOnly());
+    System.out.println("Message Sent? " + arduino.addressOnly());
 
     return sent;
   }
@@ -44,6 +44,7 @@ public class Arduino extends Subsystem {
   {
     byte[] dataFromArduino = new byte[2];//change based on type of data 
     received = !arduino.read(address, 2, dataFromArduino);//because true if aborted, false if worked
+    System.out.print("Message Received: ");
     for (byte b : dataFromArduino) {//gets data in bytes from arduino and converts to binary 
     String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     System.out.print(s1 + ", ");
