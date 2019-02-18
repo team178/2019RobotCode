@@ -13,7 +13,8 @@ import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
 import frc.robot.subsystems.Pixy;
 
-public class AlignHatchPanel extends Command {
+public class AlignHatchPanel extends Command 
+{
   Pixy pixy;
   OI oi;
   HatchMechanism hatchmechanism;
@@ -28,7 +29,8 @@ public class AlignHatchPanel extends Command {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() 
+  {
     oi = Robot.oi;
     pixy = Robot.pixy;
     hatchmechanism = Robot.hatchMechanism;
@@ -36,7 +38,8 @@ public class AlignHatchPanel extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void execute() 
+  {
     
     double desiredavg = 157.0;//checks if the pixy is inbetween the two pieces of tape
     pixy.updateTargetValues();
@@ -59,10 +62,16 @@ public class AlignHatchPanel extends Command {
       if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {
         hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
         triggerPressed = true;
-      } else {
-        if (diff > 0) {
+      } 
+      else 
+      {
+        if (diff > 0) 
+        {
           hatchmechanism.moveLeadScrew(false, 0.5);
-        } else {
+          //switched false and true because test screw is in wrong direction
+        } 
+        else 
+        {
           hatchmechanism.moveLeadScrew(true, 0.5);
         }
       }
@@ -89,7 +98,8 @@ public class AlignHatchPanel extends Command {
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end() 
+  {
   }
   
 
