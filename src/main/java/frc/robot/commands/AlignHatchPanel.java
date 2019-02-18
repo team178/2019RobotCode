@@ -38,7 +38,7 @@ public class AlignHatchPanel extends Command {
   @Override
   protected void execute() {
     
-    double desiredavg = 157;//checks if the pixy is inbetween the two pieces of tape
+    double desiredavg = 157.0;//checks if the pixy is inbetween the two pieces of tape
     pixy.updateTargetValues();
     int firstLocation = pixy.getLeft();
     int secondLocation = pixy.getRight();
