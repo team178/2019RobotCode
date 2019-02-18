@@ -21,10 +21,10 @@ public class AlignHatchPanel extends Command
   double diff;
   private final int TOLERANCE = 10;
   private final double DESIREDAVG = 157.5;//desired distance between the two objects that pixy recognizes 
-  private boolean triggerPressed = false;//if the trigger is pressed, used for the purpose of an override 
+  private boolean triggerPressed;//if the trigger is pressed, used for the purpose of an override 
 
   public AlignHatchPanel() {
-    //requires(Robot.hatchMechanism);
+    requires(Robot.hatchMechanism);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -62,14 +62,11 @@ public class AlignHatchPanel extends Command
         }
       }
     }
-  
-
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Math.abs(diff) < TOLERANCE || !triggerPressed);
+    return (Math.abs(diff) < TOLERANCE && triggerPressed);
   }
 
   // Called once after isFinished returns true
