@@ -45,7 +45,7 @@ public class Pixy extends Arduino {
       return dataFromArduino;
   }
 
-  public static void updateTargetValues () {
+  public void updateTargetValues () {
     byte[] coordinatesFromPixy = Robot.pixy.receiveMessage(RobotMap.pixyAddress);//gets first x value from pixy
     ByteBuffer bytebuffer1 = ByteBuffer.allocateDirect(4); //allocating 4 bytes for an integer in this ByteBuffer object
       bytebuffer1.order(ByteOrder.LITTLE_ENDIAN); //makes it so that it goes from least significant bit to most significant bit
@@ -78,12 +78,15 @@ public class Pixy extends Arduino {
     {
       lLoc = x1;
       rLoc = x2;
-    }  }
+    } 
+    System.out.println("received 2nd value " + lLoc);
+    System.out.println("received 1st value " + rLoc);
+   }
 
-  public static boolean checkPixyAlign()//true if aligned, false if not
+  public boolean checkPixyAlign()//true if aligned, false if not
   {
     double desiredavg = 159;
-    Pixy.updateTargetValues();
+    updateTargetValues();
     int leftLocation = lLoc;
     int rightLocation = rLoc;
     double x1 = (double) leftLocation;
@@ -99,15 +102,15 @@ public class Pixy extends Arduino {
   }
 
 
-  public static int getLeft()
+  public int getLeft()
   {
-    System.out.println(lLoc);
+    System.out.println("Left Location: " + lLoc);
     return lLoc;
   }
 
-  public static int getRight()
+  public int getRight()
   {
-    System.out.println(rLoc);
+    System.out.println("Right Location: " + rLoc);
     return rLoc;
   }
 

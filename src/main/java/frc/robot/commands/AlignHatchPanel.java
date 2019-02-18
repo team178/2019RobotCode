@@ -18,6 +18,8 @@ public class AlignHatchPanel extends Command {
   OI oi;
   HatchMechanism hatchmechanism;
 
+  private final int tolerance = 10;
+
   public AlignHatchPanel() {
     //requires(Robot.hatchMechanism);
     // Use requires() here to declare subsystem dependencies
@@ -37,33 +39,47 @@ public class AlignHatchPanel extends Command {
   protected void execute() {
     
     double desiredavg = 157;//checks if the pixy is inbetween the two pieces of tape
-    Pixy.updateTargetValues();
-    int firstLocation = Pixy.getLeft();
-    int secondLocation = Pixy.getRight();
+    pixy.updateTargetValues();
+    int firstLocation = pixy.getLeft();
+    int secondLocation = pixy.getRight();
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
-    double avg = (x1 + x2)/2;
-    while(avg > (desiredavg  + 10) || avg < (desiredavg - 10)) {
-      double diff = desiredavg-avg;
-      if (diff > 0) {
-        hatchmechanism.moveLeadScrew(true, 1.0);
+    double avg = (x1 + x2)/2.0;
+    double diff = desiredavg-avg;
+    boolean triggerPressed = false;
+
+    if(Math.abs(diff) > tolerance && !triggerPressed) {
+      if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {
+        hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
+        triggerPressed = true;
       } else {
-        hatchmechanism.moveLeadScrew(false, 1.0);
+        if (diff > 0) {
+          hatchmechanism.moveLeadScrew(false, 0.5);
+        } else {
+          hatchmechanism.moveLeadScrew(true, 0.5);
+        }
+        
+        pixy.updateTargetValues();
+        firstLocation = pixy.getLeft();
+        secondLocation = pixy.getRight();
+        x1 = (double) firstLocation;
+        x2 = (double) secondLocation; 
+        avg = (x1 + x2)/2.0;
+
+        diff = desiredavg-avg;
       }
-      Pixy.updateTargetValues();
-      firstLocation = Pixy.getLeft();
-      secondLocation = Pixy.getRight();
-      x1 = (double) firstLocation;
-      x2 = (double) secondLocation; 
-      avg = (x1 + x2)/2;
+    }
+    else
+    {
+      hatchmechanism.moveLeadScrew(true, 0);
     }
 
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  // Make this retur n true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true

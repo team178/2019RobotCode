@@ -32,8 +32,8 @@ public class ManuallyMoveLeadScrew extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftVal = oi.getLeftTriggerAux();
-    double rightVal = -oi.getRightTriggerAux();
+    double leftVal = -oi.getLeftTriggerAux();
+    double rightVal = oi.getRightTriggerAux();
     double totalVal = leftVal + rightVal;
     hatchmechanism.moveLeadScrew(true, totalVal);
   }

@@ -73,9 +73,9 @@ public class OI {
 		auxX.whenReleased(new RetractCargoAimer());
 		auxB.whenPressed(new ExtendCargoShooter());
 		auxB.whenReleased(new RetractCargoShooter());
-
-		auxRightBumper.whileHeld (new AlignHatchPanel());
-		auxLeftBumper.whileHeld (new AlignHatchPanel());
+		
+		auxRightBumper.whileHeld(new AlignHatchPanel());
+		
 		//auxRightBumper.whenPressed(new ManuallyMoveActuator(true, .004));
 		//auxLeftBumper.whenPressed(new ManuallyMoveActuator(false, .004));
 		

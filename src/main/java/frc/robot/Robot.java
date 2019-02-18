@@ -77,7 +77,7 @@ import edu.wpi.first.wpilibj.I2C;
 
   @Override
   public void disabledPeriodic() {
-    Scheduler.getInstance().run();
+   // Scheduler.getInstance().run();
   }
 
   @Override

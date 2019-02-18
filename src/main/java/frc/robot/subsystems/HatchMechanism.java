@@ -99,12 +99,14 @@ public class HatchMechanism extends Subsystem {
     if (!movingForward) {
       factor *= -1;
     }
+
+    leadScrew.set(ControlMode.PercentOutput, factor);
     
-    if (!hasReachedLeftBound() && !hasReachedRightBound()) {
+   /* if (!hasReachedLeftBound() && !hasReachedRightBound()) {
       leadScrew.set(ControlMode.PercentOutput, factor);
     } else {
       leadScrew.set(ControlMode.PercentOutput, 0);
-    }
+    } */
     //System.out.println(getActuatorPosition());
   }
 
