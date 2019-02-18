@@ -7,6 +7,8 @@
 
 package frc.robot.commands;
 
+import javax.swing.plaf.synth.SynthStyle;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
@@ -32,7 +34,10 @@ public class RetractEjector extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
+    DoubleSolenoid.Value isRetracted = hatchmechanism.getEjectorSolenoidState();
+    System.out.println("Ejector is in?" + isRetracted);
+    System.out.println("Try to retract");
+    hatchmechanism.setEjector("Reverse");
   }
 
 

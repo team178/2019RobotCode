@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.*;
+import frc.robot.commands.ManuallyMoveActuator;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -106,7 +107,7 @@ public class HatchMechanism extends Subsystem {
         setActuatorPosition(currentPosition);
       }
     }
-    System.out.println(getActuatorPosition());
+  //  System.out.println(getActuatorPosition());
   }
   
   @Override

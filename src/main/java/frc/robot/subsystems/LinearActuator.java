@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
-
+import frc.robot.commands.ManuallyMoveActuator;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
