@@ -13,14 +13,16 @@ import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
 import frc.robot.subsystems.Pixy;
 
-public class AlignHatchPanel extends Command {
+public class AlignHatchPanel extends Command 
+{
   Pixy pixy;
   OI oi;
   HatchMechanism hatchmechanism;
 
   private final int tolerance = 10;
 
-  public AlignHatchPanel() {
+  public AlignHatchPanel() 
+  {
     //requires(Robot.hatchMechanism);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -28,7 +30,8 @@ public class AlignHatchPanel extends Command {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() 
+  {
     oi = Robot.oi;
     pixy = Robot.pixy;
     hatchmechanism = Robot.hatchMechanism;
@@ -36,7 +39,8 @@ public class AlignHatchPanel extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void execute() 
+  {
     
     double desiredavg = 157.0;//checks if the pixy is inbetween the two pieces of tape
     pixy.updateTargetValues();
@@ -48,14 +52,22 @@ public class AlignHatchPanel extends Command {
     double diff = desiredavg-avg;
     boolean triggerPressed = false;
 
-    if(Math.abs(diff) > tolerance && !triggerPressed) {
-      if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {
+    if(Math.abs(diff) > tolerance && !triggerPressed) 
+    {
+      if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) 
+      {
         hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
         triggerPressed = true;
-      } else {
-        if (diff > 0) {
+      } 
+      else 
+      {
+        if (diff > 0) 
+        {
           hatchmechanism.moveLeadScrew(false, 0.5);
-        } else {
+          //switched false and true because test screw is in wrong direction
+        } 
+        else 
+        {
           hatchmechanism.moveLeadScrew(true, 0.5);
         }
         
@@ -78,19 +90,22 @@ public class AlignHatchPanel extends Command {
 
   // Make this retur n true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  protected boolean isFinished() 
+  {
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end() 
+  {
   }
   
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
+  protected void interrupted() 
+  {
   }
 }
