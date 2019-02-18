@@ -51,7 +51,9 @@ public class AlignHatchPanel extends Command
     diff = desiredavg - avg;
     boolean triggerPressed = false;
 
-    if(Math.abs(diff) > TOLERANCE && !triggerPressed) {
+    if (x1 == 0 || x2 == 0) {
+      hatchmechanism.moveLeadScrew(true, 0);
+    } else if(Math.abs(diff) > TOLERANCE && !triggerPressed) {
       if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {
         hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
         triggerPressed = true;
@@ -71,7 +73,7 @@ public class AlignHatchPanel extends Command
     }
     else
     {
-      hatchmechanism.moveLeadScrew(true, 0);
+      //hatchmechanism.moveLeadScrew(true, 0);
     }
     pixy.updateTargetValues();
     firstLocation = pixy.getLeft();
