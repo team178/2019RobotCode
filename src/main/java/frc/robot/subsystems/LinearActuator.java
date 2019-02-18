@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
-import frc.robot.commands.ManuallyMoveActuator;
+//import frc.robot.commands.ManuallyMoveActuator;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -19,7 +19,7 @@ public class LinearActuator extends Subsystem {
   public PWM actuator;
 
   public LinearActuator () {
-    actuator = new PWM(RobotMap.linearactuator);
+   // actuator = new PWM(RobotMap.linearactuator);
   }
 
   public void setPosition(double val) {
