@@ -37,18 +37,15 @@ public class ClimbDrive extends Command {
   protected void execute() {
     leftVal = oi.getLeftTriggerMain();
     rightVal = -oi.getRightTriggerMain();
-    if (rightVal > 0) {
-      climber.moveBackWheel(rightVal);
-    } else {
-      climber.moveBackWheel(leftVal);
-    }
+    double totalVal = leftVal + rightVal;
+    climber.moveBackWheel(totalVal);
     
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

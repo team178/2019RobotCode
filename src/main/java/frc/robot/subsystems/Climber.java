@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commandgroups.ClimberCommands;
 import frc.robot.RobotMap;
 import frc.robot.commands.ClimbDrive;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -49,23 +50,23 @@ public class Climber extends Subsystem
     limitswitchBottom2 = new DigitalInput(RobotMap.LimitSwitchBottom2);
   }
 
-public boolean checkLimitSwitchTop1 () {
-  return limitswitchTop1.get();
+public boolean isFrontClimberAtTop () {
+  return !limitswitchTop1.get();
 }
 
-public boolean checkLimitSwitchTop2 () {
-  return limitswitchTop2.get();
+public boolean isBackClimberAtTop () {
+  return !limitswitchTop2.get();
 }
 
-public boolean checkLimitSwitchBottom1 () {
-  return limitswitchBottom1.get();
+public boolean isFrontClimberAtBottom () {
+  return !limitswitchBottom1.get();
 }
 
-public boolean checkLimitSwitchBottom2 () {
-  return limitswitchBottom2.get();
+public boolean isBackClimberAtBottom () {
+  return !limitswitchBottom2.get();
 }
 
-public void moveArms (double power)  {
+public void moveFrontMotors (double power)  {
   arm1.set(ControlMode.PercentOutput,power);
   arm2.set(ControlMode.PercentOutput, power);
 }
@@ -101,6 +102,6 @@ public boolean getBottomSwitchStatuses() {
   @Override
   public void initDefaultCommand() 
   {
-    setDefaultCommand(new ClimbDrive());
+    setDefaultCommand(new ClimberCommands());
   }
 }

@@ -88,16 +88,16 @@ public class OI {
 	}
 	
 	public double getLeftTriggerMain() {
-		return xboxMain.getRawAxis(3);
+		return xboxMain.getRawAxis(2);
 	}
 	
 	public double getRightTriggerMain() {
-		return xboxMain.getRawAxis(6);
+		return xboxMain.getRawAxis(3);
 	}
 	
 	//AUX controller accessor methods
 	public double getLeftStickYAux() {
-		return xboxAux.getRawAxis(2);
+		return xboxAux.getRawAxis(1);
 	}
 	
 	public double getRightStickYAux() {
@@ -105,11 +105,11 @@ public class OI {
 	}
 	
 	public double getLeftTriggerAux() {
-		return xboxAux.getRawAxis(3);
+		return xboxAux.getRawAxis(2);
 	}
 	
 	public double getRightTriggerAux() {
-		return xboxAux.getRawAxis(6);
+		return xboxAux.getRawAxis(3);
 	}
 
 	//placeholder methods so JoystickDrive doesn't cry

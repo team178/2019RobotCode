@@ -11,13 +11,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Climber;
 import frc.robot.*;
 
-public class EjectClimberArms extends Command {
+public class MoveFrontClimber extends Command {
 
   OI oi;
   Climber climber;
   private double power;
 
-  public EjectClimberArms() {
+  public MoveFrontClimber() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.climber);
@@ -34,23 +34,41 @@ public class EjectClimberArms extends Command {
   @Override
   protected void execute() {
     power = oi.getRightStickYAux();
-    if (!climber.checkLimitSwitchTop1() || !climber.checkLimitSwitchBottom1()) {
-      climber.moveArms(power);
+    if (Math.abs(power) < 0.2){
+      climber.moveFrontMotors(0);
+    } else if (climber.isFrontClimberAtTop()) {
+      if(power > 0){
+        climber.moveFrontMotors(0);
+      }else if(power < 0){
+        climber.moveFrontMotors(power);
+      }
+    } else if (climber.isFrontClimberAtBottom()) {
+      System.out.println("Front Climber at Bottom... xbox power: " + power);
+      if(power > 0) {
+        System.out.println("go up");
+        climber.moveFrontMotors(power);
+      } else if(power < 0){
+        climber.moveFrontMotors(0);
+        System.out.println("dont");
+      }
+    } else {
+      climber.moveFrontMotors(power);
     }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() 
   {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end()  
   {
-    climber.moveArms(0);
+    //System.out.println("EjectClimberArms has ended");
   }
   
 
@@ -59,6 +77,6 @@ public class EjectClimberArms extends Command {
   @Override
   protected void interrupted() 
   {
-    climber.moveArms(0);
+    //System.out.println("EjectClimberArms has been interrupted");
   }
 }
