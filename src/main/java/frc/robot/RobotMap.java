@@ -50,6 +50,9 @@ public class RobotMap {
   //linear actuator ded
 
   //DIO
+  public static int HatchLimitSwitchLeft = 3;
+  public static int HatchLimitSwitchRight = 4;
+  
   public static int LimitSwitchTop1 = 5;
   public static int LimitSwitchTop2 = 6;
   public static int LimitSwitchBottom1 = 7; 

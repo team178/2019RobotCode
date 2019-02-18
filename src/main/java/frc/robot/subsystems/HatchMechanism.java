@@ -18,7 +18,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;
 
 /**
@@ -32,7 +32,9 @@ public class HatchMechanism extends Subsystem {
   public static DoubleSolenoid hatchCylinderExtend;
   public static DoubleSolenoid hatchCylinderEject;
   public static AnalogInput pressureTransducer;
-  
+  public static DigitalInput limitSwitchLeft;
+  public static DigitalInput limitSwitchRight;
+
   //Linear actuator died, so it was replaced by lead screw
   public static VictorSPX leadScrew;
 
@@ -47,6 +49,9 @@ public class HatchMechanism extends Subsystem {
     //Default position:
     setExtender("reverse");
     setEjector("reverse");
+
+    limitSwitchLeft = new DigitalInput(RobotMap.HatchLimitSwitchLeft);
+    limitSwitchRight = new DigitalInput(RobotMap.HatchLimitSwitchRight);
   }
 
   //sets extender to two positions depending on string parameter --> forward = extends, reverse = retracts
@@ -91,12 +96,24 @@ public class HatchMechanism extends Subsystem {
   }
 
   public void moveLeadScrew(boolean movingForward, double factor) {
-    if (movingForward) {
+    if (!movingForward) {
+      factor *= -1;
+    }
+    
+    if (!hasReachedLeftBound() && !hasReachedRightBound()) {
       leadScrew.set(ControlMode.PercentOutput, factor);
     } else {
-      leadScrew.set(ControlMode.PercentOutput, -factor);
+      leadScrew.set(ControlMode.PercentOutput, 0);
     }
-  //  System.out.println(getActuatorPosition());
+    //System.out.println(getActuatorPosition());
+  }
+
+  public boolean hasReachedLeftBound() {
+    return limitSwitchLeft.get();
+  }
+
+  public boolean hasReachedRightBound() {
+    return limitSwitchRight.get();
   }
   
   @Override
