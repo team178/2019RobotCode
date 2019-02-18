@@ -17,8 +17,8 @@ public class AlignHatchPanel extends Command {
   Pixy pixy;
   OI oi;
   HatchMechanism hatchmechanism;
-
-  private final int tolerance = 10;
+  double diff;
+  private final int TOLERANCE = 10;
 
   public AlignHatchPanel() {
     //requires(Robot.hatchMechanism);
@@ -45,10 +45,17 @@ public class AlignHatchPanel extends Command {
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2.0;
-    double diff = desiredavg-avg;
+    if (avg > 0)
+    {
+      diff = desiredavg - avg;
+    }
+    else
+    {
+      diff = avg - desiredavg - avg;
+    }
     boolean triggerPressed = false;
 
-    if(Math.abs(diff) > tolerance && !triggerPressed) {
+    if(Math.abs(diff) > TOLERANCE && !triggerPressed) {
       if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {
         hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
         triggerPressed = true;
@@ -58,28 +65,26 @@ public class AlignHatchPanel extends Command {
         } else {
           hatchmechanism.moveLeadScrew(true, 0.5);
         }
-        
-        pixy.updateTargetValues();
-        firstLocation = pixy.getLeft();
-        secondLocation = pixy.getRight();
-        x1 = (double) firstLocation;
-        x2 = (double) secondLocation; 
-        avg = (x1 + x2)/2.0;
-
-        diff = desiredavg-avg;
       }
     }
     else
     {
       hatchmechanism.moveLeadScrew(true, 0);
     }
+    pixy.updateTargetValues();
+    firstLocation = pixy.getLeft();
+    secondLocation = pixy.getRight();
+    x1 = (double) firstLocation;
+    x2 = (double) secondLocation; 
+    avg = (x1 + x2)/2.0;
 
+    diff = desiredavg-avg;
   }
 
-  // Make this retur n true when this Command no longer needs to run execute()
+  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return (Math.abs(diff) < TOLERANCE);
   }
 
   // Called once after isFinished returns true
@@ -92,5 +97,6 @@ public class AlignHatchPanel extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    hatchmechanism.moveLeadScrew(true, 0);
   }
 }
