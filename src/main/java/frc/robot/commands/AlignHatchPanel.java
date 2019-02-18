@@ -48,14 +48,7 @@ public class AlignHatchPanel extends Command
     double x1 = (double) firstLocation;
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2.0;
-    if (avg > 0)
-    {
-      diff = desiredavg - avg;
-    }
-    else
-    {
-      diff = avg - desiredavg - avg;
-    }
+    diff = desiredavg - avg;
     boolean triggerPressed = false;
 
     if(Math.abs(diff) > TOLERANCE && !triggerPressed) {
