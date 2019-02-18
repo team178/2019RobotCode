@@ -8,57 +8,73 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Climber; 
 import frc.robot.*;
 
-public class Climb extends Command {
+public class MoveFrontClimber extends Command {
 
   OI oi;
   Climber climber;
   private double power;
 
-  public Climb(double pwr) {
+  public MoveFrontClimber() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    //requires(Robot.climber);
-    power = pwr;
+    requires(Robot.climber);
   }
  
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    //climber = Robot.climber;
+    climber = Robot.climber;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (power > 0) {
-      climber.climb(power);
-    } else if (power < 0) {
-      climber.unclimb(power);
+    power = oi.getRightStickYAux();
+    if (Math.abs(power) < 0.2){
+      climber.moveFrontMotors(0);
+    } else if (climber.isFrontClimberAtTop()) {
+      if(power > 0){
+        climber.moveFrontMotors(0);
+      }else if(power < 0){
+        climber.moveFrontMotors(power);
+      }
+    } else if (climber.isFrontClimberAtBottom()) {
+            if(power > 0) {
+        climber.moveFrontMotors(power);
+      } else if(power < 0){
+        climber.moveFrontMotors(0);
+      }
+
+    } else {
+      climber.moveFrontMotors(power);
     }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    //Varun - Apply all 4 switches
-    return climber.getTopSwitchStatuses() || climber.getBottomSwitchStatuses();
+  protected boolean isFinished() 
+  {
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end()  {
-    climber.climb(0);
+  protected void end()  
+  {
+    //System.out.println("EjectClimberArms has ended");
   }
   
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
-    climber.climb(0);
+  protected void interrupted() 
+  {
+    //System.out.println("EjectClimberArms has been interrupted");
   }
 }

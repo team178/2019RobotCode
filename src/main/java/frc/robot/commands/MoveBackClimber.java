@@ -12,19 +12,16 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.Climber;
 
-public class ClimbDrive extends Command {
-
+public class MoveBackClimber extends Command {
   OI oi;
   Climber climber;
-  double leftVal;
-  double rightVal;
+  private double power;
 
-  public ClimbDrive() {
+  public MoveBackClimber() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.climber);
   }
-
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -35,11 +32,25 @@ public class ClimbDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    leftVal = oi.getLeftTriggerMain();
-    rightVal = -oi.getRightTriggerMain();
-    double totalVal = leftVal + rightVal;
-    climber.moveBackWheel(totalVal);
-    
+    power = oi.getLeftStickYAux();
+    if (Math.abs(power) < 0.2){
+      climber.moveBackMotors(0);
+    } else if (climber.isBackClimberAtTop()) {
+      if(power > 0){
+        climber.moveBackMotors(0);
+      }else if(power < 0){
+        climber.moveBackMotors(power);
+      }
+    } else if (climber.isBackClimberAtBottom()) {
+      if(power > 0) {
+        climber.moveBackMotors(power);
+      } else if(power < 0){
+        climber.moveBackMotors(0);
+      }
+    } else {
+      climber.moveBackMotors(power);
+    }
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -51,11 +62,148 @@ public class ClimbDrive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+   // climber.moveBackMotors(0);
+   //System.out.println("PushRobotUp is ending");
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+   // climber.moveBackMotors(0);
+   //System.out.println("PushRobotUp is being interrupted");
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//eclips
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//a

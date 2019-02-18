@@ -22,13 +22,13 @@ public class RobotMap {
   public static int DMBottomLeft = 4;
 
   //CAN
-  public static int ClimberBackWheel = 5;
-  public static int ClimberMotor1 = 6;
-  public static int ClimberMotor2 = 7;
-  public static int ClimberMotor3 = 8;
-  public static int ClimberMotor4 = 9;
-  
-  public static int PCM = 10;
+  public static int ClimberBackWheel = 9;
+  public static int ClimberMotor1 = 5;
+  public static int ClimberMotor2 = 6;
+  public static int ClimberMotor3 = 7;
+  public static int ClimberMotor4 = 8;
+  public static int leadScrew = 10;
+  public static int PCM = 11;
 
   //Analog
   public static int PressureTranducer = 0;
@@ -47,7 +47,7 @@ public class RobotMap {
   public static int HatchEjectorCylinderRetract = 6; 
 
   //PWM
-  public static int linearactuator = 3;
+  //linear actuator ded
 
   //DIO
   public static int LimitSwitchTop1 = 5;

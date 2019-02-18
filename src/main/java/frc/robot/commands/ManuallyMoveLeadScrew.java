@@ -12,18 +12,18 @@ import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ManuallyMoveActuator extends Command {
+public class ManuallyMoveLeadScrew extends Command {
 
     private OI oi;
     private boolean movingForward;
     private double factor;
     private HatchMechanism hatchmechanism;
 
-  public ManuallyMoveActuator(boolean fwd, double f) {
+  public ManuallyMoveLeadScrew(boolean fwd, double f) {
+   // requires(Robot.linearactuator);
     requires(Robot.hatchMechanism);
     movingForward = fwd;
     factor = f;
-    
   }
 
   // Called just before this Command runs the first time
@@ -36,8 +36,7 @@ public class ManuallyMoveActuator extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    hatchmechanism.moveActuator(movingForward, factor);
-  //  System.out.println("Actuator Position:" + Robot.hatchMechanism.getActuatorPosition());
+    hatchmechanism.moveLeadScrew(movingForward, factor);
   }
 
   // Make this return true when this Command no longer needs to run execute()

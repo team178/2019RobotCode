@@ -10,9 +10,13 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.*;
-import frc.robot.commands.ManuallyMoveActuator;
+import frc.robot.commands.ManuallyMoveLeadScrew;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWM;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.AnalogInput;
 
 import edu.wpi.first.wpilibj.Talon;
@@ -24,13 +28,13 @@ public class HatchMechanism extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static Talon hatchMotor;
   //Pneumatics
   public static DoubleSolenoid hatchCylinderExtend;
   public static DoubleSolenoid hatchCylinderEject;
   public static AnalogInput pressureTransducer;
-  //Linear actuator
-  public static PWM linearactuator;
+  
+  //Linear actuator died, so it was replaced by lead screw
+  public static VictorSPX leadScrew;
 
   public HatchMechanism() {
     hatchCylinderExtend = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchExtenderCylinderExtend, RobotMap.HatchExtenderCylinderRetract);
@@ -38,7 +42,7 @@ public class HatchMechanism extends Subsystem {
     hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchEjectorCylinderExtend, RobotMap.HatchEjectorCylinderRetract);
     pressureTransducer = new AnalogInput(RobotMap.PressureTranducer);
 
-    linearactuator = new PWM(RobotMap.linearactuator);
+    leadScrew = new VictorSPX(RobotMap.leadScrew);
 
     //Default position:
     setExtender("reverse");
@@ -86,26 +90,11 @@ public class HatchMechanism extends Subsystem {
       return pressureTransducer.getVoltage();
   }
 
-  public void setActuatorPosition(double val) {
-    linearactuator.setPosition(val);
-  }
-
-  public double getActuatorPosition() {
-    return linearactuator.getPosition();
-  }
-
-  public void moveActuator (boolean movingForward, double factor) {
-    double currentPosition = getActuatorPosition();
+  public void moveLeadScrew(boolean movingForward, double factor) {
     if (movingForward) {
-      if (currentPosition < 1 || currentPosition >= 0) {
-        currentPosition+=factor;
-        setActuatorPosition(currentPosition);
-      }
+      leadScrew.set(ControlMode.PercentOutput, factor);
     } else {
-      if (currentPosition <= 1 || currentPosition > 0) {
-        currentPosition-=factor;
-        setActuatorPosition(currentPosition);
-      }
+      leadScrew.set(ControlMode.PercentOutput, -factor);
     }
   //  System.out.println(getActuatorPosition());
   }

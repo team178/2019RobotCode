@@ -9,97 +9,99 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commandgroups.ClimberCommands;
 import frc.robot.RobotMap;
+import frc.robot.commands.ClimbDrive;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Victor;
 
 /**
  * Add your docs here.
  */
-public class Climber extends Subsystem {
+public class Climber extends Subsystem 
+{
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   
-  public static Victor climber1;
-  public static Victor climber2;
-  public static TalonSRX climber3;
-  public static TalonSRX climber4;
-  public static Victor backWheel;
+  public static TalonSRX arm1;
+  public static TalonSRX arm2;
+  public static TalonSRX back1;
+  public static TalonSRX back2;
+  public static VictorSPX backWheel;
   //Proximity Sensors (4)
   public static DigitalInput limitswitchTop1;
   public static DigitalInput limitswitchTop2;
   public static DigitalInput limitswitchBottom1;
   public static DigitalInput limitswitchBottom2;
 
-  public Climber() {
-    climber1 = new Victor(RobotMap.ClimberMotor1);
-    climber2 = new Victor(RobotMap.ClimberMotor2);
-    climber3 = new TalonSRX(RobotMap.ClimberMotor3);
-    climber4 = new TalonSRX(RobotMap.ClimberMotor4);
-    backWheel = new Victor(RobotMap.ClimberBackWheel);
+  public Climber() 
+  {
+    arm1 = new TalonSRX(RobotMap.ClimberMotor1);
+    arm2 = new TalonSRX(RobotMap.ClimberMotor2);
+    back1 = new TalonSRX(RobotMap.ClimberMotor3);
+    back2 = new TalonSRX(RobotMap.ClimberMotor4);
+    backWheel = new VictorSPX(RobotMap.ClimberBackWheel);
     //Varun - go to RobotMap and make a LimitSwitch input for each one (DIO)
     limitswitchTop1 = new DigitalInput(RobotMap.LimitSwitchTop1);
     limitswitchTop2 = new DigitalInput(RobotMap.LimitSwitchTop2);
     limitswitchBottom1 = new DigitalInput(RobotMap.LimitSwitchBottom1);
     limitswitchBottom2 = new DigitalInput(RobotMap.LimitSwitchBottom2);
-
   }
 
-public void climb(double power)  {
-  power = Math.abs(power);
-  if (!getTopSwitchStatuses()){
-    moveAllClimbers(power);
-  }
-  else
-    moveAllClimbers(0);
+public boolean isFrontClimberAtTop () {
+  return !limitswitchTop1.get();
 }
 
-  
-
-public void unclimb(double power)  {
-  //Varun - Same idea as climb, just use bottom sensors
-  power = Math.abs(power);
-  if (!getBottomSwitchStatuses()){
-    moveAllClimbers(-power);
-  }
-  else
-    moveAllClimbers(0);
+public boolean isBackClimberAtTop () {
+  return !limitswitchTop2.get();
 }
 
-public void moveAllClimbers(double power){
-    climber1.set(power);
-    climber2.set(power);
-    climber3.set(ControlMode.PercentOutput, power);
-    climber4.set(ControlMode.PercentOutput, power);
+public boolean isFrontClimberAtBottom () {
+  return !limitswitchBottom1.get();
 }
-public void moveClimber1(double power)  {
-  climber1.set(power);
+
+public boolean isBackClimberAtBottom () {
+  return !limitswitchBottom2.get();
 }
-public void moveClimber2(double power)   {
-climber2.set(power);
+
+public void moveFrontMotors (double power)  {
+  arm1.set(ControlMode.PercentOutput,-power);
+  arm2.set(ControlMode.PercentOutput, -power);
 }
-public void moveClimber3(double power)   {
-  climber3.set(ControlMode.PercentOutput, power);
+public void moveBackMotors (double power) {
+  back1.set(ControlMode.PercentOutput, -power);
+  back2.set(ControlMode.PercentOutput, -power);
 }
-public void moveClimber4(double power) {
-  climber4.set(ControlMode.PercentOutput, power);
+public void moveArm1 (double power) {
+  arm1.set(ControlMode.PercentOutput, -power);
+}
+public void moveArm2 (double power) {
+  arm2.set(ControlMode.PercentOutput,-power);
+}
+public void moveBack1(double power) {
+  back1.set(ControlMode.PercentOutput, -power);
+}
+public void moveBack2(double power) {
+  back2.set(ControlMode.PercentOutput, -power);
 }
 
 public void moveBackWheel(double power) {
-  backWheel.set(power);
+  backWheel.set(ControlMode.PercentOutput,-power);
 }
 
 //Varun - Make a method like this for all 4
-public boolean getTopSwitchStatuses(){
+public boolean getTopSwitchStatuses() {
   //Returns boolean output of switch
   return (limitswitchTop1.get() && limitswitchTop2.get());
 }
-public boolean getBottomSwitchStatuses(){
+public boolean getBottomSwitchStatuses() {
   return (limitswitchBottom1.get() && limitswitchBottom2.get());
 }
   @Override
-  public void initDefaultCommand() {
-    
+  public void initDefaultCommand() 
+  {
+    setDefaultCommand(new ClimberCommands());
   }
 }
