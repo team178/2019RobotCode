@@ -67,28 +67,28 @@ public boolean isBackClimberAtBottom () {
 }
 
 public void moveFrontMotors (double power)  {
-  arm1.set(ControlMode.PercentOutput,power);
-  arm2.set(ControlMode.PercentOutput, power);
+  arm1.set(ControlMode.PercentOutput,-power);
+  arm2.set(ControlMode.PercentOutput, -power);
 }
 public void moveBackMotors (double power) {
-  back1.set(ControlMode.PercentOutput, power);
-  back2.set(ControlMode.PercentOutput, power);
+  back1.set(ControlMode.PercentOutput, -power);
+  back2.set(ControlMode.PercentOutput, -power);
 }
 public void moveArm1 (double power) {
-  arm1.set(ControlMode.PercentOutput, power);
+  arm1.set(ControlMode.PercentOutput, -power);
 }
 public void moveArm2 (double power) {
-  arm2.set(ControlMode.PercentOutput,power);
+  arm2.set(ControlMode.PercentOutput,-power);
 }
 public void moveBack1(double power) {
-  back1.set(ControlMode.PercentOutput, power);
+  back1.set(ControlMode.PercentOutput, -power);
 }
 public void moveBack2(double power) {
-  back2.set(ControlMode.PercentOutput, power);
+  back2.set(ControlMode.PercentOutput, -power);
 }
 
 public void moveBackWheel(double power) {
-  backWheel.set(ControlMode.PercentOutput,power);
+  backWheel.set(ControlMode.PercentOutput,-power);
 }
 
 //Varun - Make a method like this for all 4

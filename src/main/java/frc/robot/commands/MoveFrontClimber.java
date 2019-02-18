@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Climber; 
 import frc.robot.*;
 
 public class MoveFrontClimber extends Command {
@@ -43,14 +43,12 @@ public class MoveFrontClimber extends Command {
         climber.moveFrontMotors(power);
       }
     } else if (climber.isFrontClimberAtBottom()) {
-      System.out.println("Front Climber at Bottom... xbox power: " + power);
-      if(power > 0) {
-        System.out.println("go up");
+            if(power > 0) {
         climber.moveFrontMotors(power);
       } else if(power < 0){
         climber.moveFrontMotors(0);
-        System.out.println("dont");
       }
+
     } else {
       climber.moveFrontMotors(power);
     }
