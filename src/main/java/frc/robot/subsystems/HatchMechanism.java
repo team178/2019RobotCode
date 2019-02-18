@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.*;
+import frc.robot.commands.ManuallyMoveLeadScrew;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWM;
 
@@ -99,6 +100,7 @@ public class HatchMechanism extends Subsystem {
   
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new ManuallyMoveLeadScrew());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }

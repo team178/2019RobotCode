@@ -7,33 +7,35 @@
 
 package frc.robot.commands;
 
+import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ManuallyMoveLeadScrew extends Command {
 
-    private boolean movingForward;
-    private double factor;
     private HatchMechanism hatchmechanism;
+    private OI oi;
 
-  public ManuallyMoveLeadScrew(boolean fwd, double f) {
+  public ManuallyMoveLeadScrew() {
    // requires(Robot.linearactuator);
     requires(Robot.hatchMechanism);
-    movingForward = fwd;
-    factor = f;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     hatchmechanism = Robot.hatchMechanism;
+    oi = Robot.oi;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    hatchmechanism.moveLeadScrew(movingForward, factor);
+    double leftVal = oi.getLeftTriggerAux();
+    double rightVal = -oi.getRightTriggerAux();
+    double totalVal = leftVal + rightVal;
+    hatchmechanism.moveLeadScrew(true, totalVal);
   }
 
   // Make this return true when this Command no longer needs to run execute()
