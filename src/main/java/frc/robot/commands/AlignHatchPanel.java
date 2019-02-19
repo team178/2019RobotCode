@@ -54,7 +54,9 @@ public class AlignHatchPanel extends Command
     double avg = (x1 + x2)/2.0;
     diff = DESIREDAVG - avg;//calc difference based on distance from desired point, sign indicated direction needed to move 
     SmartDashboard.putString("Test Align", "Difference: " + diff);
-    if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {//check for interruption, manual override with triggers 
+    if (hatchmechanism.hasReachedLeftBound() || hatchmechanism.hasReachedRightBound()) {
+      hatchmechanism.moveLeadScrew(true, 0);
+    } else if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {//check for interruption, manual override with triggers 
       //hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
       triggerPressed = true;
     } else {
@@ -77,7 +79,7 @@ public class AlignHatchPanel extends Command
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Math.abs(diff) < TOLERANCE || triggerPressed);
+    return (Math.abs(diff) < TOLERANCE || triggerPressed) || (hatchmechanism.hasReachedLeftBound() || hatchmechanism.hasReachedRightBound());
   }
 
   // Called once after isFinished returns true
