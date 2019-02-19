@@ -4,26 +4,31 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-/*
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
+import frc.robot.subsystems.Pixy;
 
 public class PIDHatchPanelMvt extends Command {
   
   HatchMechanism hatchMechanism;
+  Pixy pixy;
   OI oi;
 
   private static final double LOOP_TIME = 0.02;
-  private static final double FOV = Math.toRadians(75); //FOV in radians 
-  private static final double distFromCargoShip = 0;
+  //private static final double FOV = Math.toRadians(75); //FOV in radians 
+  //private static final double distFromCargoShip = 0;
   
-  private boolean sensingTarget;
-  private double targetX;
-  private double cameraX;
+  private final double DESIREDAVG = 157.5;//desired distance between the two objects that pixy recognizes 
+  private final double TOLERANCE = 7;
+  
+  private boolean triggerPressed; //if the trigger is pressed, used for the purpose of an override 
+  private boolean limitSwitchTripped; //if a limit switch is tripped, thing will stop
+  private boolean sensingBothTargets; //if cam is not sensing both targets, motors will not run
   
   private double error;
   private double previousError;
@@ -31,48 +36,58 @@ public class PIDHatchPanelMvt extends Command {
   private double P, I, D;
   private double kP, kI, kD;
   
-  public PIDHatchPanelMvt(double setPoint) {
-    //requires(Robot.hatchMechanism);
-    //requires(Robot.arduino);
+  public PIDHatchPanelMvt() {
+    requires(Robot.hatchMechanism);
     
     kP = 0;
     kI = 0;
     kD = 0;
-    //error = setPoint - hatchMechanism.getPosition();
-    previousError = 0;
-    sensingTarget = false;
-    
-    calcSetpoint();
   }
 
   //Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    //hatchMechanism = Robot.hatchMechanism;
+    hatchMechanism = Robot.hatchMechanism;
+    pixy = Robot.pixy;
   }
 
   //Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (sensingTarget) {
-      double output;
-      retrievePixyValues();
-      //error = setPoint - hatchMechanism.getPosition(); //error = desired - actual
+    triggerPressed = false;
+    limitSwitchTripped = false;
+    sensingBothTargets = true;
 
+    pixy.updateTargetValues();//gets pixy values
 
+    double x1 = (double) pixy.getLeft();//casts to double, in order to divide accurately 
+    double x2 = (double) pixy.getRight(); 
+    double avg = (x1 + x2)/2.0;
+    error = DESIREDAVG - avg;
+
+    if (hatchMechanism.hasReachedLeftBound() || hatchMechanism.hasReachedRightBound()) {
+      hatchMechanism.moveLeadScrew(true, 0);
+      triggerPressed = true;
+    } else if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {
+      hatchMechanism.moveLeadScrew(true, 0);
+      limitSwitchTripped = true;
+    } else if (x1 == 0 || x2 == 0 || x1 == 316 || x2 == 316) {
+      hatchMechanism.moveLeadScrew(true, 0);
+      sensingBothTargets = false;
+    } else {
       //P, I, and D w/o gains
       P = error;
       I += (error * LOOP_TIME);
       D = (error - previousError) / LOOP_TIME;
-
+  
       //implementing gains
       P *= kD;
       I *= kI;
       D *= kD;
-
-      output = P + I + D;
-      //hatchMechanism.slideHatch(output);
+  
+      double output = P + I + D;
+      hatchMechanism.moveLeadScrew(true, output);
       previousError = error;
     }
    }
@@ -80,39 +95,19 @@ public class PIDHatchPanelMvt extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    //if (Math.abs(setPoint - hatchMechanism.getPosition()) < 0.0001) {
-    //  return true;
-    //}
-    return false;
+    return Math.abs(error) <= TOLERANCE || triggerPressed || limitSwitchTripped || !sensingBothTargets;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    //hatchMechanism.slideHatch(0);
+    hatchMechanism.moveLeadScrew(true, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    //hatchMechanism.slideHatch(0);
-  }
-  
-  public void retrievePixyValues() {
-    
-  }
-  
-  public void calcSetpoint() {
-    final double PIXELS_PER_INCH = 400 / (2 * distFromCargoShip * Math.tan(0.5 * FOV)); //how many cam pixels are in a real life inch
-    double offset = targetX - cameraX; //positive -- mechanism is too much to the right; negative -- too much to left
-    offset /= PIXELS_PER_INCH; //converting offset from pixels to inches
-    
-    //converting offset to encoder ticks
-    //offset /= hatchMechanism.gearRatio;
-    //offset *= hatchMechanism.countsPerRevolution;
-    //setPoint = offset; //setting setpoint in ticks (absolute setpoint, not relative to current position)
-    //error = setPoint - hatchMechanism.getPosition(); //setting error
+    hatchMechanism.moveLeadScrew(true, 0);
   }
 }
-*/
