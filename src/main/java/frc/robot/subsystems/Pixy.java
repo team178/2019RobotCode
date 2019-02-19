@@ -27,8 +27,8 @@ public class Pixy extends Arduino {
   public Pixy(int address)//use robotmap values
   {
     super(I2C.Port.kOnboard, address);
-    lLoc = 0;
-    rLoc = 0;
+    lLoc = 316;//when it doesn't recognize anything, higher than the value
+    rLoc = 316;
   }
 
   @Override

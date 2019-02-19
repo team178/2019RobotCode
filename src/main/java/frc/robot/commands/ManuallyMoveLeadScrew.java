@@ -32,26 +32,34 @@ public class ManuallyMoveLeadScrew extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftVal = -oi.getLeftTriggerAux();
-    double rightVal = oi.getRightTriggerAux();
-    double totalVal = leftVal + rightVal;
-    hatchmechanism.moveLeadScrew(true, totalVal);
+    boolean limitSwitchTripped = hatchmechanism.hasReachedLeftBound() || hatchmechanism.hasReachedRightBound();
+
+    if (!limitSwitchTripped) {
+      double leftVal = -oi.getLeftTriggerAux();
+      double rightVal = oi.getRightTriggerAux();
+      double totalVal = leftVal + rightVal;
+      hatchmechanism.moveLeadScrew(true, totalVal);
+    } else {
+      hatchmechanism.moveLeadScrew(true, 0);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return hatchmechanism.hasReachedLeftBound() || hatchmechanism.hasReachedRightBound();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    hatchmechanism.moveLeadScrew(true, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    hatchmechanism.moveLeadScrew(true, 0);
   }
 }

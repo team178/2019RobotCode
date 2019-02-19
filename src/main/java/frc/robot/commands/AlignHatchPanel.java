@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
@@ -20,7 +21,7 @@ public class AlignHatchPanel extends Command
   HatchMechanism hatchmechanism;
 
   double diff;
-  private final int TOLERANCE = 10;
+  private final int TOLERANCE = 15;
   private final double DESIREDAVG = 157.5;//desired distance between the two objects that pixy recognizes 
   private boolean triggerPressed;//if the trigger is pressed, used for the purpose of an override 
 
@@ -52,20 +53,23 @@ public class AlignHatchPanel extends Command
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2.0;
     diff = DESIREDAVG - avg;//calc difference based on distance from desired point, sign indicated direction needed to move 
-    System.out.println("Difference: " + diff);
+    SmartDashboard.putString("Test Align", "Difference: " + diff);
     if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {//check for interruption, manual override with triggers 
       //hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
       triggerPressed = true;
     } else {
-      if (diff > 0) {
-        hatchmechanism.moveLeadScrew(true, 0.5); //switched false and true because test screw is in wrong direction
-        System.out.println("Trying to go right");
-      } else if (diff == 0) {
-        hatchmechanism.moveLeadScrew(true, 0);
-        System.out.println("Diff is 0");
+
+      if (x1 == 0 || x2 == 0) {//cant do that, need to take out
+      hatchmechanism.moveLeadScrew(true, 0);
+    } else if (Math.abs(x1 - 316) < 0.0001 || Math.abs(x2 - 316) < 0.0001) {
+      hatchmechanism.moveLeadScrew(true, 0);
+      SmartDashboard.putString("Test Align", "Diff is 0");
+    } else if (diff > 0) {
+      hatchmechanism.moveLeadScrew(false, 1); //switched false and true because test screw is in wrong direction
+      SmartDashboard.putString("Test Align", "Trying to go right");
       } else {
-        hatchmechanism.moveLeadScrew(false, 0.5);
-        System.out.println("Trying to go left");
+        hatchmechanism.moveLeadScrew(true, 1);
+        SmartDashboard.putString("Test Align", "Trying to go left");
       }
     }
   }

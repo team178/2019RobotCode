@@ -79,7 +79,7 @@ import edu.wpi.first.wpilibj.I2C;
 
   @Override
   public void disabledPeriodic() {
-   // Scheduler.getInstance().run();
+    Scheduler.getInstance().run();
   }
 
   @Override
@@ -105,6 +105,8 @@ import edu.wpi.first.wpilibj.I2C;
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     //System.out.println("Current state: " + hatchMechanism.getMechanismSolenoidState());
+    System.out.println("Left limit switch: " + hatchMechanism.hasReachedLeftBound());
+    System.out.println("Right limit switch: " + hatchMechanism.hasReachedRightBound());
   }
 
   @Override
