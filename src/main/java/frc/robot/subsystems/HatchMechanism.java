@@ -8,9 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
 import frc.robot.*;
-import frc.robot.commands.ManuallyMoveLeadScrew;
+import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWM;
 
@@ -96,7 +95,7 @@ public class HatchMechanism extends Subsystem {
   }
 
   public void moveLeadScrew(boolean movingForward, double factor) {
-    if (movingForward) {
+    if (!movingForward) {
       factor *= -1;
     }
 
