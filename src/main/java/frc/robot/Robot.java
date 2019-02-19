@@ -44,8 +44,8 @@ import edu.wpi.first.wpilibj.I2C;
     hatchMechanism = new HatchMechanism();
     climber = new Climber();  
     cargolauncher = new CargoLauncher(); 
-    lightsArduino = new Arduino(I2C.Port.kOnboard, RobotMap.lightsAddress);
-    pixy = new Pixy(RobotMap.pixyAddress);
+    lightsArduino = new Arduino(I2C.Port.kMXP, RobotMap.lightsAddress); //lightsArduino will always be plugged into MXP
+    pixy = new Pixy(I2C.Port.kOnboard, RobotMap.pixyAddress); //pixy will always be plugged into onboard
     //tofL = new TimeOfFlight(RobotMap.tofAddressL);
     //tofR = new TimeOfFlight(RobotMap.tofAddressR);
     oi = new OI();

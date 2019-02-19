@@ -14,6 +14,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
 
 /**
  * Add your docs here.
@@ -24,9 +25,9 @@ public class Pixy extends Arduino {
   public static int lLoc;
   public static int rLoc;
 
-  public Pixy(int address)//use robotmap values
+  public Pixy(Port port, int address)//use robotmap values
   {
-    super(I2C.Port.kOnboard, address);
+    super(port, address);
     lLoc = 316;//when it doesn't recognize anything, higher than the value
     rLoc = 316;
   }
