@@ -53,10 +53,37 @@ public class AlignHatchPanel extends Command
     double x2 = (double) secondLocation; 
     double avg = (x1 + x2)/2.0;
     diff = DESIREDAVG - avg;//calc difference based on distance from desired point, sign indicated direction needed to move 
+    double power = oi.getRightTriggerAux() - oi.getLeftTriggerAux();
     SmartDashboard.putString("Test Align", "Difference: " + diff);
-    if (hatchmechanism.hasReachedLeftBound() || hatchmechanism.hasReachedRightBound()) {
-      hatchmechanism.moveLeadScrew(true, 0);
-    } else if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {//check for interruption, manual override with triggers 
+    if (hatchmechanism.hasReachedLeftBound()) {
+      if (power < 0) {
+        hatchmechanism.moveLeadScrew(true, 0);
+      } else {
+        hatchmechanism.moveLeadScrew(true, power);
+      }
+    } else if (hatchmechanism.hasReachedRightBound()) {
+      if (power > 0) {
+        hatchmechanism.moveLeadScrew(true, 0);
+      } else {
+        hatchmechanism.moveLeadScrew(true, power);
+      }
+    } else {
+      if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {
+        triggerPressed = true;
+      } else {
+        if (x1 == 0 || x2 == 0) {
+          hatchmechanism.moveLeadScrew(true, 0);
+        } else if (x1 == 316 || x2 == 316) {
+          hatchmechanism.moveLeadScrew(true, 0);
+        } else if (diff > 0) {
+          hatchmechanism.moveLeadScrew(false, 1);
+        } else {
+          hatchmechanism.moveLeadScrew(true, 1);
+        }
+      }
+    }
+
+    /*    if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {//check for interruption, manual override with triggers 
       //hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
       triggerPressed = true;
     } else {
@@ -67,19 +94,19 @@ public class AlignHatchPanel extends Command
       hatchmechanism.moveLeadScrew(true, 0);
       SmartDashboard.putString("Test Align", "Diff is 0");
     } else if (diff > 0) {
-      hatchmechanism.moveLeadScrew(false, 1); //switched false and true because test screw is in wrong direction
-      SmartDashboard.putString("Test Align", "Trying to go right");
+        hatchmechanism.moveLeadScrew(false, 1); //switched false and true because test screw is in wrong direction
+        SmartDashboard.putString("Test Align", "Trying to go right");
       } else {
         hatchmechanism.moveLeadScrew(true, 1);
         SmartDashboard.putString("Test Align", "Trying to go left");
       }
-    }
+    } */
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Math.abs(diff) < TOLERANCE || triggerPressed) || (hatchmechanism.hasReachedLeftBound() || hatchmechanism.hasReachedRightBound());
+    return (Math.abs(diff) < TOLERANCE || triggerPressed);
   }
 
   // Called once after isFinished returns true
