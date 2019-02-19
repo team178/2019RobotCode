@@ -96,7 +96,7 @@ public class HatchMechanism extends Subsystem {
   }
 
   public void moveLeadScrew(boolean movingForward, double factor) {
-    if (!movingForward) {
+    if (movingForward) {
       factor *= -1;
     }
 
