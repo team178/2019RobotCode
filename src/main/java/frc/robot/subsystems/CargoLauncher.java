@@ -18,25 +18,25 @@ public class CargoLauncher extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static DoubleSolenoid aimSolenoid;
+  //public static DoubleSolenoid aimSolenoid;
   public static DoubleSolenoid shootSolenoid;
 
   public CargoLauncher() {
-    aimSolenoid = new DoubleSolenoid(RobotMap.PCM,RobotMap.CargoCylinderAimExtend, RobotMap.CargoCylinderAimRetract);
+    //aimSolenoid = new DoubleSolenoid(RobotMap.PCM,RobotMap.CargoCylinderAimExtend, RobotMap.CargoCylinderAimRetract);
     shootSolenoid = new DoubleSolenoid(RobotMap.PCM, RobotMap.CargoCylinderShootExtend, RobotMap.CargoCylinderShootRetract);
     
     //Default Position:
-    raiseLauncher();
+    //raiseLauncher();
     retract();
   }
 
-  public void raiseLauncher () {
+  /*public void raiseLauncher () {
     aimSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
   public void lowerLauncher () {
     aimSolenoid.set(DoubleSolenoid.Value.kReverse);
-  }
+  }*/
 
   public void shoot () {
     shootSolenoid.set(DoubleSolenoid.Value.kForward);
@@ -46,9 +46,9 @@ public class CargoLauncher extends Subsystem {
     shootSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
-  public DoubleSolenoid.Value getAimSolenoidState() {
+  /*public DoubleSolenoid.Value getAimSolenoidState() {
     return aimSolenoid.get();
-  }
+  }*/
 
   public DoubleSolenoid.Value getShootSolenoidState() {
     return shootSolenoid.get();

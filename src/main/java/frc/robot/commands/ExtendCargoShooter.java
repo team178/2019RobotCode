@@ -39,29 +39,29 @@ public class ExtendCargoShooter extends Command {
       if no:
       set shooter "punch" to reverse 
      */
-    if(cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kForward){
+    //if(cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kForward){
       cargolauncher.shoot();
       //shoot ball
-    }
-    else if (cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kReverse){
+    //}
+    //else if (cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kReverse){
       cargolauncher.retract();
       //stay retracted
-    }
+    //}
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     DoubleSolenoid.Value ShootSolenoidState = cargolauncher.getShootSolenoidState();
-    DoubleSolenoid.Value AimSolenoidState = cargolauncher.getAimSolenoidState();
+    //DoubleSolenoid.Value AimSolenoidState = cargolauncher.getAimSolenoidState();
 
     if (ShootSolenoidState == DoubleSolenoid.Value.kForward) {
       System.out.println("Finish shooting!");
       return true;
-    } else if(AimSolenoidState == DoubleSolenoid.Value.kReverse){
-      System.out.println("Could not shoot: Aimer is down. Try to raise aimer.");
-      cargolauncher.raiseLauncher();
-      return false;
+    //} else if(AimSolenoidState == DoubleSolenoid.Value.kReverse){
+      //System.out.println("Could not shoot: Aimer is down. Try to raise aimer.");
+      //cargolauncher.raiseLauncher();
+      //return false;
     } else {
       System.out.println("Not finish shooting. Try again: " + ShootSolenoidState);
       return false;

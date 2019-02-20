@@ -33,19 +33,19 @@ public class ExtendCargoAimer extends Command {
   @Override
   protected void execute() {
     
-      cargolauncher.raiseLauncher();
+      //cargolauncher.raiseLauncher();
     
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (cargolauncher.getAimSolenoidState()==DoubleSolenoid.Value.kForward ){
+    /*if (cargolauncher.getAimSolenoidState()==DoubleSolenoid.Value.kForward ){
       return true;
     }
-    else {
+    else {*/
       return false;
-    }
+    //}
   }
 
   // Called once afte isFinished returns true

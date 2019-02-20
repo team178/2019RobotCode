@@ -69,8 +69,9 @@ public class OI {
 		auxY.whenReleased(new RetractHatchMechanism());
 		//auxX.whileHeld(new ScoreCargoLow());
 		//auxB.whenPressed (new ScoreCargoHigh());
-		auxX.whenPressed(new ExtendCargoAimer());
-		auxX.whenReleased(new RetractCargoAimer());
+		
+		//auxX.whenPressed(new ExtendCargoAimer());
+		//auxX.whenReleased(new RetractCargoAimer());
 		auxB.whenPressed(new ExtendCargoShooter());
 		auxB.whenReleased(new RetractCargoShooter());
 		

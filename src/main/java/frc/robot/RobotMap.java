@@ -32,17 +32,17 @@ public class RobotMap {
   public static int PressureTranducer = 0;
   
   //PCM
-  public static int CargoCylinderAimExtend = 0; 
-  public static int CargoCylinderAimRetract = 1; 
+  //public static int CargoCylinderAimExtend = 0; 
+  //public static int CargoCylinderAimRetract = 1; 
   
-  public static int CargoCylinderShootExtend = 2; 
-  public static int CargoCylinderShootRetract = 3; 
+  public static int CargoCylinderShootExtend = 0; 
+  public static int CargoCylinderShootRetract = 1; 
 
-  public static int HatchExtenderCylinderExtend = 4; 
-  public static int HatchExtenderCylinderRetract = 5; 
+  public static int HatchExtenderCylinderExtend = 2; 
+  public static int HatchExtenderCylinderRetract = 3; 
 
-  public static int HatchEjectorCylinderExtend = 7; 
-  public static int HatchEjectorCylinderRetract = 6; 
+  public static int HatchEjectorCylinderExtend = 4; 
+  public static int HatchEjectorCylinderRetract = 5; 
 
   //PWM
   //linear actuator ded
@@ -62,10 +62,10 @@ public class RobotMap {
   public static int ActualJoystick = 2;
 
   //arduino
+  public static int lightsAddress = 7;
   public static int pixyAddress = 8;
   //public static int tofAddressL = 18;//left and right
   //public static int tofAddressR = 19;
-  public static int lightsAddress = 7;
 
   public enum SubsystemIndex {
     ALL, BUMPER

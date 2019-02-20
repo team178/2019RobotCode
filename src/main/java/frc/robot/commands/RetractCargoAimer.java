@@ -32,17 +32,17 @@ public class RetractCargoAimer extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      cargolauncher.lowerLauncher();
+      //cargolauncher.lowerLauncher();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kReverse){
+    /*if(cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kReverse){
       return true;
-    } else {
+    } else {*/
       return false;
-    }
+    //}
   }
 
   // Called once after isFinished returns true
