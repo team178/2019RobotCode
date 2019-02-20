@@ -19,15 +19,13 @@ public class RobotMap {
   public static int DMTopRight = 1;
   public static int DMBottomRight = 2;
   public static int DMTopLeft = 3;
-  public static int DMBottomLeft = 10;
-
-  //CAN
-  public static int ClimberBackWheel = 9;
+  public static int DMBottomLeft = 4; 
   public static int ClimberMotor1 = 5;
   public static int ClimberMotor2 = 6;
   public static int ClimberMotor3 = 7;
   public static int ClimberMotor4 = 8;
-  public static int leadScrew = 4;
+  public static int ClimberBackWheel = 9;
+  public static int leadScrew = 10;
   public static int PCM = 11;
 
   //Analog
