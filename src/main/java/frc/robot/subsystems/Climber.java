@@ -94,14 +94,13 @@ public void moveBackWheel(double power) {
 //Varun - Make a method like this for all 4
 public boolean getTopSwitchStatuses() {
   //Returns boolean output of switch
-  return (limitswitchTop1.get() && limitswitchTop2.get());
+  return (limitswitchTop1.get() || limitswitchTop2.get());
 }
 public boolean getBottomSwitchStatuses() {
-  return (limitswitchBottom1.get() && limitswitchBottom2.get());
+  return (limitswitchBottom1.get() || limitswitchBottom2.get());
 }
   @Override
-  public void initDefaultCommand() 
-  {
+  public void initDefaultCommand() {
     setDefaultCommand(new ClimberCommands());
   }
 }
