@@ -18,16 +18,6 @@ import frc.robot.commands.*;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
-	//Joystick buttons
-	public static Joystick joystick = new Joystick(RobotMap.ActualJoystick);
-	public Button button1 = new JoystickButton(joystick, 1);
-	public Button button2 = new JoystickButton(joystick, 2);
-	public Button button3 = new JoystickButton(joystick, 3);
-	public Button button4 = new JoystickButton(joystick, 4);
-	public Button button5 = new JoystickButton(joystick, 5);
-	public Button button6 = new JoystickButton(joystick, 6);
-	public Button button7 = new JoystickButton(joystick, 7);
 
 	//MAIN controller buttons
 	public static Joystick xboxMain = new Joystick(RobotMap.JoystickPortXBoxMain); //Controller
@@ -50,12 +40,18 @@ public class OI {
 	public Button auxRightBumper = new JoystickButton(xboxAux, 6);
 	public Button auxBack = new JoystickButton(xboxAux, 7);
   	public Button auxStart = new JoystickButton(xboxAux, 8);
+	
+	//JOYSTICK buttons -- MAIN JOYSTICK NOT BEING USED
+	public static Joystick joystick = new Joystick(RobotMap.ActualJoystick);
+	public Button button1 = new JoystickButton(joystick, 1);
+	public Button button2 = new JoystickButton(joystick, 2);
+	public Button button3 = new JoystickButton(joystick, 3);
+	public Button button4 = new JoystickButton(joystick, 4);
+	public Button button5 = new JoystickButton(joystick, 5);
+	public Button button6 = new JoystickButton(joystick, 6);
+	public Button button7 = new JoystickButton(joystick, 7);
   
 	public OI() {
-		joystick.setXChannel(0);
-		joystick.setYChannel(3);
-		joystick.setZChannel(2);
-		joystick.setTwistChannel(1);
 		//MAIN controls (joystick code in JoystickDrive)
 		mainB.whenPressed(new LightsCargo());
 		mainY.whenPressed(new LightsHatch());
@@ -67,20 +63,18 @@ public class OI {
 		auxA.whenReleased(new RetractEjector());
 		auxY.whenPressed(new ExtendHatchMechanism());
 		auxY.whenReleased(new RetractHatchMechanism());
-		//auxX.whileHeld(new ScoreCargoLow());
-		//auxB.whenPressed (new ScoreCargoHigh());
 		
 		//auxX.whenPressed(new ExtendCargoAimer());
 		//auxX.whenReleased(new RetractCargoAimer());
 		auxB.whenPressed(new ExtendCargoShooter());
 		auxB.whenReleased(new RetractCargoShooter());
-		
 		auxRightBumper.whileHeld(new AlignHatchPanel());
 		
-		//auxRightBumper.whenPressed(new ManuallyMoveActuator(true, .004));
-		//auxLeftBumper.whenPressed(new ManuallyMoveActuator(false, .004));
-		
-		
+		//Setting joystick channels
+		joystick.setXChannel(0);
+		joystick.setYChannel(3);
+		joystick.setZChannel(2);
+		joystick.setTwistChannel(1);
 	}
 
 	//MAIN controller accessor methods
@@ -117,7 +111,7 @@ public class OI {
 		return xboxAux.getRawAxis(3);
 	}
 
-	//placeholder methods so JoystickDrive doesn't cry
+	//Joystick accessor methods so JoystickDrive doesn't cry
 	public double getTrigger() { 
 		return 0;
 	}
