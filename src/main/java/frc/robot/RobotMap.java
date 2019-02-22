@@ -15,7 +15,7 @@ package frc.robot;
  */
 public class RobotMap {
 
-  //CAN
+  //CAN IDs
   public static int DMTopRight = 1;
   public static int DMBottomRight = 2;
   public static int DMTopLeft = 3;
@@ -28,10 +28,10 @@ public class RobotMap {
   public static int leadScrew = 10;
   public static int PCM = 11;
 
-  //Analog
+  //Analog ports
   public static int PressureTranducer = 0;
   
-  //PCM
+  //PCM ports
   //public static int CargoCylinderAimExtend = 0; 
   //public static int CargoCylinderAimRetract = 1; 
   
@@ -42,12 +42,9 @@ public class RobotMap {
   public static int HatchExtenderCylinderRetract = 3; 
 
   public static int HatchEjectorCylinderExtend = 4; 
-  public static int HatchEjectorCylinderRetract = 5; 
+  public static int HatchEjectorCylinderRetract = 5;
 
-  //PWM
-  //linear actuator ded
-
-  //DIO
+  //DIO ports
   public static int HatchLimitSwitchLeft = 3;
   public static int HatchLimitSwitchRight = 4;
   
@@ -56,16 +53,14 @@ public class RobotMap {
   public static int LimitSwitchBottom1 = 7; 
   public static int LimitSwitchBottom2 = 8; 
 
-  //computer
+  //Computer USB ports
   public static int JoystickPortXBoxMain = 0; 
   public static int JoystickPortXBoxAux = 1; 
   public static int ActualJoystick = 2;
 
-  //arduino
+  //Arduino addresses
   public static int lightsAddress = 7;
   public static int pixyAddress = 8;
-  //public static int tofAddressL = 18;//left and right
-  //public static int tofAddressR = 19;
 
   public enum SubsystemIndex {
     ALL, BUMPER
