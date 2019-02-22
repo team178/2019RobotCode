@@ -23,10 +23,8 @@ import edu.wpi.first.wpilibj.Talon;
 /**
  * Add your docs here.
  */
-public class HatchMechanism extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
 
+public class HatchMechanism extends Subsystem {
   //Pneumatics
   public static DoubleSolenoid hatchCylinderExtend;
   public static DoubleSolenoid hatchCylinderEject;
@@ -38,41 +36,39 @@ public class HatchMechanism extends Subsystem {
   public static VictorSPX leadScrew;
 
   public HatchMechanism() {
+    //Pneumatics
     hatchCylinderExtend = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchExtenderCylinderExtend, RobotMap.HatchExtenderCylinderRetract);
-    
     hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchEjectorCylinderExtend, RobotMap.HatchEjectorCylinderRetract);
     pressureTransducer = new AnalogInput(RobotMap.PressureTranducer);
 
     leadScrew = new VictorSPX(RobotMap.leadScrew);
 
-    //Default position:
+    //Default positions
     setExtender("reverse");
     setEjector("reverse");
 
+    //Limit switches
     limitSwitchLeft = new DigitalInput(RobotMap.HatchLimitSwitchLeft);
     limitSwitchRight = new DigitalInput(RobotMap.HatchLimitSwitchRight);
   }
 
-  //sets extender to two positions depending on string parameter --> forward = extends, reverse = retracts
+  //Sets extender to two positions depending on string parameter --> forward = extends, reverse = retracts
   public void setExtender(String pos){
       if(pos.toLowerCase().equals("forward")){
         hatchCylinderExtend.set(DoubleSolenoid.Value.kForward);
-        
-
         System.out.println("Extender forward: " + getExtenderSolenoidState());
       } else if (pos.toLowerCase().equals("reverse")){
         hatchCylinderExtend.set(DoubleSolenoid.Value.kReverse);
-        
         System.out.println("Extender reverse: " + getExtenderSolenoidState());
       } else{
           System.out.println("Invalid position. Please try again");
       }
   }
-  //sets extender to two positions depending on string parameter --> forward = extends, reverse = retracts
+  
+  //Sets extender to two positions depending on string parameter --> forward = extends, reverse = retracts
   public void setEjector(String pos){
     if(pos.toLowerCase().equals("forward")){
         hatchCylinderEject.set(DoubleSolenoid.Value.kForward);
-        
         System.out.println("Ejecter forward: " + getEjectorSolenoidState());
       } else if (pos.toLowerCase().equals("reverse")){
        hatchCylinderEject.set(DoubleSolenoid.Value.kReverse);
@@ -82,6 +78,23 @@ public class HatchMechanism extends Subsystem {
       }
   }
 
+  public void moveLeadScrew(boolean movingForward, double factor) {
+    if (!movingForward) {
+      factor *= -1;
+    }
+    leadScrew.set(ControlMode.PercentOutput, factor);
+  }
+  
+  //Limit switch methods
+  public boolean hasReachedLeftBound() {
+    return limitSwitchLeft.get();
+  }
+
+  public boolean hasReachedRightBound() {
+    return limitSwitchRight.get();
+  }
+  
+  //Accessor methods
   public DoubleSolenoid.Value getExtenderSolenoidState() {
     return hatchCylinderExtend.get();
   }
@@ -93,34 +106,9 @@ public class HatchMechanism extends Subsystem {
   public double getPressure() {
       return pressureTransducer.getVoltage();
   }
-
-  public void moveLeadScrew(boolean movingForward, double factor) {
-    if (!movingForward) {
-      factor *= -1;
-    }
-
-    leadScrew.set(ControlMode.PercentOutput, factor);
-    
-   /* if (!hasReachedLeftBound() && !hasReachedRightBound()) {
-      leadScrew.set(ControlMode.PercentOutput, factor);
-    } else {
-      leadScrew.set(ControlMode.PercentOutput, 0);
-    } */
-    //System.out.println(getActuatorPosition());
-  }
-
-  public boolean hasReachedLeftBound() {
-    return limitSwitchLeft.get();
-  }
-
-  public boolean hasReachedRightBound() {
-    return limitSwitchRight.get();
-  }
   
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new ManuallyMoveLeadScrew());
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
 }
