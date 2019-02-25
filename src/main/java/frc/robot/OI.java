@@ -58,7 +58,7 @@ public class OI {
 		mainY.whenPressed(new LightsHatch());
 		mainX.whenPressed(new LightsDefault());
 		mainStart.whenPressed(new LightsOff());
-		//mainA.whenPressed(new LightsAlign()); will be used to turn lights green
+		mainA.whenPressed(new LightsAlign());
 		
 		//AUX controls (TODO: put climb controls in Climb command)
 		auxA.whenPressed(new EjectHatchPanel());
