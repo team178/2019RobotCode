@@ -29,6 +29,7 @@ public class OI {
 	public Button mainRightBumper = new JoystickButton(xboxMain, 6);
 	public Button mainBack = new JoystickButton(xboxMain, 7);
   	public Button mainStart = new JoystickButton(xboxMain, 8);
+	//mainStart will be used to turn lights off
 	
 	//AUX controller buttons
 	public static Joystick xboxAux = new Joystick(RobotMap.JoystickPortXBoxAux); //Controller
@@ -56,7 +57,8 @@ public class OI {
 		mainB.whenPressed(new LightsCargo());
 		mainY.whenPressed(new LightsHatch());
 		mainX.whenPressed(new LightsDefault());
-		mainA.whenPressed(new LightsOff());
+		mainStart.whenPressed(new LightsOff());
+		//mainA.whenPressed(new LightsAlign()); will be used to turn lights green
 		
 		//AUX controls (TODO: put climb controls in Climb command)
 		auxA.whenPressed(new EjectHatchPanel());
