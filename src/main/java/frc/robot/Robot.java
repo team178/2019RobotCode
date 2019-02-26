@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-//importing libraries and packages
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -20,19 +19,17 @@ import edu.wpi.first.wpilibj.I2C;
 
 
  public class Robot extends TimedRobot {
-   
+  
+ //All subsystems & classes declared
  public static OI oi;
-
- //Here is where all the subsystems on the robot are declared
  public static DriveTrain drivetrain;
- 
  public static HatchMechanism hatchMechanism;
  public static Climber climber;
  public static CargoLauncher cargolauncher;
  public static Arduino lightsArduino;
  public static Pixy pixy;
- //public static TimeOfFlight tofL;
- //public static TimeOfFlight tofR;
+ 
+ //USB Camera declarations
  public static CameraServer camserv;
  public static UsbCamera camera1;
  public static UsbCamera camera2;
@@ -44,32 +41,30 @@ import edu.wpi.first.wpilibj.I2C;
     hatchMechanism = new HatchMechanism();
     climber = new Climber();  
     cargolauncher = new CargoLauncher(); 
-    lightsArduino = new Arduino(I2C.Port.kMXP, RobotMap.lightsAddress); //lightsArduino will always be plugged into MXP
-    pixy = new Pixy(I2C.Port.kOnboard, RobotMap.pixyAddress); //pixy will always be plugged into onboard
-    //tofL = new TimeOfFlight(RobotMap.tofAddressL);
-    //tofR = new TimeOfFlight(RobotMap.tofAddressR);
+    lightsArduino = new Arduino(I2C.Port.kMXP, RobotMap.lightsAddress); //lightsArduino will always be plugged into MXP port
+    pixy = new Pixy(I2C.Port.kOnboard, RobotMap.pixyAddress); //pixy will always be plugged into onboard port
     oi = new OI();
-    //sets light strips to color of alliance (red or blue)
-    lightsArduino.setAllianceColor();
+    lightsArduino.setAllianceColor(); //Sets light strips to color of alliance (red or blue)
 
+    //Camera initializations
     camserv = CameraServer.getInstance();
     
-    //formats video specifications for cameras
+    //Camera 1
     camera1 = camserv.startAutomaticCapture("cam0", 0);
     camera1.setResolution(160, 120);
     camera1.setFPS(14);
-    camera1.setPixelFormat(PixelFormat.kYUYV);
+    camera1.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
 
+    //Camera 2
     camera2 = CameraServer.getInstance().startAutomaticCapture("cam1", 1);
     camera2.setResolution(160, 120);
     camera2.setFPS(14);
-    camera2.setPixelFormat(PixelFormat.kYUYV);
-
-    System.out.println("Robot init: " + hatchMechanism.getExtenderSolenoidState());
+    camera2.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
   }
 
   @Override
   public void robotPeriodic() {
+   
   }
 
   @Override
@@ -104,13 +99,10 @@ import edu.wpi.first.wpilibj.I2C;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    //System.out.println("Current state: " + hatchMechanism.getMechanismSolenoidState());
-    //System.out.println("Left limit switch: " + hatchMechanism.hasReachedLeftBound());
-    //System.out.println("Right limit switch: " + hatchMechanism.hasReachedRightBound());
   }
 
   @Override
   public void testPeriodic() {
-    //Scheduler.getInstance().run();
+    Scheduler.getInstance().run();
   }
 }

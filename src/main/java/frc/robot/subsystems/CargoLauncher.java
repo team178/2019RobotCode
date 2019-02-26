@@ -15,9 +15,7 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class CargoLauncher extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-
+  
   //public static DoubleSolenoid aimSolenoid;
   public static DoubleSolenoid shootSolenoid;
 
@@ -25,7 +23,7 @@ public class CargoLauncher extends Subsystem {
     //aimSolenoid = new DoubleSolenoid(RobotMap.PCM,RobotMap.CargoCylinderAimExtend, RobotMap.CargoCylinderAimRetract);
     shootSolenoid = new DoubleSolenoid(RobotMap.PCM, RobotMap.CargoCylinderShootExtend, RobotMap.CargoCylinderShootRetract);
     
-    //Default Position:
+    //Default positions for aimer and launcher
     //raiseLauncher();
     retract();
   }
@@ -38,11 +36,11 @@ public class CargoLauncher extends Subsystem {
     aimSolenoid.set(DoubleSolenoid.Value.kReverse);
   }*/
 
-  public void shoot () {
+  public void shoot() {
     shootSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void retract () {
+  public void retract() {
     shootSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
@@ -56,7 +54,6 @@ public class CargoLauncher extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
 }

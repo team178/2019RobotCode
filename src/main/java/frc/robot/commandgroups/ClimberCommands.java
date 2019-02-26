@@ -13,10 +13,13 @@ import frc.robot.commands.MoveFrontClimber;
 import frc.robot.commands.MoveBackClimber;
 
 public class ClimberCommands extends CommandGroup {
+  
   /**
-   * Add your docs here.
+   * Adding all climber commands in one command group to add one default command in the Climber subsystem
    */
+  
   public ClimberCommands() {
+    //May need to switch to addParallel()
     addSequential(new MoveFrontClimber());
     addSequential(new MoveBackClimber());
     addSequential(new ClimbDrive());
