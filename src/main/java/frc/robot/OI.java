@@ -111,7 +111,7 @@ public class OI {
 	}
 
 	public double getSlider() {
-		return joystick.getRawAxis(3);
+		return 1 - joystick.getRawAxis(3);
 	}
 	
 	//AUX controller accessor methods
