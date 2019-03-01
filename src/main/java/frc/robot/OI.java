@@ -21,18 +21,22 @@ public class OI {
 
 	//JOYSTICK buttons
 	public static Joystick joystick = new Joystick(RobotMap.ActualJoystick);
-	public Button button1 = new JoystickButton(joystick, 1);
-	public Button button2 = new JoystickButton(joystick, 2);
-	public Button button3 = new JoystickButton(joystick, 3);
-	public Button button4 = new JoystickButton(joystick, 4);
-	public Button button5 = new JoystickButton(joystick, 5);
-	public Button button6 = new JoystickButton(joystick, 6);
-	public Button button7 = new JoystickButton(joystick, 7);
-	public Button button8 = new JoystickButton(joystick, 8);
-	public Button button9 = new JoystickButton(joystick, 9);
-	public Button button10 = new JoystickButton(joystick, 10);
-	public Button button11 = new JoystickButton(joystick, 11);
-	public Button button12 = new JoystickButton(joystick, 12);
+	public Button trigger = new JoystickButton(joystick, 1);
+	public Button headBottom = new JoystickButton(joystick, 2);
+	public Button headLeft = new JoystickButton(joystick, 3);
+	public Button headRight = new JoystickButton(joystick, 4);
+	public Button leftPadTop1 = new JoystickButton(joystick, 5);
+	public Button leftPadTop2 = new JoystickButton(joystick, 6);
+	public Button leftPadTop3 = new JoystickButton(joystick, 7);
+	public Button leftPadBottom3 = new JoystickButton(joystick, 8);
+	public Button leftPadBottom2  = new JoystickButton(joystick, 9);
+	public Button leftPadBottom1 = new JoystickButton(joystick, 10);
+	public Button rightPadTop3 = new JoystickButton(joystick, 11);
+	public Button rightPadTop2 = new JoystickButton(joystick, 12);
+	public Button rightPadTop1 = new JoystickButton(joystick, 13);
+	public Button rightPadBottom1 = new JoystickButton(joystick, 14);
+	public Button rightPadBottom2 = new JoystickButton(joystick, 15);
+	public Button rightPadBottom3 = new JoystickButton(joystick, 16);
 
 	//AUX controller buttons
 	public static Joystick xboxAux = new Joystick(RobotMap.JoystickPortXBoxAux); //Controller
@@ -58,21 +62,21 @@ public class OI {
 	
 	public OI() {
 		//Setting JOYSTICK channels
-		joystick.setXChannel(0);
+		/*joystick.setXChannel(0);
 		joystick.setYChannel(3);
 		joystick.setZChannel(2);
-		joystick.setTwistChannel(1);
+		joystick.setTwistChannel(1);*/
 
 		//JOYSTICK controls
-		button1.whenPressed(new LightsOff());
-		button2.whenPressed(new LightsHatch());
-		button3.whenPressed(new LightsCargo());
-		button4.whenPressed(new LightsDefault());
-		button5.whenPressed(new LightsAlign());
+		leftPadBottom2.whenPressed(new LightsOff());
+		leftPadTop1.whenPressed(new LightsHatch());
+		leftPadTop2.whenPressed(new LightsCargo());
+		leftPadTop3.whenPressed(new LightsDefault());
+		leftPadBottom1.whenPressed(new LightsAlign());
 		//button6.whenPressed(new LightsRainbow());
 
-		button7.whenPressed(new ClimbDrive(true));
-		button8.whenPressed(new ClimbDrive(false));
+		rightPadTop1.whenPressed(new ClimbDrive(true));
+		rightPadBottom1.whenPressed(new ClimbDrive(false));
 		
 		//AUX controls
 		auxA.whenPressed(new EjectHatchPanel());
@@ -95,15 +99,19 @@ public class OI {
 
 	//JOYSTICK accessor methods
 	public double getX() {
-		return joystick.getX();
+		return joystick.getRawAxis(0);
 	}
 	
 	public double getY() {
-		return joystick.getY(); //joystick.getRawAxis(3);
+		return joystick.getRawAxis(1);
 	}
 
 	public double getTwist() {
-		return joystick.getTwist(); //joystick.getRawAxis(3);
+		return joystick.getRawAxis(2);
+	}
+
+	public double getSlider() {
+		return joystick.getRawAxis(3);
 	}
 	
 	//AUX controller accessor methods
