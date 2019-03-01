@@ -24,17 +24,11 @@ public class RobotMap {
   public static int ClimberMotor2 = 6;
   public static int ClimberMotor3 = 7;
   public static int ClimberMotor4 = 8;
-  public static int ClimberBackWheel = 9;
-  public static int leadScrew = 10;
+  public static int ClimberBackWheel = 10;
+  public static int leadScrew = 9;
   public static int PCM = 11;
-
-  //Analog ports
-  public static int PressureTranducer = 0;
   
-  //PCM ports
-  //public static int CargoCylinderAimExtend = 0; 
-  //public static int CargoCylinderAimRetract = 1; 
-  
+  //PCM  
   public static int CargoCylinderShootExtend = 0; 
   public static int CargoCylinderShootRetract = 1; 
 
@@ -52,11 +46,11 @@ public class RobotMap {
   public static int LimitSwitchTop2 = 6;
   public static int LimitSwitchBottom1 = 7; 
   public static int LimitSwitchBottom2 = 8; 
-
+  
   //Computer USB ports
-  public static int JoystickPortXBoxMain = 0; 
+  public static int ActualJoystick = 0;
   public static int JoystickPortXBoxAux = 1; 
-  public static int ActualJoystick = 2;
+  public static int JoystickPortXBoxMain = 2;
 
   //Arduino addresses
   public static int lightsAddress = 7;

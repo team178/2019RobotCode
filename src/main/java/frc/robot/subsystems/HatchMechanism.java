@@ -39,7 +39,7 @@ public class HatchMechanism extends Subsystem {
     //Pneumatics
     hatchCylinderExtend = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchExtenderCylinderExtend, RobotMap.HatchExtenderCylinderRetract);
     hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchEjectorCylinderExtend, RobotMap.HatchEjectorCylinderRetract);
-    pressureTransducer = new AnalogInput(RobotMap.PressureTranducer);
+    //pressureTransducer = new AnalogInput(RobotMap.PressureTranducer);
 
     leadScrew = new VictorSPX(RobotMap.leadScrew);
 
@@ -82,7 +82,15 @@ public class HatchMechanism extends Subsystem {
     if (!movingForward) {
       factor *= -1;
     }
-    leadScrew.set(ControlMode.PercentOutput, factor);
+
+    //leadScrew.set(ControlMode.PercentOutput, factor);
+    
+   /* if (!hasReachedLeftBound() && !hasReachedRightBound()) {
+      leadScrew.set(ControlMode.PercentOutput, factor);
+    } else {
+      leadScrew.set(ControlMode.PercentOutput, 0);
+    } */
+    //System.out.println(getActuatorPosition());
   }
   
   //Limit switch methods

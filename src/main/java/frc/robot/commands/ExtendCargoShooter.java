@@ -44,7 +44,7 @@ public class ExtendCargoShooter extends Command {
       //shoot ball
     //}
     //else if (cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kReverse){
-      cargolauncher.retract();
+      //cargolauncher.retract();
       //stay retracted
     //}
   }

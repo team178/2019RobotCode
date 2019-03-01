@@ -19,10 +19,11 @@ public class ClimbDrive extends Command {
   double leftVal;
   double rightVal;
 
-  public ClimbDrive() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+  boolean forward;
+
+  public ClimbDrive(boolean forward) {
     requires(Robot.climber);
+    this.forward = forward;
   }
 
   // Called just before this Command runs the first time
@@ -38,8 +39,11 @@ public class ClimbDrive extends Command {
     leftVal = oi.getLeftTriggerMain();
     rightVal = -oi.getRightTriggerMain();
     double totalVal = leftVal + rightVal;
+
+    if (!forward) {
+      totalVal *= -1;
+    }
     climber.moveBackWheel(totalVal);
-    
   }
 
   // Make this return true when this Command no longer needs to run execute()

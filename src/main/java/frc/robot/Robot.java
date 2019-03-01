@@ -39,7 +39,7 @@ import edu.wpi.first.wpilibj.I2C;
   public void robotInit() {
     drivetrain = new DriveTrain();
     hatchMechanism = new HatchMechanism();
-    climber = new Climber();  
+    climber = new EmptyClimber();  
     cargolauncher = new CargoLauncher(); 
     lightsArduino = new Arduino(I2C.Port.kMXP, RobotMap.lightsAddress); //lightsArduino will always be plugged into MXP port
     pixy = new Pixy(I2C.Port.kOnboard, RobotMap.pixyAddress); //pixy will always be plugged into onboard port
