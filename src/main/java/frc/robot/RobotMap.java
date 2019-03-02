@@ -24,8 +24,8 @@ public class RobotMap {
   public static int ClimberMotor2 = 6;
   public static int ClimberMotor3 = 7;
   public static int ClimberMotor4 = 8;
-  public static int ClimberBackWheel = 10;
-  public static int leadScrew = 9;
+  public static int ClimberBackWheel = 9;
+  public static int leadScrew = 10;
   public static int PCM = 11;
   
   //PCM  
