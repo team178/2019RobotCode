@@ -75,10 +75,7 @@ public class AlignHatchPanel extends Command
       if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {
         triggerPressed = true;
       } else {
-        if (x1 == 0 || x2 == 0) {//can replace this code with canAutoAlign Method
-          hatchmechanism.moveLeadScrew(true, 0);
-        } else if (x1 == 316 || x2 == 316) {//sent if pixy sees nothing
-          hatchmechanism.moveLeadScrew(true, 0);
+        if (pixy.canAutoAlign()) {
         } else if (x1 == 317 || x2 == 317) {//sent if three objects 
           hatchmechanism.moveLeadScrew(true, 0);
          // drivetrain.drive(0.3, 0.3);//drives forward if three objects are detected, unfinished

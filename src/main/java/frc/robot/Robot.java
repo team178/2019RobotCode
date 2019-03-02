@@ -71,7 +71,7 @@ import edu.wpi.first.wpilibj.I2C;
   public void robotPeriodic() {
     SmartDashboard.putBoolean("Can Auto Align", pixy.canAutoAlign());
     SmartDashboard.putString("Lead Screw Motion", hatchMechanism.getLeadScrewMotion());
-    SmartDashboard.putBoolean("HM is centered", isAligned);
+    SmartDashboard.putBoolean("Hatch Mechanism Centered", isAligned);
   }
 
   @Override
