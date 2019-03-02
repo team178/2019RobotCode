@@ -110,6 +110,6 @@ public class Climber extends Subsystem  {
   
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ClimberCommands());
+    setDefaultCommand(new ClimberCommands(true));
   }
 }
