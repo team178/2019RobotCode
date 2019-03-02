@@ -34,14 +34,14 @@ public class JoystickDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
    @Override
    protected void execute() {
-      /*yVal = -oi.getY();
-      twistVal = -0.5*(oi.getTwist());
+      yVal = 0.5 * oi.getY();
+      twistVal = oi.getTwist();
 
       if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) {
         drivetrain.drive(twistVal-yVal, twistVal+yVal);
       } else {
         drivetrain.drive(0,0);
-      }*/
+      }
    }
 
     @Override

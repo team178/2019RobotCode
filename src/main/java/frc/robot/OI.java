@@ -50,7 +50,7 @@ public class OI {
 	public Button auxStart = new JoystickButton(xboxAux, 8);
 	
 	//MAIN controller buttons -- MAIN XBOX NOT BEING USED
-	public static Joystick xboxMain = new Joystick(RobotMap.JoystickPortXBoxMain); //Controller
+	/*public static Joystick xboxMain = new Joystick(RobotMap.JoystickPortXBoxMain); //Controller
 	public Button mainA = new JoystickButton(xboxMain, 1);
 	public Button mainB = new JoystickButton(xboxMain, 2);
 	public Button mainX = new JoystickButton(xboxMain, 3);
@@ -58,14 +58,14 @@ public class OI {
 	public Button mainLeftBumper = new JoystickButton(xboxMain, 5);
 	public Button mainRightBumper = new JoystickButton(xboxMain, 6);
 	public Button mainBack = new JoystickButton(xboxMain, 7);
-	public Button mainStart = new JoystickButton(xboxMain, 8);
+	public Button mainStart = new JoystickButton(xboxMain, 8);*/
 	
 	public OI() {
 		//Setting JOYSTICK channels
-		/*joystick.setXChannel(0);
-		joystick.setYChannel(3);
-		joystick.setZChannel(2);
-		joystick.setTwistChannel(1);*/
+		joystick.setXChannel(3); //3
+		joystick.setYChannel(2); //2
+		joystick.setZChannel(0); //0
+		joystick.setTwistChannel(1); //1
 
 		//JOYSTICK controls
 		leftPadBottom2.whenPressed(new LightsOff());
@@ -89,29 +89,29 @@ public class OI {
 		auxRightBumper.whileHeld(new AlignHatchPanel());
 
 		//MAIN controls (joystick code in JoystickDrive)
-		mainB.whenPressed(new LightsCargo());
+		/*mainB.whenPressed(new LightsCargo());
 		mainY.whenPressed(new LightsHatch());
 		mainX.whenPressed(new LightsDefault());
 		mainStart.whenPressed(new LightsOff());
 		mainA.whenPressed(new LightsAlign());
-		mainA.whenPressed(new LightsOff());
+		mainA.whenPressed(new LightsOff());*/
 	}
 
 	//JOYSTICK accessor methods
 	public double getX() {
-		return joystick.getRawAxis(0);
+		return joystick.getX(); //joystick.getRawAxis(0);
 	}
 	
 	public double getY() {
-		return joystick.getRawAxis(1);
+		return joystick.getY(); //joystick.getRawAxis(1);
 	}
 
 	public double getTwist() {
-		return joystick.getRawAxis(2);
+		return joystick.getTwist(); //joystick.getRawAxis(2);
 	}
 
 	public double getSlider() {
-		return 1 - joystick.getRawAxis(3);
+		return 1 - joystick.getZ(); //joystick.getRawAxis(3);
 	}
 	
 	//AUX controller accessor methods
@@ -132,20 +132,21 @@ public class OI {
 	}
 
 	//MAIN controller accessor methods
+	// EDIT FOR XBOX DRIVE
 	public double getLeftStickYMain() {
-		return xboxMain.getRawAxis(1);
+		return 0; //xboxMain.getRawAxis(1);
 	}
 	
 	public double getRightStickYMain() {
-		return xboxMain.getRawAxis(5);
+		return 0; //xboxMain.getRawAxis(5);
 	}
 	
 	public double getLeftTriggerMain() {
-		return xboxMain.getRawAxis(2);
+		return 0; //xboxMain.getRawAxis(2);
 	}
 	
 	public double getRightTriggerMain() {
-		return xboxMain.getRawAxis(3);
+		return 0; //xboxMain.getRawAxis(3);
 	}
 
 	public void printJoystickChannels() {

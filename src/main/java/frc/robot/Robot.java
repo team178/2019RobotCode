@@ -99,10 +99,6 @@ import edu.wpi.first.wpilibj.I2C;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    System.out.println("X: " + oi.getX());
-    System.out.println("Y: " + oi.getY());
-    System.out.println("Twist: " + oi.getTwist());
-    System.out.println("Slider: " + oi.getSlider());
   }
 
   @Override
