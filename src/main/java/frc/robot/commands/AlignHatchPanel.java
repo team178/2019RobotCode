@@ -26,14 +26,12 @@ public class AlignHatchPanel extends Command
   private final int TOLERANCE = 15;
   private final double DESIREDAVG = 157.5;//desired distance between the two objects that pixy recognizes 
   private boolean triggerPressed;//if the trigger is pressed, used for the purpose of an override 
-  private String mode;
 
   /**
    * @param mode "left" or "right" based off of position of hatch panel port
    */
-  public AlignHatchPanel(String mode) {
+  public AlignHatchPanel() {
     requires(Robot.hatchMechanism);
-    this.mode = mode.toLowerCase();
   }
 
   // Called just before this Command runs the first time
@@ -77,7 +75,7 @@ public class AlignHatchPanel extends Command
       if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {
         triggerPressed = true;
       } else {
-        if (x1 == 0 || x2 == 0) {
+        if (x1 == 0 || x2 == 0) {//can replace this code with canAutoAlign Method
           hatchmechanism.moveLeadScrew(true, 0);
         } else if (x1 == 316 || x2 == 316) {//sent if pixy sees nothing
           hatchmechanism.moveLeadScrew(true, 0);
@@ -115,7 +113,9 @@ public class AlignHatchPanel extends Command
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Math.abs(diff) < TOLERANCE || triggerPressed);
+    boolean temp = (Math.abs(diff) < TOLERANCE || triggerPressed);
+    Robot.isAligned = temp;
+    return temp;
   }
 
   // Called once after isFinished returns true
@@ -133,4 +133,5 @@ public class AlignHatchPanel extends Command
     hatchmechanism.moveLeadScrew(true, 0);
     drivetrain.drive(0,0);
   }
+
 }

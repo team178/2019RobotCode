@@ -114,6 +114,15 @@ public class HatchMechanism extends Subsystem {
   public double getPressure() {
       return pressureTransducer.getVoltage();
   }
+
+  public String getLeadScrewMotion() {
+    if (leadScrew.getActiveTrajectoryArbFeedFwd() < 0) {
+      return "Left";
+    } else if (leadScrew.getActiveTrajectoryArbFeedFwd() > 0) {
+      return "Right";
+    }
+      return "No Movement";
+  }
   
   @Override
   public void initDefaultCommand() {
