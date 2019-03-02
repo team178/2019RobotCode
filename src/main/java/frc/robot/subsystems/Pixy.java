@@ -105,13 +105,13 @@ public class Pixy extends Arduino {
 
   public int getLeft()
   {
-    System.out.println("Left Location: " + lLoc);
+    //System.out.println("Left Location: " + lLoc);
     return lLoc;
   }
 
   public int getRight()
   {
-    System.out.println("Right Location: " + rLoc);
+    //System.out.println("Right Location: " + rLoc);
     return rLoc;
   }
 
