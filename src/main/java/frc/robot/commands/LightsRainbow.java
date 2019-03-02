@@ -38,7 +38,7 @@ public class LightsRainbow extends Command {
   protected boolean isFinished() {
     return sent;
   }
-
+  
   // Called once after isFinished returns true
   @Override
   protected void end() {
