@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.commands.LightsOff;
 import frc.robot.subsystems.*;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.I2C;
 
@@ -28,6 +29,8 @@ import edu.wpi.first.wpilibj.I2C;
  public static CargoLauncher cargolauncher;
  public static Arduino lightsArduino;
  public static Pixy pixy;
+
+ public static boolean isAligned;
  
  //USB Camera declarations
  public static CameraServer camserv;
@@ -45,6 +48,8 @@ import edu.wpi.first.wpilibj.I2C;
     pixy = new Pixy(I2C.Port.kOnboard, RobotMap.pixyAddress); //pixy will always be plugged into onboard port
     oi = new OI();
     lightsArduino.setAllianceColor(); //Sets light strips to color of alliance (red or blue)
+
+    isAligned = false;
 
     //Camera initializations
     camserv = CameraServer.getInstance();
@@ -64,7 +69,9 @@ import edu.wpi.first.wpilibj.I2C;
 
   @Override
   public void robotPeriodic() {
-   
+    SmartDashboard.putBoolean("Can Auto Align", pixy.canAutoAlign());
+    SmartDashboard.putString("Lead Screw Motion", hatchMechanism.getLeadScrewMotion());
+    SmartDashboard.putBoolean("HM is centered", isAligned);
   }
 
   @Override

@@ -13,22 +13,25 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
 import frc.robot.subsystems.Pixy;
+import frc.robot.subsystems.DriveTrain;
 
 public class AlignHatchPanel extends Command 
 {
   Pixy pixy;
   OI oi;
   HatchMechanism hatchmechanism;
+  DriveTrain drivetrain;
 
   double diff;
   private final int TOLERANCE = 15;
   private final double DESIREDAVG = 157.5;//desired distance between the two objects that pixy recognizes 
   private boolean triggerPressed;//if the trigger is pressed, used for the purpose of an override 
 
+  /**
+   * @param mode "left" or "right" based off of position of hatch panel port
+   */
   public AlignHatchPanel() {
     requires(Robot.hatchMechanism);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
@@ -38,6 +41,7 @@ public class AlignHatchPanel extends Command
     oi = Robot.oi;
     pixy = Robot.pixy;
     hatchmechanism = Robot.hatchMechanism;
+    drivetrain = Robot.drivetrain;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -55,7 +59,7 @@ public class AlignHatchPanel extends Command
     diff = DESIREDAVG - avg;//calc difference based on distance from desired point, sign indicated direction needed to move 
     double power = oi.getRightTriggerAux() - oi.getLeftTriggerAux();
     SmartDashboard.putString("Test Align", "Difference: " + diff);
-    if (hatchmechanism.hasReachedLeftBound()) {
+    if (hatchmechanism.hasReachedLeftBound()) {//limit switches
       if (power < 0) {
         hatchmechanism.moveLeadScrew(true, 0);
       } else {
@@ -71,10 +75,13 @@ public class AlignHatchPanel extends Command
       if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {
         triggerPressed = true;
       } else {
-        if (x1 == 0 || x2 == 0) {
+        if (x1 == 0 || x2 == 0) {//can replace this code with canAutoAlign Method
           hatchmechanism.moveLeadScrew(true, 0);
-        } else if (x1 == 316 || x2 == 316) {
+        } else if (x1 == 316 || x2 == 316) {//sent if pixy sees nothing
           hatchmechanism.moveLeadScrew(true, 0);
+        } else if (x1 == 317 || x2 == 317) {//sent if three objects 
+          hatchmechanism.moveLeadScrew(true, 0);
+         // drivetrain.drive(0.3, 0.3);//drives forward if three objects are detected, unfinished
         } else if (diff > 0) {
           hatchmechanism.moveLeadScrew(false, 1);
         } else {
@@ -106,13 +113,16 @@ public class AlignHatchPanel extends Command
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Math.abs(diff) < TOLERANCE || triggerPressed);
+    boolean temp = (Math.abs(diff) < TOLERANCE || triggerPressed);
+    Robot.isAligned = temp;
+    return temp;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     hatchmechanism.moveLeadScrew(true, 0);
+    drivetrain.drive(0,0);
   }
   
 
@@ -121,5 +131,7 @@ public class AlignHatchPanel extends Command
   @Override
   protected void interrupted() {
     hatchmechanism.moveLeadScrew(true, 0);
+    drivetrain.drive(0,0);
   }
+
 }
