@@ -41,7 +41,7 @@ public class HatchMechanism extends Subsystem {
     hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchEjectorCylinderExtend, RobotMap.HatchEjectorCylinderRetract);
     //pressureTransducer = new AnalogInput(RobotMap.PressureTranducer);
 
-    leadScrew = new VictorSPX(RobotMap.leadScrew);
+    //leadScrew = new VictorSPX(RobotMap.leadScrew);
 
     //Default positions
     setExtender("reverse");
@@ -116,11 +116,11 @@ public class HatchMechanism extends Subsystem {
   }
 
   public String getLeadScrewMotion() {
-    if (leadScrew.getActiveTrajectoryArbFeedFwd() < 0) {
+    /*if (leadScrew.getActiveTrajectoryArbFeedFwd() < 0) {
       return "Left";
     } else if (leadScrew.getActiveTrajectoryArbFeedFwd() > 0) {
       return "Right";
-    }
+    }*/
       return "No Movement";
   }
   
