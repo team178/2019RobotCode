@@ -28,8 +28,8 @@ public class Pixy extends Arduino {
   public Pixy(Port port, int address)//use robotmap values
   {
     super(port, address);
-    lLoc = 316;//when it doesn't recognize anything, higher than the value
-    rLoc = 316;
+    lLoc = 318;//when it doesn't recognize anything, higher than the value
+    rLoc = 318;
   }
 
   @Override
@@ -122,5 +122,22 @@ public class Pixy extends Arduino {
     return false;
   }
   return true; 
+  }
+
+  public String getObjectInfo()
+  {
+    if (this.getRight() == 316 || this.getLeft() == 316)//if one or zero objects are detected
+    {
+        return "not enough tapes detected";
+    }
+    if (this.getRight() == 317 || this.getLeft() == 317)//if three or more objects are detected 
+    {
+      return "too many tapes detected";
+    }
+    if (this.getRight() == 318 || this.getLeft() == 318)//if the arduino isn't sending values 
+    {
+      return "no communication with pixy";
+    }
+    return "two tapes detected, go auto align!";
   }
 }

@@ -123,6 +123,8 @@ public class HatchMechanism extends Subsystem {
     }*/
       return "No Movement";
   }
+
+
   
   @Override
   public void initDefaultCommand() {
