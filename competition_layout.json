@@ -37,9 +37,9 @@
               "colorWhenFalse": "#8B0000FF"
             }
           },
-          "4,0": {
+          "6,0": {
             "size": [
-              4,
+              3,
               1
             ],
             "content": {
@@ -68,6 +68,17 @@
               "_type": "Camera Stream",
               "_source0": "camera_server://cam1",
               "_title": "cam1"
+            }
+          },
+          "3,0": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Pixy Status",
+              "_title": "Pixy Status"
             }
           }
         }
@@ -186,6 +197,30 @@
               "_type": "Subsystem Layout",
               "_source0": "network_table:///LiveWindow/DriveTrain",
               "_title": "DriveTrain",
+              "_children": []
+            }
+          },
+          "8,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/Arduino",
+              "_title": "Arduino",
+              "_children": []
+            }
+          },
+          "10,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/CargoLauncher",
+              "_title": "CargoLauncher",
               "_children": []
             }
           }
