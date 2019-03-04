@@ -16,10 +16,11 @@ public class LightsAlign extends Command {
   Arduino lightsArduino; 
   boolean sent;
 
-  public LightsAlign() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+  private boolean alignable;
+
+  public LightsAlign(boolean alignable) {
     requires(Robot.lightsArduino);
+    this.alignable = alignable;
   }
 
   // Called just before this Command runs the first time
@@ -31,7 +32,11 @@ public class LightsAlign extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    sent = lightsArduino.sendMessage("a");
+    if (alignable) {
+      sent = lightsArduino.sendMessage("a");
+    } else {
+      sent = lightsArduino.sendMessage("x");
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

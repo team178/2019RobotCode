@@ -13,11 +13,13 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
 import frc.robot.subsystems.Pixy;
+import frc.robot.subsystems.Arduino;
 import frc.robot.subsystems.DriveTrain;
 
 public class AlignHatchPanel extends Command 
 {
   Pixy pixy;
+  Arduino lightsArduino;
   OI oi;
   HatchMechanism hatchmechanism;
   DriveTrain drivetrain;
@@ -40,6 +42,7 @@ public class AlignHatchPanel extends Command
   {
     oi = Robot.oi;
     pixy = Robot.pixy;
+    lightsArduino = Robot.lightsArduino;
     hatchmechanism = Robot.hatchMechanism;
     drivetrain = Robot.drivetrain;
   }
@@ -59,6 +62,13 @@ public class AlignHatchPanel extends Command
     diff = DESIREDAVG - avg;//calc difference based on distance from desired point, sign indicated direction needed to move 
     double power = oi.getRightTriggerAux() - oi.getLeftTriggerAux();
     SmartDashboard.putString("Test Align", "Difference: " + diff);
+    
+    if (x1 == 316 || x1 == 317 || x2 == 316 || x2 == 317) {
+      lightsArduino.sendMessage("x");
+    } else {
+      lightsArduino.sendMessage("a");
+    }
+
     if (hatchmechanism.hasReachedLeftBound()) {//limit switches
       if (power < 0) {
         hatchmechanism.moveLeadScrew(true, 0);
