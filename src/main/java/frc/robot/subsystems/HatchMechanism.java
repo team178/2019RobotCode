@@ -35,6 +35,8 @@ public class HatchMechanism extends Subsystem {
   //Linear actuator died, so it was replaced by lead screw
   public static VictorSPX leadScrew;
 
+  double leadScrewSpeed;
+
   public HatchMechanism() {
     //Pneumatics
     hatchCylinderExtend = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchExtenderCylinderExtend, RobotMap.HatchExtenderCylinderRetract);
@@ -50,6 +52,7 @@ public class HatchMechanism extends Subsystem {
     //Limit switches
     limitSwitchLeft = new DigitalInput(RobotMap.HatchLimitSwitchLeft);
     limitSwitchRight = new DigitalInput(RobotMap.HatchLimitSwitchRight);
+    leadScrewSpeed = 0;
   }
 
   //Sets extender to two positions depending on string parameter --> forward = extends, reverse = retracts
@@ -79,6 +82,7 @@ public class HatchMechanism extends Subsystem {
   }
 
   public void moveLeadScrew(boolean movingForward, double factor) {
+    leadScrewSpeed = factor;
     if (!movingForward) {
       factor *= -1;
     }
@@ -121,6 +125,11 @@ public class HatchMechanism extends Subsystem {
     } else if (leadScrew.getActiveTrajectoryArbFeedFwd() > 0) {
       return "Right";
     }*/
+    if (leadScrewSpeed > 0) {
+      return "Right";
+    } else if (leadScrewSpeed < 0) {
+      return "Left";
+    }
       return "No Movement";
   }
 
