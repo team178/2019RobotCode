@@ -120,11 +120,6 @@ public class HatchMechanism extends Subsystem {
   }
 
   public String getLeadScrewMotion() {
-    /*if (leadScrew.getActiveTrajectoryArbFeedFwd() < 0) {
-      return "Left";
-    } else if (leadScrew.getActiveTrajectoryArbFeedFwd() > 0) {
-      return "Right";
-    }*/
     if (leadScrewSpeed > 0) {
       return "Right";
     } else if (leadScrewSpeed < 0) {
