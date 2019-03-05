@@ -36,6 +36,8 @@ public class Climber extends Subsystem  {
   public static DigitalInput limitswitchBottom1;
   public static DigitalInput limitswitchBottom2;
 
+  private String gimpDriveDirection;
+
   public Climber() {
     //Motor controller initializations
     arm1 = new TalonSRX(RobotMap.ClimberMotor1);
@@ -108,9 +110,13 @@ public class Climber extends Subsystem  {
   public boolean isBackClimberAtBottom() {
     return !limitswitchBottom2.get();
   }
+
+  public void setGimpDriveDirection(String gimpDriveDirection) {
+    this.gimpDriveDirection = gimpDriveDirection;
+  }
   
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ClimberCommands(true));
+    setDefaultCommand(new ClimberCommands(gimpDriveDirection));
   }
 }

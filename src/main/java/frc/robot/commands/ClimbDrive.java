@@ -19,11 +19,11 @@ public class ClimbDrive extends Command {
   double leftVal;
   double rightVal;
 
-  boolean forward;
+  private String gimpDriveDirection;
 
-  public ClimbDrive(boolean forward) {
+  public ClimbDrive(String gimpDriveDirection) {
     requires(Robot.climber);
-    this.forward = forward;
+    this.gimpDriveDirection = gimpDriveDirection.toLowerCase();
   }
 
   // Called just before this Command runs the first time
@@ -40,10 +40,13 @@ public class ClimbDrive extends Command {
     rightVal = -oi.getRightTriggerMain();
     double totalVal = leftVal + rightVal;
 
-    if (!forward) {
+    if (gimpDriveDirection.equals("backwards")) {
       totalVal *= -1;
     }
-    climber.moveBackWheel(totalVal);
+
+    if (gimpDriveDirection.equals("forward") || gimpDriveDirection.equals("backwards")) {
+      climber.moveBackWheel(totalVal);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -18,7 +18,7 @@ public class ClimberCommands extends CommandGroup {
    * Adding all climber commands in one command group to add one default command in the Climber subsystem
    */
   
-  public ClimberCommands(boolean climbDriveForward) {
+  public ClimberCommands(String climbDriveForward) {
     //May need to switch to addParallel()
     addSequential(new MoveFrontClimber());
     addSequential(new MoveBackClimber());

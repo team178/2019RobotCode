@@ -75,8 +75,8 @@ public class OI {
 		leftPadBottom1.whenPressed(new LightsAlign());
 		//button6.whenPressed(new LightsRainbow());
 
-		rightPadTop1.whenPressed(new ClimbDrive(true));
-		rightPadBottom1.whenPressed(new ClimbDrive(false));
+		rightPadTop1.whileHeld(new ClimbDrive("forward"));
+		rightPadBottom1.whileHeld(new ClimbDrive("backward"));
 		
 		//AUX controls
 		auxA.whenPressed(new EjectHatchPanel());
