@@ -79,13 +79,13 @@ public class OI {
 		rightPadBottom1.whileHeld(new ClimbDrive("backward"));
 		
 		//AUX controls
-		auxA.whenPressed(new EjectHatchPanel());
-		auxA.whenReleased(new RetractEjector());
 		auxY.whenPressed(new ExtendHatchMechanism());
 		auxY.whenReleased(new RetractHatchMechanism());
+		auxB.whenPressed(new EjectHatchPanel());
+		auxB.whenReleased(new RetractEjector());
 		
-		auxB.whenPressed(new ExtendCargoShooter());
-		auxB.whenReleased(new RetractCargoShooter());
+		auxA.whenPressed(new ExtendCargoShooter());
+		auxA.whenReleased(new RetractCargoShooter());
 		auxRightBumper.whileHeld(new AlignHatchPanel());
 
 		//MAIN controls (joystick code in JoystickDrive)
