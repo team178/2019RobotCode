@@ -117,11 +117,10 @@ public class Pixy extends Arduino {
 
   public boolean canAutoAlign()//checks if it sees only two objects
   {
-  if (this.getRight() == 316 || this.getLeft() == 316 || this.getRight() == 317 || this.getLeft() == 317 || this.getRight() == 0 || this.getLeft() == 0 || this.getLeft() == 318 || this.getRight() == 318)
-  {
-    return false;
-  }
-  return true; 
+    if (lLoc == 0 || rLoc == 0 || lLoc > 315 || rLoc > 315) {
+      return false;
+    }
+    return true; 
   }
 
   public String getObjectInfo()

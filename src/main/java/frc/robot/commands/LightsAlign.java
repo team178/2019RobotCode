@@ -22,7 +22,7 @@ public class LightsAlign extends Command {
 
   public LightsAlign() {
     requires(Robot.lightsArduino);
-    alignable = pixy.canAutoAlign();
+    alignable = false;  
   }
 
   // Called just before this Command runs the first time
@@ -30,6 +30,7 @@ public class LightsAlign extends Command {
   protected void initialize() {
     pixy = Robot.pixy;
     lightsArduino = Robot.lightsArduino;
+    alignable = pixy.canAutoAlign();
   }
 
   // Called repeatedly when this Command is scheduled to run
