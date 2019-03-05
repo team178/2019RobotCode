@@ -72,7 +72,7 @@ public class OI {
 		leftPadTop1.whenPressed(new LightsHatch());
 		leftPadTop2.whenPressed(new LightsCargo());
 		leftPadTop3.whenPressed(new LightsDefault());
-		leftPadBottom1.whenPressed(new LightsAlign());
+		leftPadBottom1.whenPressed(new LightsAlign(false));
 		//button6.whenPressed(new LightsRainbow());
 
 		rightPadTop1.whenPressed(new ClimbDrive(true));
