@@ -10,28 +10,32 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arduino;
+import frc.robot.subsystems.Pixy;
 
 public class LightsAlign extends Command {
   
   Arduino lightsArduino; 
   boolean sent;
+  Pixy pixy;
 
   private boolean alignable;
 
-  public LightsAlign(boolean alignable) {
+  public LightsAlign() {
     requires(Robot.lightsArduino);
-    this.alignable = alignable;
+    alignable = pixy.canAutoAlign();
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    pixy = Robot.pixy;
     lightsArduino = Robot.lightsArduino;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    alignable = pixy.canAutoAlign();
     if (alignable) {
       sent = lightsArduino.sendMessage("a");
     } else {
