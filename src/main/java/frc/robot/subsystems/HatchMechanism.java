@@ -99,13 +99,11 @@ public class HatchMechanism extends Subsystem {
   
   //Limit switch methods
   public boolean hasReachedLeftBound() {
-    return false;
-    // return limitSwitchLeft.get();
+    return limitSwitchLeft.get();
   }
 
   public boolean hasReachedRightBound() {
-      return false;
-    // return limitSwitchRight.get();
+    return limitSwitchRight.get();
   }
   
   //Accessor methods
