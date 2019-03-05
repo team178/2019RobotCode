@@ -36,7 +36,7 @@ public class Climber extends Subsystem  {
   public static DigitalInput limitswitchBottom1;
   public static DigitalInput limitswitchBottom2;
 
-  private String gimpDriveDirection;
+  private String gimpDriveDirection = "";
 
   public Climber() {
     //Motor controller initializations
