@@ -36,6 +36,7 @@ public class ManuallyMoveLeadScrew extends Command {
     double leftVal = -oi.getLeftTriggerAux();
     double rightVal = oi.getRightTriggerAux();
     double totalVal = leftVal + rightVal;
+    System.out.println(totalVal);
 
     if (hatchmechanism.hasReachedLeftBound()) {
       if (totalVal < 0) {

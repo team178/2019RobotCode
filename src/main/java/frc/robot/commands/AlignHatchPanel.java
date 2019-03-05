@@ -23,7 +23,7 @@ public class AlignHatchPanel extends Command
   DriveTrain drivetrain;
 
   double diff;
-  private final int TOLERANCE = 15;
+  private final int TOLERANCE = 5;
   private final double DESIREDAVG = 157.5;//desired distance between the two objects that pixy recognizes 
   private boolean triggerPressed;//if the trigger is pressed, used for the purpose of an override 
 

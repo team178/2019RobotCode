@@ -43,7 +43,7 @@ public class HatchMechanism extends Subsystem {
     hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchEjectorCylinderExtend, RobotMap.HatchEjectorCylinderRetract);
     //pressureTransducer = new AnalogInput(RobotMap.PressureTranducer);
 
-    //leadScrew = new VictorSPX(RobotMap.leadScrew);
+    leadScrew = new VictorSPX(RobotMap.leadScrew);
 
     //Default positions
     setExtender("reverse");
@@ -84,10 +84,10 @@ public class HatchMechanism extends Subsystem {
   public void moveLeadScrew(boolean movingForward, double factor) {
     leadScrewSpeed = factor;
     if (!movingForward) {
-      factor *= -1;
+      factor *= -1; 
     }
 
-    //leadScrew.set(ControlMode.PercentOutput, factor);
+    leadScrew.set(ControlMode.PercentOutput, factor);
     
    /* if (!hasReachedLeftBound() && !hasReachedRightBound()) {
       leadScrew.set(ControlMode.PercentOutput, factor);
@@ -99,11 +99,13 @@ public class HatchMechanism extends Subsystem {
   
   //Limit switch methods
   public boolean hasReachedLeftBound() {
-    return limitSwitchLeft.get();
+    return false;
+    // return limitSwitchLeft.get();
   }
 
   public boolean hasReachedRightBound() {
-    return limitSwitchRight.get();
+      return false;
+    // return limitSwitchRight.get();
   }
   
   //Accessor methods
