@@ -8,9 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
 import frc.robot.commands.*;
 
 /**
@@ -86,7 +86,10 @@ public class OI {
 		
 		auxA.whenPressed(new ExtendCargoShooter());
 		auxA.whenReleased(new RetractCargoShooter());
-		auxRightBumper.whileHeld(new AlignHatchPanel());
+		auxX.whileHeld(new AlignHatchPanel());
+
+		auxLeftBumper.whileHeld(new MoveFrontClimber());
+		auxRightBumper.whileHeld(new MoveBackClimber());
 
 		//MAIN controls (joystick code in JoystickDrive)
 		/*mainB.whenPressed(new LightsCargo());
@@ -114,7 +117,7 @@ public class OI {
 	 * @return the raw slider value that retuns 0- to +1 insteaad of -1 to +1
 	 */
 	public double getSlider() {
-		return (joystick.getZ() + 1) / 2; //joystick.getRawAxis(3);
+		return 1 - ((joystick.getRawAxis(3) + 1) / 2); //joystick.getRawAxis(3);\
 	}
 	
 	//AUX controller accessor methods

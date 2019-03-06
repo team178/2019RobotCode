@@ -36,33 +36,33 @@ public class ClimbDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    leftVal = oi.getLeftTriggerMain();
-    rightVal = -oi.getRightTriggerMain();
-    double totalVal = leftVal + rightVal;
+    double power = oi.getSlider();
 
-    if (gimpDriveDirection.equals("backwards")) {
-      totalVal *= -1;
+    if (gimpDriveDirection.equals("forward")) {
+      power *= -1;
     }
 
-    if (gimpDriveDirection.equals("forward") || gimpDriveDirection.equals("backwards")) {
-      climber.moveBackWheel(totalVal);
+    if (gimpDriveDirection.equals("forward") || gimpDriveDirection.equals("backward")) {
+      climber.moveBackWheel(power);
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    climber.moveBackWheel(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    climber.moveBackWheel(0);
   }
 }

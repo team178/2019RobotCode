@@ -20,8 +20,8 @@ public class ClimberCommands extends CommandGroup {
   
   public ClimberCommands(String climbDriveForward) {
     //May need to switch to addParallel()
-    addSequential(new MoveFrontClimber());
-    addSequential(new MoveBackClimber());
-    addSequential(new ClimbDrive(climbDriveForward));
+    addParallel(new MoveFrontClimber());
+    addParallel(new MoveBackClimber());
+    addParallel(new ClimbDrive(climbDriveForward));
   }
 }

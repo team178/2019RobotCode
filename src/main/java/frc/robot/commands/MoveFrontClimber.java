@@ -33,23 +33,26 @@ public class MoveFrontClimber extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    power = oi.getRightStickYAux();
-    if (Math.abs(power) < 0.2){
+    power = oi.getLeftStickYAux();
+    if (Math.abs(power) < 0.1){
       climber.moveFrontMotors(0);
     } else if (climber.isFrontClimberAtTop()) {
       if(power > 0){
         climber.moveFrontMotors(0);
       }else if(power < 0){
+        System.out.println("FRONT: " + power);
         climber.moveFrontMotors(power);
       }
     } else if (climber.isFrontClimberAtBottom()) {
             if(power > 0) {
+              System.out.println("FRONT: " + power);
         climber.moveFrontMotors(power);
       } else if(power < 0){
         climber.moveFrontMotors(0);
       }
 
     } else {
+      System.out.println("FRONT: " + power);
       climber.moveFrontMotors(power);
     }
 
@@ -59,14 +62,14 @@ public class MoveFrontClimber extends Command {
   @Override
   protected boolean isFinished() 
   {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end()  
   {
-    //System.out.println("EjectClimberArms has ended");
+    climber.moveFrontMotors(0);
   }
   
 
@@ -75,6 +78,6 @@ public class MoveFrontClimber extends Command {
   @Override
   protected void interrupted() 
   {
-    //System.out.println("EjectClimberArms has been interrupted");
+    climber.moveFrontMotors(0);
   }
 }

@@ -32,22 +32,25 @@ public class MoveBackClimber extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    power = oi.getLeftStickYAux();
+    power = -oi.getRightStickYAux();
     if (Math.abs(power) < 0.1){
       climber.moveBackMotors(0);
     } else if (climber.isBackClimberAtTop()) {
       if(power > 0){
         climber.moveBackMotors(0);
       }else if(power < 0){
+        System.out.println("BACK: " + power);
         climber.moveBackMotors(power);
       }
     } else if (climber.isBackClimberAtBottom()) {
       if(power > 0) {
+        System.out.println("BACK: " + power);
         climber.moveBackMotors(power);
       } else if(power < 0){
         climber.moveBackMotors(0);
       }
     } else {
+      System.out.println("BACK: " + power);
       climber.moveBackMotors(power);
     }
 
@@ -56,22 +59,20 @@ public class MoveBackClimber extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-   // climber.moveBackMotors(0);
-   //System.out.println("PushRobotUp is ending");
+    climber.moveBackMotors(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-   // climber.moveBackMotors(0);
-   //System.out.println("PushRobotUp is being interrupted");
+    climber.moveBackMotors(0);
   }
 }
 
