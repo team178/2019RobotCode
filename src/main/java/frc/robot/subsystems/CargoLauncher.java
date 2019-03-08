@@ -16,26 +16,13 @@ import frc.robot.RobotMap;
  */
 public class CargoLauncher extends Subsystem {
   
-  //public static DoubleSolenoid aimSolenoid;
   public static DoubleSolenoid shootSolenoid;
 
   public CargoLauncher() {
-    //aimSolenoid = new DoubleSolenoid(RobotMap.PCM,RobotMap.CargoCylinderAimExtend, RobotMap.CargoCylinderAimRetract);
     shootSolenoid = new DoubleSolenoid(RobotMap.PCM, RobotMap.CargoCylinderShootExtend, RobotMap.CargoCylinderShootRetract);
-    
-    //Default positions for aimer and launcher
-    //raiseLauncher();
     retract();
   }
-
-  /*public void raiseLauncher () {
-    aimSolenoid.set(DoubleSolenoid.Value.kForward);
-  }
-
-  public void lowerLauncher () {
-    aimSolenoid.set(DoubleSolenoid.Value.kReverse);
-  }*/
-
+  
   public void shoot() {
     shootSolenoid.set(DoubleSolenoid.Value.kForward);
   }
@@ -43,11 +30,7 @@ public class CargoLauncher extends Subsystem {
   public void retract() {
     shootSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
-
-  /*public DoubleSolenoid.Value getAimSolenoidState() {
-    return aimSolenoid.get();
-  }*/
-
+  
   public DoubleSolenoid.Value getShootSolenoidState() {
     return shootSolenoid.get();
   }
