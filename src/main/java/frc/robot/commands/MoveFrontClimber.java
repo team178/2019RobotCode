@@ -18,8 +18,6 @@ public class MoveFrontClimber extends Command {
   private double power;
 
   public MoveFrontClimber() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.climber);
   }
  

@@ -12,14 +12,17 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.Climber;
 
-public class MoveBackClimber extends Command {
+public class MoveBothClimbers extends Command {
+
   OI oi;
   Climber climber;
-  private double power;
+  private double frontPower;
+  private double backPower;
 
-  public MoveBackClimber() {
+  public MoveBothClimbers() {
     requires(Robot.climber);
   }
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -30,23 +33,45 @@ public class MoveBackClimber extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    power = -oi.getRightStickYAux();
-    if (Math.abs(power) < 0.1){
+    frontPower = oi.getLeftStickYAux();
+    backPower = -oi.getRightStickYAux();
+
+    //Front climber
+    if (Math.abs(frontPower) < 0.1){
+      climber.moveFrontMotors(0);
+    } else if (climber.isFrontClimberAtTop()) {
+      if(frontPower > 0){
+        climber.moveFrontMotors(0);
+      }else if(frontPower < 0){
+        climber.moveFrontMotors(frontPower);
+      }
+    } else if (climber.isFrontClimberAtBottom()) {
+      if(frontPower > 0) {
+        climber.moveFrontMotors(frontPower);
+      } else if(frontPower < 0){
+        climber.moveFrontMotors(0);
+      }
+    } else {
+      climber.moveFrontMotors(frontPower);
+    }
+
+    //Back climb
+    if (Math.abs(backPower) < 0.1){
       climber.moveBackMotors(0);
     } else if (climber.isBackClimberAtTop()) {
-      if(power > 0){
+      if(backPower > 0){
         climber.moveBackMotors(0);
-      }else if(power < 0){
-        climber.moveBackMotors(power);
+      } else if(backPower < 0){
+        climber.moveBackMotors(backPower);
       }
     } else if (climber.isBackClimberAtBottom()) {
-      if(power > 0) {
-        climber.moveBackMotors(power);
-      } else if(power < 0){
+      if(backPower > 0) {
+        climber.moveBackMotors(backPower);
+      } else if(backPower < 0){
         climber.moveBackMotors(0);
       }
     } else {
-      climber.moveBackMotors(power);
+      climber.moveBackMotors(backPower);
     }
   }
 
@@ -59,6 +84,7 @@ public class MoveBackClimber extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    climber.moveFrontMotors(0);
     climber.moveBackMotors(0);
   }
 
@@ -66,139 +92,7 @@ public class MoveBackClimber extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    climber.moveFrontMotors(0);
     climber.moveBackMotors(0);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//eclips
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//a

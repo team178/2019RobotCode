@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.RobotMap;
 import frc.robot.commandgroups.*;
+import frc.robot.commands.MoveBothClimbers;
 
 
 /**
@@ -31,10 +32,10 @@ public class Climber extends Subsystem  {
   public static VictorSPX backWheel;
   
   //Proximity Sensors (4)
-  public static DigitalInput limitswitchTop1;
-  public static DigitalInput limitswitchTop2;
-  public static DigitalInput limitswitchBottom1;
-  public static DigitalInput limitswitchBottom2;
+  public static DigitalInput proxSensorTopFront;
+  public static DigitalInput proxSensorTopBack;
+  public static DigitalInput proxSensorBottomFront;
+  public static DigitalInput proxSensorBottomBack;
 
   private String gimpDriveDirection = "";
 
@@ -47,10 +48,10 @@ public class Climber extends Subsystem  {
     backWheel = new VictorSPX(RobotMap.ClimberBackWheel);
     
     //Limit switch/proximity sensor initializations
-    limitswitchTop1 = new DigitalInput(RobotMap.LimitSwitchTop1);
-    limitswitchTop2 = new DigitalInput(RobotMap.LimitSwitchTop2);
-    limitswitchBottom1 = new DigitalInput(RobotMap.LimitSwitchBottom1);
-    limitswitchBottom2 = new DigitalInput(RobotMap.LimitSwitchBottom2);
+    proxSensorTopFront = new DigitalInput(RobotMap.proxSensorTopFront);
+    proxSensorTopBack = new DigitalInput(RobotMap.proxSensorTopBack);
+    proxSensorBottomFront = new DigitalInput(RobotMap.proxSensorBottomFront);
+    proxSensorBottomBack = new DigitalInput(RobotMap.proxSensorBottomBack);
   }
   
   //Climbing methods
@@ -90,27 +91,27 @@ public class Climber extends Subsystem  {
   
   //Proximity sensor data
   public boolean getTopSwitchStatuses() {
-    return (limitswitchTop1.get() || limitswitchTop2.get());
+    return (proxSensorTopFront.get() || proxSensorTopBack.get());
   }
   public boolean getBottomSwitchStatuses() {
-    return (limitswitchBottom1.get() || limitswitchBottom2.get());
+    return (proxSensorBottomFront.get() || proxSensorBottomBack.get());
   }
   
   //Individual proximity sensor data
   public boolean isFrontClimberAtTop() {
-    return !limitswitchTop1.get();
+    return !proxSensorTopFront.get();
   }
 
   public boolean isBackClimberAtTop() {
-    return !limitswitchTop2.get();
+    return !proxSensorTopBack.get();
   }
 
   public boolean isFrontClimberAtBottom() {
-    return !limitswitchBottom1.get();
+    return !proxSensorBottomFront.get();
   }
 
   public boolean isBackClimberAtBottom() {
-    return !limitswitchBottom2.get();
+    return !proxSensorBottomBack.get();
   }
 
   public void setGimpDriveDirection(String gimpDriveDirection) {
@@ -119,6 +120,6 @@ public class Climber extends Subsystem  {
   
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ClimberCommands(gimpDriveDirection));
+    setDefaultCommand(new MoveBothClimbers());
   }
 }

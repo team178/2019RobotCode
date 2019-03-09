@@ -108,6 +108,10 @@ import edu.wpi.first.wpilibj.I2C;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    /*System.out.println("FRONT TOP:    " + climber.isFrontClimberAtTop());
+    System.out.println("FRONT BOTTOM: " + climber.isFrontClimberAtBottom());
+    System.out.println("BACK TOP:     " + climber.isBackClimberAtTop());
+    System.out.println("BACK BOTTOM:  " + climber.isBackClimberAtBottom());*/
   }
 
   @Override

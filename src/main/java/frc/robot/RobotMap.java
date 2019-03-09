@@ -42,10 +42,10 @@ public class RobotMap {
   public static int HatchLimitSwitchLeft = 3;
   public static int HatchLimitSwitchRight = 4;
   
-  public static int LimitSwitchTop1 = 5;
-  public static int LimitSwitchTop2 = 6;
-  public static int LimitSwitchBottom1 = 7; 
-  public static int LimitSwitchBottom2 = 8; 
+  public static int proxSensorTopFront = 5;
+  public static int proxSensorTopBack = 6;
+  public static int proxSensorBottomFront = 7; 
+  public static int proxSensorBottomBack = 8; 
   
   //Computer USB ports
   public static int ActualJoystick = 0;
