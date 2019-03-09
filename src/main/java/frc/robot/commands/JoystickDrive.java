@@ -34,7 +34,7 @@ public class JoystickDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
    @Override
    protected void execute() {
-      yVal = 0.5 * oi.getY();
+      yVal = oi.getY();
       twistVal = oi.getTwist();
       if(oi.trigger.get()){
         yVal *= .5;
