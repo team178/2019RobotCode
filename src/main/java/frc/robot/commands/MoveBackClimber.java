@@ -39,21 +39,17 @@ public class MoveBackClimber extends Command {
       if(power > 0){
         climber.moveBackMotors(0);
       }else if(power < 0){
-        System.out.println("BACK: " + power);
         climber.moveBackMotors(power);
       }
     } else if (climber.isBackClimberAtBottom()) {
       if(power > 0) {
-        System.out.println("BACK: " + power);
         climber.moveBackMotors(power);
       } else if(power < 0){
         climber.moveBackMotors(0);
       }
     } else {
-      System.out.println("BACK: " + power);
       climber.moveBackMotors(power);
     }
-
   }
 
   // Make this return true when this Command no longer needs to run execute()

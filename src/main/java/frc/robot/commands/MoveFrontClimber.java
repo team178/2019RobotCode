@@ -40,22 +40,17 @@ public class MoveFrontClimber extends Command {
       if(power > 0){
         climber.moveFrontMotors(0);
       }else if(power < 0){
-        System.out.println("FRONT: " + power);
         climber.moveFrontMotors(power);
       }
     } else if (climber.isFrontClimberAtBottom()) {
-            if(power > 0) {
-              System.out.println("FRONT: " + power);
+      if(power > 0) {
         climber.moveFrontMotors(power);
       } else if(power < 0){
         climber.moveFrontMotors(0);
       }
-
     } else {
-      System.out.println("FRONT: " + power);
       climber.moveFrontMotors(power);
     }
-
   }
 
   // Make this return true when this Command no longer needs to run execute()
