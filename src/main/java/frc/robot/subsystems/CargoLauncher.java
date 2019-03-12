@@ -19,7 +19,7 @@ public class CargoLauncher extends Subsystem {
   public static DoubleSolenoid shootSolenoid;
 
   public CargoLauncher() {
-    shootSolenoid = new DoubleSolenoid(RobotMap.PCM, RobotMap.CargoCylinderShootExtend, RobotMap.CargoCylinderShootRetract);
+    shootSolenoid = new DoubleSolenoid(RobotMap.PCM, RobotMap.cargoCylinderShootExtend, RobotMap.cargoCylinderShootRetract);
     retract();
   }
   

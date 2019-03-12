@@ -39,8 +39,8 @@ public class HatchMechanism extends Subsystem {
 
   public HatchMechanism() {
     //Pneumatics
-    hatchCylinderExtend = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchExtenderCylinderExtend, RobotMap.HatchExtenderCylinderRetract);
-    hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.HatchEjectorCylinderExtend, RobotMap.HatchEjectorCylinderRetract);
+    hatchCylinderExtend = new DoubleSolenoid(RobotMap.PCM, RobotMap.hatchExtenderCylinderExtend, RobotMap.hatchExtenderCylinderRetract);
+    hatchCylinderEject = new DoubleSolenoid(RobotMap.PCM, RobotMap.hatchEjectorCylinderExtend, RobotMap.hatchEjectorCylinderRetract);
     //pressureTransducer = new AnalogInput(RobotMap.PressureTranducer);
 
     leadScrew = new VictorSPX(RobotMap.leadScrew);
@@ -50,8 +50,8 @@ public class HatchMechanism extends Subsystem {
     setEjector("reverse");
 
     //Limit switches
-    limitSwitchLeft = new DigitalInput(RobotMap.HatchLimitSwitchLeft);
-    limitSwitchRight = new DigitalInput(RobotMap.HatchLimitSwitchRight);
+    limitSwitchLeft = new DigitalInput(RobotMap.hatchLimitSwitchLeft);
+    limitSwitchRight = new DigitalInput(RobotMap.hatchLimitSwitchRight);
     leadScrewSpeed = 0;
   }
 
