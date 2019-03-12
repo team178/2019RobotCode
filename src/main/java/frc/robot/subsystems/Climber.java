@@ -26,7 +26,7 @@ import frc.robot.commands.MoveBothClimbers;
 
 public class Climber extends Subsystem  {
 
-  private static BuiltInAccelerometer accelerometer = new BuiltInAccelerometer();
+  public static BuiltInAccelerometer accelerometer = new BuiltInAccelerometer();
   
   public static TalonSRX arm1;
   public static TalonSRX arm2;
@@ -121,10 +121,13 @@ public class Climber extends Subsystem  {
 
   public String getTilt() {
     double angle = accelerometer.getX();
-    if (angle > 0) {
-      return "forward";
+
+    if (Math.abs(angle) < 2) {
+      return "Yeet";
+    } else if (angle > 0) {
+      return "Forward";
     }
-    return "backward";
+    return "Backward";
   }
   
   @Override
