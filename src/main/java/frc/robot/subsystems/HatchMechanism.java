@@ -87,7 +87,7 @@ public class HatchMechanism extends Subsystem {
       factor *= -1; 
     }
 
-    leadScrew.set(ControlMode.PercentOutput, factor);
+    leadScrew.set(ControlMode.PercentOutput, factor * 0.4 );
     
    /* if (!hasReachedLeftBound() && !hasReachedRightBound()) {
       leadScrew.set(ControlMode.PercentOutput, factor);

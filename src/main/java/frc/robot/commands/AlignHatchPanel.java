@@ -51,6 +51,7 @@ public class AlignHatchPanel extends Command
   @Override
   protected void execute() 
   {
+    System.out.println("Left:" + pixy.getLeft() + ", Right:" + pixy.getRight());
     triggerPressed = false; 
     pixy.updateTargetValues();//gets pixy values
 
@@ -86,13 +87,14 @@ public class AlignHatchPanel extends Command
         triggerPressed = true;
       } else {
         if (pixy.canAutoAlign()) {
-        } else if (x1 == 317 || x2 == 317) {//sent if three objects 
-          hatchmechanism.moveLeadScrew(true, 0);
-         // drivetrain.drive(0.3, 0.3);//drives forward if three objects are detected, unfinished
-        } else if (diff > 0) {
-          hatchmechanism.moveLeadScrew(false, 1);
-        } else {
-          hatchmechanism.moveLeadScrew(true, 1);
+          if (x1 == 317 || x2 == 317) {//sent if three objects 
+            hatchmechanism.moveLeadScrew(true, 0);
+           // drivetrain.drive(0.3, 0.3);//drives forward if three objects are detected, unfinished
+          } else if (diff > 0) {
+            hatchmechanism.moveLeadScrew(false, 1);
+          } else {
+            hatchmechanism.moveLeadScrew(true, 1);
+          }
         }
       }
     }
@@ -120,6 +122,7 @@ public class AlignHatchPanel extends Command
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    System.out.println("diff: " + diff);
     boolean temp = (Math.abs(diff) < TOLERANCE || triggerPressed);
     Robot.isAligned = temp;
     return temp;

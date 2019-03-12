@@ -56,13 +56,11 @@ public class Climber extends Subsystem  {
   
   //Climbing methods
   public void moveFrontMotors(double power)  {
-    power *= 0.5;
     arm1.set(ControlMode.PercentOutput,-power);
     arm2.set(ControlMode.PercentOutput, -power);
   }
   
   public void moveBackMotors(double power) {
-    power *= 0.5;
     back1.set(ControlMode.PercentOutput, -power);
     back2.set(ControlMode.PercentOutput, -power);
   }

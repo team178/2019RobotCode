@@ -31,7 +31,7 @@ public class MoveBackClimber extends Command {
   @Override
   protected void execute() {
     power = -oi.getRightStickYAux();
-    if (Math.abs(power) < 0.1){
+    if (Math.abs(power) < 0.2){
       climber.moveBackMotors(0);
     } else if (climber.isBackClimberAtTop()) {
       if(power > 0){

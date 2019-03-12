@@ -32,7 +32,7 @@ public class MoveFrontClimber extends Command {
   @Override
   protected void execute() {
     power = oi.getLeftStickYAux();
-    if (Math.abs(power) < 0.1){
+    if (Math.abs(power) < 0.2){
       climber.moveFrontMotors(0);
     } else if (climber.isFrontClimberAtTop()) {
       if(power > 0){

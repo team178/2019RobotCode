@@ -111,8 +111,10 @@ import edu.wpi.first.wpilibj.I2C;
     /*System.out.println("FRONT TOP:    " + climber.isFrontClimberAtTop());
     System.out.println("FRONT BOTTOM: " + climber.isFrontClimberAtBottom());
     System.out.println("BACK TOP:     " + climber.isBackClimberAtTop());
-    System.out.println("BACK BOTTOM:  " + climber.isBackClimberAtBottom());*/
+    System.out.println("BACK BOTTOM:  " + climber.isBackClimberAtBottom());
+  */
   }
+
 
   @Override
   public void testPeriodic() {

@@ -37,7 +37,7 @@ public class MoveBothClimbers extends Command {
     backPower = -oi.getRightStickYAux();
 
     //Front climber
-    if (Math.abs(frontPower) < 0.1){
+    if (Math.abs(frontPower) < 0.2){
       climber.moveFrontMotors(0);
     } else if (climber.isFrontClimberAtTop()) {
       if(frontPower > 0){
@@ -56,7 +56,7 @@ public class MoveBothClimbers extends Command {
     }
 
     //Back climb
-    if (Math.abs(backPower) < 0.1){
+    if (Math.abs(backPower) < 0.2){
       climber.moveBackMotors(0);
     } else if (climber.isBackClimberAtTop()) {
       if(backPower > 0){
