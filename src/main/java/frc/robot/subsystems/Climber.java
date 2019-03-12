@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -24,6 +25,8 @@ import frc.robot.commands.MoveBothClimbers;
  */
 
 public class Climber extends Subsystem  {
+
+  private static BuiltInAccelerometer accelerometer = new BuiltInAccelerometer();
   
   public static TalonSRX arm1;
   public static TalonSRX arm2;
@@ -114,6 +117,14 @@ public class Climber extends Subsystem  {
 
   public void setGimpDriveDirection(String gimpDriveDirection) {
     this.gimpDriveDirection = gimpDriveDirection;
+  }
+
+  public String getTilt() {
+    double angle = accelerometer.getX();
+    if (angle > 0) {
+      return "forward";
+    }
+    return "backward";
   }
   
   @Override

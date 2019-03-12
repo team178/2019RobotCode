@@ -74,6 +74,7 @@ import edu.wpi.first.wpilibj.I2C;
     SmartDashboard.putString("Pixy Status", pixy.getObjectInfo());
     SmartDashboard.putString("Lead Screw Motion", hatchMechanism.getLeadScrewMotion());
     SmartDashboard.putBoolean("Hatch Mechanism Centered", isAligned);
+    SmartDashboard.putString("Robot tilt", climber.getTilt());
   }
 
   @Override
