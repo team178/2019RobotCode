@@ -10,14 +10,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AutoClimb extends Command {
+  
+  OI oi;
+  Climber climber;
+  
   public AutoClimb() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.climber);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    oi = Robot.OI;
+    climber = Robot.climber;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -28,7 +33,7 @@ public class AutoClimb extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return isFrontClimberAtTop() && isBackClimberAtTop();
   }
 
   // Called once after isFinished returns true
