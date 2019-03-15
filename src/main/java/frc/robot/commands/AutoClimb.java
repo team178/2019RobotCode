@@ -17,7 +17,10 @@ public class AutoClimb extends Command {
   private final double POWER = 1.00;
   private double overidePowerFront;
   private double overridePowerBack;
-  private boolean finished;
+  
+  private boolean frontClimberFinished;
+  private boolean rightClimberFinished;
+  private boolean override;
   
   public AutoClimb() {
     requires(Robot.climber);
@@ -28,6 +31,10 @@ public class AutoClimb extends Command {
   protected void initialize() {
     oi = Robot.OI;
     climber = Robot.climber;
+    
+    frontClimberFinished = false;;
+    rightClimberFinished = false;
+    overrideControls = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -37,23 +44,19 @@ public class AutoClimb extends Command {
     overridePowerBack = -oi.getRightStickYAux();
     
     //Front climber
-    if (Math.abs(overridePowerFront) < 0.1){
-      climber.moveFrontMotors(0);
-      finished = true;
-    } else if (climber.isFrontClimberAtTop()) {
-      climber.moveFrontMotors(0);
-      finished = true;
+    if (Math.abs(overridePowerFront) > 0.1){
+      overrideControls = true;
+    } else if (climber.isFrontClimberAtBottom()) {
+      frontClimberFinished = true;
     } else {
       climber.moveFrontMotors(POWER);
     }
 
     //Back climb
-    if (Math.abs(overridePowerBack) < 0.2){
-      climber.moveBackMotors(0);
-      finished = true;
-    } else if (climber.isBackClimberAtTop()) {
-      climber.moveBackMotors(0);
-      finished = true;
+    if (Math.abs(overridePowerBack) > 0.1){
+      overrideControls = true;
+    } else if (climber.isBackClimberAtBottom()) {
+      backClimberFinished = true;
     } else {
       climber.moveBackMotors(-POWER);
     }
@@ -62,7 +65,7 @@ public class AutoClimb extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return finished;
+    return (frontClimberFinished && backClimberFinished) || override;
   }
 
   // Called once after isFinished returns true
