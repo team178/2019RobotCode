@@ -32,7 +32,7 @@ public class AutoClimb extends Command {
     oi = Robot.OI;
     climber = Robot.climber;
     
-    frontClimberFinished = false;;
+    frontClimberFinished = false;
     rightClimberFinished = false;
     overrideControls = false;
   }
@@ -47,6 +47,7 @@ public class AutoClimb extends Command {
     if (Math.abs(overridePowerFront) > 0.1){
       overrideControls = true;
     } else if (climber.isFrontClimberAtBottom()) {
+      climber.moveFrontMotors(0);
       frontClimberFinished = true;
     } else {
       climber.moveFrontMotors(POWER);
@@ -56,6 +57,7 @@ public class AutoClimb extends Command {
     if (Math.abs(overridePowerBack) > 0.1){
       overrideControls = true;
     } else if (climber.isBackClimberAtBottom()) {
+      climber.moveBackMotors(0);
       backClimberFinished = true;
     } else {
       climber.moveBackMotors(-POWER);
