@@ -27,19 +27,21 @@ public class RobotMap {
   public static int leadScrew = 10;
   public static int PCM = 11;
   
-  //PCM  
-  public static int cargoCylinderShootExtend = 0; 
-  public static int cargoCylinderShootRetract = 1; 
+  //PCM 
+  public static int cargoRailCylinderExtend = 0;
+  public static int cargoRailCylinderRetract = 1;
 
-  public static int hatchExtenderCylinderExtend = 2; 
-  public static int hatchExtenderCylinderRetract = 3; 
+  public static int cargoCylinderShootExtend = 2;
+  public static int cargoCylinderShootRetract = 3; 
 
-  public static int hatchEjectorCylinderExtend = 4; 
-  public static int hatchEjectorCylinderRetract = 5;
+  public static int hatchExtenderCylinderExtend = 4; 
+  public static int hatchExtenderCylinderRetract = 5; 
+
+  public static int hatchEjectorCylinderExtend = 6;
+  public static int hatchEjectorCylinderRetract = 7;
 
   //DIO ports
-  public static int hatchLimitSwitchLeft = 2;
-  public static int hatchLimitSwitchCenter = 3;
+  public static int hatchLimitSwitchLeft = 3;
   public static int hatchLimitSwitchRight = 4;
   
   public static int proxSensorTopFront = 5;

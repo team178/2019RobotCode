@@ -15,37 +15,37 @@ import frc.robot.Robot;
 import frc.robot.subsystems.CargoLauncher;
 
 public class RetractCargoShooter extends Command {
+
   OI oi;
-  CargoLauncher cargolauncher;
+  CargoLauncher cargoLauncher;
 
   public RetractCargoShooter() {
     requires(Robot.cargolauncher);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    cargolauncher = Robot.cargolauncher;
+    cargoLauncher = Robot.cargolauncher;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    cargolauncher.retract();
+    while (cargoLauncher.getShootSolenoidState() != DoubleSolenoid.Value.kReverse) {
+      cargoLauncher.retract();
+    }
+    cargoLauncher.close();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (cargolauncher.getShootSolenoidState() == DoubleSolenoid.Value.kReverse){
+    if (cargoLauncher.getShootSolenoidState() == DoubleSolenoid.Value.kReverse){
       return true;
     }
-    else{
-      return false;
-    }
+    return false;
   }
 
   // Called once after isFinished returns true
