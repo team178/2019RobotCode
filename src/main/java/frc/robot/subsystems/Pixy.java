@@ -24,12 +24,14 @@ public class Pixy extends Arduino {
   // here. Call these from Commands.
   public static int lLoc;
   public static int rLoc;
+  public static int status;
 
   public Pixy(Port port, int address)//use robotmap values
   {
     super(port, address);
-    lLoc = 318;//when it doesn't recognize anything, higher than the value
-    rLoc = 318;
+    lLoc = 0;
+    rLoc = 0;
+    status = 0;
   }
 
   @Override
@@ -41,8 +43,8 @@ public class Pixy extends Arduino {
   @Override
   public byte[] receiveMessage(int address)
   {
-    byte[] dataFromArduino = new byte[4];
-    received = !arduino.read(address, 4, dataFromArduino);
+    byte[] dataFromArduino = new byte[6];
+    received = !arduino.read(address, 6, dataFromArduino);
       return dataFromArduino;
   }
 
@@ -66,9 +68,19 @@ public class Pixy extends Arduino {
      bytebuffer2.put((byte) 0x00);
      bytebuffer2.flip(); //flips order of the bytes we put in the bytebuffer and stages it to convert to base 10
      int x2 = bytebuffer2.getInt(); //converts base 2 value to base 10
-  
+    
+    ByteBuffer bytebuffer3 = ByteBuffer.allocateDirect(4);
+      bytebuffer3.order(ByteOrder.LITTLE_ENDIAN);
+      bytebuffer3.put(coordinatesFromPixy[5]);
+      bytebuffer3.put(coordinatesFromPixy[4]);
+      bytebuffer3.put((byte) 0x00);
+      bytebuffer3.put((byte) 0x00);
+      bytebuffer3.flip();
+      int x3 = bytebuffer3.getInt();
+
     lLoc = x1;
     rLoc = x2;
+    status = x3;
     
     if (x1 > x2)//determines which one is on the left 
     {
@@ -117,7 +129,7 @@ public class Pixy extends Arduino {
 
   public boolean canAutoAlign()//checks if it sees only two objects
   {
-    if (lLoc == 0 || rLoc == 0 || lLoc > 315 || rLoc > 315) {
+    if (lLoc == 0 || rLoc == 0) {
       return false;
     }
     return true; 
@@ -125,18 +137,10 @@ public class Pixy extends Arduino {
 
   public String getObjectInfo()
   {
-    if (this.getRight() == 316 || this.getLeft() == 316)//if one or zero objects are detected
-    {
-        return "not enough tapes detected";
+    if (status == 0) {
+      return "No pixy communication";
     }
-    if (this.getRight() == 317 || this.getLeft() == 317)//if three or more objects are detected 
-    {
-      return "too many tapes detected";
-    }
-    if (this.getRight() == 318 || this.getLeft() == 318)//if the arduino isn't sending values 
-    {
-      return "no communication with pixy";
-    }
-    return "two tapes detected, go auto align!";
+      int objects = status - 1;
+      return "Currently detecting " + objects + " objects";
   }
 }

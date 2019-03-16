@@ -64,7 +64,7 @@ public class AlignHatchPanel extends Command
     double power = oi.getRightTriggerAux() - oi.getLeftTriggerAux();
     SmartDashboard.putString("Test Align", "Difference: " + diff);
     
-    if (x1 == 316 || x1 == 317 || x2 == 316 || x2 == 317) {
+    if (Pixy.status != 3) {
       lightsArduino.sendMessage("x");
     } else {
       lightsArduino.sendMessage("a");
@@ -87,7 +87,7 @@ public class AlignHatchPanel extends Command
         triggerPressed = true;
       } else {
         if (pixy.canAutoAlign()) {
-          if (x1 == 317 || x2 == 317) {//sent if three objects 
+          if (Pixy.status == 4) {//sent if three objects 
             hatchmechanism.moveLeadScrew(true, 0);
            // drivetrain.drive(0.3, 0.3);//drives forward if three objects are detected, unfinished
           } else if (diff > 0) {
