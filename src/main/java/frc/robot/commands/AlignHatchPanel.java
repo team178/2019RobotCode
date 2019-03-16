@@ -54,7 +54,7 @@ public class AlignHatchPanel extends Command
     System.out.println("Left:" + pixy.getLeft() + ", Right:" + pixy.getRight());
     triggerPressed = false; 
     pixy.updateTargetValues();//gets pixy values
-
+    System.out.println("Status: " + pixy.getObjectInfo());
     int firstLocation = pixy.getLeft();
     int secondLocation = pixy.getRight();
     double x1 = (double) firstLocation;//casts to double, in order to divide accurately 
