@@ -14,8 +14,9 @@ import frc.robot.subsystems.CargoLauncher;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class ExtendCargoShooter extends Command {
+
   OI oi;
-  CargoLauncher cargolauncher;
+  CargoLauncher cargoLauncher;
 
   public ExtendCargoShooter() {
     requires(Robot.cargolauncher);
@@ -25,48 +26,25 @@ public class ExtendCargoShooter extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    cargolauncher = Robot.cargolauncher;
+    cargoLauncher = Robot.cargolauncher;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    /*
-    check if the shooter is aiming up
-       if yes:
-        set shooter "punch" to forward
-      if no:
-      set shooter "punch" to reverse 
-     */
-    //if(cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kForward){
-      cargolauncher.shoot();
-      //shoot ball
-    //}
-    //else if (cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kReverse){
-      //cargolauncher.retract();
-      //stay retracted
-    //}
+    while (cargoLauncher.getRailSolenoidState() != DoubleSolenoid.Value.kForward) {
+      cargoLauncher.open();
+    }
+    cargoLauncher.shoot();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    DoubleSolenoid.Value ShootSolenoidState = cargolauncher.getShootSolenoidState();
-    //DoubleSolenoid.Value AimSolenoidState = cargolauncher.getAimSolenoidState();
-
-    if (ShootSolenoidState == DoubleSolenoid.Value.kForward) {
-      System.out.println("Finish shooting!");
+    if (cargoLauncher.getShootSolenoidState() == DoubleSolenoid.Value.kForward) {
       return true;
-    //} else if(AimSolenoidState == DoubleSolenoid.Value.kReverse){
-      //System.out.println("Could not shoot: Aimer is down. Try to raise aimer.");
-      //cargolauncher.raiseLauncher();
-      //return false;
-    } else {
-      System.out.println("Not finish shooting. Try again: " + ShootSolenoidState);
-      return false;
     }
-
+    return false;
   }
 
   // Called once after isFinished returns true

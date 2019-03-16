@@ -117,7 +117,7 @@ public class OI {
 	 * @return the raw slider value that retuns 0- to +1 insteaad of -1 to +1
 	 */
 	public double getSlider() {
-		return 1 - ((joystick.getRawAxis(3) + 1) / 2); //joystick.getRawAxis(3);\
+		return 1 - ((joystick.getRawAxis(3) + 1) / 2);
 	}
 	
 	//AUX controller accessor methods
