@@ -86,10 +86,11 @@ public class OI {
 		
 		auxA.whenPressed(new ExtendCargoShooter());
 		auxA.whenReleased(new RetractCargoShooter());
-		auxX.whileHeld(new AlignHatchPanel());
+		auxX.whenPressed(new OpenCargoRails());
+		auxX.whenReleased(new CloseCargoRails());
 
-		auxLeftBumper.whileHeld(new MoveFrontClimber());
-		auxRightBumper.whileHeld(new MoveBackClimber());
+		auxLeftBumper.whenPressed(new CenterHatchMechanism());
+		auxRightBumper.whileHeld(new AlignHatchPanel());
 
 		//MAIN controls (joystick code in JoystickDrive)
 		/*mainB.whenPressed(new LightsCargo());
