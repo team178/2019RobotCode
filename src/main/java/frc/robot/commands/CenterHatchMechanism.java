@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class CenterHatchMechanism extends Command {
 
@@ -44,7 +43,7 @@ public class CenterHatchMechanism extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    
+
   }
 
   // Called when another command which requires one or more of the same
