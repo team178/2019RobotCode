@@ -106,6 +106,61 @@
               "_source0": "network_table:///SmartDashboard/Test Align",
               "_title": "Test Align"
             }
+          },
+          "9,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Go for switch?",
+              "_title": "Go for switch?"
+            }
+          },
+          "0,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Go for vault?",
+              "_title": "Go for vault?"
+            }
+          },
+          "9,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Go for switch no matter what?",
+              "_title": "Go for switch no matter what?"
+            }
+          },
+          "0,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Drive Forward?",
+              "_title": "Drive Forward?"
+            }
+          },
+          "1,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/AutoLocation",
+              "_title": "AutoLocation"
+            }
           }
         }
       }
@@ -200,6 +255,69 @@
                   "_type": "Text View",
                   "_source0": "network_table:///LiveWindow/Ungrouped/DoubleSolenoid[11,2]/Value",
                   "_title": "DoubleSolenoid[11,2]/Value"
+                },
+                {
+                  "_type": "Encoder",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[1]",
+                  "_title": "Encoder[1]"
+                },
+                {
+                  "_type": "Voltage View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[0]",
+                  "_title": "AnalogInput[0]",
+                  "Range/Min": 0.0,
+                  "Range/Max": 5.0,
+                  "Range/Center": 0.0,
+                  "Visuals/Orientation": "HORIZONTAL",
+                  "Visuals/Number of tick marks": 5
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DoubleSolenoid[7,1]/Value",
+                  "_title": "DoubleSolenoid[7,1]/Value"
+                },
+                {
+                  "_type": "Gyro",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogGyro[1]",
+                  "_title": "AnalogGyro[1]",
+                  "Visuals/Major tick spacing": 45.0,
+                  "Visuals/Starting angle": 180.0,
+                  "Visuals/Show tick mark ring": true
+                },
+                {
+                  "_type": "Encoder",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[0]",
+                  "_title": "Encoder[0]"
+                },
+                {
+                  "_type": "Voltage View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[3]",
+                  "_title": "AnalogInput[3]",
+                  "Range/Min": 0.0,
+                  "Range/Max": 5.0,
+                  "Range/Center": 0.0,
+                  "Visuals/Orientation": "HORIZONTAL",
+                  "Visuals/Number of tick marks": 5
+                },
+                {
+                  "_type": "Voltage View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[2]",
+                  "_title": "AnalogInput[2]",
+                  "Range/Min": 0.0,
+                  "Range/Max": 5.0,
+                  "Range/Center": 0.0,
+                  "Visuals/Orientation": "HORIZONTAL",
+                  "Visuals/Number of tick marks": 5
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DoubleSolenoid[7,5]/Value",
+                  "_title": "DoubleSolenoid[7,5]/Value"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DoubleSolenoid[7,2]/Value",
+                  "_title": "DoubleSolenoid[7,2]/Value"
                 }
               ]
             }
