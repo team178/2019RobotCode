@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.OI;
@@ -15,8 +16,11 @@ import frc.robot.subsystems.HatchMechanism;
 
 public class CenterHatchMechanism extends Command {
 
+  private static Timer timer = new Timer();
   OI oi;
   HatchMechanism hatchMechanism;
+
+  private int timeToCenter;
 
   public CenterHatchMechanism() {
     requires(Robot.hatchMechanism);
@@ -25,13 +29,19 @@ public class CenterHatchMechanism extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    oi = Robot.oi;
+    hatchMechanism = Robot.hatchMechanism;
+    timeToCenter = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
+    hatchMechanism.leadScrewToLeft();
+    timer.reset();
+    while (timer.get() < timeToCenter) {
+      hatchMechanism.moveLeadScrew(true, 0.8);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

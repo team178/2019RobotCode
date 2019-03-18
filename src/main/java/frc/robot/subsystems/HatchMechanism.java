@@ -96,6 +96,12 @@ public class HatchMechanism extends Subsystem {
     } */
     //System.out.println(getActuatorPosition());
   }
+
+  public void leadScrewToLeft() {
+    while (!hasReachedLeftBound()) {
+      moveLeadScrew(false, 1);
+    }
+  }
   
   //Limit switch methods
   public boolean hasReachedLeftBound() {
