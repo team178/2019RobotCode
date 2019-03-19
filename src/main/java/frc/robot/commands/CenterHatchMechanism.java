@@ -31,7 +31,7 @@ public class CenterHatchMechanism extends Command {
   protected void initialize() {
     oi = Robot.oi;
     hatchMechanism = Robot.hatchMechanism;
-    timeToCenter = 0;
+    timeToCenter = 0; //TODO run CalibrateHatchSlide n save time in variable
   }
 
   // Called repeatedly when this Command is scheduled to run

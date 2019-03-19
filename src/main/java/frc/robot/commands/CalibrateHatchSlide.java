@@ -20,6 +20,7 @@ public class CalibrateHatchSlide extends Command {
   OI oi;
   HatchMechanism hatchMechanism;
   
+  private String state;
   private double calibratedTimeToCenter;
   
   public CalibrateHatchSlide() {
@@ -31,25 +32,32 @@ public class CalibrateHatchSlide extends Command {
   protected void initialize() {
     oi = Robot.oi;
     hatchMechanism = Robot.hatchMechanism;
+    state = "move left";
     calibratedTimeToCenter = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    hatchMechanism.leadScrewToLeft();
-    timer.reset();
-    
-    while (!hatchMechanism.hasReachedLeftBound()) {
+    if (state.equals("move left")) {
+      hatchMechanism.moveLeadScrew(false, 1);
+      if (hatchMechanism.hasReachedLeftBound()) {
+        state = "move right";
+        timer.reset();
+      }
+    } else if (state.equals("move right")) {
       hatchMechanism.moveLeadScrew(true, 1);
+      if (hatchMechanism.hasReachedRightBound()) {
+        calibratedTimeToCenter = timer.get() / 2;
+        state = "reached right";
+      }
     }
-    calibratedTimeToCenter = timer.get() / 2;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return state.equals("reached right");
   }
 
   // Called once after isFinished returns true

@@ -103,6 +103,13 @@ public class HatchMechanism extends Subsystem {
     }
     moveLeadScrew(true, 0);
   }
+
+  public void leadScrewToRight() {
+    while (!hasReachedRightBound()) {
+      moveLeadScrew(true, 1);
+    }
+    moveLeadScrew(true, 0);
+  }
   
   //Limit switch methods
   public boolean hasReachedLeftBound() {
