@@ -20,7 +20,7 @@ public class CenterHatchMechanism extends Command {
   OI oi;
   HatchMechanism hatchMechanism;
 
-  private static final double timeToCenter = 0.72;
+  private static final double timeToCenter = 0.69;
   private boolean reachedCenter;
 
   public CenterHatchMechanism() {
