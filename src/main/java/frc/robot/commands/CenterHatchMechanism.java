@@ -20,7 +20,7 @@ public class CenterHatchMechanism extends Command {
   OI oi;
   HatchMechanism hatchMechanism;
 
-  private int timeToCenter;
+  private double timeToCenter;
 
   public CenterHatchMechanism() {
     requires(Robot.hatchMechanism);
