@@ -8,43 +8,46 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.CargoLauncher;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.subsystems.Arduino;
+import frc.robot.subsystems.Pixy;
 
-public class ExtendCargoShooter extends Command {
+public class LightsAlign extends Command {
+  
+  Arduino lightsArduino; 
+  boolean sent;
+  Pixy pixy;
 
-  OI oi;
-  CargoLauncher cargoLauncher;
+  private boolean alignable;
 
-  public ExtendCargoShooter() {
-    requires(Robot.cargolauncher);
+  public LightsAlign() {
+    requires(Robot.lightsArduino);
+    alignable = false;  
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    oi = Robot.oi;
-    cargoLauncher = Robot.cargolauncher;
+    pixy = Robot.pixy;
+    lightsArduino = Robot.lightsArduino;
+    alignable = pixy.canAutoAlign();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    while (cargoLauncher.getRailSolenoidState() != DoubleSolenoid.Value.kForward) {
-      cargoLauncher.open();
+    alignable = pixy.canAutoAlign();
+    if (alignable) {
+      sent = lightsArduino.sendMessage("a");
+    } else {
+      sent = lightsArduino.sendMessage("x");
     }
-    cargoLauncher.shoot();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (cargoLauncher.getShootSolenoidState() == DoubleSolenoid.Value.kForward) {
-      return true;
-    }
-    return false;
+    return sent;
   }
 
   // Called once after isFinished returns true

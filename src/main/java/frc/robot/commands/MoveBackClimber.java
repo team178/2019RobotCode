@@ -10,51 +10,195 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.CargoLauncher;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.subsystems.Climber;
 
-public class ExtendCargoShooter extends Command {
-
+public class MoveBackClimber extends Command {
   OI oi;
-  CargoLauncher cargoLauncher;
+  Climber climber;
+  private double power;
 
-  public ExtendCargoShooter() {
-    requires(Robot.cargolauncher);
+  public MoveBackClimber() {
+    requires(Robot.climber);
   }
-
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    cargoLauncher = Robot.cargolauncher;
+    climber = Robot.climber;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    while (cargoLauncher.getRailSolenoidState() != DoubleSolenoid.Value.kForward) {
-      cargoLauncher.open();
+    power = -oi.getRightStickYAux();
+    if (Math.abs(power) < 0.2){
+      climber.moveBackMotors(0);
+    } else if (climber.isBackClimberAtTop()) {
+      if(power > 0){
+        climber.moveBackMotors(0);
+      }else if(power < 0){
+        climber.moveBackMotors(power);
+      }
+    } else if (climber.isBackClimberAtBottom()) {
+      if(power > 0) {
+        climber.moveBackMotors(power);
+      } else if(power < 0){
+        climber.moveBackMotors(0);
+      }
+    } else {
+      climber.moveBackMotors(power);
     }
-    cargoLauncher.shoot();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (cargoLauncher.getShootSolenoidState() == DoubleSolenoid.Value.kForward) {
-      return true;
-    }
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    climber.moveBackMotors(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    climber.moveBackMotors(0);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//eclips
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//a

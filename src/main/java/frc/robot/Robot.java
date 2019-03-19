@@ -7,31 +7,33 @@
 
 package frc.robot;
 
-//importing libraries and packages
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import frc.robot.commands.LightsOff;
 import frc.robot.subsystems.*;
 import edu.wpi.first.cameraserver.CameraServer;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.I2C;
 
 
  public class Robot extends TimedRobot {
-   
+  
+ //All subsystems & classes declared
  public static OI oi;
-
- //Here is where all the subsystems on the robot are declared
  public static DriveTrain drivetrain;
- 
  public static HatchMechanism hatchMechanism;
  public static Climber climber;
  public static CargoLauncher cargolauncher;
  public static Arduino lightsArduino;
  public static Pixy pixy;
- //public static TimeOfFlight tofL;
- //public static TimeOfFlight tofR;
+
+ public static boolean isAligned;
+ 
+ //USB Camera declarations
  public static CameraServer camserv;
  public static UsbCamera camera1;
  public static UsbCamera camera2;
@@ -41,38 +43,43 @@ import edu.wpi.first.wpilibj.I2C;
   public void robotInit() {
     drivetrain = new DriveTrain();
     hatchMechanism = new HatchMechanism();
-    climber = new Climber();  
+    climber = new Climber();
     cargolauncher = new CargoLauncher(); 
-    lightsArduino = new Arduino(I2C.Port.kOnboard, RobotMap.lightsAddress);//1 is placeholder
-    pixy = new Pixy(RobotMap.pixyAddress);
-    //tofL = new TimeOfFlight(RobotMap.tofAddressL);
-    //tofR = new TimeOfFlight(RobotMap.tofAddressR);
+    lightsArduino = new Arduino(I2C.Port.kMXP, RobotMap.lightsAddress); //lightsArduino will always be plugged into MXP port
+    pixy = new Pixy(I2C.Port.kOnboard, RobotMap.pixyAddress); //pixy will always be plugged into onboard port
     oi = new OI();
-    //sets light strips to color of alliance (red or blue)
-    lightsArduino.setAllianceColor();
+    lightsArduino.setAllianceColor(); //Sets light strips to color of alliance (red or blue)
 
+    isAligned = false;
+
+    //Camera initializations
     camserv = CameraServer.getInstance();
     
-    //formats video specifications for cameras
+    //Camera 1
     camera1 = camserv.startAutomaticCapture("cam0", 0);
     camera1.setResolution(160, 120);
     camera1.setFPS(14);
-    camera1.setPixelFormat(PixelFormat.kYUYV);
+    camera1.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
 
+    //Camera 2
     camera2 = CameraServer.getInstance().startAutomaticCapture("cam1", 1);
     camera2.setResolution(160, 120);
     camera2.setFPS(14);
-    camera2.setPixelFormat(PixelFormat.kYUYV);
-
-    System.out.println("Robot init: " + hatchMechanism.getExtenderSolenoidState());
+    camera2.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
   }
 
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putBoolean("Can Auto Align", pixy.canAutoAlign());
+    SmartDashboard.putString("Pixy Status", pixy.getObjectInfo());
+    SmartDashboard.putString("Lead Screw Motion", hatchMechanism.getLeadScrewMotion());
+    SmartDashboard.putBoolean("Hatch Mechanism Centered", isAligned);
+    SmartDashboard.putString("Robot tilt", climber.getTilt());
   }
 
   @Override
   public void disabledInit() {
+    lightsArduino.sendMessage("n");
   }
 
   @Override
@@ -102,11 +109,11 @@ import edu.wpi.first.wpilibj.I2C;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    //System.out.println("Current state: " + hatchMechanism.getMechanismSolenoidState());
   }
+
 
   @Override
   public void testPeriodic() {
-    //Scheduler.getInstance().run();
+    Scheduler.getInstance().run();
   }
 }

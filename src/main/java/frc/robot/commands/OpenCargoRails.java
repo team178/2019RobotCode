@@ -13,12 +13,12 @@ import frc.robot.Robot;
 import frc.robot.subsystems.CargoLauncher;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-public class ExtendCargoShooter extends Command {
+public class OpenCargoRails extends Command {
 
   OI oi;
   CargoLauncher cargoLauncher;
 
-  public ExtendCargoShooter() {
+  public OpenCargoRails() {
     requires(Robot.cargolauncher);
   }
 
@@ -32,19 +32,13 @@ public class ExtendCargoShooter extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    while (cargoLauncher.getRailSolenoidState() != DoubleSolenoid.Value.kForward) {
-      cargoLauncher.open();
-    }
-    cargoLauncher.shoot();
+    cargoLauncher.open();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (cargoLauncher.getShootSolenoidState() == DoubleSolenoid.Value.kForward) {
-      return true;
-    }
-    return false;
+    return cargoLauncher.getRailSolenoidState() == DoubleSolenoid.Value.kForward;
   }
 
   // Called once after isFinished returns true

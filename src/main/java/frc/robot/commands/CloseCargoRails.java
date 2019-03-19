@@ -13,12 +13,12 @@ import frc.robot.Robot;
 import frc.robot.subsystems.CargoLauncher;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-public class RetractCargoAimer extends Command {
+public class CloseCargoRails extends Command {
+
   OI oi;
-  CargoLauncher cargolauncher;
-  public RetractCargoAimer() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+  CargoLauncher cargoLauncher;
+  
+  public CloseCargoRails() {
     requires(Robot.cargolauncher);
   }
 
@@ -26,23 +26,19 @@ public class RetractCargoAimer extends Command {
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    cargolauncher = Robot.cargolauncher;
+    cargoLauncher = Robot.cargolauncher;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      cargolauncher.lowerLauncher();
+    cargoLauncher.close();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(cargolauncher.getAimSolenoidState() == DoubleSolenoid.Value.kReverse){
-      return true;
-    } else {
-      return false;
-    }
+    return cargoLauncher.getRailSolenoidState() == DoubleSolenoid.Value.kReverse;
   }
 
   // Called once after isFinished returns true

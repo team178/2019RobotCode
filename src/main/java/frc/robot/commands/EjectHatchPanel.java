@@ -15,13 +15,12 @@ import frc.robot.subsystems.HatchMechanism;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class EjectHatchPanel extends Command {
+  
   OI oi; 
   HatchMechanism hatchmechanism;
 
   public EjectHatchPanel() {
     requires(Robot.hatchMechanism);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time

@@ -12,37 +12,65 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.Climber;
 
-public class PushRobotUp extends Command {
+public class AutoClimb extends Command {
+  
   OI oi;
   Climber climber;
-  private double power;
-
-  public PushRobotUp(double pwr) {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+  
+  private final double POWER = 1.00;
+  private double overridePowerFront;
+  private double overridePowerBack;
+  
+  private boolean frontClimberFinished;
+  private boolean backClimberFinished;
+  private boolean overrideControls;
+  
+  public AutoClimb() {
     requires(Robot.climber);
-    power = pwr;
   }
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
     climber = Robot.climber;
+    
+    frontClimberFinished = false;
+    backClimberFinished = false;
+    overrideControls = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    power = oi.getLeftStickYAux();
-    if (!climber.checkLimitSwitchTop2() || !climber.checkLimitSwitchBottom2()) {
-      climber.moveBackMotors(power);
+    overridePowerFront = oi.getLeftStickYAux();
+    overridePowerBack = -oi.getRightStickYAux();
+    
+    //Front climber
+    if (Math.abs(overridePowerFront) > 0.1){
+      overrideControls = true;
+    } else if (climber.isFrontClimberAtBottom()) {
+      climber.moveFrontMotors(0);
+      frontClimberFinished = true;
+    } else {
+      climber.moveFrontMotors(POWER);
+    }
+
+    //Back climb
+    if (Math.abs(overridePowerBack) > 0.1){
+      overrideControls = true;
+    } else if (climber.isBackClimberAtBottom()) {
+      climber.moveBackMotors(0);
+      backClimberFinished = true;
+    } else {
+      climber.moveBackMotors(-POWER);
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return (frontClimberFinished && backClimberFinished) || overrideControls;
   }
 
   // Called once after isFinished returns true
@@ -58,136 +86,3 @@ public class PushRobotUp extends Command {
     climber.moveBackMotors(0);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//eclips
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//a

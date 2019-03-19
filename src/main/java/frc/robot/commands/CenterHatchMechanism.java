@@ -7,49 +7,53 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.CargoLauncher;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.subsystems.HatchMechanism;
 
-public class ExtendCargoShooter extends Command {
+public class CenterHatchMechanism extends Command {
 
+  private static Timer timer = new Timer();
   OI oi;
-  CargoLauncher cargoLauncher;
+  HatchMechanism hatchMechanism;
 
-  public ExtendCargoShooter() {
-    requires(Robot.cargolauncher);
+  private int timeToCenter;
+
+  public CenterHatchMechanism() {
+    requires(Robot.hatchMechanism);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    cargoLauncher = Robot.cargolauncher;
+    hatchMechanism = Robot.hatchMechanism;
+    timeToCenter = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    while (cargoLauncher.getRailSolenoidState() != DoubleSolenoid.Value.kForward) {
-      cargoLauncher.open();
+    hatchMechanism.leadScrewToLeft();
+    timer.reset();
+    while (timer.get() < timeToCenter) {
+      hatchMechanism.moveLeadScrew(true, 0.8);
     }
-    cargoLauncher.shoot();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (cargoLauncher.getShootSolenoidState() == DoubleSolenoid.Value.kForward) {
-      return true;
-    }
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+
   }
 
   // Called when another command which requires one or more of the same

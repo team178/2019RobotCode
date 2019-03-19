@@ -7,50 +7,69 @@
 
 package frc.robot.commands;
 
+import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ManuallyMoveLeadScrew extends Command {
 
-    private boolean movingForward;
-    private double factor;
+    private OI oi;
     private HatchMechanism hatchmechanism;
 
-  public ManuallyMoveLeadScrew(boolean fwd, double f) {
+  public ManuallyMoveLeadScrew() {
    // requires(Robot.linearactuator);
     requires(Robot.hatchMechanism);
-    movingForward = fwd;
-    factor = f;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     hatchmechanism = Robot.hatchMechanism;
+    oi = Robot.oi;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
+
   protected void execute() {
-    hatchmechanism.moveLeadScrew(movingForward, factor);
+    double leftVal = -oi.getLeftTriggerAux();
+    double rightVal = oi.getRightTriggerAux();
+    double totalVal = leftVal + rightVal;
+
+    if (hatchmechanism.hasReachedLeftBound()) {
+      if (totalVal < 0) {
+        hatchmechanism.moveLeadScrew(true, 0);
+      } else {
+        hatchmechanism.moveLeadScrew(true, totalVal);
+      }
+    } else if (hatchmechanism.hasReachedRightBound()) {
+      if (totalVal > 0) {
+        hatchmechanism.moveLeadScrew(true, 0);
+      } else {
+        hatchmechanism.moveLeadScrew(true, totalVal);
+      }
+    } else {
+      hatchmechanism.moveLeadScrew(true, totalVal);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
-
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    hatchmechanism.moveLeadScrew(true, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    hatchmechanism.moveLeadScrew(true, 0);
   }
 }

@@ -17,18 +17,21 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class DriveTrain extends Subsystem {
 
+  //DM declarations
   public static VictorSPX left1;
   public static VictorSPX left2;
   public static VictorSPX right1;
   public static VictorSPX right2;
     
   public DriveTrain() {
+	  //DM initializations
 	  left1 = new VictorSPX(RobotMap.DMTopLeft);
 	  left2 = new VictorSPX(RobotMap.DMBottomLeft);
 	  right1 = new VictorSPX(RobotMap.DMTopRight);
 	  right2 = new VictorSPX(RobotMap.DMBottomRight);
   }
 
+  //Drive methods
   public void rightDrive(double speed) {
     right1.set(ControlMode.PercentOutput, speed);
     right2.set(ControlMode.PercentOutput, speed);
@@ -40,7 +43,7 @@ public class DriveTrain extends Subsystem {
    }
   
   public void drive(double leftMotors, double rightMotors) {
-    leftMotors *= -1;
+    leftMotors *= -1; //Inverting leftMotors so the left and right side of the robot go the same direction
     left1.set(ControlMode.PercentOutput, leftMotors);
     left2.set(ControlMode.PercentOutput, leftMotors);
     right1.set(ControlMode.PercentOutput, rightMotors);
@@ -49,7 +52,7 @@ public class DriveTrain extends Subsystem {
   
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new XBoxDrive());
-    //setDefaultCommand(new JoystickDrive());
+    //setDefaultCommand(new XBoxDrive());
+    setDefaultCommand(new JoystickDrive());
   }
 }

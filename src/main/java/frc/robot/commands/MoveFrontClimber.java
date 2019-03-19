@@ -7,55 +7,70 @@
 
 package frc.robot.commands;
 
-import frc.robot.*;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.CargoLauncher;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.subsystems.Climber; 
+import frc.robot.*;
 
-public class ExtendCargoAimer extends Command {
+public class MoveFrontClimber extends Command {
+
   OI oi;
-  CargoLauncher cargolauncher;
+  Climber climber;
+  private double power;
 
-  public ExtendCargoAimer() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.cargolauncher);
+  public MoveFrontClimber() {
+    requires(Robot.climber);
   }
-
+ 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     oi = Robot.oi;
-    cargolauncher = Robot.cargolauncher;
+    climber = Robot.climber;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
-      cargolauncher.raiseLauncher();
-    
+    power = oi.getLeftStickYAux();
+    if (Math.abs(power) < 0.2){
+      climber.moveFrontMotors(0);
+    } else if (climber.isFrontClimberAtTop()) {
+      if(power > 0){
+        climber.moveFrontMotors(0);
+      }else if(power < 0){
+        climber.moveFrontMotors(power);
+      }
+    } else if (climber.isFrontClimberAtBottom()) {
+      if(power > 0) {
+        climber.moveFrontMotors(power);
+      } else if(power < 0){
+        climber.moveFrontMotors(0);
+      }
+    } else {
+      climber.moveFrontMotors(power);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    if (cargolauncher.getAimSolenoidState()==DoubleSolenoid.Value.kForward ){
-      return true;
-    }
-    else {
-      return false;
-    }
+  protected boolean isFinished() 
+  {
+    return false;
   }
 
-  // Called once afte isFinished returns true
+  // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end()  
+  {
+    climber.moveFrontMotors(0);
   }
+  
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
+  protected void interrupted() 
+  {
+    climber.moveFrontMotors(0);
   }
 }

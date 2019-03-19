@@ -19,10 +19,11 @@ public class ClimbDrive extends Command {
   double leftVal;
   double rightVal;
 
-  public ClimbDrive() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+  private String gimpDriveDirection;
+
+  public ClimbDrive(String gimpDriveDirection) {
     requires(Robot.climber);
+    this.gimpDriveDirection = gimpDriveDirection.toLowerCase();
   }
 
   // Called just before this Command runs the first time
@@ -35,14 +36,15 @@ public class ClimbDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    leftVal = oi.getLeftTriggerMain();
-    rightVal = -oi.getRightTriggerMain();
-    if (rightVal > 0) {
-      climber.moveBackWheel(rightVal);
-    } else {
-      climber.moveBackWheel(leftVal);
+    double power = oi.getSlider();
+
+    if (gimpDriveDirection.equals("forward")) {
+      power *= -1;
     }
-    
+
+    if (gimpDriveDirection.equals("forward") || gimpDriveDirection.equals("backward")) {
+      climber.moveBackWheel(power);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -54,11 +56,13 @@ public class ClimbDrive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    climber.moveBackWheel(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    climber.moveBackWheel(0);
   }
 }
