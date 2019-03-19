@@ -40,7 +40,7 @@ public class CenterHatchMechanism extends Command {
     hatchMechanism.leadScrewToLeft();
     timer.reset();
     while (timer.get() < timeToCenter) {
-      hatchMechanism.moveLeadScrew(true, 0.8);
+      hatchMechanism.moveLeadScrew(true, 1);
     }
   }
 

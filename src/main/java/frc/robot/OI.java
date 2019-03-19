@@ -76,8 +76,6 @@ public class OI {
 		leftPadBottom3.whenPressed(new LightsRainbow());
 
 		rightPadTop1.whileHeld(new ClimbDrive("forward"));
-		rightPadTop2.whileHeld(new ClimbDrive("forward"));
-		rightPadTop3.whileHeld(new ClimbDrive("forward"));
 		rightPadBottom1.whileHeld(new ClimbDrive("backward"));
 		
 		//AUX controls
@@ -94,13 +92,7 @@ public class OI {
 		auxLeftBumper.whenPressed(new CenterHatchMechanism());
 		auxRightBumper.whileHeld(new AlignHatchPanel());
 
-		//MAIN controls (joystick code in JoystickDrive)
-		/*mainB.whenPressed(new LightsCargo());
-		mainY.whenPressed(new LightsHatch());
-		mainX.whenPressed(new LightsDefault());
-		mainStart.whenPressed(new LightsOff());
-		mainA.whenPressed(new LightsAlign());
-		mainA.whenPressed(new LightsOff());*/
+		rightPadBottom2.whenPressed(new CalibrateHatchSlide()); //temp
 	}
 
 	//JOYSTICK accessor methods

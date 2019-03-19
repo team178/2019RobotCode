@@ -43,7 +43,7 @@ public class CalibrateHatchSlide extends Command {
       hatchMechanism.moveLeadScrew(false, 1);
       if (hatchMechanism.hasReachedLeftBound()) {
         state = "move right";
-        timer.reset();
+        timer.start();
       }
     } else if (state.equals("move right")) {
       hatchMechanism.moveLeadScrew(true, 1);
