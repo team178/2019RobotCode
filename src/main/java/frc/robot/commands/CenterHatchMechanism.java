@@ -38,7 +38,7 @@ public class CenterHatchMechanism extends Command {
   @Override
   protected void execute() {
     hatchMechanism.leadScrewToLeft();
-    timer.reset();
+    timer.start();
     while (timer.get() < timeToCenter) {
       hatchMechanism.moveLeadScrew(true, 1);
     }
