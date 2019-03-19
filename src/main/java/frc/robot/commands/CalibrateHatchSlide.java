@@ -40,13 +40,13 @@ public class CalibrateHatchSlide extends Command {
   @Override
   protected void execute() {
     if (state.equals("move left")) {
-      hatchMechanism.moveLeadScrew(false, 1);
+      hatchMechanism.moveLeadScrew(false, hatchMechanism.LINEAR_CALIBRATION_SPEED);
       if (hatchMechanism.hasReachedLeftBound()) {
         state = "move right";
         timer.start();
       }
     } else if (state.equals("move right")) {
-      hatchMechanism.moveLeadScrew(true, 1);
+      hatchMechanism.moveLeadScrew(true, hatchMechanism.LINEAR_CALIBRATION_SPEED);
       if (hatchMechanism.hasReachedRightBound()) {
         calibratedTimeToCenter = timer.get() / 2;
         state = "reached right";
