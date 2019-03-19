@@ -15,42 +15,40 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ManuallyMoveLeadScrew extends Command {
 
     private OI oi;
-    private HatchMechanism hatchmechanism;
+    private HatchMechanism hatchMechanism;
 
   public ManuallyMoveLeadScrew() {
-   // requires(Robot.linearactuator);
     requires(Robot.hatchMechanism);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    hatchmechanism = Robot.hatchMechanism;
+    hatchMechanism = Robot.hatchMechanism;
     oi = Robot.oi;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-
   protected void execute() {
     double leftVal = -oi.getLeftTriggerAux();
     double rightVal = oi.getRightTriggerAux();
     double totalVal = leftVal + rightVal;
 
-    if (hatchmechanism.hasReachedLeftBound()) {
+    if (hatchMechanism.hasReachedLeftBound()) {
       if (totalVal < 0) {
-        hatchmechanism.moveLeadScrew(true, 0);
+        hatchMechanism.moveLeadScrew(true, 0);
       } else {
-        hatchmechanism.moveLeadScrew(true, totalVal);
+        hatchMechanism.moveLeadScrew(true, totalVal);
       }
-    } else if (hatchmechanism.hasReachedRightBound()) {
+    } else if (hatchMechanism.hasReachedRightBound()) {
       if (totalVal > 0) {
-        hatchmechanism.moveLeadScrew(true, 0);
+        hatchMechanism.moveLeadScrew(true, 0);
       } else {
-        hatchmechanism.moveLeadScrew(true, totalVal);
+        hatchMechanism.moveLeadScrew(true, totalVal);
       }
     } else {
-      hatchmechanism.moveLeadScrew(true, totalVal);
+      hatchMechanism.moveLeadScrew(true, totalVal);
     }
   }
 
@@ -63,13 +61,13 @@ public class ManuallyMoveLeadScrew extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    hatchmechanism.moveLeadScrew(true, 0);
+    hatchMechanism.moveLeadScrew(true, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    hatchmechanism.moveLeadScrew(true, 0);
+    hatchMechanism.moveLeadScrew(true, 0);
   }
 }
