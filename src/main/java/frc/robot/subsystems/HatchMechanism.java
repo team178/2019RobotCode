@@ -35,7 +35,7 @@ public class HatchMechanism extends Subsystem {
   //Linear actuator died, so it was replaced by lead screw
   public static VictorSPX leadScrew;
 
-  public static final double LINEAR_CALIBRATION_SPEED = 0.5;
+  public static final double LINEAR_CALIBRATION_SPEED = 1;
   private double leadScrewSpeed;
 
   public HatchMechanism() {

@@ -20,7 +20,8 @@ public class CenterHatchMechanism extends Command {
   OI oi;
   HatchMechanism hatchMechanism;
 
-  private double timeToCenter;
+  private static final double timeToCenter = 0.72;
+  private boolean reachedCenter;
 
   public CenterHatchMechanism() {
     requires(Robot.hatchMechanism);
@@ -31,7 +32,7 @@ public class CenterHatchMechanism extends Command {
   protected void initialize() {
     oi = Robot.oi;
     hatchMechanism = Robot.hatchMechanism;
-    timeToCenter = 0; //TODO run CalibrateHatchSlide n save time in variable
+    reachedCenter = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -42,12 +43,13 @@ public class CenterHatchMechanism extends Command {
     while (timer.get() < timeToCenter) {
       hatchMechanism.moveLeadScrew(true, hatchMechanism.LINEAR_CALIBRATION_SPEED);
     }
+    reachedCenter = true;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return reachedCenter;
   }
 
   // Called once after isFinished returns true
