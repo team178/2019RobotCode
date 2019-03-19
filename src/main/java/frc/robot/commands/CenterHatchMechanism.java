@@ -53,12 +53,13 @@ public class CenterHatchMechanism extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-
+    hatchMechanism.moveLeadScrew(true, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    hatchMechanism.moveLeadScrew(true, 0);
   }
 }
