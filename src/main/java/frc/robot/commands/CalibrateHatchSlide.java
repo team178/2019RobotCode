@@ -33,7 +33,7 @@ public class CalibrateHatchSlide extends Command {
     oi = Robot.oi;
     hatchMechanism = Robot.hatchMechanism;
     state = "move left";
-    calibratedTimeToCenter = 0;
+    calibratedTimeToCenter = 0.65;
   }
 
   // Called repeatedly when this Command is scheduled to run
