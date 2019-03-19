@@ -101,6 +101,7 @@ public class HatchMechanism extends Subsystem {
     while (!hasReachedLeftBound()) {
       moveLeadScrew(false, 1);
     }
+    moveLeadScrew(true, 0);
   }
   
   //Limit switch methods
