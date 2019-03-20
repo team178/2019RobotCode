@@ -64,6 +64,7 @@ public class CalibrateHatchSlide extends Command {
   @Override
   protected void end() {
     hatchMechanism.moveLeadScrew(true, 0);
+    calibratedTimeToCenter = Math.round(calibratedTimeToCenter * 100) / 100; //round to two decimal places bc vivek is extra
     System.out.println("Approximate time to center mechanism: " + calibratedTimeToCenter + " seconds");
   }
 
