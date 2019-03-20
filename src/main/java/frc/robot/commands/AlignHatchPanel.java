@@ -64,40 +64,56 @@ public class AlignHatchPanel extends Command
     double power = oi.getRightTriggerAux() - oi.getLeftTriggerAux();
     SmartDashboard.putString("Test Align", "Difference: " + diff);
     
-    if (Pixy.status != 3) {
+    if (Pixy.status != 3) 
+    {
       lightsArduino.sendMessage("x");
-    } else {
+    } 
+    else 
+    {
       lightsArduino.sendMessage("a");
     }
 
-    if (hatchmechanism.hasReachedLeftBound()) {//limit switches
-      if (power < 0) {
+    if (hatchmechanism.hasReachedLeftBound()) //limit switch left
+    {
+      if (power < 0) 
+      {
         hatchmechanism.moveLeadScrew(true, 0);
-      } else {
+      } 
+      else if (power > 0) 
+      {
         hatchmechanism.moveLeadScrew(true, power);
+      } 
+      else 
+      {
+        pixyAlign();
       }
-    } else if (hatchmechanism.hasReachedRightBound()) {
-      if (power > 0) {
+    } 
+    else
+    {
+        if (hatchmechanism.hasReachedRightBound()) //limit switch right
+    {
+      if (power > 0) 
+      {
         hatchmechanism.moveLeadScrew(true, 0);
-      } else {
+      } 
+      else if (power < 0)
+      {
         hatchmechanism.moveLeadScrew(true, power);
-      }
-    } else {
-      if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {
-        triggerPressed = true;
-      } else {
-        if (pixy.canAutoAlign()) {
-          if (Pixy.status == 4) {//sent if three objects 
-            hatchmechanism.moveLeadScrew(true, 0);
-           // drivetrain.drive(0.3, 0.3);//drives forward if three objects are detected, unfinished
-          } else if (diff > 0) {
-            hatchmechanism.moveLeadScrew(false, 1);
-          } else {
-            hatchmechanism.moveLeadScrew(true, 1);
-          }
-        }
+      } 
+      else 
+      {
+        pixyAlign();
       }
     }
+  else
+  {
+    pixyAlign();
+  }
+} 
+
+
+
+
 
     /*    if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {//check for interruption, manual override with triggers 
       //hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
@@ -118,6 +134,34 @@ public class AlignHatchPanel extends Command
       }
     } */
   }
+
+  public void pixyAlign()
+  {
+    if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) 
+        {
+          triggerPressed = true;
+        } 
+        else 
+        {
+          if (pixy.canAutoAlign()) 
+          {
+            if (Pixy.status == 4) //sent if three objects
+            { 
+              hatchmechanism.moveLeadScrew(true, 0);
+            } 
+            else if (diff > 0) 
+            {
+              hatchmechanism.moveLeadScrew(false, 1);
+            } 
+            else 
+            {
+              hatchmechanism.moveLeadScrew(true, 1);
+            }
+          }
+        }
+  }
+
+
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
