@@ -37,13 +37,13 @@ import edu.wpi.first.wpilibj.I2C;
  public static CameraServer camserv;
  public static UsbCamera camera1;
  public static UsbCamera camera2;
- 
+ public static UsbCamera camera3;
   //Here is where each of the subsystem fields declared above are initiatilized with their constructors when robot is started up
   @Override 
   public void robotInit() {
     drivetrain = new DriveTrain();
     hatchMechanism = new HatchMechanism();
-    climber = new EmptyClimber();
+    climber = new Climber();
     cargolauncher = new CargoLauncher(); 
     lightsArduino = new Arduino(I2C.Port.kMXP, RobotMap.lightsAddress); //lightsArduino will always be plugged into MXP port
     pixy = new Pixy(I2C.Port.kOnboard, RobotMap.pixyAddress); //pixy will always be plugged into onboard port
@@ -57,7 +57,7 @@ import edu.wpi.first.wpilibj.I2C;
     
     //Camera 1
     camera1 = camserv.startAutomaticCapture("cam0", 0);
-    camera1.setResolution(160, 120);
+    camera1.setResolution(160, 90);
     camera1.setFPS(14);
     camera1.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
 
@@ -66,6 +66,11 @@ import edu.wpi.first.wpilibj.I2C;
     camera2.setResolution(160, 120);
     camera2.setFPS(14);
     camera2.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
+    //Camera 2
+    camera3 = CameraServer.getInstance().startAutomaticCapture("cam2", 2);
+    camera3.setResolution(160, 120);
+    camera3.setFPS(14);
+    camera3.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
   }
 
   @Override
