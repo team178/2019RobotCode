@@ -35,21 +35,7 @@ public class ManuallyMoveLeadScrew extends Command {
     double rightVal = oi.getRightTriggerAux();
     double totalVal = leftVal + rightVal;
 
-    if (hatchMechanism.hasReachedLeftBound()) {
-      if (totalVal < 0) {
-        hatchMechanism.moveLeadScrew(true, 0);
-      } else {
-        hatchMechanism.moveLeadScrew(true, totalVal);
-      }
-    } else if (hatchMechanism.hasReachedRightBound()) {
-      if (totalVal > 0) {
-        hatchMechanism.moveLeadScrew(true, 0);
-      } else {
-        hatchMechanism.moveLeadScrew(true, totalVal);
-      }
-    } else {
-      hatchMechanism.moveLeadScrew(true, totalVal);
-    }
+    hatchMechanism.moveLeadScrew(true, totalVal);
   }
 
   // Make this return true when this Command no longer needs to run execute()

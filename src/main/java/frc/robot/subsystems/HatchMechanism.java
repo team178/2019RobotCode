@@ -83,19 +83,18 @@ public class HatchMechanism extends Subsystem {
   }
 
   public void moveLeadScrew(boolean movingForward, double factor) {
+    // Factor is positive when HM goes right
     leadScrewSpeed = factor;
     if (!movingForward) {
       factor *= -1; 
     }
 
-    leadScrew.set(ControlMode.PercentOutput, factor * 0.4 );
-    
-   /* if (!hasReachedLeftBound() && !hasReachedRightBound()) {
-      leadScrew.set(ControlMode.PercentOutput, factor);
+    if((hasReachedLeftBound() && (factor < 0)) || (hasReachedRightBound() && (factor > 0)))
+    {
+      leadScrew.set(ControlMode.PercentOutput, 0 );
     } else {
-      leadScrew.set(ControlMode.PercentOutput, 0);
-    } */
-    //System.out.println(getActuatorPosition());
+      leadScrew.set(ControlMode.PercentOutput, factor * 0.4 );
+    }  
   }
 
   public void leadScrewToLeft() {

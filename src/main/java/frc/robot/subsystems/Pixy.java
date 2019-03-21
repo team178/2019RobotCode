@@ -140,7 +140,11 @@ public class Pixy extends Arduino {
     if (status == 0) {
       return "No pixy communication";
     }
-      int objects = status - 1;
+      int objects = getNumObjects();
       return "Currently detecting " + objects + " objects";
+  }
+  public int getNumObjects()
+  {
+    return status - 1;
   }
 }

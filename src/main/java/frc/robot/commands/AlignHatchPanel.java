@@ -28,6 +28,7 @@ public class AlignHatchPanel extends Command
   private final int TOLERANCE = 5;
   private final double DESIREDAVG = 157.5;//desired distance between the two objects that pixy recognizes 
   private boolean triggerPressed;//if the trigger is pressed, used for the purpose of an override 
+  private boolean direction; //true = right; false = left
 
   /**
    * @param mode "left" or "right" based off of position of hatch panel port
@@ -57,140 +58,81 @@ public class AlignHatchPanel extends Command
     triggerPressed = false; 
     pixy.updateTargetValues();//gets pixy values
     System.out.println("Status: " + pixy.getObjectInfo());
-    int firstLocation = pixy.getLeft();
-    int secondLocation = pixy.getRight();
-    double x1 = (double) firstLocation;//casts to double, in order to divide accurately 
-    double x2 = (double) secondLocation; 
+    int x1 = pixy.getLeft();
+    int x2 = pixy.getRight();
     double avg = (x1 + x2)/2.0;
     diff = DESIREDAVG - avg;//calc difference based on distance from desired point, sign indicated direction needed to move 
     double power = oi.getRightTriggerAux() - oi.getLeftTriggerAux();
     SmartDashboard.putString("Test Align", "Difference: " + diff);
+    /*
+     *
+     * DO i have 2 targets?
+     * no: tell the drivers that we have more or less than 2 targets, do nothing. Light message: x (red) 
+     * yes: 
+     *    calculate the center of the targets
+     *    compare to center of the camera.
+     *    if zero (ish): tell the drivers that they are centered, do nothing. Light message: a (green) 
+     *    if nonzero:
+     *        Direction I need to go: (positive = right, negative = left)
+     *        Direction I'm not allowed to go: (right, left, or none)
+     * 
+     *        if direction i need to go == direction i'm not allowed to go:
+     *            tell the drivers they are out of range (and which direction, if possible). 
+     *            Light message: a (red)
+     *        else:
+     *        Attempt to go in the above direction.
+     *        Light message: (blue) 
+     */
     
-    //makes lights change if it sees three objects 
-    if (Pixy.status != 4) //four because status is number of objects plus one
-    {
-      lightsArduino.sendMessage("x");
-    } 
-    else 
-    {
-      lightsArduino.sendMessage("a");
-    }
-
-    if (hatchmechanism.hasReachedLeftBound()) //limit switch left
-    {
-      if (power < 0) 
-      {
-        //don't move if trying to move left 
-        hatchmechanism.moveLeadScrew(true, 0);
-      } 
-      else if (power > 0) 
-      {
-        //move if trying to move right 
-        hatchmechanism.moveLeadScrew(true, power);
-      } 
-      else if (Math.abs(diff) < TOLERANCE)
-      {
-        //if lined up, dont move with auto
-        hatchmechanism.moveLeadScrew(true, 0);
-      }
-      else 
-      {
-        //if not lined up, move the right way a lil bit 
-        hatchmechanism.moveLeadScrew(true, power);
-      }
-    } 
-    else
-    {
-        if (hatchmechanism.hasReachedRightBound()) //limit switch right
-    {
-      if (power > 0) 
-      {
-        //don't move if trying to move right
-        hatchmechanism.moveLeadScrew(false, 0);
-      } 
-      else if (power < 0)
-      {
-        //move if trying to move left 
-        hatchmechanism.moveLeadScrew(false, power);
-      } 
-      else if (Math.abs(diff) < TOLERANCE)
-      {
-        //if lined up, don't move with auto
-        hatchmechanism.moveLeadScrew(false, 0);
-      }
-      else 
-      {
-        //if not lined up, move left a lil bit
-        hatchmechanism.moveLeadScrew(false, power);
-      }
-    }
-  else
-  {
-    pixyAlign();
-  }
-} 
-    /*    if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {//check for interruption, manual override with triggers 
-      //hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
-      triggerPressed = true;
-    } else {
-
-      if (x1 == 0 || x2 == 0) {//cant do that, need to take out
-      hatchmechanism.moveLeadScrew(true, 0);
-    } else if (Math.abs(x1 - 316) < 0.0001 || Math.abs(x2 - 316) < 0.0001) {
-      hatchmechanism.moveLeadScrew(true, 0);
-      SmartDashboard.putString("Test Align", "Diff is 0");
-    } else if (diff > 0) {
-        hatchmechanism.moveLeadScrew(false, 1); //switched false and true because test screw is in wrong direction
-        SmartDashboard.putString("Test Align", "Trying to go right");
-      } else {
-        hatchmechanism.moveLeadScrew(true, 1);
-        SmartDashboard.putString("Test Align", "Trying to go left");
-      }
-    } */
-  }
-
-  public void pixyAlign()
-  {
-    if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) 
+     if (pixy.getNumObjects() == 2) 
+     {
+       if (Math.abs(diff) < TOLERANCE)
         {
-          triggerPressed = true;
-        } 
-        else 
+          //centered; tell drivers
+          hatchmechanism.moveLeadScrew(true, 0);
+          lightsArduino.sendMessage("a");
+          SmartDashboard.putString("AutoAlign Status", "Finished!");
+        }
+        else
         {
-          if (pixy.canAutoAlign()) 
+          //try to align
+          if (diff > 0) direction = false;
+          else if (diff < 0) direction = true;
+          if( (hatchmechanism.hasReachedLeftBound() && !direction) || (hatchmechanism.hasReachedRightBound() && direction) )
           {
-            if (Pixy.status == 4) //sent if three objects
-            { 
-              hatchmechanism.moveLeadScrew(true, 0);
-            } 
-            else if (diff > 0) 
-            {
-              hatchmechanism.moveLeadScrew(false, 1);
-            } 
-            else 
-            {
-              hatchmechanism.moveLeadScrew(true, 1);
+            // can't move i guess
+            hatchmechanism.moveLeadScrew(true, 0);
+            if(direction){
+              SmartDashboard.putString("AutoAlign Status", "Need to go right");
+            } else {
+              SmartDashboard.putString("AutoAlign Status", "Need to go left");
             }
+          } else 
+          {
+            hatchmechanism.moveLeadScrew(direction, 1);
+            SmartDashboard.putString("AutoAlign Status", "trying to center...");
           }
         }
+     } 
+     else 
+     {
+       //more or less than 2 targets
+       //tell drivers it don't work 
+       SmartDashboard.putString("AutoAlign Status", "wrong # of targets");
+       
+     }
   }
-
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    System.out.println("diff: " + diff);
-    boolean temp = (Math.abs(diff) < TOLERANCE || triggerPressed);
-    Robot.isAligned = temp;
-    return temp;
+    return false; 
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     hatchmechanism.moveLeadScrew(true, 0);
-    drivetrain.drive(0,0);
   }
   
 
@@ -199,7 +141,6 @@ public class AlignHatchPanel extends Command
   @Override
   protected void interrupted() {
     hatchmechanism.moveLeadScrew(true, 0);
-    drivetrain.drive(0,0);
   }
 
 }
