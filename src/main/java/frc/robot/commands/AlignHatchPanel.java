@@ -51,6 +51,8 @@ public class AlignHatchPanel extends Command
   @Override
   protected void execute() 
   {
+
+    //gets x values of both objects from pixy and determines off centeredness
     System.out.println("Left:" + pixy.getLeft() + ", Right:" + pixy.getRight());
     triggerPressed = false; 
     pixy.updateTargetValues();//gets pixy values
@@ -64,7 +66,8 @@ public class AlignHatchPanel extends Command
     double power = oi.getRightTriggerAux() - oi.getLeftTriggerAux();
     SmartDashboard.putString("Test Align", "Difference: " + diff);
     
-    if (Pixy.status != 3) 
+    //makes lights change if it sees three objects 
+    if (Pixy.status != 4) //four because status is number of objects plus one
     {
       lightsArduino.sendMessage("x");
     } 
@@ -77,15 +80,23 @@ public class AlignHatchPanel extends Command
     {
       if (power < 0) 
       {
+        //don't move if trying to move left 
         hatchmechanism.moveLeadScrew(true, 0);
       } 
       else if (power > 0) 
       {
+        //move if trying to move right 
         hatchmechanism.moveLeadScrew(true, power);
       } 
+      else if (Math.abs(diff) < TOLERANCE)
+      {
+        //if lined up, dont move with auto
+        hatchmechanism.moveLeadScrew(true, 0);
+      }
       else 
       {
-        pixyAlign();
+        //if not lined up, move the right way a lil bit 
+        hatchmechanism.moveLeadScrew(true, power);
       }
     } 
     else
@@ -94,15 +105,23 @@ public class AlignHatchPanel extends Command
     {
       if (power > 0) 
       {
-        hatchmechanism.moveLeadScrew(true, 0);
+        //don't move if trying to move right
+        hatchmechanism.moveLeadScrew(false, 0);
       } 
       else if (power < 0)
       {
-        hatchmechanism.moveLeadScrew(true, power);
+        //move if trying to move left 
+        hatchmechanism.moveLeadScrew(false, power);
       } 
+      else if (Math.abs(diff) < TOLERANCE)
+      {
+        //if lined up, don't move with auto
+        hatchmechanism.moveLeadScrew(false, 0);
+      }
       else 
       {
-        pixyAlign();
+        //if not lined up, move left a lil bit
+        hatchmechanism.moveLeadScrew(false, power);
       }
     }
   else
@@ -110,11 +129,6 @@ public class AlignHatchPanel extends Command
     pixyAlign();
   }
 } 
-
-
-
-
-
     /*    if (oi.getLeftTriggerAux() != 0 || oi.getRightTriggerAux() != 0) {//check for interruption, manual override with triggers 
       //hatchmechanism.moveLeadScrew(true, oi.getRightTriggerAux() - oi.getLeftTriggerAux());
       triggerPressed = true;
