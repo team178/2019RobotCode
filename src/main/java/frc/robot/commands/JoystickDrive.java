@@ -35,14 +35,13 @@ public class JoystickDrive extends Command {
    @Override
    protected void execute() {
       yVal = oi.getY();
-      twistVal = 0.5 * oi.getTwist();
+      twistVal = .5 * oi.getTwist();
       if(oi.trigger.get()){
-        yVal *= .25;
-        twistVal *= .5;
+        yVal *= .5;
+        twistVal *= .35;
       }
-
       if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) { 
-        drivetrain.drive(twistVal-yVal, twistVal+yVal);
+        drivetrain.drive(yVal-twistVal, yVal+twistVal);
       } else {
         drivetrain.drive(0,0);
       }

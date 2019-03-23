@@ -101,11 +101,11 @@ public class OI {
 	}
 	
 	public double getY() {
-		return joystick.getY(); //joystick.getRawAxis(1);
+		return joystick.getTwist(); //joystick.getRawAxis(1);
 	}
 
 	public double getTwist() {
-		return joystick.getTwist(); //joystick.getRawAxis(2);
+		return joystick.getY(); //joystick.getRawAxis(2);
 	}
 
 	/**
