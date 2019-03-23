@@ -22,7 +22,8 @@ public class ClimbDrive extends Command {
   private String gimpDriveDirection;
 
   public ClimbDrive(String gimpDriveDirection) {
-    requires(Robot.climber);
+    // we removed the climber dependency so the default command does not stop
+    //requires(Robot.climber);
     this.gimpDriveDirection = gimpDriveDirection.toLowerCase();
   }
 
