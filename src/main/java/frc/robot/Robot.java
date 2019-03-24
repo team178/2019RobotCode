@@ -12,6 +12,7 @@ import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import frc.robot.commands.LightsDefault;
 import frc.robot.commands.LightsOff;
 import frc.robot.subsystems.*;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -46,10 +47,10 @@ import edu.wpi.first.wpilibj.I2C;
     hatchMechanism = new HatchMechanism();
     climber = new Climber();
     cargolauncher = new CargoLauncher(); 
-    lightsArduino = new Arduino(I2C.Port.kMXP, RobotMap.lightsAddress); //lightsArduino will always be plugged into MXP port
+    lightsArduino = new Arduino(I2C.Port.kOnboard, RobotMap.lightsAddress); //lightsArduino will always be plugged into MXP port
     pixy = new Pixy(I2C.Port.kOnboard, RobotMap.pixyAddress); //pixy will always be plugged into onboard port
     oi = new OI();
-    lightsArduino.setAllianceColor(); //Sets light strips to color of alliance (red or blue)
+    new LightsDefault(); //Sets light strips to color of alliance (red or blue)
 
     isAligned = false;
 
