@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.CargoLauncher;
+import frc.robot.subsystems.Arduino;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class OpenCargoRails extends Command {
 
   OI oi;
   CargoLauncher cargoLauncher;
+  Arduino lightsArduino;
 
   public OpenCargoRails() {
     requires(Robot.cargolauncher);
@@ -27,11 +29,13 @@ public class OpenCargoRails extends Command {
   protected void initialize() {
     oi = Robot.oi;
     cargoLauncher = Robot.cargolauncher;
+    lightsArduino = Robot.lightsArduino;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    lightsArduino.sendMessage("c");
     cargoLauncher.open();
   }
 

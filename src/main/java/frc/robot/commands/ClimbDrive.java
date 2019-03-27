@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Arduino;
 
 public class ClimbDrive extends Command {
 
@@ -18,6 +19,7 @@ public class ClimbDrive extends Command {
   Climber climber;
   double leftVal;
   double rightVal;
+  Arduino lightsArduino;
 
   private String gimpDriveDirection;
 
@@ -32,11 +34,13 @@ public class ClimbDrive extends Command {
   protected void initialize() {
     oi = Robot.oi;
     climber = Robot.climber;
+    lightsArduino = Robot.lightsArduino;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    //lightsArduino.sendMessage("l");
     double power = oi.getSlider();
 
     if (gimpDriveDirection.equals("forward")) {

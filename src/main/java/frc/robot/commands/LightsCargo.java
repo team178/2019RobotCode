@@ -31,7 +31,7 @@ public class LightsCargo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    sent = lightsArduino.sendMessage("c");
+    sent = lightsArduino.sendMessage("o");
   }
 
   // Make this return true when this Command no longer needs to run execute()

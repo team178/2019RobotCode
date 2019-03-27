@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.HatchMechanism;
+import frc.robot.subsystems.Arduino;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
 public class ExtendHatchMechanism extends Command {
   OI oi;
   HatchMechanism hatchmechanism;
+  Arduino lightsArduino;
 
 
 
@@ -29,11 +31,13 @@ public class ExtendHatchMechanism extends Command {
   protected void initialize() {
       oi = Robot.oi;
      hatchmechanism = Robot.hatchMechanism;
+     lightsArduino = Robot.lightsArduino;
     }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    lightsArduino.sendMessage("h");
     DoubleSolenoid.Value isExtended = hatchmechanism.getExtenderSolenoidState();
     System.out.println("Extender is out? " + isExtended);
     System.out.println("Try to go out");
