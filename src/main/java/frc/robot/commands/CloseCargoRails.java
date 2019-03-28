@@ -12,12 +12,14 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.CargoLauncher;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.subsystems.Arduino;
 
 public class CloseCargoRails extends Command {
 
   OI oi;
   CargoLauncher cargoLauncher;
-  
+  Arduino lightsArduino;
+
   public CloseCargoRails() {
     requires(Robot.cargolauncher);
   }
@@ -27,12 +29,14 @@ public class CloseCargoRails extends Command {
   protected void initialize() {
     oi = Robot.oi;
     cargoLauncher = Robot.cargolauncher;
+    lightsArduino = Robot.lightsArduino;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     cargoLauncher.close();
+    lightsArduino.sendMessage("o");//lights solid orange 
   }
 
   // Make this return true when this Command no longer needs to run execute()

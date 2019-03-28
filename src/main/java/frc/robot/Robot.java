@@ -10,15 +10,18 @@ package frc.robot;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.commands.LightsDefault;
 import frc.robot.commands.LightsOff;
 import frc.robot.subsystems.*;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.hal.sim.DriverStationSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.DriverStation;
 
 
  public class Robot extends TimedRobot {
@@ -31,6 +34,10 @@ import edu.wpi.first.wpilibj.I2C;
  public static CargoLauncher cargolauncher;
  public static Arduino lightsArduino;
  public static Pixy pixy;
+
+ //for lights
+ public static DriverStation ds;
+
 
  public static boolean isAligned;
  
@@ -50,7 +57,8 @@ import edu.wpi.first.wpilibj.I2C;
     lightsArduino = new Arduino(I2C.Port.kOnboard, RobotMap.lightsAddress); //lightsArduino will always be plugged into MXP port
     pixy = new Pixy(I2C.Port.kOnboard, RobotMap.pixyAddress); //pixy will always be plugged into onboard port
     oi = new OI();
-    new LightsDefault(); //Sets light strips to color of alliance (red or blue)
+    ds = DriverStation.getInstance();
+    
 
     isAligned = false;
 
@@ -74,6 +82,7 @@ import edu.wpi.first.wpilibj.I2C;
     // camera3.setResolution(160, 120);
     // camera3.setFPS(14);
     // camera3.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
+ 
   }
 
   @Override
@@ -81,16 +90,25 @@ import edu.wpi.first.wpilibj.I2C;
     SmartDashboard.putBoolean("Can Auto Align", pixy.canAutoAlign());
     SmartDashboard.putString("Pixy Status", pixy.getObjectInfo());
     SmartDashboard.putBoolean("Hatch Mechanism Centered", isAligned);
+
+    //lights
+    if (ds.getAlliance() == Alliance.Blue) { //set alliance color code 
+      lightsArduino.sendMessage("d");
+    }
+    else if (ds.getAlliance() == Alliance.Red){
+      lightsArduino.sendMessage("s");
+    }
   }
 
   @Override
   public void disabledInit() {
-    lightsArduino.sendMessage("n");
+    lightsArduino.sendMessage("n");//lights off
   }
 
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    //lightsArduino.sendMessage("x");//lights red
   }
 
   @Override
@@ -108,7 +126,7 @@ import edu.wpi.first.wpilibj.I2C;
 
   @Override
   public void teleopInit() {
-    
+    //lightsArduino.sendMessage("f");//enforcers colors 
   }
 
   //Called repeatedly and automatically during teleop --> Scheduler automatically stores all actions robot needs to do

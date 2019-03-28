@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Climber; 
+import frc.robot.subsystems.Arduino;
 import frc.robot.*;
 
 public class MoveFrontClimber extends Command {
@@ -16,6 +17,7 @@ public class MoveFrontClimber extends Command {
   OI oi;
   Climber climber;
   private double power;
+  Arduino lightsArduino;
 
   public MoveFrontClimber() {
     requires(Robot.climber);
@@ -26,6 +28,7 @@ public class MoveFrontClimber extends Command {
   protected void initialize() {
     oi = Robot.oi;
     climber = Robot.climber;
+    lightsArduino = Robot.lightsArduino;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -49,6 +52,8 @@ public class MoveFrontClimber extends Command {
     } else {
       climber.moveFrontMotors(power);
     }
+
+    lightsArduino.sendMessage("r");//rainbow 
   }
 
   // Make this return true when this Command no longer needs to run execute()
