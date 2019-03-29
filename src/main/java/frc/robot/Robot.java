@@ -91,13 +91,7 @@ import edu.wpi.first.wpilibj.DriverStation;
     SmartDashboard.putString("Pixy Status", pixy.getObjectInfo());
     SmartDashboard.putBoolean("Hatch Mechanism Centered", isAligned);
 
-    //lights
-    if (ds.getAlliance() == Alliance.Blue) { //set alliance color code 
-      lightsArduino.sendMessage("d");
-    }
-    else if (ds.getAlliance() == Alliance.Red){
-      lightsArduino.sendMessage("s");
-    }
+
   }
 
   @Override
@@ -109,6 +103,14 @@ import edu.wpi.first.wpilibj.DriverStation;
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
     //lightsArduino.sendMessage("x");//lights red
+   
+   //lights
+    if (ds.getAlliance() == Alliance.Blue) { //set alliance color code 
+      lightsArduino.sendMessage("d");
+    }
+    else if (ds.getAlliance() == Alliance.Red){
+      lightsArduino.sendMessage("s");
+    }
   }
 
   @Override
