@@ -128,7 +128,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 
   @Override
   public void teleopInit() {
-    //lightsArduino.sendMessage("f");//enforcers colors 
+    lightsArduino.sendMessage("f");//enforcers colors 
   }
 
   //Called repeatedly and automatically during teleop --> Scheduler automatically stores all actions robot needs to do
