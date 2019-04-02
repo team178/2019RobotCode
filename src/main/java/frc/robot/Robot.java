@@ -54,7 +54,7 @@ import edu.wpi.first.wpilibj.DriverStation;
     hatchMechanism = new HatchMechanism();
     climber = new Climber();
     cargolauncher = new CargoLauncher(); 
-    lightsArduino = new Arduino(I2C.Port.kOnboard, RobotMap.lightsAddress); //lightsArduino will always be plugged into MXP port
+    lightsArduino = new Arduino(I2C.Port.kMXP, RobotMap.lightsAddress); //lightsArduino will always be plugged into MXP port
     pixy = new Pixy(I2C.Port.kOnboard, RobotMap.pixyAddress); //pixy will always be plugged into onboard port
     oi = new OI();
     ds = DriverStation.getInstance();
