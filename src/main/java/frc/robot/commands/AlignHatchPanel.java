@@ -25,7 +25,7 @@ public class AlignHatchPanel extends Command
   DriveTrain drivetrain;
 
   double diff;
-  private final int TOLERANCE = 5;
+  private final int TOLERANCE = 7;
   private final double DESIREDAVG = 157.5;//desired distance between the two objects that pixy recognizes 
   private boolean triggerPressed;//if the trigger is pressed, used for the purpose of an override 
   private boolean direction; //true = right; false = left
@@ -63,7 +63,7 @@ public class AlignHatchPanel extends Command
     double avg = (x1 + x2)/2.0;
     diff = DESIREDAVG - avg;//calc difference based on distance from desired point, sign indicated direction needed to move 
     double power = oi.getRightTriggerAux() - oi.getLeftTriggerAux();
-    SmartDashboard.putString("Test Align", "Difference: " + diff);
+    SmartDashboard.putString("Difference", "Difference: " + diff);
     /*
      *
      * DO i have 2 targets?
@@ -133,6 +133,8 @@ public class AlignHatchPanel extends Command
   @Override
   protected void end() {
     hatchmechanism.moveLeadScrew(true, 0);
+    SmartDashboard.putString("AutoAlign Status", "not doing anything");
+    SmartDashboard.putString("Difference", "Difference: " + diff);
   }
   
 
@@ -141,6 +143,8 @@ public class AlignHatchPanel extends Command
   @Override
   protected void interrupted() {
     hatchmechanism.moveLeadScrew(true, 0);
+    SmartDashboard.putString("AutoAlign Status", "not doing anything");
+    SmartDashboard.putString("Difference", "Difference: " + diff);
   }
 
 }
