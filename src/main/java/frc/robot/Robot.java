@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Relay;
 
 
  public class Robot extends TimedRobot {
@@ -47,6 +48,9 @@ import edu.wpi.first.wpilibj.DriverStation;
  public static UsbCamera camera2;
  public static UsbCamera camera3;
 
+ // Relay for spotlight
+ public static Relay spike;
+
   //Here is where each of the subsystem fields declared above are initiatilized with their constructors when robot is started up
   @Override 
   public void robotInit() {
@@ -62,26 +66,33 @@ import edu.wpi.first.wpilibj.DriverStation;
 
     isAligned = false;
 
+    //Spike initialization
+    spike = new Relay(1);
+    spike.setDirection(Relay.Direction.kForward);
+    spike.set(Relay.Value.kForward);
+
+
+
     //Camera initializations
     camserv = CameraServer.getInstance();
     
     //Camera 1
     camera1 = camserv.startAutomaticCapture("cam0", 0);
-    camera1.setResolution(160, 90);
+    //camera1.setResolution(160, 90);
     camera1.setFPS(14);
     camera1.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
 
     //Camera 2
     camera2 = CameraServer.getInstance().startAutomaticCapture("cam1", 1);
-    camera2.setResolution(160, 120);
+    //camera2.setResolution(160, 120);
     camera2.setFPS(14);
     camera2.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
 
     // //Camera 3
-    // camera3 = CameraServer.getInstance().startAutomaticCapture("cam2", 2);
-    // camera3.setResolution(160, 120);
-    // camera3.setFPS(14);
-    // camera3.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
+     camera3 = CameraServer.getInstance().startAutomaticCapture("cam2", 2);
+    //camera3.setResolution(160, 120);
+    camera3.setFPS(14);
+    camera3.setPixelFormat(PixelFormat.kYUYV); //formats video specifications for cameras
  
   }
 
@@ -90,8 +101,8 @@ import edu.wpi.first.wpilibj.DriverStation;
     SmartDashboard.putBoolean("Can Auto Align", pixy.canAutoAlign());
     SmartDashboard.putString("Pixy Status", pixy.getObjectInfo());
     SmartDashboard.putBoolean("Hatch Mechanism Centered", isAligned);
-
-
+    SmartDashboard.putString("FRONT climber status", climber.getFrontClimberStatus());
+    SmartDashboard.putString("BACK climber status", climber.getBackClimberStatus());
   }
 
   @Override

@@ -65,6 +65,7 @@ public class MoveBothClimbers extends Command {
         climber.moveBackMotors(backPower);
       }
     } else if (climber.isBackClimberAtBottom()) {
+      System.out.println(climber.isBackClimberAtBottom());
       if(backPower > 0) {
         climber.moveBackMotors(backPower);
       } else if(backPower < 0){

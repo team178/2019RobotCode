@@ -10,7 +10,7 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "0,0": {
+          "2,5": {
             "size": [
               1,
               1
@@ -23,7 +23,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "9,0": {
+          "3,5": {
             "size": [
               1,
               1
@@ -36,21 +36,10 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "0,2": {
+          "0,0": {
             "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Lead Screw Motion",
-              "_title": "Lead Screw Motion"
-            }
-          },
-          "1,0": {
-            "size": [
-              4,
-              4
+              7,
+              5
             ],
             "content": {
               "_type": "Camera Stream",
@@ -66,10 +55,10 @@
               "imageHeight": -1
             }
           },
-          "5,0": {
+          "7,0": {
             "size": [
-              4,
-              4
+              6,
+              5
             ],
             "content": {
               "_type": "Camera Stream",
@@ -85,92 +74,15 @@
               "imageHeight": -1
             }
           },
-          "0,1": {
+          "0,5": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Pixy Status",
               "_title": "Pixy Status"
-            }
-          },
-          "9,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Test Align",
-              "_title": "Test Align"
-            }
-          },
-          "9,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Go for switch?",
-              "_title": "Go for switch?"
-            }
-          },
-          "0,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Go for vault?",
-              "_title": "Go for vault?"
-            }
-          },
-          "9,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Go for switch no matter what?",
-              "_title": "Go for switch no matter what?"
-            }
-          },
-          "0,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Drive Forward?",
-              "_title": "Drive Forward?"
-            }
-          },
-          "1,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/AutoLocation",
-              "_title": "AutoLocation"
-            }
-          },
-          "2,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Robot tilt",
-              "_title": "Robot tilt"
             }
           }
         }
@@ -338,6 +250,11 @@
                   "Visuals/Show value": true,
                   "Visuals/Precision": 2,
                   "Visuals/Show tick marks": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DoubleSolenoid[11,6]/Value",
+                  "_title": "DoubleSolenoid[11,6]/Value"
                 }
               ]
             }
@@ -393,15 +310,41 @@
               "Layout/Label position": "BOTTOM",
               "_children": []
             }
+          },
+          "10,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/Climber",
+              "_title": "Climber",
+              "Layout/Label position": "BOTTOM",
+              "_children": []
+            }
+          },
+          "12,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/Pixy",
+              "_title": "Pixy",
+              "Layout/Label position": "BOTTOM",
+              "_children": []
+            }
           }
         }
       }
     }
   ],
   "windowGeometry": {
-    "x": -7.199999809265137,
-    "y": -7.199999809265137,
-    "width": 1550.4000244140625,
-    "height": 838.4000244140625
+    "x": -1927.0,
+    "y": 9.0,
+    "width": 2833.0,
+    "height": 1046.0
   }
 }

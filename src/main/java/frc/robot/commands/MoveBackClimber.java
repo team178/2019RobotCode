@@ -40,6 +40,7 @@ public class MoveBackClimber extends Command {
         climber.moveBackMotors(power);
       }
     } else if (climber.isBackClimberAtBottom()) {
+      
       if(power > 0) {
         climber.moveBackMotors(power);
       } else if(power < 0){

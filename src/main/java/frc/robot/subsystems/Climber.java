@@ -115,6 +115,24 @@ public class Climber extends Subsystem  {
     return !proxSensorBottomBack.get();
   }
 
+  public String getFrontClimberStatus() {
+    if (isFrontClimberAtTop()) {
+      return "Bottom limit reached";
+    } else if (isFrontClimberAtBottom()) {
+      return "Top limit reached";
+    }
+    return "Somewhere in the middle";
+  }
+
+  public String getBackClimberStatus() {
+    if (isBackClimberAtTop()) {
+      return "Top limit reached";
+    } else if (isBackClimberAtBottom()) {
+      return "Bottom limit reached";
+    }
+    return "Somewhere in the middle";
+  }
+
   public void setGimpDriveDirection(String gimpDriveDirection) {
     this.gimpDriveDirection = gimpDriveDirection;
   }
