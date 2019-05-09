@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commandgroups.ClimberCommands;
 import frc.robot.RobotMap;
 import frc.robot.commands.ClimbDrive;
 import edu.wpi.first.wpilibj.DigitalInput;

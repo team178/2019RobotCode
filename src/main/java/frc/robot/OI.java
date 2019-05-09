@@ -12,12 +12,15 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.*;
+import frc.robot.commandgroups.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+
+	private int HATCH_CONTROLS = 1;
 
 	//JOYSTICK buttons
 	public static Joystick joystick = new Joystick(RobotMap.ActualJoystick);
@@ -79,20 +82,30 @@ public class OI {
 		rightPadBottom1.whileHeld(new ClimbDrive("backward"));
 		
 		//AUX controls
-		auxY.whenPressed(new ExtendHatchMechanism());
-		auxY.whenReleased(new RetractHatchMechanism());
-		auxB.whenPressed(new EjectHatchPanel());
-		auxB.whenReleased(new RetractEjector());
+		if (HATCH_CONTROLS == 0) {
+			auxY.whenPressed(new ExtendHatchMechanism());
+			auxY.whenReleased(new RetractHatchMechanism());
+			auxB.whenPressed(new EjectHatchPanel());
+			auxB.whenReleased(new RetractEjector());
+		} else if (HATCH_CONTROLS == 1) {
+			auxY.whenPressed(new HatchPickupExtend());
+			auxY.whenReleased(new HatchPickupRetract());
+			auxB.whenPressed(new HatchDropoffExtend());
+			auxB.whenReleased(new HatchDropoffRetract());
+		}
 		
 		auxA.whenPressed(new ExtendCargoShooter());
 		auxA.whenReleased(new RetractCargoShooter());
 		auxX.whenPressed(new OpenCargoRails());
 		auxX.whenReleased(new CloseCargoRails());
-
+		
 		auxLeftBumper.whenPressed(new CenterHatchMechanism());
 		auxRightBumper.whileHeld(new AlignHatchPanel());
 
-		rightPadBottom2.whenPressed(new CalibrateHatchSlide()); //temp
+		rightPadTop2.whenPressed(new AutoClimbPrep(2));
+		rightPadTop3.whenPressed(new AutoClimbPrep(3));
+		rightPadBottom2.whenPressed(new AutoClimb(2));
+		rightPadBottom3.whenPressed(new AutoClimb(3));
 	}
 
 	//JOYSTICK accessor methods
@@ -130,24 +143,6 @@ public class OI {
 	
 	public double getRightTriggerAux() {
 		return xboxAux.getRawAxis(3);
-	}
-
-	//MAIN controller accessor methods
-	// EDIT FOR XBOX DRIVE
-	public double getLeftStickYMain() {
-		return 0; //xboxMain.getRawAxis(1);
-	}
-	
-	public double getRightStickYMain() {
-		return 0; //xboxMain.getRawAxis(5);
-	}
-	
-	public double getLeftTriggerMain() {
-		return 0; //xboxMain.getRawAxis(2);
-	}
-	
-	public double getRightTriggerMain() {
-		return 0; //xboxMain.getRawAxis(3);
 	}
 
 	public void printJoystickChannels() {

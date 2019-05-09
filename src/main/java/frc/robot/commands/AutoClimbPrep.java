@@ -12,14 +12,14 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Arduino;
 import frc.robot.*;
 
-public class AutoClimb extends Command {
+public class AutoClimbPrep extends Command {
 
   OI oi;
   Climber climber;
 
   private int level;
 
-  public AutoClimb(int level) {
+  public AutoClimbPrep(int level) {
     requires(Robot.climber);
     this.level = level;
   }
@@ -35,7 +35,7 @@ public class AutoClimb extends Command {
   @Override
   protected void execute() {
     if (level == 2) {
-
+      
     } else if (level == 3) {
 
     }
@@ -45,7 +45,7 @@ public class AutoClimb extends Command {
   @Override
   protected boolean isFinished() {
     if (level == 2) {
-      
+
     } else if (level == 3) {
       
     }
@@ -57,7 +57,6 @@ public class AutoClimb extends Command {
   protected void end() {
     climber.moveFrontMotors(0);
     climber.moveBackMotors(0);
-    climber.moveBackWheel(0);
   }
 
   // Called when another command which requires one or more of the same
@@ -66,6 +65,5 @@ public class AutoClimb extends Command {
   protected void interrupted() {
     climber.moveFrontMotors(0);
     climber.moveBackMotors(0);
-    climber.moveBackWheel(0);
   }
 }

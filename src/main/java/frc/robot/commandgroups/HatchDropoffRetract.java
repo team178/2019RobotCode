@@ -8,20 +8,17 @@
 package frc.robot.commandgroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.ClimbDrive;
-import frc.robot.commands.MoveFrontClimber;
-import frc.robot.commands.MoveBackClimber;
+import frc.robot.commands.*;
+import frc.robot.Robot;
 
-public class ClimberCommands extends CommandGroup {
-  
+public class HatchDropoffRetract extends CommandGroup {
   /**
-   * Adding all climber commands in one command group to add one default command in the Climber subsystem
+   * Add your docs here.
    */
-  
-  public ClimberCommands(String climbDriveForward) {
-    //May need to switch to addParallel()
-    addParallel(new MoveFrontClimber());
-    addParallel(new MoveBackClimber());
-    addParallel(new ClimbDrive(climbDriveForward));
+  public HatchDropoffRetract() {
+    requires(Robot.hatchMechanism);
+    addSequential(new RetractHatchMechanism());
+    addSequential(new RetractEjector());
   }
 }
+  
