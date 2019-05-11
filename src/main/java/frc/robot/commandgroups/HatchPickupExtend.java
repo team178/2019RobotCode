@@ -8,6 +8,8 @@
 package frc.robot.commandgroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
+
 import frc.robot.commands.*;
 import frc.robot.Robot;
 
@@ -18,6 +20,7 @@ public class HatchPickupExtend extends CommandGroup {
   public HatchPickupExtend() {
     requires(Robot.hatchMechanism);
     addSequential(new EjectHatchPanel());
+    addSequential(new WaitCommand(0.3));
     addSequential(new ExtendHatchMechanism());
   }
 }

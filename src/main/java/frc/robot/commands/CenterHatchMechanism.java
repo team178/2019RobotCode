@@ -20,7 +20,7 @@ public class CenterHatchMechanism extends Command {
   OI oi;
   HatchMechanism hatchMechanism;
 
-  private static final double timeToCenter = 0.9; //0.73 for alpha bot; 0.69 for beta bot
+  private static final double timeToCenter = 0.73; //0.73 for alpha bot; 0.69 for beta bot
   private boolean reachedCenter;
 
   public CenterHatchMechanism() {

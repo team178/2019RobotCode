@@ -20,7 +20,7 @@ import frc.robot.commandgroups.*;
  */
 public class OI {
 
-	private int HATCH_CONTROLS = 1;
+	private int HATCH_CONTROLS = 1; //0 = old; 1 = new
 
 	//JOYSTICK buttons
 	public static Joystick joystick = new Joystick(RobotMap.ActualJoystick);

@@ -8,6 +8,7 @@
 package frc.robot.commandgroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.commands.*;
 import frc.robot.Robot;
 
@@ -15,9 +16,11 @@ public class HatchDropoffRetract extends CommandGroup {
   /**
    * Add your docs here.
    */
+
   public HatchDropoffRetract() {
     requires(Robot.hatchMechanism);
     addSequential(new RetractHatchMechanism());
+    addSequential(new WaitCommand(0.5));
     addSequential(new RetractEjector());
   }
 }

@@ -19,8 +19,6 @@ public class RetractHatchMechanism extends Command {
   HatchMechanism hatchMechanism;
   public RetractHatchMechanism() {
     requires(Robot.hatchMechanism);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
@@ -42,11 +40,8 @@ public class RetractHatchMechanism extends Command {
   protected boolean isFinished() {
     if (hatchMechanism.getExtenderSolenoidState() == DoubleSolenoid.Value.kReverse){
       return true;
-
     }
-  else {
-      return false;
-    }
+    return false;
   }
 
   // Called once after isFinished returns true
