@@ -8,22 +8,32 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.Climber; 
-import frc.robot.subsystems.Arduino;
+import edu.wpi.first.wpilibj.Timer;
+import frc.robot.subsystems.*
 import frc.robot.*;
 
 public class AutoClimbPrep extends Command {
 
+  private static Timer timer = new Timer();
   OI oi;
   Climber climber;
 
+  //front climber times and speeds for level 2
+  private static final double frontRaiseTimeExtend = 0;
+  private static final double frontRaiseTimePrep = 0;
+  private static final double frontRaiseSpeedPrep = 0;
+  
   private int level;
   private boolean override;
+  private String levelTwoPhase;
+  private boolean levelTwoTopReached;
 
   public AutoClimbPrep(int level) {
     requires(Robot.climber);
     this.level = level;
     override = false;
+    levelTwoPhase = "extend front climber arms";
+    levelTwoTopReached = false;
   }
 
   // Called just before this Command runs the first time
@@ -38,7 +48,50 @@ public class AutoClimbPrep extends Command {
   protected void execute() {
     override = getLeftStickYAux() >= 0.1 || getRightStickYAux() >= 0.1;
     if (level == 2) {
-      
+      if (levelTwoPhase.equals("extend front climber arms") {
+        //extend front climber arms
+        timer.reset();
+        timer.start();
+        if (timer.seconds() <= frontRaiseTimeExtend) {
+          climber.moveFrontMotors(0.9);
+        } else {
+          timer.stop();
+          climber.moveFrontMotors(0);
+          
+          //change phase
+          levelTwoPhase = "reset front climber";
+        }
+      } else if (levelTwoPhase.equals("reset front climber")) {
+         //reset front climber (front to bottom proximity sensor)
+        if (!climber.isFrontClimberAtBottom()) {
+          climber.moveFrontMotors(0.9);
+        } else {
+          climber.moveFrontMotors(0);
+        }
+        
+        //reset back climber
+        if (!climber.isBackClimberAtTop()) {
+          climber.moveBackMotors(0.2);
+        } else {
+          climber.moveBackMotors(0);
+        }
+        
+        //change phase
+        if (climber.isFrontClimberAtBottom && climber.isBackClimberAtTop()) {
+          levelTwoPhase = "raise to level 2 height";
+        }
+      } else if (levelTwoPhase.equals("raise to level 2 height")) {
+        //raise front climber to necessary height
+        timer.reset();
+        timer.start();
+        if (timer.seconds <= frontRaiseTimePrep) {
+          climber.moveFrontMotors(frontRaiseSpeedPrep);
+        } else {
+          timer.stop();
+          climber.moveFrontMotors(0);
+          levelTwoTopReached = true;
+        }
+      }
     } else if (level == 3) {
       if (!climber.isFrontClimberAtTop()) {
         climber.moveFrontMotors(0.8);
@@ -53,7 +106,7 @@ public class AutoClimbPrep extends Command {
   @Override
   protected boolean isFinished() {
     if (level == 2) {
-      
+      return override || levelTwoTopReached;
     } else if (level == 3) {
       return override || (climber.isFrontClimberAtTop() && climber.isBackClimberAtTop());
     }
