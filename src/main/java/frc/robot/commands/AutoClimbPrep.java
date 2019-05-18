@@ -18,10 +18,12 @@ public class AutoClimbPrep extends Command {
   Climber climber;
 
   private int level;
+  private boolean override;
 
   public AutoClimbPrep(int level) {
     requires(Robot.climber);
     this.level = level;
+    override = false;
   }
 
   // Called just before this Command runs the first time
@@ -34,10 +36,16 @@ public class AutoClimbPrep extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    override = getLeftStickYAux() >= 0.1 || getRightStickYAux() >= 0.1;
     if (level == 2) {
       
     } else if (level == 3) {
-
+      if (!climber.isFrontClimberAtTop()) {
+        climber.moveFrontMotors(0.8);
+      }
+      if (!climber.isBackClimberAtTop()) {
+        climber.moveBackMotors(0.2);
+      }
     }
   }
 
@@ -45,9 +53,9 @@ public class AutoClimbPrep extends Command {
   @Override
   protected boolean isFinished() {
     if (level == 2) {
-
-    } else if (level == 3) {
       
+    } else if (level == 3) {
+      return override || (climber.isFrontClimberAtTop() && climber.isBackClimberAtTop());
     }
     return false;
   }
