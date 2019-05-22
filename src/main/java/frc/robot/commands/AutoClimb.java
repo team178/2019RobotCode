@@ -36,9 +36,12 @@ public class AutoClimb extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    override = getLeftStickYAux() >= 0.1 || getRightStickYAux() >= 0.1;
+    override = oi.getLeftStickYAux() >= 0.1 || oi.getRightStickYAux() >= 0.1;
     if (level == 2) {
-
+      if (!climber.isFrontClimberAtBottom()) {
+        climber.moveFrontMotors(-0.5);
+        climber.moveBackMotors(-0.5);
+      }
     } else if (level == 3) {
       if (!climber.isFrontClimberAtBottom()) {
         climber.moveFrontMotors(-0.8);
@@ -53,7 +56,7 @@ public class AutoClimb extends Command {
   @Override
   protected boolean isFinished() {
     if (level == 2) {
-      
+      return override || climber.isFrontClimberAtBottom();
     } else if (level == 3) {
       return override || (climber.isFrontClimberAtBottom() && climber.isBackClimberAtBottom());
     }
