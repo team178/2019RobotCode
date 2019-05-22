@@ -46,7 +46,7 @@ public class AutoClimbPrep extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    override = getLeftStickYAux() >= 0.1 || getRightStickYAux() >= 0.1;
+    override = oi.getLeftStickYAux() >= 0.1 || oi.getRightStickYAux() >= 0.1;
     if (level == 2) {
       if (levelTwoPhase.equals("extend front climber arms") {
         //extend front climber arms
