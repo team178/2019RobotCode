@@ -27,6 +27,7 @@ public class AutoClimbPrep extends Command {
   private boolean override;
   private String levelTwoPhase;
   private boolean levelTwoTopReached;
+  private boolean startTimer;
 
   public AutoClimbPrep(int level) {
     requires(Robot.climber);
@@ -34,6 +35,7 @@ public class AutoClimbPrep extends Command {
     override = false;
     levelTwoPhase = "extend front climber arms";
     levelTwoTopReached = false;
+    startTimer = true;
   }
 
   // Called just before this Command runs the first time
@@ -50,15 +52,18 @@ public class AutoClimbPrep extends Command {
     if (level == 2) {
       if (levelTwoPhase.equals("extend front climber arms") {
         //extend front climber arms
-        timer.reset();
-        timer.start();
+        if (startTimer) {
+          startTimer();
+          startTimer = false;
+        }
+        
         if (timer.seconds() <= frontRaiseTimeExtend) {
           climber.moveFrontMotors(0.9);
         } else {
           timer.stop();
           climber.moveFrontMotors(0);
           
-          //change phase
+          //change phase when finished
           levelTwoPhase = "reset front climber";
         }
       } else if (levelTwoPhase.equals("reset front climber")) {
@@ -76,14 +81,18 @@ public class AutoClimbPrep extends Command {
           climber.moveBackMotors(0);
         }
         
-        //change phase
+        //change phase when finished
         if (climber.isFrontClimberAtBottom && climber.isBackClimberAtTop()) {
           levelTwoPhase = "raise to level 2 height";
+          startTimer = true;
         }
       } else if (levelTwoPhase.equals("raise to level 2 height")) {
         //raise front climber to necessary height
-        timer.reset();
-        timer.start();
+        if (startTimer) {
+          startTimer();
+          startTimer = false;
+        }
+        
         if (timer.seconds <= frontRaiseTimePrep) {
           climber.moveFrontMotors(frontRaiseSpeedPrep);
         } else {
@@ -126,5 +135,10 @@ public class AutoClimbPrep extends Command {
   protected void interrupted() {
     climber.moveFrontMotors(0);
     climber.moveBackMotors(0);
+  }
+  
+  private void startTimer() {
+    timer.reset();
+    timer.start();
   }
 }
