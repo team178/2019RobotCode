@@ -7,38 +7,58 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.Timer;
+import frc.robot.subsystems.*
+import frc.robot.*;
 
 public class ClimberCalibration extends Command {
+  
+  private static Timer timer = new Timer();
+  OI oi;
+  Climber climber;
+  
+  private Button stopButton;
+  private double power;
+  
   public ClimberCalibration() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.climber);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize(Button stopButton, double power) {
+    this.stopButton = stopButton;
+    this.power = power;
+    
+    timer.reset();
+    timer.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    climber.moveFrontMotors(power);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return stopButton.get();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    climber.moveFrontMotors(0);
+    System.out.println("TIME TO TARGET: " + timer.get() + " SECONDS);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    climber.moveFrontMotors(0);
   }
 }
