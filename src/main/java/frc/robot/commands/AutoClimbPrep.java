@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.Timer;
-import frc.robot.subsystems.*
+import frc.robot.subsystems.*;
 import frc.robot.*;
 
 public class AutoClimbPrep extends Command {
@@ -50,14 +50,14 @@ public class AutoClimbPrep extends Command {
   protected void execute() {
     override = oi.getLeftStickYAux() >= 0.1 || oi.getRightStickYAux() >= 0.1;
     if (level == 2) {
-      if (levelTwoPhase.equals("extend front climber arms") {
+      if (levelTwoPhase.equals("extend front climber arms")) {
         //extend front climber arms
         if (startTimer) {
           startTimer();
           startTimer = false;
         }
         
-        if (timer.seconds() <= frontRaiseTimeExtend) {
+        if (timer.get() <= frontRaiseTimeExtend) {
           climber.moveFrontMotors(0.9);
         } else {
           timer.stop();
@@ -82,7 +82,7 @@ public class AutoClimbPrep extends Command {
         }
         
         //change phase when finished
-        if (climber.isFrontClimberAtBottom && climber.isBackClimberAtTop()) {
+        if (climber.isFrontClimberAtBottom() && climber.isBackClimberAtTop()) {
           levelTwoPhase = "raise to level 2 height";
           startTimer = true;
         }
@@ -93,7 +93,7 @@ public class AutoClimbPrep extends Command {
           startTimer = false;
         }
         
-        if (timer.seconds <= frontRaiseTimePrep) {
+        if (timer.get() <= frontRaiseTimePrep) {
           climber.moveFrontMotors(frontRaiseSpeedPrep);
         } else {
           timer.stop();

@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.Timer;
-import frc.robot.subsystems.*
+import frc.robot.subsystems.*;
 import frc.robot.*;
 
 public class ClimberCalibration extends Command {
@@ -22,16 +22,15 @@ public class ClimberCalibration extends Command {
   private Button stopButton;
   private double power;
   
-  public ClimberCalibration() {
+  public ClimberCalibration(Button stopButton, double power) {
     requires(Robot.climber);
+    this.stopButton = stopButton;
+    this.power = power;
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize(Button stopButton, double power) {
-    this.stopButton = stopButton;
-    this.power = power;
-    
+  protected void initialize() {
     timer.reset();
     timer.start();
   }
@@ -52,7 +51,7 @@ public class ClimberCalibration extends Command {
   @Override
   protected void end() {
     climber.moveFrontMotors(0);
-    System.out.println("TIME TO TARGET: " + timer.get() + " SECONDS);
+    System.out.println("TIME TO TARGET: " + timer.get() + " SECONDS");
   }
 
   // Called when another command which requires one or more of the same
