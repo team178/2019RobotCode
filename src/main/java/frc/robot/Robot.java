@@ -146,6 +146,9 @@ import edu.wpi.first.wpilibj.Relay;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    if (climber.isFrontClimberAtTop()) {
+      System.out.println("FRONT AT TOP");
+    }
   }
 
 

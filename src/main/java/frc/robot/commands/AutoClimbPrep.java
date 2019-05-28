@@ -48,7 +48,7 @@ public class AutoClimbPrep extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    override = oi.getLeftStickYAux() >= 0.1 || oi.getRightStickYAux() >= 0.1;
+    override = Math.abs(oi.getLeftStickYAux()) >= 0.1 || Math.abs(oi.getRightStickYAux()) >= 0.1;
     if (level == 2) {
       if (levelTwoPhase.equals("extend front climber arms")) {
         //extend front climber arms
@@ -103,10 +103,15 @@ public class AutoClimbPrep extends Command {
       }
     } else if (level == 3) {
       if (!climber.isFrontClimberAtTop()) {
-        climber.moveFrontMotors(0.8);
+        climber.moveFrontMotors(-0.2);
+      } else {
+        climber.moveFrontMotors(0);
       }
+      
       if (!climber.isBackClimberAtTop()) {
-        climber.moveBackMotors(0.8);
+        climber.moveBackMotors(0.2);
+      } else {
+        climber.moveFrontMotors(0);
       }
     }
   }

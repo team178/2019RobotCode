@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.Climber; 
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Arduino;
 import frc.robot.*;
 
@@ -36,7 +36,7 @@ public class AutoClimb extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    override = oi.getLeftStickYAux() >= 0.1 || oi.getRightStickYAux() >= 0.1;
+    override = Math.abs(oi.getLeftStickYAux()) >= 0.1 || Math.abs(oi.getRightStickYAux()) >= 0.1;
     if (level == 2) {
       if (!climber.isFrontClimberAtBottom()) {
         climber.moveFrontMotors(-0.5);
@@ -44,10 +44,14 @@ public class AutoClimb extends Command {
       }
     } else if (level == 3) {
       if (!climber.isFrontClimberAtBottom()) {
-        climber.moveFrontMotors(-0.8);
+        climber.moveFrontMotors(-0.2);
+      } else {
+        climber.moveFrontMotors(0);
       }
       if (!climber.isBackClimberAtBottom()) {
-        climber.moveBackMotors(-0.8);
+        climber.moveBackMotors(0.2);
+      } else {
+        climber.moveFrontMotors(0);
       }
     }
   }

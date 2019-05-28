@@ -19,12 +19,10 @@ public class ClimberCalibration extends Command {
   OI oi;
   Climber climber;
   
-  private Button stopButton;
   private double power;
   
-  public ClimberCalibration(Button stopButton, double power) {
+  public ClimberCalibration(double power) {
     requires(Robot.climber);
-    this.stopButton = stopButton;
     this.power = power;
   }
 
@@ -44,7 +42,7 @@ public class ClimberCalibration extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return stopButton.get();
+    return oi.trigger.get();
   }
 
   // Called once after isFinished returns true
