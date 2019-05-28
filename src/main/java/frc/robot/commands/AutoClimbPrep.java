@@ -106,7 +106,7 @@ public class AutoClimbPrep extends Command {
         climber.moveFrontMotors(0.8);
       }
       if (!climber.isBackClimberAtTop()) {
-        climber.moveBackMotors(0.2);
+        climber.moveBackMotors(0.8);
       }
     }
   }
