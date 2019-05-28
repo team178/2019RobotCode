@@ -68,7 +68,6 @@ public class AutoClimb extends Command {
   protected void end() {
     climber.moveFrontMotors(0);
     climber.moveBackMotors(0);
-    climber.moveBackWheel(0);
   }
 
   // Called when another command which requires one or more of the same
@@ -77,6 +76,5 @@ public class AutoClimb extends Command {
   protected void interrupted() {
     climber.moveFrontMotors(0);
     climber.moveBackMotors(0);
-    climber.moveBackWheel(0);
   }
 }
