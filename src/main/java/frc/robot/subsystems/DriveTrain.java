@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -26,6 +27,8 @@ public class DriveTrain extends Subsystem {
 
   public static Encoder left;
   public static Encoder right;
+
+  public static AnalogGyro gyro;
     
   public DriveTrain() {
 	  //DM initializations
@@ -35,6 +38,7 @@ public class DriveTrain extends Subsystem {
     right2 = new VictorSPX(RobotMap.DMBottomRight);
     left = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB, false, Encoder.EncodingType.k4X);
     right = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB, true, Encoder.EncodingType.k4X);
+    gyro = new AnalogGyro(RobotMap.gyro);
   }
 
   //Drive methods
@@ -67,6 +71,14 @@ public class DriveTrain extends Subsystem {
 
   public double getLeftDistance() {
     return left.get();
+  }
+  
+  public double getAngle () {
+    return gyro.pidGet();
+  }
+
+  public void resetGyro () {
+    gyro.reset();
   }
 
   @Override

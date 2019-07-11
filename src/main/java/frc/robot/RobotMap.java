@@ -30,6 +30,7 @@ public class RobotMap {
   public static int leftEncoderB = 0; // temporary filler value
   public static int rightEncoderA = 0; // temporary filler value
   public static int rightEncoderB = 0; // temporary filler value
+  public static int gyro = 0; // temporary filler value
   
   //PCM
   public static int cargoRailCylinderExtend = 0;
