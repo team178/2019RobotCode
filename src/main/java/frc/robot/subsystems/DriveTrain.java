@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.RobotMap;
@@ -22,13 +23,18 @@ public class DriveTrain extends Subsystem {
   public static VictorSPX left2;
   public static VictorSPX right1;
   public static VictorSPX right2;
+
+  public static Encoder left;
+  public static Encoder right;
     
   public DriveTrain() {
 	  //DM initializations
 	  left1 = new VictorSPX(RobotMap.DMTopLeft);
 	  left2 = new VictorSPX(RobotMap.DMBottomLeft);
 	  right1 = new VictorSPX(RobotMap.DMTopRight);
-	  right2 = new VictorSPX(RobotMap.DMBottomRight);
+    right2 = new VictorSPX(RobotMap.DMBottomRight);
+    left = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB, false, Encoder.EncodingType.k4X);
+    right = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB, true, Encoder.EncodingType.k4X);
   }
 
   //Drive methods
@@ -50,6 +56,19 @@ public class DriveTrain extends Subsystem {
     right2.set(ControlMode.PercentOutput, rightMotors);
   }
   
+  public void resetEncoders() {
+    right.reset();
+    left.reset();
+  }
+
+  public double getRightDistance() {
+    return right.get();
+  }
+
+  public double getLeftDistance() {
+    return left.get();
+  }
+
   @Override
   public void initDefaultCommand() {
     //setDefaultCommand(new XBoxDrive());

@@ -26,6 +26,10 @@ public class RobotMap {
   public static int ClimberBackWheel = 9;
   public static int leadScrew = 10;
   public static int PCM = 11;
+  public static int leftEncoderA = 0; // temporary filler value
+  public static int leftEncoderB = 0; // temporary filler value
+  public static int rightEncoderA = 0; // temporary filler value
+  public static int rightEncoderB = 0; // temporary filler value
   
   //PCM
   public static int cargoRailCylinderExtend = 0;
