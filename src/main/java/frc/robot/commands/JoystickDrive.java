@@ -34,8 +34,8 @@ public class JoystickDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
    @Override
    protected void execute() {
-      yVal = oi.getY();
-      twistVal = .5 * oi.getTwist();
+      yVal = oi.getY() * 0.7;
+      twistVal = .4 * oi.getTwist();
       if(oi.trigger.get()){
         yVal *= .5;
         twistVal *= .7;
@@ -51,7 +51,7 @@ public class JoystickDrive extends Command {
     protected boolean isFinished() {
       return false;
     }
-
+ 
     // Called once after isFinished returns true
     @Override
     protected void end() {

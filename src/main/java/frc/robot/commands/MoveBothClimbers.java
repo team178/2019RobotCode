@@ -33,7 +33,7 @@ public class MoveBothClimbers extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    frontPower = oi.getLeftStickYAux();
+    frontPower = -oi.getLeftStickYAux();
     backPower = -oi.getRightStickYAux();
 
     //Front climber

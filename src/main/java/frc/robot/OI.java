@@ -107,8 +107,8 @@ public class OI {
 		rightPadBottom2.whenPressed(new AutoClimb(2));
 		rightPadBottom3.whenPressed(new AutoClimb(3));
 		
-		//TEMP -- FRONT CLIMBER CALIBRATION ONLY
-		trigger.whenPressed(new ClimberCalibration(0.5));
+		//AUTO WORKSHOP
+		headBottom.whenPressed(new Course2());
 	}
 
 	//JOYSTICK accessor methods
