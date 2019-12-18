@@ -5,16 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commandgroups;
+package frc.robot.programmingworkshop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.DriveByTime;
 
-public class Course2 extends CommandGroup {
+public class Course3 extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public Course2() {
+  public Course3() {
     System.out.println("yeet");
     addSequential(new DriveByTime(0.3, 0.5, 1));
   }
