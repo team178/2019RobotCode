@@ -39,6 +39,10 @@ public class JoystickDrive extends Command {
       if(oi.trigger.get()){
         yVal *= .5;
         twistVal *= .7;
+        
+        if (oi.auxRightBumper.get()) {
+          drivetrain.drive(0,0);
+    		
       }
       if(Math.abs(yVal)>0.1 || Math.abs(twistVal)>0.1) { 
         drivetrain.drive(yVal-twistVal, yVal+twistVal);
