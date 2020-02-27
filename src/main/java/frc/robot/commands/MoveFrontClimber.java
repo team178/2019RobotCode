@@ -34,7 +34,9 @@ public class MoveFrontClimber extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    power = oi.getLeftStickYAux();
+    //power = oi.getLeftStickYAux();
+    power = 0;
+    
     if (Math.abs(power) < 0.2){
       climber.moveFrontMotors(0);
     } else if (climber.isFrontClimberAtTop()) {

@@ -49,7 +49,9 @@ public class OI {
 	public Button auxX = new JoystickButton(xboxAux, 3);
 	public Button auxY = new JoystickButton(xboxAux, 4);
 	public Button auxLeftBumper = new JoystickButton(xboxAux, 5);
+	//replace with kid mode code 
 	public Button auxRightBumper = new JoystickButton(xboxAux, 6);
+	//replace with kid mode code
 	public Button auxBack = new JoystickButton(xboxAux, 7);
 	public Button auxStart = new JoystickButton(xboxAux, 8);
 	
@@ -100,8 +102,9 @@ public class OI {
 		auxX.whenPressed(new OpenCargoRails());
 		auxX.whenReleased(new CloseCargoRails());
 		
-		auxLeftBumper.whenPressed(new CenterHatchMechanism());
-		auxRightBumper.whileHeld(new AlignHatchPanel());
+		//auxLeftBumper.whenPressed(new CenterHatchMechanism()); - replaced
+		//auxRightBumper.whileHeld(new AlignHatchPanel()); - replaced
+	
 
 		rightPadTop2.whenPressed(new AutoClimbPrep(2));
 		rightPadTop3.whenPressed(new AutoClimbPrep(3));
@@ -123,6 +126,14 @@ public class OI {
 
 	public double getTwist() {
 		return joystick.getY(); //joystick.getRawAxis(2);
+	}
+
+	//xbox kiddie code methods
+	public double getRightStickAux(){
+		return xboxAux.getRawAxis(5);
+	}
+	public double getLeftStickAux() {
+		return xboxAux.getY();
 	}
 
 	/**

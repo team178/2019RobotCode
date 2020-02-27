@@ -30,7 +30,8 @@ public class MoveBackClimber extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    power = -oi.getRightStickYAux();
+    //power = -oi.getRightStickYAux();
+    power = 0;
     if (Math.abs(power) < 0.2){
       climber.moveBackMotors(0);
     } else if (climber.isBackClimberAtTop()) {
